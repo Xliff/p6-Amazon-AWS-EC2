@@ -15,7 +15,7 @@ constant region = 'us-east-1';
 constant service = 'ec2';
 constant terminator = 'aws4_request';
 
-unit package Amazon::Utils;
+unit package Amazon::AWS::Utils;
 
 sub sign($k, $m) {
   hmac($k, $m, &sha256);
@@ -40,6 +40,7 @@ sub getLocalAccess {
 }
 
 sub makeRequest ($uri, :$method = 'GET', :$body, *%headers) is export {
+  say "URI: { $uri }";
   my $t = DateTime.now(timezone => 0);            # MUST be in GMT
   my $amzdate = strftime('%Y%m%dT%H%M%SZ', $t);
   #my $amzdate = '20190604T233232Z';
