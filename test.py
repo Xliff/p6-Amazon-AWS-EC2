@@ -62,8 +62,9 @@ def pretty_print_GET(req):
 
 # Read AWS access key from env. variables or configuration file. Best practice is NOT
 # to embed credentials in code.
-access_key = 'AKIA4G7JQPR6EU23PWUU'
-secret_key = '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'
+# Insert access key
+access_key = 'XXXXXXXXXXXXXXXXXXXU'
+secret_key = 'dnXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXytHGp0W6'
 if access_key is None or secret_key is None:
     print('No access key is available.')
     sys.exit()

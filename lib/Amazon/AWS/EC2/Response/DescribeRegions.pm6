@@ -2,24 +2,20 @@ use v6.d;
 
 use XML::Class;
 
-class Amazon::AWS::EC2::Response::DescribeRegions
+use Amazon::AWS::Roles::Response;
+use Amazon::AWS::EC2::Region;
+
+class Amazon::AWS::EC2::Response::DescribeRegions is export
   does XML::Class[
     xml-element   => 'DescribeRegionsResponse',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2013-10-15/'
   ]
 {
+  also does Amazon::AWS::Roles::Response;
 
-  class RegionInfo
-    does XML::Class[xml-element => 'regionInfo']
-  {
-    class RegionItem does XML::Class[xml-element => 'item'] {
-      has $.regionName     is xml-element;
-      has $.regionEndpoint is xml-element;
-    }
-
-    has RegionItem @.items;
+  class RegionInfo is export does XML::Class[xml-element => 'regionInfo'] {
+    has Region @.items;
   }
 
-  has $.requestId is xml-element;
-  has RegionInfo $.regionInfo
+  has RegionInfo $.regionInfo;
 }

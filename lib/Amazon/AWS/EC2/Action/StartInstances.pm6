@@ -44,11 +44,12 @@ DIE
 
     # Should already be sorted.
     my @args = (
-      #AdditionalInfo => $.AdditionalInfo,
       DryRun         => $.DryRun,
       |@InstanceArgs,
       Version        => '2016-11-15'
     );
+    @args.unshift: Pair.new('AdditionalInfo', $.AdditionalInfo)
+      if $.AdditionalInfo.chars;
 
     # XXX - Add error handling to makeRequest!
     #Amazon::AWS::EC2::Response::StartInstances.from-xml(
