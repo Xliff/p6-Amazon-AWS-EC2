@@ -1,4 +1,4 @@
-use v6.c;
+use v6.d;
 
 use Base64::Native;
 use Cro::HTTP::Client;
@@ -91,7 +91,5 @@ sub makeRequest ($uri, :$method = 'GET', :$body, *%headers) is export {
     }
   }
   my $b = await $r.body;
-  
-  # Inspect the output.
-  $b.say;
+  $b;
 }
