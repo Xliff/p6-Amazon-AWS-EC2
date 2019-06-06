@@ -10,8 +10,8 @@ use XML::Class;
 class Amazon::AWS::EC2::InstanceNetworkInterface is export
   does XML::Class[xml-element => 'item']
 {
-  has InstanceNetworkInterfaceAssociation $.association;
-  has InstanceNetworkInterfaceAttachment  $.attachment;
+  has InstanceNetworkInterfaceAssociation $.association                       is rw;
+  has InstanceNetworkInterfaceAttachment  $.attachment                        is rw;
   has Str                                 $.description        is xml-element is rw;
   has Str                                 $.interfaceType      is xml-element is rw;
   has Str                                 $.macAddress         is xml-element is rw;

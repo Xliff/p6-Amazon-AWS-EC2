@@ -7,7 +7,7 @@ class Amazon::AWS::EC2::ProductCode is export
 {
 
   has Str $.productCode is xml-element is rw;
-  has Str $.type        is xml-element;
+  has Str $.type        is xml-element is rw;
 
   method setType($newType) {
     my @valid-types = <devpay marketplace>;
