@@ -1,5 +1,7 @@
 use v6.d;
 
+use Amazon::AWS::EC2::Base;
+
 use XML::Class;
 
 use Amazon::AWS::EC2::CapacityReservationTarget;
@@ -7,6 +9,8 @@ use Amazon::AWS::EC2::CapacityReservationTarget;
 class Amazon::AWS::EC2::CapacityReservationSpecification is export
   does XML::Class[xml-element => 'capacityReservationSpecification']
 {
+  also is Amazon::AWS::EC2::Base;
+
   has Str                       $.CapacityReservationPreference is xml-element is rw;
   has CapacityReservationTarget $.CapacityReservationTarget                    is rw;
 

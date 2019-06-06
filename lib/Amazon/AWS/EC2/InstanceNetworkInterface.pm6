@@ -1,5 +1,7 @@
 use v6.d;
 
+use Amazon::AWS::EC2::Base;
+
 use Amazon::AWS::EC2::GroupIdentifier;
 use Amazon::AWS::EC2::InstanceNetworkInterfaceAssociation;
 use Amazon::AWS::EC2::InstanceNetworkInterfaceAttachment;
@@ -10,6 +12,8 @@ use XML::Class;
 class Amazon::AWS::EC2::InstanceNetworkInterface is export
   does XML::Class[xml-element => 'item']
 {
+  also is Amazon::AWS::EC2::Base;
+
   has InstanceNetworkInterfaceAssociation $.association                       is rw;
   has InstanceNetworkInterfaceAttachment  $.attachment                        is rw;
   has Str                                 $.description        is xml-element is rw;

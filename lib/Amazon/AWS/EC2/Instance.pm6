@@ -1,6 +1,8 @@
 use v6.d;
 
-use XML::Class  ;
+use Amazon::AWS::EC2::Base;
+
+use XML::Class;
 
 use Amazon::AWS::EC2::CapacityReservationSpecification;
 use Amazon::AWS::EC2::CpuOptions;
@@ -80,6 +82,8 @@ BEGIN {
 class Amazon::AWS::EC2::Instance is export
   does XML::Class[xml-element => 'item'] 
 {
+  also is Amazon::AWS::EC2::Base;
+
   has Int                              $.amiLaunchIndex                   is xml-element is rw;
   has Str                              $.architecture                     is xml-element is rw;
   has Str                              $.capacityReservationId            is xml-element is rw;
