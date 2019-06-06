@@ -4,9 +4,8 @@ use XML::Class;
 
 use Amazon::AWS::EC2::CapacityReservationSpecification;
 use Amazon::AWS::EC2::CpuOptions;
-use Amazon::AWS::EC2::dnsName;
 use Amazon::AWS::EC2::ElasticGpuAssociation;
-use Amazon::AWS::EC2::ElasticInferenceAccelleratorAssociation;
+use Amazon::AWS::EC2::ElasticInferenceAcceleratorAssociation;
 use Amazon::AWS::EC2::GroupIdentifier;
 use Amazon::AWS::EC2::HibernationOptions;
 use Amazon::AWS::EC2::IamInstanceProfile;
@@ -19,7 +18,6 @@ use Amazon::AWS::EC2::ProductCode;
 use Amazon::AWS::EC2::StateReason;
 use Amazon::AWS::EC2::Tag;
 
-use Amazon::AWS::EC2::Response::CapacityReservationSpecification;
 
 my (@valid-instance-types, $valid-types);
 BEGIN {
@@ -86,7 +84,7 @@ class Amazon::AWS::EC2::Instance does XML::Class[xml-element => 'item'] {
   has CapacityReservationSpecification $.capacityReservationSpecification;
   has Str                              $.clientToken                      is xml-element;
   has CpuOptions                       $.cpuOptions;
-  has dnsName                          $.dnsName   ;
+  has Str                              $.dnsName                          is xml-element;
   has Bool                             $.ebsOptimized                     is xml-element;
   has Bool                             $.enaSupport                       is xml-element;
   has HibernationOptions               $.hibernationOptions;
@@ -119,7 +117,7 @@ class Amazon::AWS::EC2::Instance does XML::Class[xml-element => 'item'] {
     is xml-container('blockDeviceMapping');
   has ElasticGpuAssociation                   @.elasticGpuAssociations
     is xml-container('elasticGpuAssociaionSet');
-  has ElasticInferenceAccelleratorAssociation @.elasticInferenceAccelatorAssociations
+  has ElasticInferenceAcceleratorAssociation  @.elasticInferenceAccelatorAssociations
     is xml-container('elasticInferenceAcceleratorAssociationSet');
   has LicenseConfiguration                    @.licenses
     is xml-container('licenseSet');
