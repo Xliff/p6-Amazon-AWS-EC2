@@ -3,12 +3,12 @@ use v6.c;
 use Method::Also;
 
 use Amazon::AWS::Utils;
-#use Amazon::AWS::EC2::Filter;
+use Amazon::AWS::EC2::Filter;
 use Amazon::AWS::EC2::Response::DescribeInstances;
 
 class Amazon::AWS::EC2::Action::DescribeInstances is export {
   has Bool    $.DryRun;
-#  has Filter  @.filters;
+  has Filter  @.filters;
   has Str     @.InstanceIds;
   has Int     $.maxResults;
   has Str     $.nextToken;
