@@ -1,5 +1,7 @@
 use v6.c;
 
+use Amazon::AWS::EC2::Base;
+
 use XML::Class;
 
 class Amazon::AWS::EC2::ElasticGpuAssociation is export

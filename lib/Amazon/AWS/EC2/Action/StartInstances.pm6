@@ -20,7 +20,7 @@ class Amazon::AWS::EC2::Action::StartInstances is export {
       @!InstanceIds = @instances;
     }
     when @instances.all ~~ Amazon::AWS::EC2::Instance {
-      @!InstanceIds = @instances.map( *.InstanceID );
+      @!InstanceIds = @instances.map( *.instanceID );
     }
     default {
       die qq:to/DIE/.chomp;
