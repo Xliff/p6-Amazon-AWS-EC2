@@ -3,9 +3,9 @@ use v6.c;
 use XML::Class;
 use Method::Also;
 
-use Amazon::AWS::Utils;
 use Amazon::AWS::EC2::Filter;
 use Amazon::AWS::EC2::Response::DescribeInstances;
+use Amazon::AWS::Utils;
 
 class Amazon::AWS::EC2::Action::DescribeInstances is export
   does XML::Class[

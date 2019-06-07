@@ -3,9 +3,10 @@ use v6.c;
 use Method::Also;
 use XML::Class;
 
-use Amazon::AWS::Utils;
-use Amazon::AWS::EC2::Instance;
+use Amazon::AWS::EC2::Types::Instance;
+
 use Amazon::AWS::EC2::Response::StopInstances;
+use Amazon::AWS::Utils;
 
 class Amazon::AWS::EC2::Action::StopInstances is export
   does XML::Class[

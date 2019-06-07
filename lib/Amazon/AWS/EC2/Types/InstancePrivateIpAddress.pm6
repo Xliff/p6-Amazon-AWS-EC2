@@ -1,15 +1,15 @@
 use v6.d;
 
-use Amazon::AWS::EC2::Base;
+use Amazon::AWS::EC2::Types::Base;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::InstanceNetworkInterfaceAssociation;
+use Amazon::AWS::EC2::Types::InstanceNetworkInterfaceAssociation;
 
-class Amazon::AWS::EC2::InstancePrivateIpAddress is export
+class Amazon::AWS::EC2::Types::InstancePrivateIpAddress is export
   does XML::Class[xml-element => 'item']
 {
-  also is Amazon::AWS::EC2::Base;
+  also is Amazon::AWS::EC2::Types::Base;
 
   has InstanceNetworkInterfaceAssociation $.association                     is rw;
   has Bool                                $.primary          is xml-element is rw;

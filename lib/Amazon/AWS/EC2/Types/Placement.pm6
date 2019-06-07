@@ -1,13 +1,13 @@
 use v6.d;
 
-use Amazon::AWS::EC2::Base;
+use Amazon::AWS::EC2::Types::Base;
 
 use XML::Class;
 
-class Amazon::AWS::EC2::Placement is export
+class Amazon::AWS::EC2::Types::Placement is export
   does XML::Class[xml-element => 'placement']
 {
-  also is Amazon::AWS::EC2::Base;
+  also is Amazon::AWS::EC2::Types::Base;
 
   # Request
   has Str $.Affinity         is xml-element is rw;

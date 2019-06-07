@@ -1,13 +1,13 @@
 use v6.d;
 
-use Amazon::AWS::EC2::Base;
+use Amazon::AWS::EC2::Types::Base;
 
 use XML::Class;
 
-class Amazon::AWS::EC2::CapacityReservationTarget is export
+class Amazon::AWS::EC2::Types::CapacityReservationTarget is export
   does XML::Class[xml-element => 'CapacityReservationTarget']
 {
-  also is Amazon::AWS::EC2::Base;
+  also is Amazon::AWS::EC2::Types::Base;
 
   has Str $.CapacityReservationId is xml-element is rw;
 }

@@ -1,13 +1,13 @@
 use v6.d;
 
-use Amazon::AWS::EC2::Base;
+use Amazon::AWS::EC2::Types::Base;
 
 use XML::Class;
 
-class Amazon::AWS::EC2::InstanceNetworkInterfaceAttachment is export
+class Amazon::AWS::EC2::Types::InstanceNetworkInterfaceAttachment is export
   does XML::Class[xml-element => 'attachment']
 {
-  also is Amazon::AWS::EC2::Base;
+  also is Amazon::AWS::EC2::Types::Base;
 
   has Str  $.attachmentId         is xml-element is rw;
   has Str  $.attachTime           is xml-element is rw;

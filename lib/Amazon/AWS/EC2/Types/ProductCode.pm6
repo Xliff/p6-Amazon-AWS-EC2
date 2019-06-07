@@ -1,13 +1,13 @@
 use v6.d;
 
-use Amazon::AWS::EC2::Base;
+use Amazon::AWS::EC2::Types::Base;
 
 use XML::Class;
 
-class Amazon::AWS::EC2::ProductCode is export
+class Amazon::AWS::EC2::Types::ProductCode is export
   does XML::Class[xml-element => 'item']
 {
-  also is Amazon::AWS::EC2::Base;
+  also is Amazon::AWS::EC2::Types::Base;
 
 
   has Str $.productCode is xml-element is rw;

@@ -2,8 +2,8 @@ use v6.d;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Instance;
-use Amazon::AWS::EC2::Reservation;
+use Amazon::AWS::EC2::Types::Instance;
+use Amazon::AWS::EC2::Types::Reservation;
 use Amazon::AWS::Roles::Response;
 
 class Amazon::AWS::EC2::Response::DescribeInstances is export

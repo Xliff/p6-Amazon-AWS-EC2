@@ -1,31 +1,31 @@
 use v6.d;
 
-use Amazon::AWS::EC2::Base;
-
 use XML::Class;
 
-use Amazon::AWS::EC2::CapacityReservationSpecification;
-use Amazon::AWS::EC2::CpuOptions;
-use Amazon::AWS::EC2::ElasticGpuAssociation;
-use Amazon::AWS::EC2::ElasticInferenceAcceleratorAssociation;
-use Amazon::AWS::EC2::GroupIdentifier;
-use Amazon::AWS::EC2::HibernationOptions;
-use Amazon::AWS::EC2::IamInstanceProfile;
-use Amazon::AWS::EC2::InstanceBlockDeviceMapping;
-use Amazon::AWS::EC2::InstanceNetworkInterface;
-use Amazon::AWS::EC2::InstanceState;
-use Amazon::AWS::EC2::LicenseConfiguration;
-use Amazon::AWS::EC2::Placement;
-use Amazon::AWS::EC2::ProductCode;
-use Amazon::AWS::EC2::StateReason;
-use Amazon::AWS::EC2::Tag;
+use Amazon::AWS::EC2::Types::Base;
+
+use Amazon::AWS::EC2::Types::CapacityReservationSpecification;
+use Amazon::AWS::EC2::Types::CpuOptions;
+use Amazon::AWS::EC2::Types::ElasticGpuAssociation;
+use Amazon::AWS::EC2::Types::ElasticInferenceAcceleratorAssociation;
+use Amazon::AWS::EC2::Types::GroupIdentifier;
+use Amazon::AWS::EC2::Types::HibernationOptions;
+use Amazon::AWS::EC2::Types::IamInstanceProfile;
+use Amazon::AWS::EC2::Types::InstanceBlockDeviceMapping;
+use Amazon::AWS::EC2::Types::InstanceNetworkInterface;
+use Amazon::AWS::EC2::Types::InstanceState;
+use Amazon::AWS::EC2::Types::LicenseConfiguration;
+use Amazon::AWS::EC2::Types::Placement;
+use Amazon::AWS::EC2::Types::ProductCode;
+use Amazon::AWS::EC2::Types::StateReason;
+use Amazon::AWS::EC2::Types::Tag;
 
 use Amazon::AWS::EC2::validInstanceTypes;
 
-class Amazon::AWS::EC2::Instance is export
+class Amazon::AWS::EC2::Types::Instance is export
   does XML::Class[xml-element => 'item']
 {
-  also is Amazon::AWS::EC2::Base;
+  also is Amazon::AWS::EC2::Types::Base;
 
   has Int                                     $.amiLaunchIndex                   is xml-element is rw;
   has Str                                     $.architecture                     is xml-element is rw;

@@ -2,12 +2,12 @@ use v6.c;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Base;
+use Amazon::AWS::EC2::Types::Base;
 
-class Amazon::AWS::EC2::Region is export
+class Amazon::AWS::EC2::Types::Region is export
   does XML::Class[xml-element => 'item']
 {
-  also is Amazon::AWS::EC2::Base;
+  also is Amazon::AWS::EC2::Types::Base;
 
   has $.regionName     is xml-element is rw;
   has $.regionEndpoint is xml-element is rw;

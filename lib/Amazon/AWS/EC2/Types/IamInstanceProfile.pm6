@@ -1,13 +1,13 @@
 use v6.d;
 
-use Amazon::AWS::EC2::Base;
+use Amazon::AWS::EC2::Types::Base;
 
 use XML::Class;
 
-class Amazon::AWS::EC2::IamInstanceProfile is export
+class Amazon::AWS::EC2::Types::IamInstanceProfile is export
   does XML::Class[xml-element => 'iamInstanceProfile']
 {
-  also is Amazon::AWS::EC2::Base;
+  also is Amazon::AWS::EC2::Types::Base;
 
   has Str $.arn is xml-element is rw;
   has Str $.id  is xml-element is rw;

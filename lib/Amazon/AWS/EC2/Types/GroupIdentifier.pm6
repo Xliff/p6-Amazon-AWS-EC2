@@ -1,6 +1,6 @@
 use v6.c;
 
-use Amazon::AWS::EC2::Base;
+use Amazon::AWS::EC2::Types::Base;
 
 use XML::Class;
 
@@ -11,10 +11,10 @@ use XML::Class;
 # This makes shit harder on the people writing code in other languages.
 # For me... it just means 2 extra lines. :)
 
-class Amazon::AWS::EC2::GroupIdentifier is export
+class Amazon::AWS::EC2::Types::GroupIdentifier is export
   does XML::Class[xml-element => 'item']
 {
-  also is Amazon::AWS::EC2::Base;
+  also is Amazon::AWS::EC2::Types::Base;
 
   # Request;
   has Str $.GroupId   is xml-element is rw;

@@ -2,8 +2,9 @@ use v6.d;
 
 use XML::Class;
 
+use Amazon::AWS::EC2::Types::Region;
+
 use Amazon::AWS::Roles::Response;
-use Amazon::AWS::EC2::Region;
 
 class Amazon::AWS::EC2::Response::DescribeRegions is export
   does XML::Class[

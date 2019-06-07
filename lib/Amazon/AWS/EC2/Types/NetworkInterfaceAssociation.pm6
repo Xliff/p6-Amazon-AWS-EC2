@@ -1,14 +1,14 @@
 use v6.d;
 
-use Amazon::AWS::EC2::Base;
-
 use XML::Class;
 
-class Amazon::AWS::EC2::InstanceNetworkInterfaceAssociation is export
+use Amazon::AWS::EC2::Types::Base;
+
+class Amazon::AWS::EC2::Types::NetworkInterfaceAssociation is export
   does XML::Class[xml-element => 'association']
 {
-  also is Amazon::AWS::EC2::Base;
-
+  has Str $.allocationId  is xml-element is rw;
+  has Str $.associationId is xml-element is rw;
   has Str $.ipOwnerId     is xml-element is rw;
   has Str $.publicDnsName is xml-element is rw;
   has Str $.publicIp      is xml-element is rw;

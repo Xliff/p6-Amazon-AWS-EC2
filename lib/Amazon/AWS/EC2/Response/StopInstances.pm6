@@ -2,10 +2,11 @@ use v6.d;
 
 use XML::Class;
 
-use Amazon::AWS::Roles::Response;
-use Amazon::AWS::EC2::InstanceStateChange;
+use Amazon::AWS::EC2::Types::InstanceStateChange;
 
-class Amazon::AWS::EC2::Response::StopInstances 
+use Amazon::AWS::Roles::Response;
+
+class Amazon::AWS::EC2::Response::StopInstances
   does XML::Class[
     xml-element   => 'StopInstancesResponse',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'

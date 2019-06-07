@@ -1,18 +1,18 @@
 use v6.d;
 
-use Amazon::AWS::EC2::Base;
+use Amazon::AWS::EC2::Types::Base;
 
-use Amazon::AWS::EC2::GroupIdentifier;
-use Amazon::AWS::EC2::InstanceNetworkInterfaceAssociation;
-use Amazon::AWS::EC2::InstanceNetworkInterfaceAttachment;
-use Amazon::AWS::EC2::InstancePrivateIpAddress;
+use Amazon::AWS::EC2::Types::GroupIdentifier;
+use Amazon::AWS::EC2::Types::InstanceNetworkInterfaceAssociation;
+use Amazon::AWS::EC2::Types::InstanceNetworkInterfaceAttachment;
+use Amazon::AWS::EC2::Types::InstancePrivateIpAddress;
 
 use XML::Class;
 
-class Amazon::AWS::EC2::InstanceNetworkInterface is export
+class Amazon::AWS::EC2::Types::InstanceNetworkInterface is export
   does XML::Class[xml-element => 'item']
 {
-  also is Amazon::AWS::EC2::Base;
+  also is Amazon::AWS::EC2::Types::Base;
 
   has InstanceNetworkInterfaceAssociation $.association                       is rw;
   has InstanceNetworkInterfaceAttachment  $.attachment                        is rw;
