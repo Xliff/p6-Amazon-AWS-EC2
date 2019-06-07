@@ -75,9 +75,9 @@ class Amazon::AWS::EC2::Filter::NetworkAddrAssociation
 class Amazon::AWS::EC2::Filter::NetworkAddress
   does XML::Class[xml-element => 'address']
 {
-  has Str                       $.private-ip-address;
-  has Bool                      $.primary;
-  has NetworkAddrAssociation    $.association;
+  has Str                       $.private-ip-address        is xml-element is rw;
+  has Bool                      $.primary                   is xml-element is rw;
+  has NetworkAddrAssociation    $.association               is xml-element is rw;
 }
 
 class Amazon::AWS::EC2::Filter::NetworkAssociation

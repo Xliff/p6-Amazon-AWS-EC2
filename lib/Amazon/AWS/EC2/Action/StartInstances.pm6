@@ -1,15 +1,21 @@
 use v6.c;
 
 use Method::Also;
+use XML::Class;
 
 use Amazon::AWS::Utils;
 use Amazon::AWS::EC2::Instance;
-#use Amazon::AWS::EC2::Response::StartInstances;
+use Amazon::AWS::EC2::Response::StartInstances;
 
-class Amazon::AWS::EC2::Action::StartInstances is export {
-  has Str  $.AdditionalInfo;
-  has Bool $.DryRun;
-  has Str  @.InstanceIds;
+class Amazon::AWS::EC2::Action::StartInstances is export
+  does XML::Class[
+    xml-element   => 'StartInstances',
+    xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
+  ]
+{
+  has Str  $.AdditionalInfo                                   is xml-element               is rw;
+  has Bool $.DryRun                                           is xml-element               is rw;
+  has Str  @.InstanceIds   is xml-container('instancesIdSet') is xml-element('instanceId') is rw;
 
   submethod BUILD (
     :$!AdditionalInfo? = '',
@@ -52,11 +58,11 @@ DIE
       if $.AdditionalInfo.chars;
 
     # XXX - Add error handling to makeRequest!
-    #Amazon::AWS::EC2::Response::StartInstances.from-xml(
+    Amazon::AWS::EC2::Response::StartInstances.from-xml(
       makeRequest(
         "?Action=StartInstances&{ @args.map({ "{.key}={.value}" }).join('&') }"
       )
-    #);
+    );
   }
 
 }

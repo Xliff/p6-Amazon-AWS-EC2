@@ -5,9 +5,9 @@ use XML::Class;
 use Amazon::AWS::Roles::Response;
 use Amazon::AWS::EC2::InstanceStateChange;
 
-class Amazon::AWS::EC2::Response::StartInstances is export 
+class Amazon::AWS::EC2::Response::StopInstances 
   does XML::Class[
-    xml-element   => 'StartInstancesResponse',
+    xml-element   => 'StopInstancesResponse',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {

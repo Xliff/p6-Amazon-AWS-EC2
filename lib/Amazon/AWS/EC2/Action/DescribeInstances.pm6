@@ -1,17 +1,23 @@
 use v6.c;
 
+use XML::Class;
 use Method::Also;
 
 use Amazon::AWS::Utils;
 use Amazon::AWS::EC2::Filter;
 use Amazon::AWS::EC2::Response::DescribeInstances;
 
-class Amazon::AWS::EC2::Action::DescribeInstances is export {
-  has Bool    $.DryRun;
-  has Filter  @.filters;
-  has Str     @.InstanceIds;
-  has Int     $.maxResults;
-  has Str     $.nextToken;
+class Amazon::AWS::EC2::Action::DescribeInstances is export
+  does XML::Class[
+    xml-element   => 'DescribeInstances',
+    xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
+  ]
+{
+  has Bool    $.DryRun                                        is xml-element               is rw;
+  has Filter  @.filters     is xml-container('filterSet')     is xml-element               is rw;
+  has Str     @.InstanceIds is xml-container('instanceIdSet') is xml-element('instanceId') is rw;
+  has Int     $.maxResults                                    is xml-element               is rw;
+  has Str     $.nextToken                                     is xml-element               is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
