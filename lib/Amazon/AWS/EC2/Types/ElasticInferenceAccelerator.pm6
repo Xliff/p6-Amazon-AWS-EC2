@@ -9,13 +9,13 @@ class Amazon::AWS::EC2::Types::ElasticInferenceAccelerator is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str $.type is xml-element is rw;
+  has Str $.type is xml-element is rw; #= eia1.small | eia1.medium | eia1.large
 
   method setType($newType) {
     my @valid-types = <eia1.small eia1.medium eia1.large>;
 
     die "Invalid type '{$newType}' given. Valid types are:{
-         @valid-types.join(', ') }";
+         @valid-types.join(', ') }"
       unless $newType ~~ @valid-types.any;
   }
 

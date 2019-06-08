@@ -6,10 +6,13 @@ use XML::Class;
 use Amazon::AWS::EC2::Response::DescribeRegions;
 use Amazon::AWS::EC2::Types::Instance;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeRegions::Filter is export
     does XML::Class[xml-element => 'item']
 {
+    also does Amazon::AWS::Roles::Eqv;
+
     has Str $.endpoint                                       is xml-element                is rw;
     has Str $.region-name                                    is xml-element                is rw;
 }
@@ -19,6 +22,8 @@ constant Filter := Amazon::AWS::EC2::Action::DescribeRegions::Filter;
 class Amazon::AWS::EC2::Action::DescribeRegions is export
   does XML::Class[xml-element => 'DescribeRegions']
 {
+  also does Amazon::AWS::Roles::Eqv;
+
   has Bool   $.DryRun                                        is xml-element                is rw;
   has Filter @.filters     is xml-container('filterSet')                                   is rw;
   has Str    @.regions     is xml-container('regionNameSet') is xml-element('region')      is rw;

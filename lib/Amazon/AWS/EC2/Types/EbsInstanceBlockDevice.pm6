@@ -9,5 +9,8 @@ class Amazon::AWS::EC2::Types::EbsInstanceBlockDevice is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  # XXX - FINISH HIM!!
+  has Str  $.attachTime           is xml-element is rw;
+  has Bool $.deleteOnTermination  is xml-element is rw;
+  has Str  $.status               is xml-element is rw; #= attaching | attached | detaching | detached
+  has Str  $.volumeId             is xml-element is rw;
 }

@@ -1,23 +1,40 @@
 use v6.d;
 
 role Amazon::AWS::Roles::Eqv {
-  
+
   method eqv($b) {
-    return False unless self.defined == $b.defined;
-    return False unless self.WHAT =:= $b.WHAT; 
-  
+    unless self.defined == $b.defined {
+      say '»»»» DEFINED';
+      return False;
+    }
+    unless self.WHAT =:= $b.WHAT {
+      say '»»»» WHAT';
+      return False;
+    }
+
     for self.^attributes Z $b.^attributes -> ($x, $y) {
       my $attr = $x.name.substr(2);
-      return False unless self."$attr"().defined == $b."$attr"().defined;
+      unless self."$attr"().defined == $b."$attr"().defined {
+        say "»»»» ATTR DEF - $attr";
+        return False;
+      }
       if self."$attr"().defined {
         if self."$attr"() ~~ Amazon::AWS::Roles::Eqv {
-          return False unless self."$attr"().eqv( $b."$attr"() )
+          unless self."$attr"().eqv( $b."$attr"() ) {
+            say "»»»» EQV M -- {$b.^name}.{$attr}";
+            return False
+          }
         } else {
-          return False unless self."$attr"() eqv $b."$attr"();
+          unless self."$attr"() eqv $b."$attr"() {
+            say "»»»» EQV P -- {$b.^name}.{$attr}";
+            say "A: { self."$attr"() }";
+            say "B: { $b."$attr"() }";
+            return False
+          }
         }
       }
     }
     True;
   }
-  
+
 }

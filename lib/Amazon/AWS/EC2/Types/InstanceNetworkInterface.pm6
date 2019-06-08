@@ -26,6 +26,8 @@ class Amazon::AWS::EC2::Types::InstanceNetworkInterface is export
   has Str                                 $.status             is xml-element is rw;
   has Str                                 $.subnetId           is xml-element is rw;
 
-  has GroupIdentifier          @.groups             is xml-container('groupSet');
-  has InstancePrivateIpAddress @.privateIpAddresses is xml-container('privateIpAddressesSet');
+  has GroupIdentifier          @.groups
+    is xml-container('groupSet')                                              is rw;
+  has InstancePrivateIpAddress @.privateIpAddresses is
+    xml-container('privateIpAddressesSet')                                    is rw;
 }

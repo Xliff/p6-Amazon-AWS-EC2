@@ -6,6 +6,7 @@ use Method::Also;
 use Amazon::AWS::EC2::Filter;
 use Amazon::AWS::EC2::Response::DescribeInstances;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeInstances is export
   does XML::Class[
@@ -13,6 +14,8 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
+  also does Amazon::AWS::Roles::Eqv;
+  
   has Bool    $.DryRun                                        is xml-element               is rw;
   has Filter  @.filters     is xml-container('filterSet')     is xml-element               is rw;
   has Str     @.InstanceIds is xml-container('instanceIdSet') is xml-element('instanceId') is rw;
@@ -32,8 +35,8 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     :@instances,
   ) {
     @!InstanceIds = do given @instances {
-      when .all ~~ Str                        { @instances                     }
-      when .all ~~ Amazon::AWS::EC2::Instance { @instances.map( *.instanceID ) }
+      when .all ~~ Str      { @instances                     }
+      when .all ~~ Instance { @instances.map( *.instanceID ) }
 
       default {
         die qq:to/DIE/.chomp;
@@ -44,17 +47,17 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
       }
     };
 
-    # @filters = do given @filters {
-    #   when .all ~~ Amazon::AWS::EC2::Filter { @filters }
-    #
-    #   default {
-    #     die qq:to/DIE/.chomp;
-    #     Invalid value passed to \@filers. Should only contain Filter objects, but contains:
-    #     { @filters.map( *.^name ).unique.join('. ') }
-    #     DIE
-    #
-    #   }
-    # };
+    @filters = do given @filters {
+      when .all ~~ Amazon::AWS::EC2::Filter { @filters }
+
+      default {
+        die qq:to/DIE/.chomp;
+        Invalid value passed to \@filers. Should only contain Filter objects, but contains:
+        { @filters.map( *.^name ).unique.join('. ') }
+        DIE
+
+      }
+    };
 
   }
 

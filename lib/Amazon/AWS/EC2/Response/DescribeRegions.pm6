@@ -14,5 +14,5 @@ class Amazon::AWS::EC2::Response::DescribeRegions is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has Region     @.items is xml-container('regionInfo');
+  has Region     @.items is xml-container('regionInfo') is rw;
 }

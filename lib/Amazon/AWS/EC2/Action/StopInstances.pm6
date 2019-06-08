@@ -7,6 +7,7 @@ use Amazon::AWS::EC2::Types::Instance;
 
 use Amazon::AWS::EC2::Response::StopInstances;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::StopInstances is export
   does XML::Class[
@@ -14,6 +15,8 @@ class Amazon::AWS::EC2::Action::StopInstances is export
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
+  also does Amazon::AWS::Roles::Eqv;
+  
   has Bool $.DryRun                                         is xml-element               is rw;
   has Bool $.Force                                          is xml-element               is rw;
   has Bool $.Hibernate                                      is xml-element               is rw;

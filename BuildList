@@ -9,6 +9,7 @@ XML::Class
 Amazon::AWS::EC2::Filter
 Amazon::AWS::Utils
 Amazon::AWS::Roles::Response
+Amazon::AWS::Roles::Base
 Amazon::AWS::EC2::Types::Base
 Amazon::AWS::EC2::Types::CapacityReservationTarget
 Amazon::AWS::EC2::Types::CpuOptions
@@ -25,6 +26,7 @@ Amazon::AWS::EC2::Types::InstanceNetworkInterfaceAssociation
 Amazon::AWS::EC2::Types::InstanceNetworkInterfaceAttachment
 Amazon::AWS::EC2::Types::InstancePrivateIpAddress
 Amazon::AWS::EC2::Types::InstanceState
+Amazon::AWS::EC2::Roles::InstanceState
 Amazon::AWS::EC2::Types::InstanceStateChange
 Amazon::AWS::EC2::Types::LicenseConfiguration
 Amazon::AWS::EC2::Types::NetworkInterfaceAssociation

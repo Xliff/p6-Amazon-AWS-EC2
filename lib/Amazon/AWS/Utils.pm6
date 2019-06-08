@@ -101,25 +101,28 @@ sub makeRequest ($uri, :$method = 'GET', :$body, *%headers) is export {
   $b;
 }
 
-sub populateTestObject($object) is export {
+sub populateTestObject($object, :$blanks = True) is export {
   for $object.^attributes -> $a {
     # 10% chance for an undefined attr.
-    next unless (^10).pick;
-    
+    if $blanks { next unless (^10).pick }
+
     sub generateValue($_) {
       do {
         when Str  { (gather for ^@range.pick { take @charValue.pick }).join() }
         when Bool { Bool.pick         }
         when Int  { @range.pick       }
         when Num  { @range.max * rand }
-        
+
         default   { populateTestObject( .new ) }
       }
     }
-    
+
     $object."{ $a.name.substr(2) }"() = do given $a.type {
-      when Positional { do gather for ^((^5).pick) -> $i { take generateValue(.of) } }
-      default         { generateValue($_)                                            }
+      when Positional {
+        do gather for ^((^5).pick) -> $i { take generateValue(.of) }
+      }
+
+      default         { generateValue($_) }
     }
   }
   $object;
