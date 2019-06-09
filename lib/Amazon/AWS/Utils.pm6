@@ -101,10 +101,21 @@ sub makeRequest ($uri, :$method = 'GET', :$body, *%headers) is export {
   $b;
 }
 
-sub populateTestObject($object, :$blanks = True) is export {
+sub populateTestObject(
+  $object,           #= Object instance to populate
+  :$blanks = True,   #= Whether or not to randomly generate empty attributes
+  :$chance = 10,     #= Chance of generating a blank = (1/chance)
+  :$elems  = 5,      #= If a list, random number up to given value.
+  :$invert = False   #= Invert chance computation.
+) is export {
   for $object.^attributes -> $a {
     # 10% chance for an undefined attr.
-    if $blanks { next unless (^10).pick }
+    if $blanks {
+      $invert ??
+        (next if (^$chance).pick)
+        !!
+        (next unless (^$chance).pick);
+    }
 
     sub generateValue($_) {
       do {
@@ -113,13 +124,13 @@ sub populateTestObject($object, :$blanks = True) is export {
         when Int  { @range.pick       }
         when Num  { @range.max * rand }
 
-        default   { populateTestObject( .new ) }
+        default   { populateTestObject( .new, :$blanks, :$chance, :$invert, :$elems ) }
       }
     }
 
     $object."{ $a.name.substr(2) }"() = do given $a.type {
       when Positional {
-        do gather for ^((^5).pick) -> $i { take generateValue(.of) }
+        do gather for ^((^$elems).pick) -> $i { take generateValue(.of) }
       }
 
       default         { generateValue($_) }
