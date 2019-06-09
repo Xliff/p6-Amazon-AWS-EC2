@@ -14,6 +14,8 @@ class Amazon::AWS::EC2::Action::StopInstances is export
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
+  my $c = ::?CLASS.^name.split('::')[* - 1];
+  
   has Bool $.DryRun                                         is xml-element               is rw;
   has Bool $.Force                                          is xml-element               is rw;
   has Bool $.Hibernate                                      is xml-element               is rw;
@@ -39,7 +41,7 @@ DIE
     }
   }
 
-  method run
+  method run (:$raw = False)
     is also<
       do
       execute
@@ -60,11 +62,14 @@ DIE
     );
 
     # XXX - Add error handling to makeRequest!
-    Amazon::AWS::EC2::Response::StopInstances.from-xml(
-      makeRequest(
-        "?Action=StopInstances&{ @args.map({ "{.key}={.value}" }).join('&') }"
-      )
+    my $xml = makeRequest(
+      "?Action={ $c }}&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
+    
+    $raw ??
+      $xml
+      !!
+      Amazon::AWS::EC2::Response::StopInstances.from-xml($xml);
   }
 
 }

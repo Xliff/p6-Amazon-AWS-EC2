@@ -4,18 +4,18 @@ use v6.d;
 
 use XML::Class;
 
-class Amazon::AWS::EC2::Filter::BlockDeviceMapping     { ... }
-class Amazon::AWS::EC2::Filter::HibernationOptions     { ... }
-class Amazon::AWS::EC2::Filter::IamInstanceProfile     { ... }
-class Amazon::AWS::EC2::Filter::Instance               { ... }
-class Amazon::AWS::EC2::Filter::Ipv6Address            { ... }
-class Amazon::AWS::EC2::Filter::NetworkAddrAssociation { ... }
-class Amazon::AWS::EC2::Filter::NetworkAddress         { ... }
-class Amazon::AWS::EC2::Filter::NetworkAssociation     { ... }
-class Amazon::AWS::EC2::Filter::NetworkAttachment      { ... }
-class Amazon::AWS::EC2::Filter::NetworkInterface       { ... }
-class Amazon::AWS::EC2::Filter::ProductCode            { ... }
-class Amazon::AWS::EC2::Filter::Tag                    { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::BlockDeviceMapping     { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::HibernationOptions     { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::IamInstanceProfile     { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::Instance               { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::Ipv6Address            { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddrAssociation { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddress         { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAssociation     { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAttachment      { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkInterface       { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::ProductCode            { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstances::Tag                    { ... }
 
 constant BlockDeviceMapping     :=  Amazon::AWS::EC2::Filter::BlockDeviceMapping;
 constant HibernationOptions     :=  Amazon::AWS::EC2::Filter::HibernationOptions;
@@ -30,7 +30,7 @@ constant NetworkInterface       :=  Amazon::AWS::EC2::Filter::NetworkInterface;
 constant ProductCode            :=  Amazon::AWS::EC2::Filter::ProductCode;
 constant Tag                    :=  Amazon::AWS::EC2::Filter::Tag;
 
-class Amazon::AWS::EC2::Filter::BlockDeviceMapping
+class Amazon::AWS::EC2::Filters::DescribeInstances::BlockDeviceMapping
   does XML::Class[xml-element => 'block-device-mapping']
 {
   has Str                       $.attach-time               is xml-element is rw; #= default | host
@@ -40,39 +40,39 @@ class Amazon::AWS::EC2::Filter::BlockDeviceMapping
   has Str                       $.volume-id                 is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filter::HibernationOptions
+class Amazon::AWS::EC2::Filters::DescribeInstances::HibernationOptions
   does XML::Class[xml-element => 'hibernation-options']
 {
   has Bool                      $.configured                is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filter::IamInstanceProfile
+class Amazon::AWS::EC2::Filters::DescribeInstances::IamInstanceProfile
   does XML::Class[xml-element => 'iam-instance-profile']
 {
   has Str                       $.arn                       is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filter::Instance
+class Amazon::AWS::EC2::Filters::DescribeInstances::Instance
   does XML::Class[xml-element => 'instance']
 {
   has Str                       $.group-id                  is xml-element is rw;
   has Str                       $.group-name                is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filter::Ipv6Address
+class Amazon::AWS::EC2::Filters::DescribeInstances::Ipv6Address
   does XML::Class[xml-element => 'addresses']
 {
   has Str                       $.ipv6-address              is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filter::NetworkAddrAssociation
+class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddrAssociation
   does XML::Class[xml-element => 'association']
 {
   has Str                       $.private-ip-address        is xml-element is rw;
   has Str                       $.ip-owner-id               is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filter::NetworkAddress
+class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddress
   does XML::Class[xml-element => 'address']
 {
   has Str                       $.private-ip-address        is xml-element is rw;
@@ -80,7 +80,7 @@ class Amazon::AWS::EC2::Filter::NetworkAddress
   has NetworkAddrAssociation    $.association               is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filter::NetworkAssociation
+class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAssociation
   does XML::Class[xml-element => 'association']
 {
   has Str                       $.public-ip                 is xml-element is rw;
@@ -89,7 +89,7 @@ class Amazon::AWS::EC2::Filter::NetworkAssociation
   has Str                       $.attachment-id             is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filter::NetworkAttachment
+class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAttachment
   does XML::Class[xml-element => 'attachment']
 {
   has Str                       $.attachment-id             is xml-element is rw;
@@ -99,7 +99,7 @@ class Amazon::AWS::EC2::Filter::NetworkAttachment
   has Int                       $.device-index              is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filter::NetworkInterface
+class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkInterface
   does XML::Class[xml-element => 'network-interface']
 {
   has NetworkAddress            $.addresses                                is rw;
@@ -122,13 +122,13 @@ class Amazon::AWS::EC2::Filter::NetworkInterface
   has Str                       $.vpc-id                    is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filter::ProductCode
+class Amazon::AWS::EC2::Filters::DescribeInstances::ProductCode
   does XML::Class[xml-element => 'product-code']
 {
   has Str                       $.type                      is xml-element is rw; #= devpay | marketplace
 }
 
-class Amazon::AWS::EC2::Filter::Tag
+class Amazon::AWS::EC2::Filters::DescribeInstances::Tag
   does XML::Class[xml-element => 'item']
 {
   has Str                       $.key                       is xml-element is rw;
@@ -136,7 +136,7 @@ class Amazon::AWS::EC2::Filter::Tag
 }
 
 # All objects used are local objects. Any EC2 objects used shall be fully qualified.
-class Amazon::AWS::EC2::Filter is export
+class Amazon::AWS::EC2::DescribeInstances::Filter is export
   does XML::Class[xml-element => 'item']
 {
   has Str                       $.affinity                  is xml-element is rw;

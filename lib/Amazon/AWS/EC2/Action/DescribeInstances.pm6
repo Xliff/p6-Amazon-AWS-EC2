@@ -13,6 +13,8 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
+  my $c = ::?CLASS.^name.split('::')[* - 1];
+  
   has Bool    $.DryRun                                        is xml-element               is rw;
   has Filter  @.filters     is xml-container('filterSet')     is xml-element               is rw;
   has Str     @.InstanceIds is xml-container('instanceIdSet') is xml-element('instanceId') is rw;
@@ -58,7 +60,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
 
   }
 
-  method run (:$nextToken = '')
+  method run (:$nextToken = '', :$raw)
     is also<
       do
       execute
@@ -90,11 +92,14 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     }
 
     # XXX - Add error handling to makeRequest!
-    Amazon::AWS::EC2::Response::DescribeInstances.from-xml(
-      makeRequest(
-        "?Action=DescribeInstances&{ @args.map({ "{.key}={.value}" }).join('&') }"
-      )
+    makeRequest(
+      "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
+    
+    $raw ??
+      $xml
+      !!
+      Amazon::AWS::EC2::Response::DescribeInstances.from-xml($xml);
   }
 
 }
