@@ -3,7 +3,7 @@ use v6.c;
 use XML::Class;
 use Method::Also;
 
-use Amazon::AWS::EC2::Filter;
+use Amazon::AWS::EC2::Filters::DescribeInstances;
 use Amazon::AWS::EC2::Response::DescribeInstances;
 use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
@@ -15,7 +15,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
   ]
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool    $.DryRun                                        is xml-element               is rw;
@@ -50,7 +50,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     };
 
     @filters = do given @filters {
-      when .all ~~ Amazon::AWS::EC2::Filter { @filters }
+      when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @filters }
 
       default {
         die qq:to/DIE/.chomp;
@@ -95,7 +95,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     }
 
     # XXX - Add error handling to makeRequest!
-    makeRequest(
+    my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
 

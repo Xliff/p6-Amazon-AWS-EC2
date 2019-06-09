@@ -2,3 +2,5 @@
 lib/.precomp/
 *.bak
 test-files/
+LastBuildResults
+LastBuildResults.*

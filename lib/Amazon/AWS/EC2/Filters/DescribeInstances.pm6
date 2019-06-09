@@ -17,18 +17,18 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkInterface       { ...
 class Amazon::AWS::EC2::Filters::DescribeInstances::ProductCode            { ... }
 class Amazon::AWS::EC2::Filters::DescribeInstances::Tag                    { ... }
 
-constant BlockDeviceMapping     :=  Amazon::AWS::EC2::Filter::BlockDeviceMapping;
-constant HibernationOptions     :=  Amazon::AWS::EC2::Filter::HibernationOptions;
-constant IamInstanceProfile     :=  Amazon::AWS::EC2::Filter::IamInstanceProfile;
-constant Instance               :=  Amazon::AWS::EC2::Filter::Instance;
-constant Ipv6Address            :=  Amazon::AWS::EC2::Filter::Ipv6Address;
-constant NetworkAddrAssociation :=  Amazon::AWS::EC2::Filter::NetworkAddrAssociation;
-constant NetworkAddress         :=  Amazon::AWS::EC2::Filter::NetworkAddress;
-constant NetworkAssociation     :=  Amazon::AWS::EC2::Filter::NetworkAssociation;
-constant NetworkAttachment      :=  Amazon::AWS::EC2::Filter::NetworkAttachment;
-constant NetworkInterface       :=  Amazon::AWS::EC2::Filter::NetworkInterface;
-constant ProductCode            :=  Amazon::AWS::EC2::Filter::ProductCode;
-constant Tag                    :=  Amazon::AWS::EC2::Filter::Tag;
+constant BlockDeviceMapping     :=  Amazon::AWS::EC2::Filters::DescribeInstances::BlockDeviceMapping;
+constant HibernationOptions     :=  Amazon::AWS::EC2::Filters::DescribeInstances::HibernationOptions;
+constant IamInstanceProfile     :=  Amazon::AWS::EC2::Filters::DescribeInstances::IamInstanceProfile;
+constant Instance               :=  Amazon::AWS::EC2::Filters::DescribeInstances::Instance;
+constant Ipv6Address            :=  Amazon::AWS::EC2::Filters::DescribeInstances::Ipv6Address;
+constant NetworkAddrAssociation :=  Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddrAssociation;
+constant NetworkAddress         :=  Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddress;
+constant NetworkAssociation     :=  Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAssociation;
+constant NetworkAttachment      :=  Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAttachment;
+constant NetworkInterface       :=  Amazon::AWS::EC2::Filters::DescribeInstances::NetworkInterface;
+constant ProductCode            :=  Amazon::AWS::EC2::Filters::DescribeInstances::ProductCode;
+constant Tag                    :=  Amazon::AWS::EC2::Filters::DescribeInstances::Tag;
 
 class Amazon::AWS::EC2::Filters::DescribeInstances::BlockDeviceMapping
   does XML::Class[xml-element => 'block-device-mapping']
