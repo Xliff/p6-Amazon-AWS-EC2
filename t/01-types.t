@@ -48,8 +48,6 @@ my @files = $buildList.IO
   .starts-with(
     <
       Amazon::AWS::EC2::Types
-      Amazon::AWS::EC2::Action
-      Amazon::AWS::EC2::Response
     >.any
   )
   &&
