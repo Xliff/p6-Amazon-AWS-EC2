@@ -76,8 +76,11 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     my @InstanceArgs;
     @InstanceArgs.push: Pair.new("InstanceId.{$c++}", $_) for @.InstanceIds;
 
-    my @Filters;
-    # Handle filters
+    my @FilterArgs;
+    $cnt = 1;
+    for @filters {
+      @FilterArgs.push: Pair.new("Filter.{$c++}.{.key}", .value) for .pairs;
+    }
 
     # Should already be sorted.
     my @args;
@@ -88,7 +91,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
       @args = (
         DryRun         => $.DryRun,
         |@InstanceArgs,
-        |@Filters,
+        |@FilterArgs,
         MaxResults     => $.maxResults,
         Version        => '2016-11-15'
       );

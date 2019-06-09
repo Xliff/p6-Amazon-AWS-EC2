@@ -16,7 +16,7 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
   ]
 {
   my $c = ::?CLASS.^name.split('::')[* - 1];
-  
+
   has Bool    $.DryRun                                      is xml-element               is rw;
   has Filter  @.filters     is xml-container('filterSet')   is xml-element               is rw;
   has Str     @.groupIds    is xml-container('groupIds')    is xml-element('groupId')    is rw;
@@ -35,12 +35,12 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
     :$!nextToken  = '',
     :@filters    is copy = (),
     :@groups     is copy = (),
-    :@groupIds   is copy = (), 
+    :@groupIds   is copy = (),
     :@groupNames is copy = ()
   ) {
-    die ':$maxResults must be a number from 5 to 1000' 
+    die ':$maxResults must be a number from 5 to 1000'
       unless $!maxResults ~~ 5..1000;
-      
+
     for @groups {
       when GroupIdentifier {
         @!groupIds.push:   .groupId;
@@ -48,7 +48,7 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
       }
       default { die "Invalid value '{ ^.name }' in \@groups" }
     }
-    
+
     @!groupIds = @groupIds.map({
       do {
         when Str             { $_       }
@@ -56,7 +56,7 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
         default              { die "Invalid type '{ .^name }' in \@groupIds!" }
       }
     }).unique;
-    
+
     @!groupNames = @groupNames.= map({
       do {
         when Str             { $_       }
@@ -64,19 +64,18 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
         default              { die "Invalid type '{ .^name }' in \@groupNames!" }
       }
     }).unique;
-   
 
-    # @filters = do given @filters {
-    #   when .all ~~ Amazon::AWS::EC2::Filters::DescribeSecurityGroups { @filters }
-    #
-    #   default {
-    #     die qq:to/DIE/.chomp;
-    #     Invalid value passed to \@filers. Should only contain Filter objects, but contains:
-    #     { @filters.map( *.^name ).unique.join('. ') }
-    #     DIE
-    #
-    #   }
-    # };
+    @filters = do given @filters {
+      when .all ~~ Amazon::AWS::EC2::Filters::DescribeSecurityGroups { @filters }
+
+      default {
+        die qq:to/DIE/.chomp;
+        Invalid value passed to \@filers. Should only contain Filters::DescribeSecurityGroup objects, but contains:
+        { @filters.map( *.^name ).unique.join('. ') }
+        DIE
+
+      }
+    };
 
   }
 
@@ -89,13 +88,16 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
     my $cnt = 1;
     my @GroupIdArgs;
     @GroupIdArgs.push: Pair.new("GroupId.{$c++}", $_) for @.groupIds;
-    
+
     $cnt = 1;
     my @GroupNameArgs;
     @GroupNameArgs.push: Pair.new("GroupName.{$c++}", $_) for @.groupNames;
 
-    my @Filters;
-    # Handle filters
+    my @FilterArgs;
+    $cnt = 1;
+    for @filters {
+      @FilterArgs.push: Pair.new("Filter.{$c++}.{.key}", .value) for .pairs;
+    }
 
     # Should already be sorted.
     my @args;
@@ -107,6 +109,7 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
         DryRun         => $.DryRun,
         |@GroupIdArgs,
         |@GroupNameArgs,
+        |@FilterArgs,
         MaxResults     => $.maxResults,
         Version        => '2016-11-15'
       );
@@ -116,10 +119,10 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
-    
-    $raw ?? 
-      $xml 
-      !! 
+
+    $raw ??
+      $xml
+      !!
       Amazon::AWS::EC2::Response::DescribeSecurityGroups.from-xml($xml);
   }
 
