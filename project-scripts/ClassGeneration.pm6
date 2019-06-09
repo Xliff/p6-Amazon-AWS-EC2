@@ -164,7 +164,7 @@ sub processClass ($url) {
   "testClass/{ $className }.pm6".IO.spurt($classDef);
 }
 
-sub doSpider ($url, :$batch) is export {
+sub doSpider ($url, :$threads) is export {
   my $dom = Mojo::DOM.new( LWP::Simple.get($url) );
   my @hrefs = $dom.find('ul.itemizedlist a')
                   .to_array
@@ -174,5 +174,6 @@ sub doSpider ($url, :$batch) is export {
                              .to_string
                   });
 
-  @hrefs.batch($batch)».&processClass();
+  #@hrefs.race(batch => 1, degree => $threads).map({ processClass($_) });
+  @hrefs».&processClass();
 }
