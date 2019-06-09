@@ -2,11 +2,11 @@ use v6.d;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::SecurityGroup;
+use Amazon::AWS::EC2::Types::SecurityGroup;
 
 use Amazon::AWS::Roles::Response;
 
-class Amazon::AWS::EC2::Response::DescribeInstances is export
+class Amazon::AWS::EC2::Response::DescribeSecurityGroups is export
   does XML::Class[
     xml-element   => 'DescribeSecurityGroupsResponse',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
