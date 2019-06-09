@@ -1,0 +1,4 @@
+- See about writing a spider that goes here: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Types.html
+  And generates the reset of these?
+
+  This should ONLY be considered after the type verification test has been written. See the obj-testing branch for the status on that initiative.
