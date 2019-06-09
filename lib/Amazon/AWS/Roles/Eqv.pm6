@@ -5,7 +5,7 @@ role Amazon::AWS::Roles::Eqv {
 
   multi method is-empty {
     for self.^attributes {
-      return False if not is-empty( self."{ .substr(2) }"() );
+      return False if not self.is-empty( self."{ .substr(2) }"() );
     }
     True;
   }
