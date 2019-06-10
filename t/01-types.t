@@ -47,14 +47,7 @@ my @files = $buildList.IO
 @files .= grep({
   .defined
   &&
-  .starts-with(
-    <
-      Amazon::AWS::EC2::Types
-      Amazon::AWS::EC2::Response
-      Amazon::AWS::EC2::Filters
-      Amazon::AWS::EC2::Action
-    >.any
-  )
+  .starts-with('Amazon::AWS::EC2::Types')    
   &&
   not .ends-with('Base')
 });
