@@ -50,9 +50,9 @@ DIE
       execute
     >
   {
-    my $c = 1;
+    my $cnt = 1;
     my @InstanceArgs;
-    @InstanceArgs.push: Pair.new("InstanceId.{$c++}", $_) for @.InstanceIds;
+    @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @.InstanceIds;
     @InstanceArgs.say;
 
     # Should already be sorted.

@@ -87,16 +87,16 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
   {
     my $cnt = 1;
     my @GroupIdArgs;
-    @GroupIdArgs.push: Pair.new("GroupId.{$c++}", $_) for @.groupIds;
+    @GroupIdArgs.push: Pair.new("GroupId.{$cnt++}", $_) for @.groupIds;
 
     $cnt = 1;
     my @GroupNameArgs;
-    @GroupNameArgs.push: Pair.new("GroupName.{$c++}", $_) for @.groupNames;
+    @GroupNameArgs.push: Pair.new("GroupName.{$cnt++}", $_) for @.groupNames;
 
     my @FilterArgs;
     $cnt = 1;
     for @.filters {
-      @FilterArgs.push: Pair.new("Filter.{$c++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
     }
 
     # Should already be sorted.

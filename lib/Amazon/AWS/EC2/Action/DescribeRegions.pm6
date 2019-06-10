@@ -60,15 +60,15 @@ DIE
     >
   {
     # Needs more thought!
-    my $c = 1;
+    my $cnt = 1;
     my @FilterArgs;
     for @.filters {
-      @FilterArgs.push: Pair.new("Filter.{$c++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
     }
 
-    $c = 1;
+    $cnt = 1;
     my @RegionArgs;
-    @RegionArgs.push: Pair.new("RegionName.{$c++}", $_) for @.regions;
+    @RegionArgs.push: Pair.new("RegionName.{$cnt++}", $_) for @.regions;
     @RegionArgs.say;
 
     # Should already be sorted.

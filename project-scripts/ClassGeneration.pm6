@@ -138,6 +138,11 @@ sub makeClass (Str $url, :$response = False) is export {
                        $a[5].defined ?? "  #= { $a[5] }" !! '' }";
   }
 
+  my $mode = do {
+    when $response.defined { 'Response' }
+    default                { 'Types' }
+  };
+
   # Really should be separated out into a view.
   my $dependent = $response ??
     'Amazon::AWS::Roles::Response'
@@ -158,9 +163,9 @@ sub makeClass (Str $url, :$response = False) is export {
 
     { @extraTypes.sort.map( 'use Amazon::AWS::EC2::Types::' ~ *  ~ ';' ).join("\n") }
 
-    class Amazon::AWS::EC2::Types::{ $response ??
-      'Response::' !! ''
-    }{ $className }{ $response ?? 'Response' !! ''} is export
+    class Amazon::AWS::EC2::{ $mode }::{ $className }{
+      $response ?? 'Response' !! ''
+    } is export
       does XML::Class[xml-element => 'item']
     \{
       { $also }
@@ -173,7 +178,9 @@ sub makeClass (Str $url, :$response = False) is export {
 sub processClass ($url, :$response) {
   $url ~~ / '_' (\w+) '.html' $/;
   die "Cannot find class name from '{ $url }'" unless $/[0].defined;
-  my $className =$/[0];
+
+  my $optSuffix = $response ?? 'Response' !! '';
+  my $className =$/[0] ~ $optSuffix;
 
   say "Processing { $className }...";
 

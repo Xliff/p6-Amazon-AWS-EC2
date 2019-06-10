@@ -49,8 +49,8 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
       }
     };
 
-    @filters = do given @filters {
-      when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @filters }
+    @filters = do given @!filters {
+      when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @!filters }
 
       default {
         die qq:to/DIE/.chomp;
@@ -72,14 +72,14 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     die 'Cannot use @.instances and $.maxResults in the same call to DescribeInstances'
       if $.maxResults.defined && @.InstanceIds;
 
-    my $c = 1;
+    my $cnt = 1;
     my @InstanceArgs;
-    @InstanceArgs.push: Pair.new("InstanceId.{$c++}", $_) for @.InstanceIds;
+    @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @.InstanceIds;
 
     my @FilterArgs;
     $cnt = 1;
-    for @filters {
-      @FilterArgs.push: Pair.new("Filter.{$c++}.{.key}", .value) for .pairs;
+    for @!filters {
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
     }
 
     # Should already be sorted.
