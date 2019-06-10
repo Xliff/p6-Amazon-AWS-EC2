@@ -4,3 +4,4 @@ lib/.precomp/
 test-files/
 LastBuildResults
 LastBuildResults.*
+genClasses/

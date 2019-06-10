@@ -6,7 +6,7 @@ use LWP::Simple;
 use Mojo::DOM:from<Perl5>;
 use Mojo::URL:from<Perl5>;
 
-sub makeClass (Str $url) is export {
+sub makeClass (Str $url, :$response = False) is export {
   my $dom = Mojo::DOM.new( LWP::Simple.get($url) );
 
   my ($className, @attributes);
@@ -21,9 +21,18 @@ sub makeClass (Str $url) is export {
   quietly {
     $className = $dom.find('h1').to_array[0].text;
 
-    for $dom.find('div.variablelist span.term b').to_array -> $ne {
+    my @vl = $dom.find('div.variablelist').to_array;
+    # .text.say for @vl[0].find('span.term b').to_array;
+    # say '»»»»»»';
+    # .text.say for @vl[1].find('span.term b').to_array;
+    # @vl.say;
+    # exit;
+    my $vl = $response ?? @vl[1] !! @vl[0];
+
+    for $vl.find('span.term b').to_array -> $ne {
       my ($attrName, $attrType, $sigil, $validValues, $container) =
         ($ne.text, '');
+      next if $ne.text eq 'requestId';
 
       my $nn = $ne.parent.parent.next_node;
       while not $nn.tag.defined {
@@ -129,43 +138,57 @@ sub makeClass (Str $url) is export {
                        $a[5].defined ?? "  #= { $a[5] }" !! '' }";
   }
 
+  # Really should be separated out into a view.
+  my $dependent = $response ??
+    'Amazon::AWS::Roles::Response'
+    !!
+    'Amazon::AWS::EC2::Types::Base';
+
+  my $also = $response ??
+    "also does {$dependent};"
+    !!
+    "also is {$dependent};";
+
   qq:to/PRE1/.chomp;
     use v6.d;
 
-    use Amazon::AWS::EC2::Types::Base;
+    use { $dependent };
 
     use XML::Class;
 
     { @extraTypes.sort.map( 'use Amazon::AWS::EC2::Types::' ~ *  ~ ';' ).join("\n") }
 
-    class Amazon::AWS::EC2::Types::{ $className } is export
+    class Amazon::AWS::EC2::Types::{ $response ??
+      'Response::' !! ''
+    }{ $className }{ $response ?? 'Response' !! ''} is export
       does XML::Class[xml-element => 'item']
     \{
-      also is Amazon::AWS::EC2::Types::Base;
+      { $also }
 
     { @attrDefs.join("\n") }
     \}
     PRE1
 }
 
-sub processClass ($url) {
+sub processClass ($url, :$response) {
   $url ~~ / '_' (\w+) '.html' $/;
   die "Cannot find class name from '{ $url }'" unless $/[0].defined;
   my $className =$/[0];
 
   say "Processing { $className }...";
 
-  my $classDef = makeClass($url);
+  my $classDef = makeClass($url, :$response);
 
   # Make the directory. Naked literal needs to be replaced!
-  "testClass/".IO.mkdir(0o744);
+  "genClasses/".IO.mkdir(0o744);
 
   # Output the class.
-  "testClass/{ $className }.pm6".IO.spurt($classDef);
+  "genClasses/{ $className }.pm6".IO.spurt($classDef);
 }
 
-sub doSpider ($url, :$threads) is export {
+sub doSpider ($url, :$response = False, :$threads) is export {
   my $dom = Mojo::DOM.new( LWP::Simple.get($url) );
+
   my @hrefs = $dom.find('ul.itemizedlist a')
                   .to_array
                   .map({
@@ -174,6 +197,6 @@ sub doSpider ($url, :$threads) is export {
                              .to_string
                   });
 
-  #@hrefs.race(batch => 1, degree => $threads).map({ processClass($_) });
-  @hrefs».&processClass();
+
+  @hrefs.map({ processClass($_, :$response) });
 }
