@@ -18,11 +18,11 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool    $.DryRun                                        is xml-element               is rw;
-  has Filter  @.filters     is xml-container('filterSet')     is xml-element               is rw;
-  has Str     @.InstanceIds is xml-container('instanceIdSet') is xml-element('instanceId') is rw;
-  has Int     $.maxResults                                    is xml-element               is rw;
-  has Str     $.nextToken                                     is xml-element               is rw;
+  has Bool                     $.DryRun                                        is xml-element               is rw;
+  has DescribeInstancesFilter  @.filters     is xml-container('filterSet')     is xml-element               is rw;
+  has Str                      @.InstanceIds is xml-container('instanceIdSet') is xml-element('instanceId') is rw;
+  has Int                      $.maxResults                                    is xml-element               is rw;
+  has Str                      $.nextToken                                     is xml-element               is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -105,7 +105,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::DescribeInstances.from-xml($xml);
+      Amazon::AWS::EC2::Response::DescribeInstancesResponse.from-xml($xml);
   }
 
 }

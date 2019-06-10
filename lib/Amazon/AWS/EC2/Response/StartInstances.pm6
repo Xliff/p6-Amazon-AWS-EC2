@@ -6,7 +6,7 @@ use Amazon::AWS::EC2::Types::InstanceStateChange;
 
 use Amazon::AWS::Roles::Response;
 
-class Amazon::AWS::EC2::Response::StartInstances is export
+class Amazon::AWS::EC2::Response::StartInstancesResponse is export
   does XML::Class[
     xml-element   => 'StartInstancesResponse',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'

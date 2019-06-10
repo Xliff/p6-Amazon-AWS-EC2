@@ -17,7 +17,7 @@ class Amazon::AWS::EC2::Action::StartInstances is export
   ]
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Str  $.AdditionalInfo                                   is xml-element               is rw;
@@ -72,7 +72,7 @@ DIE
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::StartInstances.from-xml($xml);
+      Amazon::AWS::EC2::Response::StartInstancesResponse.from-xml($xml);
   }
 
 }

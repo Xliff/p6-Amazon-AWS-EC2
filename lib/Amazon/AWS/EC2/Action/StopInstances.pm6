@@ -16,7 +16,7 @@ class Amazon::AWS::EC2::Action::StopInstances is export
   ]
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool $.DryRun                                         is xml-element               is rw;
@@ -72,7 +72,7 @@ DIE
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::StopInstances.from-xml($xml);
+      Amazon::AWS::EC2::Response::StopInstancesResponse.from-xml($xml);
   }
 
 }

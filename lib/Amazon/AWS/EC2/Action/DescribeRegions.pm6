@@ -87,7 +87,7 @@ DIE
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::DescribeRegions.from-xml($xml);
+      Amazon::AWS::EC2::Response::DescribeRegionsResponse.from-xml($xml);
   }
 
 }
