@@ -5,7 +5,6 @@ use Amazon::AWS::EC2::Types::Base;
 use XML::Class;
 
 use Amazon::AWS::EC2::Types::StaleIpPermission;
-use Amazon::AWS::EC2::Types::StaleIpPermission;
 
 class Amazon::AWS::EC2::Types::StaleSecurityGroup is export
   does XML::Class[xml-element => 'item']

@@ -1,12 +1,25 @@
 use v6.d;
 
+use Amazon::AWS::Roles::Base;
+
+# use Amazon::AWS::EC2::Types::Tag;
+
 use XML::Class;
 
-use Amazon::AWS::EC2::Types::Tag;
+class Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter::Tag
+  does XML::Class[xml-element => 'item']
+{
+  also does Amazon::AWS::Roles::Base;
+  
+  has Str          $.key             is xml-element             is rw;
+  has Str          $.value           is xml-element             is rw;
+}
 
-class Amazon::AWS::EC2::Filters::DescribeSecurityGroups::IpPermission
+class Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter::IpPermission
   does XML::Class[xml-element => 'ip-permission']
 {
+  also does Amazon::AWS::Roles::Base;
+  
   has Str          $.cidr            is xml-element             is rw;
   has Int          $.from-port       is xml-element             is rw;
   has Str          $.group-id        is xml-element             is rw;
@@ -18,11 +31,14 @@ class Amazon::AWS::EC2::Filters::DescribeSecurityGroups::IpPermission
   has Str          $.user-id         is xml-element             is rw;
 }
 
-constant IpPermission := Amazon::AWS::EC2::Filters::DescribeSecurityGroups::IpPermission;
+constant IpPermission := Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter::IpPermission;
+constant Tag          := Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter::Tag;
 
 class Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter is export
   does XML::Class[xml-element => 'item']
 {
+  also does Amazon::AWS::Roles::Base;
+  
   has Str          $.description     is xml-element             is rw;
   has IpPermission $.egress          is xml-container('egress') is rw;
   has IpPermission $.ip-permission                              is rw;
