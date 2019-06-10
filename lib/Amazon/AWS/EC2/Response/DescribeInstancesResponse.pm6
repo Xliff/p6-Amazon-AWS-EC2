@@ -2,7 +2,6 @@ use v6.d;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Types::Instance;
 use Amazon::AWS::EC2::Types::Reservation;
 use Amazon::AWS::Roles::Response;
 

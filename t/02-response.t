@@ -78,7 +78,7 @@ my @files = $buildList.IO
 #   $o."$victim"() = $newVal;
 # }
 
-plan @files.elems * 6;
+plan @files.elems * 4;
 
 for @files {
   my ($class, $a, $bx, $b);
@@ -86,9 +86,9 @@ for @files {
   #$cn ~= 'Response' if $cn.contains('::Response::');
   #diag $cn;
 
-  lives-ok { try require ::($_);                           },   "$_ loads ok";
-  lives-ok { $class := ::($_);                             },   "$_ exists";
-  ok         $class !~~ Failure,                                "$_ is not a Failure object";
+  $class := (try require ::($_));
+
+  ok         $class !~~ Failure,                                "$_ loads. Is not a Failure object";
   lives-ok { $a = populateTestObject($class.new, :!blanks) },   "$_ can be populated";
   lives-ok { $bx = $a.to-xml                               },   "$_ serializes ok";
   lives-ok { $b = $class.from-xml($bx)                     },   "$_ deseralizes ok";

@@ -5,7 +5,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Types::Instance;
 
-use Amazon::AWS::EC2::Response::StartInstances;
+use Amazon::AWS::EC2::Response::StartInstancesResponse;
 use Amazon::AWS::Utils;
 
 use Amazon::AWS::Roles::Eqv;

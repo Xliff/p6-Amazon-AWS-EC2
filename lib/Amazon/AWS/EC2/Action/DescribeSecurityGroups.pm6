@@ -6,7 +6,7 @@ use Method::Also;
 use Amazon::AWS::EC2::Types::GroupIdentifier;
 
 use Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter;
-use Amazon::AWS::EC2::Response::DescribeSecurityGroups;
+use Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse;
 use Amazon::AWS::Utils;
 
 class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
