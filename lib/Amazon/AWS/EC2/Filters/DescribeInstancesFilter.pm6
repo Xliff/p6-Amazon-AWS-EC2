@@ -162,7 +162,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::Tag
 }
 
 # All objects used are local objects. Any EC2 objects used shall be fully qualified.
-class Amazon::AWS::EC2::Filters::DescribeInstances is export
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter is export
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;

@@ -4,7 +4,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Types::Tag;
 
-class Amazon::AWS::EC2::Filters::DescribeSecurityGroups::IpPermission 
+class Amazon::AWS::EC2::Filters::DescribeSecurityGroups::IpPermission
   does XML::Class[xml-element => 'ip-permission']
 {
   has Str          $.cidr            is xml-element             is rw;
@@ -20,7 +20,7 @@ class Amazon::AWS::EC2::Filters::DescribeSecurityGroups::IpPermission
 
 constant IpPermission := Amazon::AWS::EC2::Filters::DescribeSecurityGroups::IpPermission;
 
-class Amazon::AWS::EC2::Filters::DescribeSecurityGroups::Filter is export
+class Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter is export
   does XML::Class[xml-element => 'item']
 {
   has Str          $.description     is xml-element             is rw;
@@ -33,4 +33,3 @@ class Amazon::AWS::EC2::Filters::DescribeSecurityGroups::Filter is export
   has Str          $.vpc-id          is xml-element             is rw;
   has Tag          @.tags            is xml-container('tagSet') is rw;
 }
-  
