@@ -9,7 +9,9 @@ XML::Class
 Amazon::AWS::Utils
 Amazon::AWS::Roles::Eqv
 Amazon::AWS::Roles::Base
+Amazon::AWS::EC2::Filters::DescribeImagesFilter
 Amazon::AWS::EC2::Filters::DescribeInstancesFilter
+Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
 Amazon::AWS::EC2::Types::Base
 Amazon::AWS::EC2::Types::BlobAttributeValue
 Amazon::AWS::EC2::Types::BundleTaskError
@@ -266,7 +268,6 @@ Amazon::AWS::EC2::Types::VpnGateway
 Amazon::AWS::EC2::Types::VpnStaticRoute
 Amazon::AWS::EC2::Types::VpnTunnelOptionsSpecification
 Amazon::AWS::Roles::Response
-Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
 Amazon::AWS::EC2::Response::AcceptReservedInstancesExchangeQuoteResponse
 Amazon::AWS::EC2::Response::AdvertiseByoipCidrResponse
 Amazon::AWS::EC2::Response::AllocateAddressResponse

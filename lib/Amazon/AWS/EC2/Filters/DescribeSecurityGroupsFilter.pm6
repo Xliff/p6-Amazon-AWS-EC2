@@ -2,6 +2,7 @@ use v6.d;
 
 use Amazon::AWS::Roles::Base;
 
+# WTF does this cause t/03-filters.t to fail and ONLY t/03-filters.t!
 # use Amazon::AWS::EC2::Types::Tag;
 
 use XML::Class;
