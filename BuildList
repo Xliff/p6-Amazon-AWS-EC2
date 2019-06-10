@@ -9,7 +9,7 @@ XML::Class
 Amazon::AWS::Utils
 Amazon::AWS::Roles::Eqv
 Amazon::AWS::Roles::Base
-Amazon::AWS::EC2::Filters::DescribeInstances
+Amazon::AWS::EC2::Filters::DescribeInstancesFilter
 Amazon::AWS::EC2::Types::Base
 Amazon::AWS::EC2::Types::BlobAttributeValue
 Amazon::AWS::EC2::Types::BundleTaskError

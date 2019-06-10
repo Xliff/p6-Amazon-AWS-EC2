@@ -3,7 +3,7 @@ use v6.c;
 use XML::Class;
 use Method::Also;
 
-use Amazon::AWS::EC2::Filters::DescribeInstances;
+use Amazon::AWS::EC2::Filters::DescribeInstancesFilter;
 use Amazon::AWS::EC2::Response::DescribeInstances;
 use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
