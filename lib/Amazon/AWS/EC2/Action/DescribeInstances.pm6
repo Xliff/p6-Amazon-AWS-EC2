@@ -5,6 +5,8 @@ use Method::Also;
 
 use Amazon::AWS::EC2::Filters::DescribeInstancesFilter;
 use Amazon::AWS::EC2::Response::DescribeInstancesResponse;
+use Amazon::AWS::EC2::Types::Instance;
+use Amazon::AWS::EC2::Types::Volume;
 use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
 
@@ -36,9 +38,10 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     :@filters,
     :@instances,
   ) {
-    @!InstanceIds = do given @instances {
-      when .all ~~ Str      { @instances                     }
-      when .all ~~ Instance { @instances.map( *.instanceID ) }
+    @!InstanceIds = @instances.map {
+      when Str      { $_           }
+      when Instance { *.instanceID }
+      when Volume   { *.attachments.map( *.instanceId ) }
 
       default {
         die qq:to/DIE/.chomp;
@@ -47,7 +50,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
         DIE
 
       }
-    };
+    }).f1at;
 
     @filters = do given @!filters {
       when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @!filters }
