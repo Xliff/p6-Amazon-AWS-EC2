@@ -269,6 +269,7 @@ Amazon::AWS::EC2::Types::VpnGateway
 Amazon::AWS::EC2::Types::VpnStaticRoute
 Amazon::AWS::EC2::Types::VpnTunnelOptionsSpecification
 Amazon::AWS::Roles::Response
+Amazon::AWS::EC2::Filters::DescribeTagsFilter
 Amazon::AWS::EC2::Response::AcceptReservedInstancesExchangeQuoteResponse
 Amazon::AWS::EC2::Response::AdvertiseByoipCidrResponse
 Amazon::AWS::EC2::Response::AllocateAddressResponse
@@ -455,6 +456,7 @@ Amazon::AWS::EC2::Types::VpcCidrBlockAssociation
 Amazon::AWS::EC2::Types::VpcPeeringConnection
 Amazon::AWS::EC2::Types::VpnConnection
 Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
+Amazon::AWS::EC2::Action::DescribeTags
 Amazon::AWS::EC2::Response::BundleInstanceResponse
 Amazon::AWS::EC2::Response::CancelBundleTaskResponse
 Amazon::AWS::EC2::Response::CancelReservedInstancesListingResponse
