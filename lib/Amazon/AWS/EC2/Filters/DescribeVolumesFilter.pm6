@@ -4,7 +4,7 @@ use XML::Class;
 
 use Amazon::AWS::Roles::Base;
 
-class Amazon::AWS::EC2::Filters::DescribeVolumeFilters::Attachment
+class Amazon::AWS::EC2::Filters::DescribeVolumesFilters::Attachment
   does XML::Class[xml-element => 'attachment']
 {
   also does Amazon::AWS::Roles::Base;
@@ -15,9 +15,9 @@ class Amazon::AWS::EC2::Filters::DescribeVolumeFilters::Attachment
   has Str        $.status                  is xml-element    is rw;  #= sttaching | attached | detaching
 }
 
-constant Attachment := Amazon::AWS::EC2::Filters::DescribeVolumeFilters::Attachment;
+constant Attachment := Amazon::AWS::EC2::Filters::DescribeVolumesFilters::Attachment;
 
-class Amazon::AWS::EC2::Filters::DescribeVolumeFilter is export 
+class Amazon::AWS::EC2::Filters::DescribeVolumesFilter is export 
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;
