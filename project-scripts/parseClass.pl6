@@ -20,7 +20,7 @@ sub MAIN (
   }
 
   when $url.defined {
-    makeClass($url).say;
+    makeClass($url, :$response).say;
   }
 
   default {

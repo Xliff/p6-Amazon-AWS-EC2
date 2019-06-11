@@ -7,13 +7,13 @@ use Digest;
 use Digest::HMAC;
 use Digest::SHA256::Native;
 
-constant algorithm = 'AWS4-HMAC-SHA256';
+constant algorithm            = 'AWS4-HMAC-SHA256';
 constant default_key_location = '/home/cbwood/.ec2/EC2AccessKeys.csv';
-constant empty_payload_hash = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
-constant host = 'ec2.amazonaws.com';
-constant region = 'us-east-1';
-constant service = 'ec2';
-constant terminator = 'aws4_request';
+constant empty_payload_hash   = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+constant host                 = 'ec2.amazonaws.com';
+constant region               = 'us-east-1';
+constant service              = 'ec2';            #= This can be optimized OUT if made generic across AWS.
+constant terminator           = 'aws4_request';
 
 unit package Amazon::AWS::Utils;
 
@@ -45,8 +45,18 @@ sub getLocalAccess {
   ($ak, $sk);
 }
 
-sub makeRequest ($uri, :$method = 'GET', :$body, *%headers) is export {
+sub makeRequest (
+  $uri, 
+  :$method = 'GET', 
+  :$service,              #= For future use
+  :$body, 
+  *%headers
+) is export {
   say "URI: { $uri }";
+  
+  die 'URI exceeds maximum recommended size of 1024 characters. Please shorten.'
+    unless $uri.chars < 1025;
+    
   my $t = DateTime.now(timezone => 0);            # MUST be in GMT
   my $amzdate = strftime('%Y%m%dT%H%M%SZ', $t);
   #my $amzdate = '20190604T233232Z';
@@ -54,6 +64,7 @@ sub makeRequest ($uri, :$method = 'GET', :$body, *%headers) is export {
   my ($canonUri, $canonQS) = $uri.split('?');
   $canonUri = '/' unless $canonUri.chars;
   %headers.append: (x-amz-date => $amzdate, host => host);
+  
   my $canonHeaders = %headers
     .pairs
     .sort( *.key )
@@ -77,13 +88,11 @@ sub makeRequest ($uri, :$method = 'GET', :$body, *%headers) is export {
   ).join("\n");
   my ($ak, $sk) = getLocalAccess;
   my $signingKey = getSignatureKey($sk, $datestamp, region, service);
-
   my $signature = hmac-hex($signingKey, $signString, &sha256);
 
   %headers<Authorization> =
     "{algorithm} Credential={$ak}/{$credScope}, SignedHeaders={$signedHeaders
   }, Signature={$signature}";
-
 
   # # FINALLY make the request
   my $r = do given $method {
