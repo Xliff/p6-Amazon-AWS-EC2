@@ -31,16 +31,12 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
 
   submethod BUILD (
     :$!DryRun       = False,
-    :$!maxResults   = 1000,
     :@filters       is copy = (),
     :@executableBy  is copy = (),
     :@imageIds      is copy = (),
-    :@owners        is copy = ()
+    :@owners        is copy = ('self').Array
   ) {
-    die ':$maxResults must be a number from 5 to 1000'
-      unless $!maxResults ~~ 5..1000;
-
-    @imageIds.map({
+    @!imageIds = @imageIds.map({
       when Str                               { $_ }
       when Amazon::AWS::EC2::Types::Instance { .imageId }
       when Amazon::AWS::EC2::Types::Image    { .imageId }
@@ -54,18 +50,32 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
       }
     });
     
-    die qq:to/DIE/.chomp unless @executableBy.all ~~ Str;
+    @!executableBy = @executableBy.map({
+      when Str { $_ }
+      
+      default {
+        die qq:to/DIE/.chomp unless @executableBy.all ~~ Str;
   Invalid value passed to \@executableBy. Should only contain Strings but value provided contains:
   { @executableBy.map( *.^name ).unique.join(', ') }
   DIE
   
-    die qq:to/DIE/.chomp unless @owners.all ~~ Str;
+      }
+    });
+
+    @!owners = @owners.map({
+      when Str { $_ }
+      
+      default {
+        die qq:to/DIE/.chomp unless @owners.all ~~ Str;
   Invalid value passed to \@owners. Should only contain Strings but value provided contains:
   { @owners.map( *.^name ).unique.join(', ') }
   DIE
-
-    @filters = do given @filters {
-      when .all ~~ Amazon::AWS::EC2::Filters::DescribeImagesFilter { @filters }
+  
+      }
+    });
+  
+    @!filters = do given @filters {
+      when .all ~~ Amazon::AWS::EC2::Filters::DescribeImagesFilter { $_ }
 
       default {
         die qq:to/DIE/.chomp;
@@ -108,13 +118,12 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     if $nextToken.chars {
       @args = ( nextToken => $nextToken );
     } else {
-      @args = (
+      @args = (  
         DryRun         => $.DryRun,
         |@ExecutableByArgs,
         |@FilterArgs,
         |@ImageIdArgs,
         |@OwnerArgs,
-        MaxResults     => $.maxResults,
         Version        => '2016-11-15'
       );
     }

@@ -515,6 +515,7 @@ Amazon::AWS::EC2::Types::ScheduledInstancesLaunchSpecification
 Amazon::AWS::EC2::Types::SpotFleetLaunchSpecification
 Amazon::AWS::EC2::Types::SpotFleetRequestConfigData
 Amazon::AWS::EC2::Types::Vpc
+Amazon::AWS::EC2::Action::DescribeImages
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
 Amazon::AWS::EC2::Action::StartInstances
