@@ -12,6 +12,7 @@ Amazon::AWS::Roles::Base
 Amazon::AWS::EC2::Filters::DescribeImagesFilter
 Amazon::AWS::EC2::Filters::DescribeInstancesFilter
 Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
+Amazon::AWS::EC2::Filters::DescribeVolumeFilter
 Amazon::AWS::EC2::Types::Base
 Amazon::AWS::EC2::Types::BlobAttributeValue
 Amazon::AWS::EC2::Types::BundleTaskError
