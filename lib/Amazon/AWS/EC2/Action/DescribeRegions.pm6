@@ -3,21 +3,10 @@ use v6.c;
 use Method::Also;
 use XML::Class;
 
+use Amazon::AWS::EC2::Filters::DescribeRegionsFilter;
 use Amazon::AWS::EC2::Response::DescribeRegionsResponse;
 use Amazon::AWS::EC2::Types::Instance;
 use Amazon::AWS::Utils;
-use Amazon::AWS::Roles::Eqv;
-
-class Amazon::AWS::EC2::Action::DescribeRegions::Filter is export
-    does XML::Class[xml-element => 'item']
-{
-    also does Amazon::AWS::Roles::Eqv;
-
-    has Str $.endpoint                                       is xml-element                is rw;
-    has Str $.region-name                                    is xml-element                is rw;
-}
-
-constant Filter := Amazon::AWS::EC2::Action::DescribeRegions::Filter;
 
 class Amazon::AWS::EC2::Action::DescribeRegions is export
   does XML::Class[xml-element => 'DescribeRegions']
@@ -34,17 +23,18 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
     :@Regions
   ) {
     @!filters = do given @Filters {
-      when .all ~~ Filter { @Filters }
+      when .all ~~ DescribeRegionsFilter { @Filters }
 
       default {
         die qq:to/DIE/.chomp;
-Invalid value passed to \@Filters. Should only contain EC2 DescribeRegion Filter objects, but contains:
+Invalid value passed to \@Filters. Should only contain DescribeRegionFilter objects, but contains:
 { @Filters.grep( * !~~ Filter).map( *.^name ).unique.join(', ') }
 DIE
 
       }
     }
 
+    # This can be expanded top anything that returns a regionId
     die qq:to/DIE/.chomp unless @Regions.all ~~ Str;
 Invalid value passed to @Regions. Should only contain region name strings, but contains:
 { @Regions.grep( * !~~ Str ).map( *.^name ).unique.join(', ') }

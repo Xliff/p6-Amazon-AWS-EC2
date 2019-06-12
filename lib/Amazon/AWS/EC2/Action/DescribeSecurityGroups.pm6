@@ -65,12 +65,12 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
       }
     }).unique;
 
-    @filters = do given @filters {
-      when .all ~~ Amazon::AWS::EC2::Filters::DescribeSecurityGroups { @filters }
-
+    @!filters = do given @filters {
+      when .all ~~ DescribeSecurityGroupsFilter { $_ }
+        
       default {
         die qq:to/DIE/.chomp;
-        Invalid value passed to \@filers. Should only contain Filters::DescribeSecurityGroup objects, but contains:
+        Invalid value passed to \@filers. Should only contain Filters::DescribeSecurityGroupFilter objects, but contains:
         { @filters.map( *.^name ).unique.join('. ') }
         DIE
 
