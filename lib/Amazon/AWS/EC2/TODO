@@ -13,3 +13,7 @@
   
   This may mean more complex logic in validation, although the above strategy
   could be used to keep it as clean as possible.
+- Write script to test new actions. Would work like the basic test-new, except
+  would only key on new Action classes. From there it would test corresponding
+  Action, Response and Filter objects. Depends on completion of previous action 
+  item.

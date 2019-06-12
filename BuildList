@@ -11,7 +11,10 @@ Amazon::AWS::Roles::Eqv
 Amazon::AWS::Roles::Base
 Amazon::AWS::EC2::Filters::DescribeImagesFilter
 Amazon::AWS::EC2::Filters::DescribeInstancesFilter
+Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter
+Amazon::AWS::EC2::Filters::DescribeRegionsFilter
 Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
+Amazon::AWS::EC2::Filters::DescribeTagsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumesFilter
 Amazon::AWS::EC2::Types::Base
 Amazon::AWS::EC2::Types::BlobAttributeValue
@@ -65,6 +68,7 @@ Amazon::AWS::EC2::Types::ElasticGpuHealth
 Amazon::AWS::EC2::Types::ElasticGpuSpecification
 Amazon::AWS::EC2::Types::ElasticGpuSpecificationResponse
 Amazon::AWS::EC2::Types::ElasticGpus
+Amazon::AWS::EC2::validInstanceTypes
 Amazon::AWS::EC2::Types::ElasticInferenceAccelerator
 Amazon::AWS::EC2::Types::ElasticInferenceAcceleratorAssociation
 Amazon::AWS::EC2::Types::EventInformation
@@ -90,7 +94,6 @@ Amazon::AWS::EC2::Types::IcmpTypeCode
 Amazon::AWS::EC2::Types::IdFormat
 Amazon::AWS::EC2::Types::ImportInstanceVolumeDetailItem
 Amazon::AWS::EC2::Types::ImportVolumeTaskDetails
-Amazon::AWS::EC2::validInstanceTypes
 Amazon::AWS::EC2::Types::InstanceBlockDeviceMapping
 Amazon::AWS::EC2::Types::InstanceBlockDeviceMappingSpecification
 Amazon::AWS::EC2::Types::InstanceCapacity
@@ -269,7 +272,6 @@ Amazon::AWS::EC2::Types::VpnGateway
 Amazon::AWS::EC2::Types::VpnStaticRoute
 Amazon::AWS::EC2::Types::VpnTunnelOptionsSpecification
 Amazon::AWS::Roles::Response
-Amazon::AWS::EC2::Filters::DescribeTagsFilter
 Amazon::AWS::EC2::Response::AcceptReservedInstancesExchangeQuoteResponse
 Amazon::AWS::EC2::Response::AdvertiseByoipCidrResponse
 Amazon::AWS::EC2::Response::AllocateAddressResponse
@@ -520,6 +522,7 @@ Amazon::AWS::EC2::Types::SpotFleetLaunchSpecification
 Amazon::AWS::EC2::Types::SpotFleetRequestConfigData
 Amazon::AWS::EC2::Types::Vpc
 Amazon::AWS::EC2::Action::DescribeImages
+Amazon::AWS::EC2::Action::DescribeKeyPairs
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
 Amazon::AWS::EC2::Action::DescribeVolumes
