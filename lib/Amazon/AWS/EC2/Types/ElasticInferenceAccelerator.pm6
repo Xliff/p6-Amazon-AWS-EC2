@@ -4,6 +4,8 @@ use Amazon::AWS::EC2::Types::Base;
 
 use XML::Class;
 
+use Amazon::AWS::EC2::validInstanceTypes;
+
 class Amazon::AWS::EC2::Types::ElasticInferenceAccelerator is export
   does XML::Class[xml-element => 'item']
 {
@@ -15,8 +17,8 @@ class Amazon::AWS::EC2::Types::ElasticInferenceAccelerator is export
     my @valid-types = <eia1.small eia1.medium eia1.large>;
 
     die "Invalid type '{$newType}' given. Valid types are:{
-         @valid-types.join(', ') }";
-      unless $newType ~~ @valid-types.any;
+         @valid-instance-types.join(', ') }"
+      unless checkInstanceType($newType);
   }
 
 }

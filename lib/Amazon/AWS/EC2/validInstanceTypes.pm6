@@ -2,7 +2,8 @@ use v6.d;
 
 unit package Amazon::AWS::EC2::validInstanceTypes;
 
-my (@valid-instance-types, $valid-types);
+our @valid-instance-types is export;
+my $valid-types;
 BEGIN {
   @valid-instance-types = <
   t1.micro

@@ -5,7 +5,6 @@ use Method::Also;
 
 use Amazon::AWS::EC2::Filters::DescribeInstancesFilter;
 use Amazon::AWS::EC2::Response::DescribeInstancesResponse;
-use Amazon::AWS::EC2::Types::Instance;
 use Amazon::AWS::EC2::Types::Volume;
 use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
@@ -38,7 +37,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     :@filters,
     :@instances,
   ) {
-    @!InstanceIds = @instances.map {
+    @!InstanceIds = @instances.map({
       when Str      { $_           }
       when Instance { *.instanceID }
       when Volume   { *.attachments.map( *.instanceId ) }
