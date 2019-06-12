@@ -20,12 +20,12 @@ Amazon::AWS::EC2::Types::CpuOptions
 Amazon::AWS::EC2::Types::EbsBlockDevice
 Amazon::AWS::EC2::Types::EbsInstanceBlockDevice
 Amazon::AWS::EC2::Types::ElasticGpuAssociation
+Amazon::AWS::EC2::validInstanceTypes
 Amazon::AWS::EC2::Types::ElasticInferenceAccelerator
 Amazon::AWS::EC2::Types::ElasticInferenceAcceleratorAssociation
 Amazon::AWS::EC2::Types::GroupIdentifier
 Amazon::AWS::EC2::Types::HibernationOptions
 Amazon::AWS::EC2::Types::IamInstanceProfile
-Amazon::AWS::EC2::validInstanceTypes
 Amazon::AWS::EC2::Types::InstanceBlockDeviceMapping
 Amazon::AWS::EC2::Types::InstanceNetworkInterfaceAssociation
 Amazon::AWS::EC2::Types::InstanceNetworkInterfaceAttachment
@@ -46,6 +46,7 @@ Amazon::AWS::EC2::Types::TagDescription
 Amazon::AWS::EC2::Types::UserIdGroupPair
 Amazon::AWS::EC2::Types::VolumeAttachment
 Amazon::AWS::Roles::Response
+Amazon::AWS::EC2::Filters::DescribeSecurityGroups
 Amazon::AWS::EC2::Response::DescribeRegions
 Amazon::AWS::EC2::Response::DescribeRegionsResponse
 Amazon::AWS::EC2::Response::DescribeTagsResponse
@@ -62,6 +63,7 @@ Amazon::AWS::EC2::Types::SecurityGroup
 Amazon::AWS::EC2::Types::Volume
 Amazon::AWS::EC2::Action::DescribeTags
 Amazon::AWS::EC2::Response::DescribeImagesResponse
+Amazon::AWS::EC2::Response::DescribeSecurityGroups
 Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse
 Amazon::AWS::EC2::Response::DescribeVolumesResponse
 Amazon::AWS::EC2::Types::Instance
