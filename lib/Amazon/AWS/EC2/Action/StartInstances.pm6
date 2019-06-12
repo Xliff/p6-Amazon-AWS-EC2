@@ -5,8 +5,10 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Types::Instance;
 
-use Amazon::AWS::EC2::Response::StartInstances;
+use Amazon::AWS::EC2::Response::StartInstancesResponse;
 use Amazon::AWS::Utils;
+
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::StartInstances is export
   does XML::Class[
@@ -14,6 +16,10 @@ class Amazon::AWS::EC2::Action::StartInstances is export
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
+  also does Amazon::AWS::Roles::Eqv;
+
+  my $c = ::?CLASS.^name.split('::')[* - 1];
+
   has Str  $.AdditionalInfo                                   is xml-element               is rw;
   has Bool $.DryRun                                           is xml-element               is rw;
   has Str  @.InstanceIds   is xml-container('instancesIdSet') is xml-element('instanceId') is rw;
@@ -26,7 +32,7 @@ class Amazon::AWS::EC2::Action::StartInstances is export
     when @instances.all ~~ Str {
       @!InstanceIds = @instances;
     }
-    when @instances.all ~~ Amazon::AWS::EC2::Instance {
+    when @instances.all ~~ Amazon::AWS::EC2::Types::Instance {
       @!InstanceIds = @instances.map( *.instanceID );
     }
     default {
@@ -38,15 +44,15 @@ DIE
     }
   }
 
-  method run
+  method run (:$raw = False)
     is also<
       do
       execute
     >
   {
-    my $c = 1;
+    my $cnt = 1;
     my @InstanceArgs;
-    @InstanceArgs.push: Pair.new("InstanceId.{$c++}", $_) for @.InstanceIds;
+    @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @.InstanceIds;
     @InstanceArgs.say;
 
     # Should already be sorted.
@@ -59,11 +65,14 @@ DIE
       if $.AdditionalInfo.chars;
 
     # XXX - Add error handling to makeRequest!
-    Amazon::AWS::EC2::Response::StartInstances.from-xml(
-      makeRequest(
-        "?Action=StartInstances&{ @args.map({ "{.key}={.value}" }).join('&') }"
-      )
+    my $xml = makeRequest(
+      "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
+
+    $raw ??
+      $xml
+      !!
+      Amazon::AWS::EC2::Response::StartInstancesResponse.from-xml($xml);
   }
 
 }

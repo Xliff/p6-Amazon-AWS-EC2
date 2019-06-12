@@ -3,9 +3,12 @@ use v6.c;
 use XML::Class;
 use Method::Also;
 
-use Amazon::AWS::EC2::Filter;
-use Amazon::AWS::EC2::Response::DescribeInstances;
+use Amazon::AWS::EC2::Filters::DescribeInstancesFilter;
+use Amazon::AWS::EC2::Response::DescribeInstancesResponse;
+use Amazon::AWS::EC2::Types::Instance;
+use Amazon::AWS::EC2::Types::Volume;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeInstances is export
   does XML::Class[
@@ -13,11 +16,15 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
-  has Bool    $.DryRun                                        is xml-element               is rw;
-  has Filter  @.filters     is xml-container('filterSet')     is xml-element               is rw;
-  has Str     @.InstanceIds is xml-container('instanceIdSet') is xml-element('instanceId') is rw;
-  has Int     $.maxResults                                    is xml-element               is rw;
-  has Str     $.nextToken                                     is xml-element               is rw;
+  also does Amazon::AWS::Roles::Eqv;
+
+  my $c = ::?CLASS.^name.split('::')[* - 1];
+
+  has Bool                     $.DryRun                                        is xml-element               is rw;
+  has DescribeInstancesFilter  @.filters     is xml-container('filterSet')     is xml-element               is rw;
+  has Str                      @.InstanceIds is xml-container('instanceIdSet') is xml-element('instanceId') is rw;
+  has Int                      $.maxResults                                    is xml-element               is rw;
+  has Str                      $.nextToken                                     is xml-element               is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -31,9 +38,10 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     :@filters,
     :@instances,
   ) {
-    @!InstanceIds = do given @instances {
-      when .all ~~ Str                        { @instances                     }
-      when .all ~~ Amazon::AWS::EC2::Instance { @instances.map( *.instanceID ) }
+    @!InstanceIds = @instances.map {
+      when Str      { $_           }
+      when Instance { *.instanceID }
+      when Volume   { *.attachments.map( *.instanceId ) }
 
       default {
         die qq:to/DIE/.chomp;
@@ -42,23 +50,23 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
         DIE
 
       }
-    };
+    }).f1at;
 
-    # @filters = do given @filters {
-    #   when .all ~~ Amazon::AWS::EC2::Filter { @filters }
-    #
-    #   default {
-    #     die qq:to/DIE/.chomp;
-    #     Invalid value passed to \@filers. Should only contain Filter objects, but contains:
-    #     { @filters.map( *.^name ).unique.join('. ') }
-    #     DIE
-    #
-    #   }
-    # };
+    @filters = do given @!filters {
+      when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @!filters }
+
+      default {
+        die qq:to/DIE/.chomp;
+        Invalid value passed to \@filers. Should only contain Filter objects, but contains:
+        { @filters.map( *.^name ).unique.join('. ') }
+        DIE
+
+      }
+    };
 
   }
 
-  method run (:$nextToken = '')
+  method run (:$nextToken = '', :$raw)
     is also<
       do
       execute
@@ -67,12 +75,15 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     die 'Cannot use @.instances and $.maxResults in the same call to DescribeInstances'
       if $.maxResults.defined && @.InstanceIds;
 
-    my $c = 1;
+    my $cnt = 1;
     my @InstanceArgs;
-    @InstanceArgs.push: Pair.new("InstanceId.{$c++}", $_) for @.InstanceIds;
+    @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @.InstanceIds;
 
-    my @Filters;
-    # Handle filters
+    my @FilterArgs;
+    $cnt = 1;
+    for @!filters {
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+    }
 
     # Should already be sorted.
     my @args;
@@ -83,18 +94,21 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
       @args = (
         DryRun         => $.DryRun,
         |@InstanceArgs,
-        |@Filters,
+        |@FilterArgs,
         MaxResults     => $.maxResults,
         Version        => '2016-11-15'
       );
     }
 
     # XXX - Add error handling to makeRequest!
-    Amazon::AWS::EC2::Response::DescribeInstances.from-xml(
-      makeRequest(
-        "?Action=DescribeInstances&{ @args.map({ "{.key}={.value}" }).join('&') }"
-      )
+    my $xml = makeRequest(
+      "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
+
+    $raw ??
+      $xml
+      !!
+      Amazon::AWS::EC2::Response::DescribeInstancesResponse.from-xml($xml);
   }
 
 }

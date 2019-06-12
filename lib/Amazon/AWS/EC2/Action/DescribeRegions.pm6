@@ -3,13 +3,16 @@ use v6.c;
 use Method::Also;
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::DescribeRegions;
+use Amazon::AWS::EC2::Response::DescribeRegionsResponse;
 use Amazon::AWS::EC2::Types::Instance;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeRegions::Filter is export
     does XML::Class[xml-element => 'item']
 {
+    also does Amazon::AWS::Roles::Eqv;
+
     has Str $.endpoint                                       is xml-element                is rw;
     has Str $.region-name                                    is xml-element                is rw;
 }
@@ -19,6 +22,8 @@ constant Filter := Amazon::AWS::EC2::Action::DescribeRegions::Filter;
 class Amazon::AWS::EC2::Action::DescribeRegions is export
   does XML::Class[xml-element => 'DescribeRegions']
 {
+  my $c = ::?CLASS.^name.split('::')[* - 1];
+
   has Bool   $.DryRun                                        is xml-element                is rw;
   has Filter @.filters     is xml-container('filterSet')                                   is rw;
   has Str    @.regions     is xml-container('regionNameSet') is xml-element('region')      is rw;
@@ -48,22 +53,22 @@ DIE
     @!regions = @Regions;
   }
 
-  method run
+  method run (:$raw = False)
     is also<
       do
       execute
     >
   {
     # Needs more thought!
-    my $c = 1;
+    my $cnt = 1;
     my @FilterArgs;
     for @.filters {
-      @FilterArgs.push: Pair.new("Filter.{$c++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
     }
 
-    $c = 1;
+    $cnt = 1;
     my @RegionArgs;
-    @RegionArgs.push: Pair.new("RegionName.{$c++}", $_) for @.regions;
+    @RegionArgs.push: Pair.new("RegionName.{$cnt++}", $_) for @.regions;
     @RegionArgs.say;
 
     # Should already be sorted.
@@ -75,11 +80,14 @@ DIE
     );
 
     # XXX - Add error handling to makeRequest!
-    Amazon::AWS::EC2::Response::DescribeRegions.from-xml(
-      makeRequest(
-        "?Action=DescribeRegions&{ @args.map({ "{.key}={.value}" }).join('&') }"
-      )
+    my $xml = makeRequest(
+      "?Action=DescribeRegions&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
+
+    $raw ??
+      $xml
+      !!
+      Amazon::AWS::EC2::Response::DescribeRegionsResponse.from-xml($xml);
   }
 
 }
