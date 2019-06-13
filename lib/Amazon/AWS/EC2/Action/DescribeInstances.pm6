@@ -5,7 +5,6 @@ use Method::Also;
 
 use Amazon::AWS::EC2::Filters::DescribeInstancesFilter;
 use Amazon::AWS::EC2::Response::DescribeInstancesResponse;
-use Amazon::AWS::EC2::Types::Instance;
 use Amazon::AWS::EC2::Types::Volume;
 use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
@@ -38,19 +37,21 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     :@filters,
     :@instances,
   ) {
-    @!InstanceIds = @instances.map {
-      when Str      { $_           }
-      when Instance { *.instanceID }
-      when Volume   { *.attachments.map( *.instanceId ) }
+    @!InstanceIds = @instances.map({
+      do {
+        when Str      { $_          }
+        when Instance { .instanceID }
+        when Volume   { .attachments.map( *.instanceId ) }
 
-      default {
-        die qq:to/DIE/.chomp;
-        Invalid value passed to \@instances. Should only contain Instance objects, but contains:
-        { @instances.map( *.^name ).unique.join(', ') }
-        DIE
+        default {
+          die qq:to/DIE/.chomp;
+          Invalid value passed to \@instances. Should only contain Instance objects, but contains:
+          { @instances.map( *.^name ).unique.join(', ') }
+          DIE
 
+        }
       }
-    }).f1at;
+    }).flat;
 
     @filters = do given @!filters {
       when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @!filters }
