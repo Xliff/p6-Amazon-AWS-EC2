@@ -16,6 +16,7 @@ role Amazon::AWS::Roles::Base {
         default {
           next unless $v.defined;
           {
+            # when .type ~~ Positional && .type.of ~~ Tag
             when $n ~~ /^ 'tags'/ {
               for $v.Array {
                 next unless $_;

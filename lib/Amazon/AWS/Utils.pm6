@@ -46,17 +46,17 @@ sub getLocalAccess {
 }
 
 sub makeRequest (
-  $uri, 
-  :$method = 'GET', 
+  $uri,
+  :$method = 'GET',
   :$service,              #= For future use
-  :$body, 
+  :$body,
   *%headers
 ) is export {
   say "URI: { $uri }";
-  
+
   die 'URI exceeds maximum recommended size of 1024 characters. Please shorten.'
     unless $uri.chars < 1025;
-    
+
   my $t = DateTime.now(timezone => 0);            # MUST be in GMT
   my $amzdate = strftime('%Y%m%dT%H%M%SZ', $t);
   #my $amzdate = '20190604T233232Z';
@@ -64,7 +64,7 @@ sub makeRequest (
   my ($canonUri, $canonQS) = $uri.split('?');
   $canonUri = '/' unless $canonUri.chars;
   %headers.append: (x-amz-date => $amzdate, host => host);
-  
+
   my $canonHeaders = %headers
     .pairs
     .sort( *.key )
@@ -128,10 +128,19 @@ sub populateTestObject(
 
     sub generateValue($_) {
       do {
-        when Str  { (gather for ^@range.pick { take @charValue.pick }).join() }
         when Bool { Bool.pick         }
         when Int  { @range.pick       }
         when Num  { @range.max * rand }
+
+        when Str  {
+          my @values;
+          if (my $options = $a.WHY).defined {
+            $options ~~ /('?')? \s* (\w+)+ %% [ \s* '|' \s* ]/;
+            (do gather for $/[1].Array { take $_.Str }).flat.pick;
+          } else {
+            (gather for ^@range.pick { take @charValue.pick }).join()
+          }
+        }
 
         default   { populateTestObject( .new, :$blanks, :$chance, :$invert, :$elems ) }
       }
