@@ -100,7 +100,17 @@ sub doBasicTests(@files) is export {
 
     ok         $class !~~ Failure,                                "$_ loads. Is not a Failure object";
     ok         $class !=:= Nil,                                   "$_ exists";
-    lives-ok { $a = populateTestObject($class.new, :!blanks) },   "$_ can be populated";
+    lives-ok {
+      CATCH {
+        default {
+          $class.^name.say;
+          $class.HOW.say;
+          diag .message;
+          .rethrow
+        }
+      }
+      $a = populateTestObject(::($_).new, :!blanks)
+    },                                                            "$_ can be populated";
     lives-ok { $bx = $a.to-xml                               },   "$_ serializes ok";
     lives-ok { $b = $class.from-xml($bx)                     },   "$_ deseralizes ok";
     #ok       $a.eqv($b),                                         "$_ compares ok";

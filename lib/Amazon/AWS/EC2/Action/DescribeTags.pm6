@@ -33,7 +33,7 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
     :$!nextToken  = '',
     :@filters,
   ) {
-    @filters = do given @!filters {
+    @!filters = do given @filters {
       when .all ~~ Amazon::AWS::EC2::Filters::DescribeTagsFilter { @!filters }
 
       default {
