@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::ElasticGpus;
 
 class Amazon::AWS::EC2::Response::DescribeElasticGpusResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeElasticGpusResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

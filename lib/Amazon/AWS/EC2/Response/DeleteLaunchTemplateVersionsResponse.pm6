@@ -8,7 +8,7 @@ use Amazon::AWS::EC2::Types::DeleteLaunchTemplateVersionsResponseErrorItem;
 use Amazon::AWS::EC2::Types::DeleteLaunchTemplateVersionsResponseSuccessItem;
 
 class Amazon::AWS::EC2::Response::DeleteLaunchTemplateVersionsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DeleteLaunchTemplateVersionsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

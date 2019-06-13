@@ -7,7 +7,7 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Response::DeregisterImageResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DeregisterImageResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

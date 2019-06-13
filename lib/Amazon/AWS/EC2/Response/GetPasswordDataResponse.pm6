@@ -7,7 +7,7 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Response::GetPasswordDataResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'GetPasswordDataResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

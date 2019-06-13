@@ -9,7 +9,7 @@ use Amazon::AWS::EC2::Types::ReservedInstanceReservationValue;
 use Amazon::AWS::EC2::Types::TargetReservationValue;
 
 class Amazon::AWS::EC2::Response::GetReservedInstancesExchangeQuoteResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'GetReservedInstancesExchangeQuoteResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

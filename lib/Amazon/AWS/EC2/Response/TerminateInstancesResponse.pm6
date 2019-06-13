@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::InstanceStateChange;
 
 class Amazon::AWS::EC2::Response::TerminateInstancesResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'TerminateInstancesResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

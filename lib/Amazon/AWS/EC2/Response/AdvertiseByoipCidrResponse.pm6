@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::ByoipCidr;
 
 class Amazon::AWS::EC2::Response::AdvertiseByoipCidrResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'AdvertiseByoipCidrResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

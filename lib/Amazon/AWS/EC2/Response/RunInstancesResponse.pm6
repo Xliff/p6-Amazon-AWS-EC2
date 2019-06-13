@@ -8,7 +8,7 @@ use Amazon::AWS::EC2::Types::GroupIdentifier;
 use Amazon::AWS::EC2::Types::Instance;
 
 class Amazon::AWS::EC2::Response::RunInstancesResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'RunInstancesResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

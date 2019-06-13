@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::InstanceMonitoring;
 
 class Amazon::AWS::EC2::Response::MonitorInstancesResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'MonitorInstancesResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

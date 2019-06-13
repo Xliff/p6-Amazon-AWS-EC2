@@ -11,7 +11,7 @@ use Amazon::AWS::EC2::Types::InstanceBlockDeviceMapping;
 use Amazon::AWS::EC2::Types::ProductCode;
 
 class Amazon::AWS::EC2::Response::DescribeInstanceAttributeResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeInstanceAttributeResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

@@ -10,7 +10,7 @@ use Amazon::AWS::EC2::Types::LaunchPermission;
 use Amazon::AWS::EC2::Types::ProductCode;
 
 class Amazon::AWS::EC2::Response::DescribeImageAttributeResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeImageAttributeResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

@@ -8,7 +8,7 @@ use Amazon::AWS::EC2::Types::DeleteFleetErrorItem;
 use Amazon::AWS::EC2::Types::DeleteFleetSuccessItem;
 
 class Amazon::AWS::EC2::Response::DeleteFleetsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DeleteFleetsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

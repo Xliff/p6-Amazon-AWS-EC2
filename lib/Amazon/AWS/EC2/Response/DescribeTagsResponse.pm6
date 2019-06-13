@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::TagDescription;
 
 class Amazon::AWS::EC2::Response::DescribeTagsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeTagsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

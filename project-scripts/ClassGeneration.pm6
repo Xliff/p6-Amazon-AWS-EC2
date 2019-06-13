@@ -153,6 +153,7 @@ sub makeClass (Str $url, :$response = False) is export {
     "also does {$dependent};"
     !!
     "also is {$dependent};";
+  my $xml-item = $response ??  "{ $className }Response" !! 'item';
 
   qq:to/PRE1/.chomp;
     use v6.d;
@@ -166,7 +167,7 @@ sub makeClass (Str $url, :$response = False) is export {
     class Amazon::AWS::EC2::{ $mode }::{ $className }{
       $response ?? 'Response' !! ''
     } is export
-      does XML::Class[xml-element => 'item']
+      does XML::Class[xml-element => '{ $xml-item }']
     \{
       { $also }
 

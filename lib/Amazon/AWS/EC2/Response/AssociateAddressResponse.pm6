@@ -7,7 +7,7 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Response::AssociateAddressResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'AssociateAddressResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

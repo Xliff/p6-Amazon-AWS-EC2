@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::PublicIpv4Pool;
 
 class Amazon::AWS::EC2::Response::DescribePublicIpv4PoolsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribePublicIpv4PoolsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

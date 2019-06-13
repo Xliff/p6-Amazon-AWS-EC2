@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::ReservedInstances;
 
 class Amazon::AWS::EC2::Response::DescribeReservedInstancesResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeReservedInstancesResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

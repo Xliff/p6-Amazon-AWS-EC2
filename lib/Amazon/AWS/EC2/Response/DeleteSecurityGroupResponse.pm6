@@ -7,7 +7,7 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Response::DeleteSecurityGroupResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DeleteSecurityGroupResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

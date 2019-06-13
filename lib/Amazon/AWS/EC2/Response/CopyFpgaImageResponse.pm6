@@ -7,7 +7,7 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Response::CopyFpgaImageResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'CopyFpgaImageResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::IdFormat;
 
 class Amazon::AWS::EC2::Response::DescribeIdFormatResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeIdFormatResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::InstanceCreditSpecification;
 
 class Amazon::AWS::EC2::Response::DescribeInstanceCreditSpecificationsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeInstanceCreditSpecificationsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

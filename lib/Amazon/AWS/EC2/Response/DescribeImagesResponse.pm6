@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::Image;
 
 class Amazon::AWS::EC2::Response::DescribeImagesResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeImagesResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

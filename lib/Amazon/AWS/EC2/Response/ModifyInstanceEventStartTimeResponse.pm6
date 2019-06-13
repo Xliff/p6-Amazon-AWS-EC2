@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::InstanceStatusEvent;
 
 class Amazon::AWS::EC2::Response::ModifyInstanceEventStartTimeResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'ModifyInstanceEventStartTimeResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

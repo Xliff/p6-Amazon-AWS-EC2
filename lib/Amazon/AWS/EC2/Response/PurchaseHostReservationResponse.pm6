@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::Purchase;
 
 class Amazon::AWS::EC2::Response::PurchaseHostReservationResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'PurchaseHostReservationResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

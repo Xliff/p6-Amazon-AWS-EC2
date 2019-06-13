@@ -8,7 +8,7 @@ use Amazon::AWS::EC2::Types::CreateFleetError;
 use Amazon::AWS::EC2::Types::CreateFleetInstance;
 
 class Amazon::AWS::EC2::Response::CreateFleetResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'CreateFleetResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::HostReservation;
 
 class Amazon::AWS::EC2::Response::DescribeHostReservationsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeHostReservationsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

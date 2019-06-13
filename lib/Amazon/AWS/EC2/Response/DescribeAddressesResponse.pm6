@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::Address;
 
 class Amazon::AWS::EC2::Response::DescribeAddressesResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeAddressesResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

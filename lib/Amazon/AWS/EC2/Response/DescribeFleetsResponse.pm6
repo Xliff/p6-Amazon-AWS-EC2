@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::FleetData;
 
 class Amazon::AWS::EC2::Response::DescribeFleetsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeFleetsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

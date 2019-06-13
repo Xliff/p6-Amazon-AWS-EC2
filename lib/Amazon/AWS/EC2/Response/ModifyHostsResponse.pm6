@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::UnsuccessfulItem;
 
 class Amazon::AWS::EC2::Response::ModifyHostsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'ModifyHostsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

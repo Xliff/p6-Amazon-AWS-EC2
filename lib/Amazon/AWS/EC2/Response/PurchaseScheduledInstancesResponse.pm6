@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::ScheduledInstance;
 
 class Amazon::AWS::EC2::Response::PurchaseScheduledInstancesResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'PurchaseScheduledInstancesResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

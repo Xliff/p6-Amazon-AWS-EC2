@@ -7,7 +7,7 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Response::RequestSpotFleetResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'RequestSpotFleetResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

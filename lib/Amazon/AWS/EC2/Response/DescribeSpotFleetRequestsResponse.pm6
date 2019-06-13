@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::SpotFleetRequestConfig;
 
 class Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeSpotFleetRequestsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

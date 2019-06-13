@@ -8,7 +8,7 @@ use Amazon::AWS::EC2::Types::CancelSpotFleetRequestsErrorItem;
 use Amazon::AWS::EC2::Types::CancelSpotFleetRequestsSuccessItem;
 
 class Amazon::AWS::EC2::Response::CancelSpotFleetRequestsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'CancelSpotFleetRequestsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

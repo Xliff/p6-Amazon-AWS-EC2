@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::SpotPrice;
 
 class Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeSpotPriceHistoryResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

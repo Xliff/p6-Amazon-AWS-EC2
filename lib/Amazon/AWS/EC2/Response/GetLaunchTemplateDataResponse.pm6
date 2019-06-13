@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::ResponseLaunchTemplateData;
 
 class Amazon::AWS::EC2::Response::GetLaunchTemplateDataResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'GetLaunchTemplateDataResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

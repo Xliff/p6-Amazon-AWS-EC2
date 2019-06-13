@@ -8,7 +8,7 @@ use Amazon::AWS::EC2::Types::SuccessfulInstanceCreditSpecificationItem;
 use Amazon::AWS::EC2::Types::UnsuccessfulInstanceCreditSpecificationItem;
 
 class Amazon::AWS::EC2::Response::ModifyInstanceCreditSpecificationResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'ModifyInstanceCreditSpecificationResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

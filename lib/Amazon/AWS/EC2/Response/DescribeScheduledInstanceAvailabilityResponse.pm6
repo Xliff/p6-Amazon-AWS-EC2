@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::ScheduledInstanceAvailability;
 
 class Amazon::AWS::EC2::Response::DescribeScheduledInstanceAvailabilityResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeScheduledInstanceAvailabilityResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

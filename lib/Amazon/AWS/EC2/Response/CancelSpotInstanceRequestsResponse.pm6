@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::CancelledSpotInstanceRequest;
 
 class Amazon::AWS::EC2::Response::CancelSpotInstanceRequestsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'CancelSpotInstanceRequestsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

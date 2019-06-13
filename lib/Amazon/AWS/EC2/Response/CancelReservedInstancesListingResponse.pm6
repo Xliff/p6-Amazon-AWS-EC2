@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::ReservedInstancesListing;
 
 class Amazon::AWS::EC2::Response::CancelReservedInstancesListingResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'CancelReservedInstancesListingResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

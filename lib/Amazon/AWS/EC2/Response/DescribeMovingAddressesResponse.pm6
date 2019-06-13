@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::MovingAddressStatus;
 
 class Amazon::AWS::EC2::Response::DescribeMovingAddressesResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeMovingAddressesResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

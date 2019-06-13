@@ -7,7 +7,7 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Response::ImportKeyPairResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'ImportKeyPairResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

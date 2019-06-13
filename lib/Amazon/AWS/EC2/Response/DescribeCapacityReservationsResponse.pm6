@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::CapacityReservation;
 
 class Amazon::AWS::EC2::Response::DescribeCapacityReservationsResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeCapacityReservationsResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::ActiveInstance;
 
 class Amazon::AWS::EC2::Response::DescribeSpotFleetInstancesResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'DescribeSpotFleetInstancesResponse']
 {
   also does Amazon::AWS::Roles::Response;
 

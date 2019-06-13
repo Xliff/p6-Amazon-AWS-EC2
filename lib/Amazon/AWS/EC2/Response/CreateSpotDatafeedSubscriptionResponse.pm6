@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::SpotDatafeedSubscription;
 
 class Amazon::AWS::EC2::Response::CreateSpotDatafeedSubscriptionResponse is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class[xml-element => 'CreateSpotDatafeedSubscriptionResponse']
 {
   also does Amazon::AWS::Roles::Response;
 
