@@ -67,7 +67,7 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
 
     @!filters = do given @filters {
       when .all ~~ DescribeSecurityGroupsFilter { $_ }
-        
+
       default {
         die qq:to/DIE/.chomp;
         Invalid value passed to \@filers. Should only contain Filters::DescribeSecurityGroupFilter objects, but contains:

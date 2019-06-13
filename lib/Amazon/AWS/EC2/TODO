@@ -3,17 +3,18 @@
 
   This should ONLY be considered after the type verification test has been written. See the obj-testing branch for the status on that initiative.
   update (cw): ... Oops... I forgot this prerequisite.
-  
+
 - Modify Utils::populateTestObject to honor Attribute WHY comments.
 - Add a switch to object tests in t/ to limit testing to a specific object
-- Regarding using Type objects in Actions and Filters, it may be best to smartmatch 
-  objects against Amazon::AWS::EC2::Types::Base, and then using dynamic lookup 
-  to special case. The default case would be whatever is appropriate for that filter, 
+- Regarding using Type objects in Actions and Filters, it may be best to smartmatch
+  objects against Amazon::AWS::EC2::Types::Base, and then using dynamic lookup
+  to special case. The default case would be whatever is appropriate for that filter,
   which would usually be the object-id for the main type in question.
-  
+
   This may mean more complex logic in validation, although the above strategy
   could be used to keep it as clean as possible.
 - Write script to test new actions. Would work like the basic test-new, except
   would only key on new Action classes. From there it would test corresponding
-  Action, Response and Filter objects. Depends on completion of previous action 
+  Action, Response and Filter objects. Depends on completion of previous action
   item.
+- t/03-filter.t -- First test returns a false positive. Investigate why and solve.

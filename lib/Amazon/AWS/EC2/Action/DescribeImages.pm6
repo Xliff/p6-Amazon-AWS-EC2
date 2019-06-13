@@ -19,7 +19,7 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
 
   has Bool                   $.DryRun                                            is xml-element                  is rw;
   has DescribeImagesFilter   @.filters       is xml-container('filterSet')       is xml-element                  is rw;
-  has Str                    @.executableBy  is xml-container('executableBySet') is xml-element('executableBy')  is rw; 
+  has Str                    @.executableBy  is xml-container('executableBySet') is xml-element('executableBy')  is rw;
   has Str                    @.imageIds      is xml-container('imageIdSet')      is xml-element('imageId')       is rw;
   has Str                    @.owners        is xml-container('ownerSet')        is xml-element('owner')         is rw;
   has Int                    $.maxResults    is xml-element                      is xml-element                  is rw;
@@ -40,7 +40,7 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
       when Str                               { $_ }
       when Amazon::AWS::EC2::Types::Instance { .imageId }
       when Amazon::AWS::EC2::Types::Image    { .imageId }
-        
+
       default {
         die qq:to/DIE/.chomp;
   Invalid value passed to \@instances. Should only contain InstanceIds or Instance objects, but contains:
@@ -49,31 +49,31 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
 
       }
     });
-    
-    @!executableBy = @executableBy.map({
+
+    @!executableBy = @executableBy.map(do {
       when Str { $_ }
-      
+
       default {
         die qq:to/DIE/.chomp unless @executableBy.all ~~ Str;
   Invalid value passed to \@executableBy. Should only contain Strings but value provided contains:
   { @executableBy.map( *.^name ).unique.join(', ') }
   DIE
-  
+
       }
     });
 
-    @!owners = @owners.map({
+    @!owners = @owners.map(do {
       when Str { $_ }
-      
+
       default {
         die qq:to/DIE/.chomp unless @owners.all ~~ Str;
   Invalid value passed to \@owners. Should only contain Strings but value provided contains:
   { @owners.map( *.^name ).unique.join(', ') }
   DIE
-  
+
       }
     });
-  
+
     @!filters = do given @filters {
       when .all ~~ Amazon::AWS::EC2::Filters::DescribeImagesFilter { $_ }
 
@@ -103,7 +103,7 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     for @.filters {
       @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
     }
-    
+
     $cnt = 1;
     my @ImageIdArgs;
     @ImageIdArgs.push: Pair.new("ImageId.{$cnt++}", $_) for @.imageIds;
@@ -118,7 +118,7 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     if $nextToken.chars {
       @args = ( nextToken => $nextToken );
     } else {
-      @args = (  
+      @args = (
         DryRun         => $.DryRun,
         |@ExecutableByArgs,
         |@FilterArgs,

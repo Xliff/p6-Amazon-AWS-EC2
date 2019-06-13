@@ -38,18 +38,20 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     :@instances,
   ) {
     @!InstanceIds = @instances.map({
-      when Str      { $_           }
-      when Instance { *.instanceID }
-      when Volume   { *.attachments.map( *.instanceId ) }
+      do {
+        when Str      { $_          }
+        when Instance { .instanceID }
+        when Volume   { .attachments.map( *.instanceId ) }
 
-      default {
-        die qq:to/DIE/.chomp;
-        Invalid value passed to \@instances. Should only contain Instance objects, but contains:
-        { @instances.map( *.^name ).unique.join(', ') }
-        DIE
+        default {
+          die qq:to/DIE/.chomp;
+          Invalid value passed to \@instances. Should only contain Instance objects, but contains:
+          { @instances.map( *.^name ).unique.join(', ') }
+          DIE
 
+        }
       }
-    }).f1at;
+    }).flat;
 
     @filters = do given @!filters {
       when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @!filters }
