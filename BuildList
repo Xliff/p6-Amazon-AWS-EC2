@@ -10,6 +10,7 @@ Amazon::AWS::Utils
 Amazon::AWS::Roles::Eqv
 Amazon::AWS::Roles::Base
 Amazon::AWS::EC2::Filters::DescribeImagesFilter
+Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter
 Amazon::AWS::EC2::Filters::DescribeInstancesFilter
 Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter
 Amazon::AWS::EC2::Filters::DescribeRegionsFilter
@@ -522,6 +523,7 @@ Amazon::AWS::EC2::Types::SpotFleetLaunchSpecification
 Amazon::AWS::EC2::Types::SpotFleetRequestConfigData
 Amazon::AWS::EC2::Types::Vpc
 Amazon::AWS::EC2::Action::DescribeImages
+Amazon::AWS::EC2::Action::DescribeInstanceStatus
 Amazon::AWS::EC2::Action::DescribeKeyPairs
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeSecurityGroups

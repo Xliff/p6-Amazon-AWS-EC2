@@ -14,10 +14,10 @@ class Amazon::AWS::EC2::Types::InstanceStatus is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                      $.availabilityZone    is xml-element                                       is rw; 
-  has InstanceStatusEvent      @.eventss             is xml-element    is xml-container('eventsSet')      is rw; 
-  has Str                      $.instanceId          is xml-element                                       is rw; 
-  has InstanceState            $.instanceState       is xml-element                                       is rw; 
-  has InstanceStatusSummary    $.instanceStatus      is xml-element                                       is rw; 
-  has InstanceStatusSummary    $.systemStatus        is xml-element                                       is rw; 
+  has Str                      $.availabilityZone    is xml-element                                       is rw;
+  has InstanceStatusEvent      @.events              is xml-element    is xml-container('eventsSet')      is rw;
+  has Str                      $.instanceId          is xml-element                                       is rw;
+  has InstanceState            $.instanceState       is xml-element                                       is rw;
+  has InstanceStatusSummary    $.instanceStatus      is xml-element('instanceStatus')                     is rw;
+  has InstanceStatusSummary    $.systemStatus        is xml-element('systemStatus')                       is rw;
 }
