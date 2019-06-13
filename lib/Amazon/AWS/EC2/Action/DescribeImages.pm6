@@ -50,27 +50,31 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
       }
     });
 
-    @!executableBy = @executableBy.map(do {
-      when Str { $_ }
+    @!executableBy = @executableBy.map({
+      do {
+        when Str { $_ }
 
-      default {
-        die qq:to/DIE/.chomp unless @executableBy.all ~~ Str;
-  Invalid value passed to \@executableBy. Should only contain Strings but value provided contains:
-  { @executableBy.map( *.^name ).unique.join(', ') }
-  DIE
+        default {
+          die qq:to/DIE/.chomp unless @executableBy.all ~~ Str;
+    Invalid value passed to \@executableBy. Should only contain Strings but value provided contains:
+    { @executableBy.map( *.^name ).unique.join(', ') }
+    DIE
 
+        }
       }
     });
 
-    @!owners = @owners.map(do {
-      when Str { $_ }
+    @!owners = @owners.map({
+      do {
+        when Str { $_ }
 
-      default {
-        die qq:to/DIE/.chomp unless @owners.all ~~ Str;
-  Invalid value passed to \@owners. Should only contain Strings but value provided contains:
-  { @owners.map( *.^name ).unique.join(', ') }
-  DIE
+        default {
+          die qq:to/DIE/.chomp unless @owners.all ~~ Str;
+    Invalid value passed to \@owners. Should only contain Strings but value provided contains:
+    { @owners.map( *.^name ).unique.join(', ') }
+    DIE
 
+        }
       }
     });
 
