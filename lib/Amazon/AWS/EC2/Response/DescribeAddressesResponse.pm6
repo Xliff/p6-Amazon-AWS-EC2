@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Response::DescribeAddressesResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has Address    @.addressess    is xml-element    is xml-container('addressesSet')      is rw; 
+  has Address    @.addressess    is xml-container('addressesSet')    is rw; 
 }
