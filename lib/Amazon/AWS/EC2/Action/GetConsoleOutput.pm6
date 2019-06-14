@@ -17,9 +17,9 @@ class Amazon::AWS::EC2::Action::GetConsoleOutput is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has $.DryRun                 is xml-element is rw;
-  has $.InstanceId is required is xml-element is rw;
-  has $.Latest                 is xml-element is rw;
+  has Bool $.DryRun                 is xml-element is rw;
+  has Str  $.InstanceId is required is xml-element is rw;
+  has Bool $.Latest                 is xml-element is rw;
 
   submethod BUILD (
     Bool :$!DryRun         = False,
@@ -48,7 +48,6 @@ class Amazon::AWS::EC2::Action::GetConsoleOutput is export
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
 
-    $raw.say;
     $raw ??
       $xml
       !!
