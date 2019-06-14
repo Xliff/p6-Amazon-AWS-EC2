@@ -70,7 +70,7 @@ DIE
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
-      "?Action=DescribeKeyPairs&{ @args.map({ "{.key}={.value}" }).join('&') }"
+      "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
 
     $raw ??
