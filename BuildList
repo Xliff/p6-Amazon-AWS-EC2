@@ -466,6 +466,7 @@ Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::EC2::Action::DescribeIdFormat
 Amazon::AWS::EC2::Action::DescribeTags
 Amazon::AWS::EC2::Action::GetConsoleOutput
+Amazon::AWS::EC2::Action::GetConsoleScreenshot
 Amazon::AWS::EC2::Response::BundleInstanceResponse
 Amazon::AWS::EC2::Response::CancelBundleTaskResponse
 Amazon::AWS::EC2::Response::CancelReservedInstancesListingResponse
