@@ -136,7 +136,7 @@ sub populateTestObject(
           my @values;
           if (my $options = $a.WHY).defined {
             $options ~~ /('?')? \s* (\w+)+ %% [ \s* '|' \s* ]/;
-            (do gather for $/[1].Array { take $_.Str }).flat.pick;
+            (do gather for $/[1].Array { take .Str }).flat.pick;
           } else {
             (gather for ^@range.pick { take @charValue.pick }).join()
           }
