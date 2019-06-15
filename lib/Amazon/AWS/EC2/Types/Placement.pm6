@@ -5,7 +5,7 @@ use Amazon::AWS::EC2::Types::Base;
 use XML::Class;
 
 class Amazon::AWS::EC2::Types::Placement is export
-  does XML::Class[xml-element => 'placement']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 

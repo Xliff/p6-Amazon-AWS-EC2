@@ -92,7 +92,6 @@ sub changeRandomAttribute($o is rw) {
 }
 
 sub doBasicTests(@files, :$number) is export {
-  say $number;
   plan @files.elems * 7 * $number;
 
   for ^$number {

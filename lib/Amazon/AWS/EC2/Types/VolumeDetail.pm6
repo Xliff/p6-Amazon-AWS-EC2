@@ -7,9 +7,9 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Types::VolumeDetail is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int    $.Size    is xml-element    is xml-skip-null          is rw; 
+  has Int    $.Size    is xml-element    is xml-skip-null          is rw;
 }

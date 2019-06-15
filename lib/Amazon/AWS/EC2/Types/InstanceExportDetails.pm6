@@ -7,10 +7,10 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Types::InstanceExportDetails is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.instanceId           is xml-element    is xml-skip-null          is rw; 
+  has Str    $.instanceId           is xml-element    is xml-skip-null          is rw;
   has Str    $.targetEnvironment    is xml-element    is xml-skip-null          is rw;   #=  citrix | vmware | microsoft
 }

@@ -34,8 +34,6 @@ role Amazon::AWS::Roles::Eqv {
 
       when Positional              { return False unless $_.elems == $b.elems;
                                      for $_.Array Z $b.Array -> ($x, $y) {
-                                       say $x.gist;
-                                       say $y.gist;
                                        return False
                                          unless self.testval($x, $y);
                                      }
@@ -51,7 +49,7 @@ role Amazon::AWS::Roles::Eqv {
 
     for self.^attributes Z $b.^attributes -> ($x, $y) {
       my $attr = $x.name.substr(2);
-      diag $attr;
+      #diag $attr;
       my ($aval, $bval) = ( self."$attr"(), $b."$attr"() );
       #return False unless $aval.defined == $bval.is-empty;
       return False unless self.testval($aval, $bval);

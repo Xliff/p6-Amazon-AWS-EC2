@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::DeleteLaunchTemplateVersionsResponseErrorItem is 
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str              $.launchTemplateId      is xml-element    is xml-skip-null          is rw; 
-  has Str              $.launchTemplateName    is xml-element    is xml-skip-null          is rw; 
-  has ResponseError    $.responseError         is xml-element    is xml-skip-null          is rw; 
-  has Int              $.versionNumber         is xml-element    is xml-skip-null          is rw; 
+  has Str              $.launchTemplateId      is xml-element                is xml-skip-null          is rw; 
+  has Str              $.launchTemplateName    is xml-element                is xml-skip-null          is rw; 
+  has ResponseError    $.responseError         is xml-element(:over-ride)    is xml-skip-null          is rw;
+  has Int              $.versionNumber         is xml-element                is xml-skip-null          is rw;
 }

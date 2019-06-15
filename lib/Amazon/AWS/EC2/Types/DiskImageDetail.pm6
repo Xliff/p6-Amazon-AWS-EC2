@@ -7,11 +7,11 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Types::DiskImageDetail is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int    $.Bytes                is xml-element    is xml-skip-null          is rw; 
+  has Int    $.Bytes                is xml-element    is xml-skip-null          is rw;
   has Str    $.Format               is xml-element    is xml-skip-null          is rw;   #=  VMDK | RAW | VHD
-  has Str    $.ImportManifestUrl    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.ImportManifestUrl    is xml-element    is xml-skip-null          is rw;
 }

@@ -7,7 +7,7 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::EbsBlockDevice;
 
 class Amazon::AWS::EC2::Types::BlockDeviceMapping is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 

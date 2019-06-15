@@ -119,7 +119,9 @@ sub makeClass (Str $url, :$response = False) is export {
         $attrType,
         $attrName,
         $sigil,
-        'is xml-element' ~ $override ?? '(:over-ride)' !! '',
+        $sigil.starts-with('@') ??
+          '' !!
+          'is xml-element' ~ $override ?? '(:over-ride)' !! '',
         $container,
         $validValues,
         'is xml-skip-null',

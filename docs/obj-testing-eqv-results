@@ -6,3 +6,18 @@ Results of spot testing for Amazon::AWS::Roles::eqv
 
 + Out of a 1000 run test on Amazon::AWS::EC2::Types::CapacityReservation,
   only 6925 out of 7000 subtests were run.
+
++ Received several errors of the following form:
+  Type check failed in assignment to @!associatedTargetNetwork; expected Amazon::AWS::EC2::Types::AssociatedTargetNetwork but got Array ($[])
+  While testing Amazon::AWS::EC2::Types::ClientVpnEndpoint (May be related to all items!)
+
++ Receiving the below error from Amazon::AWS::EC2::Types::FpgaImage
+                                                        ::Host
+  # Type check failed in assignment to @!tags; expected Amazon::AWS::EC2::Types::Tag but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::Image
+  # Type check failed in assignment to @!productCodes; expected Amazon::AWS::EC2::Types::ProductCode but got Array ($[])
+
++ Received th3e below error from Amazon::AWS::EC2::Types::ImportInstanceLaunchSpecification
+  # Type check failed in assignment to @!GroupNames; expected Str but got Array ($[])
+  # Type check failed in assignment to @!GroupIds; expected Str but got Array ($[])
