@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::AttributeBooleanValue is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Bool    $.Value    is xml-element          is rw; 
-  has Bool    $.value    is xml-element          is rw; 
+  has Bool    $.Value    is xml-element    is xml-skip-null          is rw; 
+  has Bool    $.value    is xml-element    is xml-skip-null          is rw; 
 }

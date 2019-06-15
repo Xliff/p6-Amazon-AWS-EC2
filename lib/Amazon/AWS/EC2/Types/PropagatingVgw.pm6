@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::PropagatingVgw is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.gatewayId    is xml-element          is rw; 
+  has Str    $.gatewayId    is xml-element    is xml-skip-null          is rw; 
 }

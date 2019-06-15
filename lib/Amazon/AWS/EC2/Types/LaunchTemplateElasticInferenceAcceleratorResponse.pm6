@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::LaunchTemplateElasticInferenceAcceleratorResponse
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.type    is xml-element          is rw; 
+  has Str    $.type    is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::InstanceCount is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int    $.instanceCount    is xml-element          is rw; 
-  has Str    $.state            is xml-element          is rw;   #=  available | sold | cancelled | pending
+  has Int    $.instanceCount    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.state            is xml-element    is xml-skip-null          is rw;   #=  available | sold | cancelled | pending
 }

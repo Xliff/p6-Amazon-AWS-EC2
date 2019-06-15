@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Bool                             $.StaticRoutesOnly    is xml-element                                           is rw; 
-  has VpnTunnelOptionsSpecification    @.TunnelOptions       is xml-element    is xml-container('TunnelOptions')      is rw; 
+  has Bool                             $.StaticRoutesOnly    is xml-element    is xml-skip-null                                           is rw; 
+  has VpnTunnelOptionsSpecification    @.TunnelOptions       is xml-element    is xml-skip-null    is xml-container('TunnelOptions')      is rw; 
 }

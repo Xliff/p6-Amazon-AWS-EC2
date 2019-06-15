@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::AvailableCapacity is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has InstanceCapacity    @.availableInstanceCapacity    is xml-element    is xml-container('availableInstanceCapacity')      is rw; 
-  has Int                 $.availableVCpus               is xml-element                                                       is rw; 
+  has InstanceCapacity    @.availableInstanceCapacity    is xml-element    is xml-skip-null    is xml-container('availableInstanceCapacity')      is rw; 
+  has Int                 $.availableVCpus               is xml-element    is xml-skip-null                                                       is rw; 
 }

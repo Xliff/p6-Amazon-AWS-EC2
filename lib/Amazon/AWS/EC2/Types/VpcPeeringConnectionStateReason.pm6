@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::VpcPeeringConnectionStateReason is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.code       is xml-element          is rw;   #=  initiating-request | pending-acceptance | active | deleted | rejected | failed | expired | provisioning | deleting
-  has Str    $.message    is xml-element          is rw; 
+  has Str    $.code       is xml-element    is xml-skip-null          is rw;   #=  initiating-request | pending-acceptance | active | deleted | rejected | failed | expired | provisioning | deleting
+  has Str    $.message    is xml-element    is xml-skip-null          is rw; 
 }

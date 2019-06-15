@@ -11,9 +11,9 @@ class Amazon::AWS::EC2::Types::IamInstanceProfileAssociation is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                   $.associationId         is xml-element          is rw; 
-  has IamInstanceProfile    $.iamInstanceProfile    is xml-element          is rw; 
-  has Str                   $.instanceId            is xml-element          is rw; 
-  has Str                   $.state                 is xml-element          is rw;   #=  associating | associated | disassociating | disassociated
-  has Str                   $.timestamp             is xml-element          is rw; 
+  has Str                   $.associationId         is xml-element    is xml-skip-null          is rw; 
+  has IamInstanceProfile    $.iamInstanceProfile    is xml-element    is xml-skip-null          is rw; 
+  has Str                   $.instanceId            is xml-element    is xml-skip-null          is rw; 
+  has Str                   $.state                 is xml-element    is xml-skip-null          is rw;   #=  associating | associated | disassociating | disassociated
+  has Str                   $.timestamp             is xml-element    is xml-skip-null          is rw; 
 }

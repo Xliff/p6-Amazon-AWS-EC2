@@ -11,10 +11,10 @@ class Amazon::AWS::EC2::Types::ElasticGpus is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                 $.availabilityZone    is xml-element          is rw; 
-  has ElasticGpuHealth    $.elasticGpuHealth    is xml-element          is rw; 
-  has Str                 $.elasticGpuId        is xml-element          is rw; 
-  has Str                 $.elasticGpuState     is xml-element          is rw;   #=  ATTACHED
-  has Str                 $.elasticGpuType      is xml-element          is rw; 
-  has Str                 $.instanceId          is xml-element          is rw; 
+  has Str                 $.availabilityZone    is xml-element    is xml-skip-null          is rw; 
+  has ElasticGpuHealth    $.elasticGpuHealth    is xml-element    is xml-skip-null          is rw; 
+  has Str                 $.elasticGpuId        is xml-element    is xml-skip-null          is rw; 
+  has Str                 $.elasticGpuState     is xml-element    is xml-skip-null          is rw;   #=  ATTACHED
+  has Str                 $.elasticGpuType      is xml-element    is xml-skip-null          is rw; 
+  has Str                 $.instanceId          is xml-element    is xml-skip-null          is rw; 
 }

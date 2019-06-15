@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::ScheduledInstancesMonitoring is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Bool    $.Enabled    is xml-element          is rw; 
+  has Bool    $.Enabled    is xml-element    is xml-skip-null          is rw; 
 }

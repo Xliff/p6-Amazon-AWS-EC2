@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::ScheduledInstancesPrivateIpAddressConfig is expor
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Bool    $.Primary             is xml-element          is rw; 
-  has Str     $.PrivateIpAddress    is xml-element          is rw; 
+  has Bool    $.Primary             is xml-element    is xml-skip-null          is rw; 
+  has Str     $.PrivateIpAddress    is xml-element    is xml-skip-null          is rw; 
 }

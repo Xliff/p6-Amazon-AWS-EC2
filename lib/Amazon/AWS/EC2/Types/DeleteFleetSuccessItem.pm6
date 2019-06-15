@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::DeleteFleetSuccessItem is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.currentFleetState     is xml-element          is rw;   #=  submitted | active | deleted | failed | deleted-running | deleted-terminating | modifying
-  has Str    $.fleetId               is xml-element          is rw; 
-  has Str    $.previousFleetState    is xml-element          is rw;   #=  submitted | active | deleted | failed | deleted-running | deleted-terminating | modifying
+  has Str    $.currentFleetState     is xml-element    is xml-skip-null          is rw;   #=  submitted | active | deleted | failed | deleted-running | deleted-terminating | modifying
+  has Str    $.fleetId               is xml-element    is xml-skip-null          is rw; 
+  has Str    $.previousFleetState    is xml-element    is xml-skip-null          is rw;   #=  submitted | active | deleted | failed | deleted-running | deleted-terminating | modifying
 }

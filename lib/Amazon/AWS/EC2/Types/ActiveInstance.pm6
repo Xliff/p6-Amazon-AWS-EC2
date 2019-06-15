@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::ActiveInstance is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.instanceHealth           is xml-element          is rw;   #=  healthy | unhealthy
-  has Str    $.instanceId               is xml-element          is rw; 
-  has Str    $.instanceType             is xml-element          is rw; 
-  has Str    $.spotInstanceRequestId    is xml-element          is rw; 
+  has Str    $.instanceHealth           is xml-element    is xml-skip-null          is rw;   #=  healthy | unhealthy
+  has Str    $.instanceId               is xml-element    is xml-skip-null          is rw; 
+  has Str    $.instanceType             is xml-element    is xml-skip-null          is rw; 
+  has Str    $.spotInstanceRequestId    is xml-element    is xml-skip-null          is rw; 
 }

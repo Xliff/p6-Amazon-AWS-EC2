@@ -11,5 +11,6 @@ class Amazon::AWS::EC2::Types::Storage is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has S3Storage    $.S3    is xml-element          is rw;
+  has S3Storage    $.S3    is xml-element    is xml-skip-null          is rw; 
+  has S3Storage    $.S3    is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::AssociatedTargetNetwork is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.networkId      is xml-element          is rw; 
-  has Str    $.networkType    is xml-element          is rw;   #=  vpc
+  has Str    $.networkId      is xml-element    is xml-skip-null          is rw; 
+  has Str    $.networkType    is xml-element    is xml-skip-null          is rw;   #=  vpc
 }

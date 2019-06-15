@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::ClassicLoadBalancer is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.Name    is xml-element          is rw; 
-  has Str    $.name    is xml-element          is rw; 
+  has Str    $.Name    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.name    is xml-element    is xml-skip-null          is rw; 
 }

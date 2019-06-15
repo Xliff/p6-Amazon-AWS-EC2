@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::UserBucket is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.S3Bucket    is xml-element          is rw; 
-  has Str    $.S3Key       is xml-element          is rw; 
+  has Str    $.S3Bucket    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.S3Key       is xml-element    is xml-skip-null          is rw; 
 }

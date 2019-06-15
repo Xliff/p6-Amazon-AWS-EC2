@@ -12,7 +12,7 @@ class Amazon::AWS::EC2::Types::DiskImage is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                $.Description    is xml-element          is rw; 
-  has DiskImageDetail    $.Image          is xml-element          is rw; 
-  has VolumeDetail       $.Volume         is xml-element          is rw; 
+  has Str                $.Description    is xml-element    is xml-skip-null          is rw; 
+  has DiskImageDetail    $.Image          is xml-element    is xml-skip-null          is rw; 
+  has VolumeDetail       $.Volume         is xml-element    is xml-skip-null          is rw; 
 }

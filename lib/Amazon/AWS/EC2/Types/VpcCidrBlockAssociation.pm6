@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::VpcCidrBlockAssociation is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                  $.associationId     is xml-element          is rw; 
-  has Str                  $.cidrBlock         is xml-element          is rw; 
-  has VpcCidrBlockState    $.cidrBlockState    is xml-element          is rw; 
+  has Str                  $.associationId     is xml-element    is xml-skip-null          is rw; 
+  has Str                  $.cidrBlock         is xml-element    is xml-skip-null          is rw; 
+  has VpcCidrBlockState    $.cidrBlockState    is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::NetworkAclAssociation is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.networkAclAssociationId    is xml-element          is rw; 
-  has Str    $.networkAclId               is xml-element          is rw; 
-  has Str    $.subnetId                   is xml-element          is rw; 
+  has Str    $.networkAclAssociationId    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.networkAclId               is xml-element    is xml-skip-null          is rw; 
+  has Str    $.subnetId                   is xml-element    is xml-skip-null          is rw; 
 }

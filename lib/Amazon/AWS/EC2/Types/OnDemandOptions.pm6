@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::OnDemandOptions is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str     $.allocationStrategy        is xml-element          is rw;   #=  lowest-price | prioritized
-  has Int     $.minTargetCapacity         is xml-element          is rw; 
-  has Bool    $.singleAvailabilityZone    is xml-element          is rw; 
-  has Bool    $.singleInstanceType        is xml-element          is rw; 
+  has Str     $.allocationStrategy        is xml-element    is xml-skip-null          is rw;   #=  lowest-price | prioritized
+  has Int     $.minTargetCapacity         is xml-element    is xml-skip-null          is rw; 
+  has Bool    $.singleAvailabilityZone    is xml-element    is xml-skip-null          is rw; 
+  has Bool    $.singleInstanceType        is xml-element    is xml-skip-null          is rw; 
 }

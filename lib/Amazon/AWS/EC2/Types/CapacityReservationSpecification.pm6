@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::CapacityReservationSpecification is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                       $.CapacityReservationPreference is xml-element is rw;
-  has CapacityReservationTarget $.CapacityReservationTarget                    is rw;
+  has Str                       $.CapacityReservationPreference is xml-element is xml-skip-null is rw;
+  has CapacityReservationTarget $.CapacityReservationTarget                    is xml-skip-null is rw;
 
   method setReservationPreference ($val) {
     my @valid-values = <open none>;

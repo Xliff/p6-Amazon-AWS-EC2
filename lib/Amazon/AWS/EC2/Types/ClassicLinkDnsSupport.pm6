@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::ClassicLinkDnsSupport is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Bool    $.classicLinkDnsSupported    is xml-element          is rw; 
-  has Str     $.vpcId                      is xml-element          is rw; 
+  has Bool    $.classicLinkDnsSupported    is xml-element    is xml-skip-null          is rw; 
+  has Str     $.vpcId                      is xml-element    is xml-skip-null          is rw; 
 }

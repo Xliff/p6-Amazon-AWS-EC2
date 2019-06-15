@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::NetworkInterfaceAttachmentChanges is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str     $.AttachmentId           is xml-element          is rw; 
-  has Bool    $.DeleteOnTermination    is xml-element          is rw; 
+  has Str     $.AttachmentId           is xml-element    is xml-skip-null          is rw; 
+  has Bool    $.DeleteOnTermination    is xml-element    is xml-skip-null          is rw; 
 }

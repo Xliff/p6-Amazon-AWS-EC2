@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::InstanceCapacity is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int    $.availableCapacity    is xml-element          is rw; 
-  has Str    $.instanceType         is xml-element          is rw; 
-  has Int    $.totalCapacity        is xml-element          is rw; 
+  has Int    $.availableCapacity    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.instanceType         is xml-element    is xml-skip-null          is rw; 
+  has Int    $.totalCapacity        is xml-element    is xml-skip-null          is rw; 
 }

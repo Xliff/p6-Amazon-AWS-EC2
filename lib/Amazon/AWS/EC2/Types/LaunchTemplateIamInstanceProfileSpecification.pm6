@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::LaunchTemplateIamInstanceProfileSpecification is 
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.arn     is xml-element          is rw; 
-  has Str    $.name    is xml-element          is rw; 
+  has Str    $.arn     is xml-element    is xml-skip-null          is rw; 
+  has Str    $.name    is xml-element    is xml-skip-null          is rw; 
 }

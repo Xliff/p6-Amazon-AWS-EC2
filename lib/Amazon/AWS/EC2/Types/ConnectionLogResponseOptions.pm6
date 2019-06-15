@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::ConnectionLogResponseOptions is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str     $.CloudwatchLogGroup     is xml-element          is rw; 
-  has Str     $.CloudwatchLogStream    is xml-element          is rw; 
-  has Bool    $.Enabled                is xml-element          is rw; 
+  has Str     $.CloudwatchLogGroup     is xml-element    is xml-skip-null          is rw; 
+  has Str     $.CloudwatchLogStream    is xml-element    is xml-skip-null          is rw; 
+  has Bool    $.Enabled                is xml-element    is xml-skip-null          is rw; 
 }

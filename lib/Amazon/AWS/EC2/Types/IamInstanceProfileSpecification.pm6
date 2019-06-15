@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::IamInstanceProfileSpecification is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.Arn     is xml-element          is rw; 
-  has Str    $.arn     is xml-element          is rw; 
-  has Str    $.Name    is xml-element          is rw; 
-  has Str    $.name    is xml-element          is rw; 
+  has Str    $.Arn     is xml-element    is xml-skip-null          is rw; 
+  has Str    $.arn     is xml-element    is xml-skip-null          is rw; 
+  has Str    $.Name    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.name    is xml-element    is xml-skip-null          is rw; 
 }

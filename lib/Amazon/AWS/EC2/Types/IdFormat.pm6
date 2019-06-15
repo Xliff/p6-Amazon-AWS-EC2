@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::IdFormat is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str     $.deadline      is xml-element          is rw; 
-  has Str     $.resource      is xml-element          is rw; 
-  has Bool    $.useLongIds    is xml-element          is rw; 
+  has Str     $.deadline      is xml-element    is xml-skip-null          is rw; 
+  has Str     $.resource      is xml-element    is xml-skip-null          is rw; 
+  has Bool    $.useLongIds    is xml-element    is xml-skip-null          is rw; 
 }

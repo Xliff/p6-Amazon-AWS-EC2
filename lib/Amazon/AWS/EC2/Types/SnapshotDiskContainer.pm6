@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::SnapshotDiskContainer is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str           $.Description    is xml-element          is rw; 
-  has Str           $.Format         is xml-element          is rw; 
-  has Str           $.Url            is xml-element          is rw; 
-  has UserBucket    $.UserBucket     is xml-element          is rw; 
+  has Str           $.Description    is xml-element    is xml-skip-null          is rw; 
+  has Str           $.Format         is xml-element    is xml-skip-null          is rw; 
+  has Str           $.Url            is xml-element    is xml-skip-null          is rw; 
+  has UserBucket    $.UserBucket     is xml-element    is xml-skip-null          is rw; 
 }

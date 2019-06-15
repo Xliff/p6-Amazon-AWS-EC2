@@ -12,8 +12,8 @@ class Amazon::AWS::EC2::Types::ClassicLinkInstance is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has GroupIdentifier    @.groups        is xml-element    is xml-container('groupSet')      is rw; 
-  has Str                $.instanceId    is xml-element                                      is rw; 
-  has Tag                @.tags          is xml-element    is xml-container('tagSet')        is rw; 
-  has Str                $.vpcId         is xml-element                                      is rw; 
+  has GroupIdentifier    @.groups        is xml-element    is xml-skip-null    is xml-container('groupSet')      is rw; 
+  has Str                $.instanceId    is xml-element    is xml-skip-null                                      is rw; 
+  has Tag                @.tags          is xml-element    is xml-skip-null    is xml-container('tagSet')        is rw; 
+  has Str                $.vpcId         is xml-element    is xml-skip-null                                      is rw; 
 }

@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::LaunchTemplateElasticInferenceAccelerator is expo
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.Type    is xml-element          is rw; 
+  has Str    $.Type    is xml-element    is xml-skip-null          is rw; 
 }

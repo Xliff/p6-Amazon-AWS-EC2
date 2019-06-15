@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::InstanceCreditSpecificationRequest is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.CpuCredits    is xml-element          is rw; 
-  has Str    $.InstanceId    is xml-element          is rw; 
+  has Str    $.CpuCredits    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.InstanceId    is xml-element    is xml-skip-null          is rw; 
 }

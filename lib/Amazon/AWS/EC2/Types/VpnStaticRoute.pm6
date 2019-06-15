@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::VpnStaticRoute is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.destinationCidrBlock    is xml-element          is rw; 
-  has Str    $.source                  is xml-element          is rw;   #=  Static
-  has Str    $.state                   is xml-element          is rw;   #=  pending | available | deleting | deleted
+  has Str    $.destinationCidrBlock    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.source                  is xml-element    is xml-skip-null          is rw;   #=  Static
+  has Str    $.state                   is xml-element    is xml-skip-null          is rw;   #=  pending | available | deleting | deleted
 }

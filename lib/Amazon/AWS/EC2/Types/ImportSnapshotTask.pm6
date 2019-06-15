@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::ImportSnapshotTask is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                   $.description           is xml-element          is rw; 
-  has Str                   $.importTaskId          is xml-element          is rw; 
-  has SnapshotTaskDetail    $.snapshotTaskDetail    is xml-element          is rw; 
+  has Str                   $.description           is xml-element    is xml-skip-null          is rw; 
+  has Str                   $.importTaskId          is xml-element    is xml-skip-null          is rw; 
+  has SnapshotTaskDetail    $.snapshotTaskDetail    is xml-element    is xml-skip-null          is rw; 
 }

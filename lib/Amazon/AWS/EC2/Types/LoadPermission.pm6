@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::LoadPermission is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.group     is xml-element          is rw;   #=  all
-  has Str    $.userId    is xml-element          is rw; 
+  has Str    $.group     is xml-element    is xml-skip-null          is rw;   #=  all
+  has Str    $.userId    is xml-element    is xml-skip-null          is rw; 
 }

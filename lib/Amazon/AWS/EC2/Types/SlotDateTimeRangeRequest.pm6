@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::SlotDateTimeRangeRequest is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.EarliestTime    is xml-element          is rw; 
-  has Str    $.LatestTime      is xml-element          is rw; 
+  has Str    $.EarliestTime    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.LatestTime      is xml-element    is xml-skip-null          is rw; 
 }

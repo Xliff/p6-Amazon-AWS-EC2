@@ -11,10 +11,10 @@ class Amazon::AWS::EC2::Types::StaleIpPermission is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int                $.fromPort         is xml-element                                           is rw; 
-  has UserIdGroupPair    @.groups           is xml-element    is xml-container('groups')             is rw; 
-  has Str                $.ipProtocol       is xml-element                                           is rw; 
-  has Str                @.ipRanges         is xml-element    is xml-container('ipRanges')           is rw; 
-  has Str                @.prefixListIds    is xml-element    is xml-container('prefixListIds')      is rw; 
-  has Int                $.toPort           is xml-element                                           is rw; 
+  has Int                $.fromPort         is xml-element    is xml-skip-null                                           is rw; 
+  has UserIdGroupPair    @.groups           is xml-element    is xml-skip-null    is xml-container('groups')             is rw; 
+  has Str                $.ipProtocol       is xml-element    is xml-skip-null                                           is rw; 
+  has Str                @.ipRanges         is xml-element    is xml-skip-null    is xml-container('ipRanges')           is rw; 
+  has Str                @.prefixListIds    is xml-element    is xml-skip-null    is xml-container('prefixListIds')      is rw; 
+  has Int                $.toPort           is xml-element    is xml-skip-null                                           is rw; 
 }

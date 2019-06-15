@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::SuccessfulInstanceCreditSpecificationItem is expo
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.instanceId    is xml-element          is rw; 
+  has Str    $.instanceId    is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::LaunchTemplatesMonitoring is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Bool    $.enabled    is xml-element          is rw; 
+  has Bool    $.enabled    is xml-element    is xml-skip-null          is rw; 
 }

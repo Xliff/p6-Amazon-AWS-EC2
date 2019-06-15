@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::VpcPeeringConnectionOptionsDescription is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Bool    $.allowDnsResolutionFromRemoteVpc               is xml-element          is rw; 
-  has Bool    $.allowEgressFromLocalClassicLinkToRemoteVpc    is xml-element          is rw; 
-  has Bool    $.allowEgressFromLocalVpcToRemoteClassicLink    is xml-element          is rw; 
+  has Bool    $.allowDnsResolutionFromRemoteVpc               is xml-element    is xml-skip-null          is rw; 
+  has Bool    $.allowEgressFromLocalClassicLinkToRemoteVpc    is xml-element    is xml-skip-null          is rw; 
+  has Bool    $.allowEgressFromLocalVpcToRemoteClassicLink    is xml-element    is xml-skip-null          is rw; 
 }

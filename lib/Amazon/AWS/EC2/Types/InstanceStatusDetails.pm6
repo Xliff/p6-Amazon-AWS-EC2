@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::InstanceStatusDetails is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.impairedSince    is xml-element          is rw; 
-  has Str    $.name             is xml-element          is rw;   #=  reachability
-  has Str    $.status           is xml-element          is rw;   #=  passed | failed | insufficient-data | initializing
+  has Str    $.impairedSince    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.name             is xml-element    is xml-skip-null          is rw;   #=  reachability
+  has Str    $.status           is xml-element    is xml-skip-null          is rw;   #=  passed | failed | insufficient-data | initializing
 }

@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::MovingAddressStatus is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.moveStatus    is xml-element          is rw;   #=  movingToVpc | restoringToClassic
-  has Str    $.publicIp      is xml-element          is rw; 
+  has Str    $.moveStatus    is xml-element    is xml-skip-null          is rw;   #=  movingToVpc | restoringToClassic
+  has Str    $.publicIp      is xml-element    is xml-skip-null          is rw; 
 }

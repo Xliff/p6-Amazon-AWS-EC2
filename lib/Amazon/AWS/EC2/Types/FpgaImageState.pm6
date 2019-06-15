@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::FpgaImageState is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.code       is xml-element          is rw;   #=  pending | failed | available | unavailable
-  has Str    $.message    is xml-element          is rw; 
+  has Str    $.code       is xml-element    is xml-skip-null          is rw;   #=  pending | failed | available | unavailable
+  has Str    $.message    is xml-element    is xml-skip-null          is rw; 
 }

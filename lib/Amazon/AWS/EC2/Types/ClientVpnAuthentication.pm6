@@ -12,7 +12,7 @@ class Amazon::AWS::EC2::Types::ClientVpnAuthentication is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has DirectoryServiceAuthentication    $.activeDirectory         is xml-element          is rw; 
-  has CertificateAuthentication         $.mutualAuthentication    is xml-element          is rw; 
-  has Str                               $.type                    is xml-element          is rw;   #=  certificate-authentication | directory-service-authentication
+  has DirectoryServiceAuthentication    $.activeDirectory         is xml-element    is xml-skip-null          is rw; 
+  has CertificateAuthentication         $.mutualAuthentication    is xml-element    is xml-skip-null          is rw; 
+  has Str                               $.type                    is xml-element    is xml-skip-null          is rw;   #=  certificate-authentication | directory-service-authentication
 }

@@ -12,6 +12,6 @@ class Amazon::AWS::EC2::Types::TargetReservationValue is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has ReservationValue       $.reservationValue       is xml-element          is rw; 
-  has TargetConfiguration    $.targetConfiguration    is xml-element          is rw; 
+  has ReservationValue       $.reservationValue       is xml-element    is xml-skip-null          is rw; 
+  has TargetConfiguration    $.targetConfiguration    is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::LaunchTemplateBlockDeviceMapping is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                             $.deviceName     is xml-element          is rw; 
-  has LaunchTemplateEbsBlockDevice    $.ebs            is xml-element          is rw; 
-  has Str                             $.noDevice       is xml-element          is rw; 
-  has Str                             $.virtualName    is xml-element          is rw; 
+  has Str                             $.deviceName     is xml-element    is xml-skip-null          is rw; 
+  has LaunchTemplateEbsBlockDevice    $.ebs            is xml-element    is xml-skip-null          is rw; 
+  has Str                             $.noDevice       is xml-element    is xml-skip-null          is rw; 
+  has Str                             $.virtualName    is xml-element    is xml-skip-null          is rw; 
 }

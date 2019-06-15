@@ -12,12 +12,12 @@ class Amazon::AWS::EC2::Types::TransitGateway is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                      $.creationTime         is xml-element                                    is rw; 
-  has Str                      $.description          is xml-element                                    is rw; 
-  has TransitGatewayOptions    $.options              is xml-element                                    is rw; 
-  has Str                      $.ownerId              is xml-element                                    is rw; 
-  has Str                      $.state                is xml-element                                    is rw;   #=  pending | available | modifying | deleting | deleted
-  has Tag                      @.tags                 is xml-element    is xml-container('tagSet')      is rw; 
-  has Str                      $.transitGatewayArn    is xml-element                                    is rw; 
-  has Str                      $.transitGatewayId     is xml-element                                    is rw; 
+  has Str                      $.creationTime         is xml-element    is xml-skip-null                                    is rw; 
+  has Str                      $.description          is xml-element    is xml-skip-null                                    is rw; 
+  has TransitGatewayOptions    $.options              is xml-element    is xml-skip-null                                    is rw; 
+  has Str                      $.ownerId              is xml-element    is xml-skip-null                                    is rw; 
+  has Str                      $.state                is xml-element    is xml-skip-null                                    is rw;   #=  pending | available | modifying | deleting | deleted
+  has Tag                      @.tags                 is xml-element    is xml-skip-null    is xml-container('tagSet')      is rw; 
+  has Str                      $.transitGatewayArn    is xml-element    is xml-skip-null                                    is rw; 
+  has Str                      $.transitGatewayId     is xml-element    is xml-skip-null                                    is rw; 
 }

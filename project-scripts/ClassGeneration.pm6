@@ -30,9 +30,10 @@ sub makeClass (Str $url, :$response = False) is export {
     my $vl = $response ?? @vl[1] !! @vl[0];
 
     for $vl.find('span.term b').to_array -> $ne {
-      my ($attrName, $attrType, $sigil, $validValues, $container) =
+      my ($attrName, $attrType, $sigil, $validValues, $container, $skipnull) =
         ($ne.text, '');
       next if $ne.text eq 'requestId';
+      $skipnull = True;
 
       my $nn = $ne.parent.parent.next_node;
       while not $nn.tag.defined {
@@ -93,8 +94,13 @@ sub makeClass (Str $url, :$response = False) is export {
           }
 
           when /^ 'Valid Values:'/ {
-            $validValues = $te.find('code').to_array[0].text;
-            $validValues ~~ s:g/ \s+ / /;
+            if $attrType ne 'Str' || $attrName.lc ne 'instanttype' {
+              $validValues = $te.find('code').to_array[0].text;
+              $validValues ~~ s:g/ \s+ / /;
+            } else {
+              # Note potential sub-call declaration.
+              $validValues = '#=  sub:Amazon::AWS::EC2::validInstanceTypes::checkInstanceType';
+            }
           }
         }
         # Emit xml-container('attrName') if sigil starts with @.
@@ -112,7 +118,8 @@ sub makeClass (Str $url, :$response = False) is export {
         $sigil,
         'is xml-element',
         $container,
-        $validValues
+        $validValues,
+        'is xml-skip-null',
       ];
     }
   }
@@ -126,6 +133,7 @@ sub makeClass (Str $url, :$response = False) is export {
   my $attrCol = @attributes.map( *[0].chars ).max + 4;
   my $nameCol = @attributes.map( *[1].chars ).max + 4;
   my $elemCol = @attributes.map( *[3].chars ).max + 4; #@attributes.map({ ($_[3] // '').chars }).max + 4;
+  my $snCol   = @attributes.map( *[6].chars ).max + 4;
   my $contCol = @attributes.map({ ($_[4] // '').chars }).max + 4;
 
   my @attrDefs;
@@ -134,14 +142,12 @@ sub makeClass (Str $url, :$response = False) is export {
                        $a[0]        .fmt("%-{$attrCol}s") }{ $a[2] }{
                        $a[1]        .fmt("%-{$nameCol}s") }{
                        $a[3]        .fmt("%-{$elemCol}s") }{
+                       $a[6]        .fmt("%-{$snCol  }s") }{
                        ($a[4] // '').fmt("%-{$contCol}s") }  is rw; {
                        $a[5].defined ?? "  #= { $a[5] }" !! '' }";
   }
 
-  my $mode = do {
-    when $response.defined { 'Response' }
-    default                { 'Types' }
-  };
+  my $mode = $response ?? 'Response' !! 'Types';
 
   # Really should be separated out into a view.
   my $dependent = $response ??

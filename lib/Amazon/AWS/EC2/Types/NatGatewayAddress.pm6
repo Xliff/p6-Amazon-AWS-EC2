@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::NatGatewayAddress is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.allocationId          is xml-element          is rw; 
-  has Str    $.networkInterfaceId    is xml-element          is rw; 
-  has Str    $.privateIp             is xml-element          is rw; 
-  has Str    $.publicIp              is xml-element          is rw; 
+  has Str    $.allocationId          is xml-element    is xml-skip-null          is rw; 
+  has Str    $.networkInterfaceId    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.privateIp             is xml-element    is xml-skip-null          is rw; 
+  has Str    $.publicIp              is xml-element    is xml-skip-null          is rw; 
 }

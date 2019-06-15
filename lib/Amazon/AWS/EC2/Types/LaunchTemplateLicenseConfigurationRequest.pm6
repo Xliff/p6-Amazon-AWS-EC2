@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::LaunchTemplateLicenseConfigurationRequest is expo
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.LicenseConfigurationArn    is xml-element          is rw; 
+  has Str    $.LicenseConfigurationArn    is xml-element    is xml-skip-null          is rw; 
 }

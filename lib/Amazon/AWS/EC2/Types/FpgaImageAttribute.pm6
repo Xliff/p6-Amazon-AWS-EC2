@@ -12,9 +12,9 @@ class Amazon::AWS::EC2::Types::FpgaImageAttribute is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str               $.description        is xml-element                                             is rw; 
-  has Str               $.fpgaImageId        is xml-element                                             is rw; 
-  has LoadPermission    @.loadPermissions    is xml-element    is xml-container('loadPermissions')      is rw; 
-  has Str               $.name               is xml-element                                             is rw; 
-  has ProductCode       @.productCodes       is xml-element    is xml-container('productCodes')         is rw; 
+  has Str               $.description        is xml-element    is xml-skip-null                                             is rw; 
+  has Str               $.fpgaImageId        is xml-element    is xml-skip-null                                             is rw; 
+  has LoadPermission    @.loadPermissions    is xml-element    is xml-skip-null    is xml-container('loadPermissions')      is rw; 
+  has Str               $.name               is xml-element    is xml-skip-null                                             is rw; 
+  has ProductCode       @.productCodes       is xml-element    is xml-skip-null    is xml-container('productCodes')         is rw; 
 }

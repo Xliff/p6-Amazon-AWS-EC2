@@ -11,9 +11,9 @@ class Amazon::AWS::EC2::Types::SpotDatafeedSubscription is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                       $.bucket     is xml-element          is rw; 
-  has SpotInstanceStateFault    $.fault      is xml-element          is rw; 
-  has Str                       $.ownerId    is xml-element          is rw; 
-  has Str                       $.prefix     is xml-element          is rw; 
-  has Str                       $.state      is xml-element          is rw;   #=  Active | Inactive
+  has Str                       $.bucket     is xml-element    is xml-skip-null          is rw; 
+  has SpotInstanceStateFault    $.fault      is xml-element    is xml-skip-null          is rw; 
+  has Str                       $.ownerId    is xml-element    is xml-skip-null          is rw; 
+  has Str                       $.prefix     is xml-element    is xml-skip-null          is rw; 
+  has Str                       $.state      is xml-element    is xml-skip-null          is rw;   #=  Active | Inactive
 }

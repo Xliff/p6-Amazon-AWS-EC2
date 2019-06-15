@@ -27,56 +27,56 @@ class Amazon::AWS::EC2::Types::Instance is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int                                     $.amiLaunchIndex                   is xml-element is rw;
-  has Str                                     $.architecture                     is xml-element is rw;
-  has Str                                     $.capacityReservationId            is xml-element is rw;
-  has CapacityReservationSpecification        $.capacityReservationSpecification                is rw;
-  has Str                                     $.clientToken                      is xml-element is rw;
-  has CpuOptions                              $.cpuOptions                                      is rw;
-  has Str                                     $.dnsName                          is xml-element is rw;
-  has Bool                                    $.ebsOptimized                     is xml-element is rw;
-  has Bool                                    $.enaSupport                       is xml-element is rw;
-  has HibernationOptions                      $.hibernationOptions                              is rw;
-  has Str                                     $.hypervisor                       is xml-element is rw;
-  has IamInstanceProfile                      $.iamInstanceProfile                              is rw;
-  has Str                                     $.imageId                          is xml-element is rw;
-  has Str                                     $.instanceId                       is xml-element is rw;
-  has Str                                     $.instanceLifecycle                is xml-element is rw;
-  has InstanceState                           $.instanceState                                   is rw;
-  has Str                                     $.instanceType                     is xml-element is rw;
-  has Str                                     $.ipAddress                        is xml-element is rw;
-  has Str                                     $.kernelId                         is xml-element is rw;
-  has Str                                     $.keyName                          is xml-element is rw;
-  has Placement                               $.placement                                       is rw;
-  has Str                                     $.platform                         is xml-element is rw;
-  has Str                                     $.privateDnsName                   is xml-element is rw;
-  has Str                                     $.ramdiskId                        is xml-element is rw;
-  has Str                                     $.reason                           is xml-element is rw;
-  has Str                                     $.rootDeviceName                   is xml-element is rw;
-  has Str                                     $.rootDeviceType                   is xml-element is rw;
-  has Bool                                    $.sourceDestCheck                  is xml-element is rw;
-  has Str                                     $.spotInstanceRequestId            is xml-element is rw;
-  has Str                                     $.sirovNetSupport                  is xml-element is rw;
-  has StateReason                             $.stateReason                                     is rw;
-  has Str                                     $.subnetId                         is xml-element is rw;
-  has Str                                     $.vpcId                            is xml-element is rw;
+  has Int                                     $.amiLaunchIndex                   is xml-element is xml-skip-null is rw;
+  has Str                                     $.architecture                     is xml-element is xml-skip-null is rw;
+  has Str                                     $.capacityReservationId            is xml-element is xml-skip-null is rw;
+  has CapacityReservationSpecification        $.capacityReservationSpecification                is xml-skip-null is rw;
+  has Str                                     $.clientToken                      is xml-element is xml-skip-null is rw;
+  has CpuOptions                              $.cpuOptions                                      is xml-skip-null is rw;
+  has Str                                     $.dnsName                          is xml-element is xml-skip-null is rw;
+  has Bool                                    $.ebsOptimized                     is xml-element is xml-skip-null is rw;
+  has Bool                                    $.enaSupport                       is xml-element is xml-skip-null is rw;
+  has HibernationOptions                      $.hibernationOptions                              is xml-skip-null is rw;
+  has Str                                     $.hypervisor                       is xml-element is xml-skip-null is rw;
+  has IamInstanceProfile                      $.iamInstanceProfile                              is xml-skip-null is rw;
+  has Str                                     $.imageId                          is xml-element is xml-skip-null is rw;
+  has Str                                     $.instanceId                       is xml-element is xml-skip-null is rw;
+  has Str                                     $.instanceLifecycle                is xml-element is xml-skip-null is rw;
+  has InstanceState                           $.instanceState                                   is xml-skip-null is rw;
+  has Str                                     $.instanceType                     is xml-element is xml-skip-null is rw;
+  has Str                                     $.ipAddress                        is xml-element is xml-skip-null is rw;
+  has Str                                     $.kernelId                         is xml-element is xml-skip-null is rw;
+  has Str                                     $.keyName                          is xml-element is xml-skip-null is rw;
+  has Placement                               $.placement                                       is xml-skip-null is rw;
+  has Str                                     $.platform                         is xml-element is xml-skip-null is rw;
+  has Str                                     $.privateDnsName                   is xml-element is xml-skip-null is rw;
+  has Str                                     $.ramdiskId                        is xml-element is xml-skip-null is rw;
+  has Str                                     $.reason                           is xml-element is xml-skip-null is rw;
+  has Str                                     $.rootDeviceName                   is xml-element is xml-skip-null is rw;
+  has Str                                     $.rootDeviceType                   is xml-element is xml-skip-null is rw;
+  has Bool                                    $.sourceDestCheck                  is xml-element is xml-skip-null is rw;
+  has Str                                     $.spotInstanceRequestId            is xml-element is xml-skip-null is rw;
+  has Str                                     $.sirovNetSupport                  is xml-element is xml-skip-null is rw;
+  has StateReason                             $.stateReason                                     is xml-skip-null is rw;
+  has Str                                     $.subnetId                         is xml-element is xml-skip-null is rw;
+  has Str                                     $.vpcId                            is xml-element is xml-skip-null is rw;
 
   has GroupIdentifier                         @.groups
-    is xml-container('groupSet')                                                                is rw;
+    is xml-container('groupSet')                                                                is xml-skip-null is rw;
   has InstanceBlockDeviceMapping              @.block-device-mappings
-    is xml-container('blockDeviceMapping')                                                      is rw;
+    is xml-container('blockDeviceMapping')                                                      is xml-skip-null is rw;
   has ElasticGpuAssociation                   @.elasticGpuAssociations
-    is xml-container('elasticGpuAssociaionSet')                                                 is rw;
+    is xml-container('elasticGpuAssociaionSet')                                                 is xml-skip-null is rw;
   has ElasticInferenceAcceleratorAssociation  @.elasticInferenceAccelatorAssociations
-    is xml-container('elasticInferenceAcceleratorAssociationSet')                               is rw;
+    is xml-container('elasticInferenceAcceleratorAssociationSet')                               is xml-skip-null is rw;
   has LicenseConfiguration                    @.licenses
-    is xml-container('licenseSet')                                                              is rw;
+    is xml-container('licenseSet')                                                              is xml-skip-null is rw;
   has InstanceNetworkInterface                @.networkInterfaces
-    is xml-container('networkInterfaceSet')                                                     is rw;
+    is xml-container('networkInterfaceSet')                                                     is xml-skip-null is rw;
   has ProductCode                             @.product-codes
-    is xml-container('productCodes')                                                            is rw;
+    is xml-container('productCodes')                                                            is xml-skip-null is rw;
   has Tag                                     @.tags
-    is xml-container('tagSet')                                                                  is rw;
+    is xml-container('tagSet')                                                                  is xml-skip-null is rw;
 
   # Attribute aliasing.
   # Attach aliases to the specific method with Method::Also.

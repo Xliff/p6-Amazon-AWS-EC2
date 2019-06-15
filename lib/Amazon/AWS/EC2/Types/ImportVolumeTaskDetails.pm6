@@ -12,9 +12,9 @@ class Amazon::AWS::EC2::Types::ImportVolumeTaskDetails is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                           $.availabilityZone    is xml-element          is rw; 
-  has Int                           $.bytesConverted      is xml-element          is rw; 
-  has Str                           $.description         is xml-element          is rw; 
-  has DiskImageDescription          $.image               is xml-element          is rw; 
-  has DiskImageVolumeDescription    $.volume              is xml-element          is rw; 
+  has Str                           $.availabilityZone    is xml-element    is xml-skip-null          is rw;
+  has Int                           $.bytesConverted      is xml-element    is xml-skip-null          is rw;
+  has Str                           $.description         is xml-element    is xml-skip-null          is rw;
+  has DiskImageDescription          $.image               is xml-element('image')    is xml-skip-null          is rw;
+  has DiskImageVolumeDescription    $.volume              is xml-element('volume')    is xml-skip-null          is rw;
 }

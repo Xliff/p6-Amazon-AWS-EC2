@@ -12,11 +12,11 @@ class Amazon::AWS::EC2::Types::VpnGateway is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int              $.amazonSideAsn       is xml-element                                         is rw; 
-  has VpcAttachment    @.attachments         is xml-element    is xml-container('attachments')      is rw; 
-  has Str              $.availabilityZone    is xml-element                                         is rw; 
-  has Str              $.state               is xml-element                                         is rw;   #=  pending | available | deleting | deleted
-  has Tag              @.tags                is xml-element    is xml-container('tagSet')           is rw; 
-  has Str              $.type                is xml-element                                         is rw;   #=  ipsec.1
-  has Str              $.vpnGatewayId        is xml-element                                         is rw; 
+  has Int              $.amazonSideAsn       is xml-element    is xml-skip-null                                         is rw; 
+  has VpcAttachment    @.attachments         is xml-element    is xml-skip-null    is xml-container('attachments')      is rw; 
+  has Str              $.availabilityZone    is xml-element    is xml-skip-null                                         is rw; 
+  has Str              $.state               is xml-element    is xml-skip-null                                         is rw;   #=  pending | available | deleting | deleted
+  has Tag              @.tags                is xml-element    is xml-skip-null    is xml-container('tagSet')           is rw; 
+  has Str              $.type                is xml-element    is xml-skip-null                                         is rw;   #=  ipsec.1
+  has Str              $.vpnGatewayId        is xml-element    is xml-skip-null                                         is rw; 
 }

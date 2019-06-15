@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::UnsuccessfulInstanceCreditSpecificationItemError 
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.code       is xml-element          is rw;   #=  InvalidInstanceID.Malformed | InvalidInstanceID.NotFound | IncorrectInstanceState | InstanceCreditSpecification.NotSupported
-  has Str    $.message    is xml-element          is rw; 
+  has Str    $.code       is xml-element    is xml-skip-null          is rw;   #=  InvalidInstanceID.Malformed | InvalidInstanceID.NotFound | IncorrectInstanceState | InstanceCreditSpecification.NotSupported
+  has Str    $.message    is xml-element    is xml-skip-null          is rw; 
 }

@@ -12,13 +12,13 @@ class Amazon::AWS::EC2::Types::ReservedInstancesModification is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                                    $.clientToken                        is xml-element                                                   is rw; 
-  has Str                                    $.createDate                         is xml-element                                                   is rw; 
-  has Str                                    $.effectiveDate                      is xml-element                                                   is rw; 
-  has ReservedInstancesModificationResult    @.modificationResults                is xml-element    is xml-container('modificationResultSet')      is rw; 
-  has Str                                    $.reservedInstancesModificationId    is xml-element                                                   is rw; 
-  has ReservedInstancesId                    @.reservedInstancess                 is xml-element    is xml-container('reservedInstancesSet')       is rw; 
-  has Str                                    $.status                             is xml-element                                                   is rw; 
-  has Str                                    $.statusMessage                      is xml-element                                                   is rw; 
-  has Str                                    $.updateDate                         is xml-element                                                   is rw; 
+  has Str                                    $.clientToken                        is xml-element    is xml-skip-null                                                   is rw; 
+  has Str                                    $.createDate                         is xml-element    is xml-skip-null                                                   is rw; 
+  has Str                                    $.effectiveDate                      is xml-element    is xml-skip-null                                                   is rw; 
+  has ReservedInstancesModificationResult    @.modificationResults                is xml-element    is xml-skip-null    is xml-container('modificationResultSet')      is rw; 
+  has Str                                    $.reservedInstancesModificationId    is xml-element    is xml-skip-null                                                   is rw; 
+  has ReservedInstancesId                    @.reservedInstancess                 is xml-element    is xml-skip-null    is xml-container('reservedInstancesSet')       is rw; 
+  has Str                                    $.status                             is xml-element    is xml-skip-null                                                   is rw; 
+  has Str                                    $.statusMessage                      is xml-element    is xml-skip-null                                                   is rw; 
+  has Str                                    $.updateDate                         is xml-element    is xml-skip-null                                                   is rw; 
 }

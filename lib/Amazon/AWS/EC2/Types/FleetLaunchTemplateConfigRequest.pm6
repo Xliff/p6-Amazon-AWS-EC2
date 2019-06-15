@@ -12,6 +12,6 @@ class Amazon::AWS::EC2::Types::FleetLaunchTemplateConfigRequest is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has FleetLaunchTemplateSpecificationRequest    $.LaunchTemplateSpecification    is xml-element                                       is rw; 
-  has FleetLaunchTemplateOverridesRequest        @.Overrides                      is xml-element    is xml-container('Overrides')      is rw; 
+  has FleetLaunchTemplateSpecificationRequest    $.LaunchTemplateSpecification    is xml-element    is xml-skip-null                                       is rw; 
+  has FleetLaunchTemplateOverridesRequest        @.Overrides                      is xml-element    is xml-skip-null    is xml-container('Overrides')      is rw; 
 }

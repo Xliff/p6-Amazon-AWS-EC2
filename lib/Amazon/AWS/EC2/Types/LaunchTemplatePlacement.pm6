@@ -11,10 +11,10 @@ class Amazon::AWS::EC2::Types::LaunchTemplatePlacement is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.affinity            is xml-element          is rw; 
-  has Str    $.availabilityZone    is xml-element          is rw; 
-  has Str    $.groupName           is xml-element          is rw; 
-  has Str    $.hostId              is xml-element          is rw; 
-  has Str    $.spreadDomain        is xml-element          is rw; 
-  has Str    $.tenancy             is xml-element          is rw;   #=  default | dedicated | host
+  has Str    $.affinity            is xml-element    is xml-skip-null          is rw; 
+  has Str    $.availabilityZone    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.groupName           is xml-element    is xml-skip-null          is rw; 
+  has Str    $.hostId              is xml-element    is xml-skip-null          is rw; 
+  has Str    $.spreadDomain        is xml-element    is xml-skip-null          is rw; 
+  has Str    $.tenancy             is xml-element    is xml-skip-null          is rw;   #=  default | dedicated | host
 }

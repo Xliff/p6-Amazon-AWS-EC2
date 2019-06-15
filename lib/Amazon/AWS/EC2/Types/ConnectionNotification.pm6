@@ -11,11 +11,11 @@ class Amazon::AWS::EC2::Types::ConnectionNotification is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    @.connectionEvents               is xml-element    is xml-container('connectionEvents')      is rw; 
-  has Str    $.connectionNotificationArn      is xml-element                                              is rw; 
-  has Str    $.connectionNotificationId       is xml-element                                              is rw; 
-  has Str    $.connectionNotificationState    is xml-element                                              is rw;   #=  Enabled | Disabled
-  has Str    $.connectionNotificationType     is xml-element                                              is rw;   #=  Topic
-  has Str    $.serviceId                      is xml-element                                              is rw; 
-  has Str    $.vpcEndpointId                  is xml-element                                              is rw; 
+  has Str    @.connectionEvents               is xml-element    is xml-skip-null    is xml-container('connectionEvents')      is rw; 
+  has Str    $.connectionNotificationArn      is xml-element    is xml-skip-null                                              is rw; 
+  has Str    $.connectionNotificationId       is xml-element    is xml-skip-null                                              is rw; 
+  has Str    $.connectionNotificationState    is xml-element    is xml-skip-null                                              is rw;   #=  Enabled | Disabled
+  has Str    $.connectionNotificationType     is xml-element    is xml-skip-null                                              is rw;   #=  Topic
+  has Str    $.serviceId                      is xml-element    is xml-skip-null                                              is rw; 
+  has Str    $.vpcEndpointId                  is xml-element    is xml-skip-null                                              is rw; 
 }

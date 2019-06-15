@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::HistoryRecord is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has EventInformation    $.eventInformation    is xml-element          is rw; 
-  has Str                 $.eventType           is xml-element          is rw;   #=  instanceChange | fleetRequestChange | error | information
-  has Str                 $.timestamp           is xml-element          is rw; 
+  has EventInformation    $.eventInformation    is xml-element    is xml-skip-null          is rw; 
+  has Str                 $.eventType           is xml-element    is xml-skip-null          is rw;   #=  instanceChange | fleetRequestChange | error | information
+  has Str                 $.timestamp           is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::CreateFleetError is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                                   $.errorCode                     is xml-element          is rw; 
-  has Str                                   $.errorMessage                  is xml-element          is rw; 
-  has LaunchTemplateAndOverridesResponse    $.launchTemplateAndOverrides    is xml-element          is rw; 
-  has Str                                   $.lifecycle                     is xml-element          is rw;   #=  spot | on-demand
+  has Str                                   $.errorCode                     is xml-element    is xml-skip-null          is rw; 
+  has Str                                   $.errorMessage                  is xml-element    is xml-skip-null          is rw; 
+  has LaunchTemplateAndOverridesResponse    $.launchTemplateAndOverrides    is xml-element    is xml-skip-null          is rw; 
+  has Str                                   $.lifecycle                     is xml-element    is xml-skip-null          is rw;   #=  spot | on-demand
 }

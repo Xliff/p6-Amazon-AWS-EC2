@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::PublicIpv4PoolRange is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int    $.addressCount             is xml-element          is rw; 
-  has Int    $.availableAddressCount    is xml-element          is rw; 
-  has Str    $.firstAddress             is xml-element          is rw; 
-  has Str    $.lastAddress              is xml-element          is rw; 
+  has Int    $.addressCount             is xml-element    is xml-skip-null          is rw; 
+  has Int    $.availableAddressCount    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.firstAddress             is xml-element    is xml-skip-null          is rw; 
+  has Str    $.lastAddress              is xml-element    is xml-skip-null          is rw; 
 }

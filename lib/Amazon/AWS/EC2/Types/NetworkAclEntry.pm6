@@ -12,12 +12,12 @@ class Amazon::AWS::EC2::Types::NetworkAclEntry is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str             $.cidrBlock        is xml-element          is rw; 
-  has Bool            $.egress           is xml-element          is rw; 
-  has IcmpTypeCode    $.icmpTypeCode     is xml-element          is rw; 
-  has Str             $.ipv6CidrBlock    is xml-element          is rw; 
-  has PortRange       $.portRange        is xml-element          is rw; 
-  has Str             $.protocol         is xml-element          is rw; 
-  has Str             $.ruleAction       is xml-element          is rw;   #=  allow | deny
-  has Int             $.ruleNumber       is xml-element          is rw; 
+  has Str             $.cidrBlock        is xml-element    is xml-skip-null          is rw; 
+  has Bool            $.egress           is xml-element    is xml-skip-null          is rw; 
+  has IcmpTypeCode    $.icmpTypeCode     is xml-element    is xml-skip-null          is rw; 
+  has Str             $.ipv6CidrBlock    is xml-element    is xml-skip-null          is rw; 
+  has PortRange       $.portRange        is xml-element    is xml-skip-null          is rw; 
+  has Str             $.protocol         is xml-element    is xml-skip-null          is rw; 
+  has Str             $.ruleAction       is xml-element    is xml-skip-null          is rw;   #=  allow | deny
+  has Int             $.ruleNumber       is xml-element    is xml-skip-null          is rw; 
 }

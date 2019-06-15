@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::ElasticGpuHealth is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.status    is xml-element          is rw;   #=  OK | IMPAIRED
+  has Str    $.status    is xml-element    is xml-skip-null          is rw;   #=  OK | IMPAIRED
 }

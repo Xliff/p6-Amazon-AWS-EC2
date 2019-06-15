@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::PrincipalIdFormat is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str         $.arn        is xml-element                                       is rw; 
-  has IdFormat    @.statuss    is xml-element    is xml-container('statusSet')      is rw; 
+  has Str         $.arn        is xml-element    is xml-skip-null                                       is rw; 
+  has IdFormat    @.statuss    is xml-element    is xml-skip-null    is xml-container('statusSet')      is rw; 
 }

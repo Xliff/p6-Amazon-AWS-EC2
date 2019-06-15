@@ -1,11 +1,13 @@
 use v6.d;
 
+use Test;
+
 # If this gets any larger, it will need a better name.
 role Amazon::AWS::Roles::Eqv {
 
   multi method is-empty {
     for self.^attributes {
-      return False if not self.is-empty( self."{ .substr(2) }"() );
+      return False if not self.is-empty( self."{ .name.substr(2) }"() );
     }
     True;
   }
@@ -16,7 +18,7 @@ role Amazon::AWS::Roles::Eqv {
       when Str                     { .chars.not  }
       when Int                     { 0           }
       when Bool                    { False       }
-      when Amazon::AWS::Roles::Eqv { $v.is-empty }
+      #when Amazon::AWS::Roles::Eqv { $v.is-empty }
 
       default {
         die "Cannot determine the emptiness of a { .^name } object."
@@ -43,13 +45,14 @@ role Amazon::AWS::Roles::Eqv {
   }
 
   method eqv($b) {
-    return False unless self.defined == $b.is-empty;
+    #return False unless self.defined == $b.is-empty;
     return False unless self.WHAT =:= $b.WHAT;
 
     for self.^attributes Z $b.^attributes -> ($x, $y) {
       my $attr = $x.name.substr(2);
+      diag $attr;
       my ($aval, $bval) = ( self."$attr"(), $b."$attr"() );
-      return False unless $aval.defined == $bval.is-empty;
+      #return False unless $aval.defined == $bval.is-empty;
       return False unless self.testval($aval, $bval);
     }
     True;

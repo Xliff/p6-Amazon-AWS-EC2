@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::DeleteFleetErrorItem is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has DeleteFleetError    $.error      is xml-element          is rw; 
-  has Str                 $.fleetId    is xml-element          is rw; 
+  has DeleteFleetError    $.error      is xml-element    is xml-skip-null          is rw; 
+  has Str                 $.fleetId    is xml-element    is xml-skip-null          is rw; 
 }

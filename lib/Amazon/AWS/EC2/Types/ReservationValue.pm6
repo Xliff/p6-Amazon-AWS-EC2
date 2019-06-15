@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::ReservationValue is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.hourlyPrice              is xml-element          is rw; 
-  has Str    $.remainingTotalValue      is xml-element          is rw; 
-  has Str    $.remainingUpfrontValue    is xml-element          is rw; 
+  has Str    $.hourlyPrice              is xml-element    is xml-skip-null          is rw; 
+  has Str    $.remainingTotalValue      is xml-element    is xml-skip-null          is rw; 
+  has Str    $.remainingUpfrontValue    is xml-element    is xml-skip-null          is rw; 
 }

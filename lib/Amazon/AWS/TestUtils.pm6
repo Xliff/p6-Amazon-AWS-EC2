@@ -63,33 +63,36 @@ sub getTestFiles($cat, :$unit) is export {
   @files;
 }
 
-# sub changeRandomAttribute($o) {
-#   my $victim;
-#   repeat {
-#     $victim = $o.^attributes
-#                 .map({ .name.substr(2) })
-#                 .grep({ .defined && .chars})
-#                 .pick;
-#   } until $o."$victim"() ~~ (Str, Bool, Int, Amazon::AWS::EC2::Types::Base).any;
-#
-#   diag "{ $o.^attributes.map({ (.name // '$!WTF').substr(2) }).join(', ') }";
-#   diag "$victim -- { $victim.^name }";
-#
-#   my $val = $o."$victim"();
-#   my $newVal = do given $val {
-#     when Str                           { "syzygy!" ~ ($_ // '') }   # 3 Wyse, Man
-#     when Int                           { ++$_                   }
-#     when Bool                          { .not                   }
-#     when Positional                    { ($val.WHAT.new)        }
-#     when Amazon::AWS::EC2::Types::Base { $val.WHAT.new          }
-#     default                            { die 'WTF?!?'           }
-#   }
-#   diag "Setting {$victim} to {$newVal.gist}";
-#   $o."$victim"() = $newVal;
-# }
+sub changeRandomAttribute($o) {
+  diag 'CHANGE!';
+  my $victim;
+  repeat {
+    diag 'vicselect';
+    $victim = $o.^attributes
+                .map({ .name.substr(2) })
+                .grep({ .defined && .chars})
+                .pick;
+  } until $o."$victim"() ~~
+    (Str, Bool, Int, Positional, Amazon::AWS::EC2::Types::Base).any;
+
+  diag "{ $o.^attributes.map({ (.name // '$!WTF').substr(2) }).join(', ') }";
+  diag "$victim -- { $victim.^name }";
+
+  my $val = $o."$victim"();
+  my $newVal = do given $val {
+    when Str                           { "syzygy!" ~ ($_ // '') }   # 3 Wyse, Man
+    when Int                           { ++$_                   }
+    when Bool                          { .not                   }
+    when Positional                    { ($val.WHAT.new)        }
+    when Amazon::AWS::EC2::Types::Base { $val.WHAT.new          }
+    default                            { die 'WTF?!?'           }
+  }
+  diag "Setting {$victim} to {$newVal.gist}";
+  $o."$victim"() = $newVal;
+}
 
 sub doBasicTests(@files) is export {
-  plan @files.elems * 5;
+  plan @files.elems * 7;
 
   for @files {
     CATCH { default { diag .message } }
@@ -112,8 +115,11 @@ sub doBasicTests(@files) is export {
       $a = populateTestObject(::($_).new, :!blanks)
     },                                                            "$_ can be populated";
     lives-ok { $bx = $a.to-xml                               },   "$_ serializes ok";
+    diag $bx;
     lives-ok { $b = $class.from-xml($bx)                     },   "$_ deseralizes ok";
-    #ok       $a.eqv($b),                                         "$_ compares ok";
-    #nok      do { changeRandomAttribute($b); $a eqv $b       },  "Changed $_ fails eqv";
+    ok       $a.eqv($b),                                          "$_ compares ok";
+    diag $a.gist;
+    diag $b.gist;
+    nok      do { changeRandomAttribute($b); $a eqv $b       },   "Changed $_ fails eqv";
   }
 }

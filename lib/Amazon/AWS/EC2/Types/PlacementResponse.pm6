@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::PlacementResponse is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.groupName    is xml-element          is rw; 
+  has Str    $.groupName    is xml-element    is xml-skip-null          is rw; 
 }

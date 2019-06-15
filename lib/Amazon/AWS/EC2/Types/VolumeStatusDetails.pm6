@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::VolumeStatusDetails is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.name      is xml-element          is rw;   #=  io-enabled | io-performance
-  has Str    $.status    is xml-element          is rw; 
+  has Str    $.name      is xml-element    is xml-skip-null          is rw;   #=  io-enabled | io-performance
+  has Str    $.status    is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,10 +11,10 @@ class Amazon::AWS::EC2::Types::AuthorizationRule is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Bool                                $.accessAll              is xml-element          is rw; 
-  has Str                                 $.clientVpnEndpointId    is xml-element          is rw; 
-  has Str                                 $.description            is xml-element          is rw; 
-  has Str                                 $.destinationCidr        is xml-element          is rw; 
-  has Str                                 $.groupId                is xml-element          is rw; 
-  has ClientVpnAuthorizationRuleStatus    $.status                 is xml-element          is rw; 
+  has Bool                                $.accessAll              is xml-element    is xml-skip-null          is rw; 
+  has Str                                 $.clientVpnEndpointId    is xml-element    is xml-skip-null          is rw; 
+  has Str                                 $.description            is xml-element    is xml-skip-null          is rw; 
+  has Str                                 $.destinationCidr        is xml-element    is xml-skip-null          is rw; 
+  has Str                                 $.groupId                is xml-element    is xml-skip-null          is rw; 
+  has ClientVpnAuthorizationRuleStatus    $.status                 is xml-element    is xml-skip-null          is rw; 
 }

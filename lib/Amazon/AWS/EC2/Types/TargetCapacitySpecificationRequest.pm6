@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::TargetCapacitySpecificationRequest is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.DefaultTargetCapacityType    is xml-element          is rw;   #=  spot | on-demand
-  has Int    $.OnDemandTargetCapacity       is xml-element          is rw; 
-  has Int    $.SpotTargetCapacity           is xml-element          is rw; 
-  has Int    $.TotalTargetCapacity          is xml-element          is rw; 
+  has Str    $.DefaultTargetCapacityType    is xml-element    is xml-skip-null          is rw;   #=  spot | on-demand
+  has Int    $.OnDemandTargetCapacity       is xml-element    is xml-skip-null          is rw; 
+  has Int    $.SpotTargetCapacity           is xml-element    is xml-skip-null          is rw; 
+  has Int    $.TotalTargetCapacity          is xml-element    is xml-skip-null          is rw; 
 }

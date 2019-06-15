@@ -13,11 +13,11 @@ class Amazon::AWS::EC2::Types::ConversionTask is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                          $.conversionTaskId    is xml-element                                    is rw; 
-  has Str                          $.expirationTime      is xml-element                                    is rw; 
-  has ImportInstanceTaskDetails    $.importInstance      is xml-element                                    is rw; 
-  has ImportVolumeTaskDetails      $.importVolume        is xml-element                                    is rw; 
-  has Str                          $.state               is xml-element                                    is rw;   #=  active | cancelling | cancelled | completed
-  has Str                          $.statusMessage       is xml-element                                    is rw; 
-  has Tag                          @.tags                is xml-element    is xml-container('tagSet')      is rw; 
+  has Str                          $.conversionTaskId    is xml-element    is xml-skip-null                                    is rw; 
+  has Str                          $.expirationTime      is xml-element    is xml-skip-null                                    is rw; 
+  has ImportInstanceTaskDetails    $.importInstance      is xml-element    is xml-skip-null                                    is rw; 
+  has ImportVolumeTaskDetails      $.importVolume        is xml-element    is xml-skip-null                                    is rw; 
+  has Str                          $.state               is xml-element    is xml-skip-null                                    is rw;   #=  active | cancelling | cancelled | completed
+  has Str                          $.statusMessage       is xml-element    is xml-skip-null                                    is rw; 
+  has Tag                          @.tags                is xml-element    is xml-skip-null    is xml-container('tagSet')      is rw; 
 }

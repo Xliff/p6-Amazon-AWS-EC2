@@ -13,14 +13,14 @@ class Amazon::AWS::EC2::Types::Vpc is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                            $.cidrBlock                    is xml-element                                                         is rw; 
-  has VpcCidrBlockAssociation        @.cidrBlockAssociations        is xml-element    is xml-container('cidrBlockAssociationSet')          is rw; 
-  has Str                            $.dhcpOptionsId                is xml-element                                                         is rw; 
-  has Str                            $.instanceTenancy              is xml-element                                                         is rw;   #=  default | dedicated | host
-  has VpcIpv6CidrBlockAssociation    @.ipv6CidrBlockAssociations    is xml-element    is xml-container('ipv6CidrBlockAssociationSet')      is rw; 
-  has Bool                           $.isDefault                    is xml-element                                                         is rw; 
-  has Str                            $.ownerId                      is xml-element                                                         is rw; 
-  has Str                            $.state                        is xml-element                                                         is rw;   #=  pending | available
-  has Tag                            @.tags                         is xml-element    is xml-container('tagSet')                           is rw; 
-  has Str                            $.vpcId                        is xml-element                                                         is rw; 
+  has Str                            $.cidrBlock                    is xml-element    is xml-skip-null                                                         is rw; 
+  has VpcCidrBlockAssociation        @.cidrBlockAssociations        is xml-element    is xml-skip-null    is xml-container('cidrBlockAssociationSet')          is rw; 
+  has Str                            $.dhcpOptionsId                is xml-element    is xml-skip-null                                                         is rw; 
+  has Str                            $.instanceTenancy              is xml-element    is xml-skip-null                                                         is rw;   #=  default | dedicated | host
+  has VpcIpv6CidrBlockAssociation    @.ipv6CidrBlockAssociations    is xml-element    is xml-skip-null    is xml-container('ipv6CidrBlockAssociationSet')      is rw; 
+  has Bool                           $.isDefault                    is xml-element    is xml-skip-null                                                         is rw; 
+  has Str                            $.ownerId                      is xml-element    is xml-skip-null                                                         is rw; 
+  has Str                            $.state                        is xml-element    is xml-skip-null                                                         is rw;   #=  pending | available
+  has Tag                            @.tags                         is xml-element    is xml-skip-null    is xml-container('tagSet')                           is rw; 
+  has Str                            $.vpcId                        is xml-element    is xml-skip-null                                                         is rw; 
 }

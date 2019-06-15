@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::LaunchTemplateSpecification is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.LaunchTemplateId      is xml-element          is rw; 
-  has Str    $.LaunchTemplateName    is xml-element          is rw; 
-  has Str    $.Version               is xml-element          is rw; 
+  has Str    $.LaunchTemplateId      is xml-element    is xml-skip-null          is rw; 
+  has Str    $.LaunchTemplateName    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.Version               is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::TransitGatewayRoute is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                              $.destinationCidrBlock         is xml-element                                                       is rw; 
-  has Str                              $.state                        is xml-element                                                       is rw;   #=  pending | active | blackhole | deleting | deleted
-  has TransitGatewayRouteAttachment    @.transitGatewayAttachments    is xml-element    is xml-container('transitGatewayAttachments')      is rw; 
-  has Str                              $.type                         is xml-element                                                       is rw;   #=  static | propagated
+  has Str                              $.destinationCidrBlock         is xml-element    is xml-skip-null                                                       is rw; 
+  has Str                              $.state                        is xml-element    is xml-skip-null                                                       is rw;   #=  pending | active | blackhole | deleting | deleted
+  has TransitGatewayRouteAttachment    @.transitGatewayAttachments    is xml-element    is xml-skip-null    is xml-container('transitGatewayAttachments')      is rw; 
+  has Str                              $.type                         is xml-element    is xml-skip-null                                                       is rw;   #=  static | propagated
 }

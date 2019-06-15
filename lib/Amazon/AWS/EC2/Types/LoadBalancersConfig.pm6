@@ -5,8 +5,6 @@ use Amazon::AWS::EC2::Types::Base;
 use XML::Class;
 
 use Amazon::AWS::EC2::Types::ClassicLoadBalancersConfig;
-use Amazon::AWS::EC2::Types::ClassicLoadBalancersConfig;
-use Amazon::AWS::EC2::Types::TargetGroupsConfig;
 use Amazon::AWS::EC2::Types::TargetGroupsConfig;
 
 class Amazon::AWS::EC2::Types::LoadBalancersConfig is export
@@ -14,8 +12,8 @@ class Amazon::AWS::EC2::Types::LoadBalancersConfig is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has ClassicLoadBalancersConfig    $.ClassicLoadBalancersConfig    is xml-element          is rw; 
-  has ClassicLoadBalancersConfig    $.classicLoadBalancersConfig    is xml-element          is rw; 
-  has TargetGroupsConfig            $.TargetGroupsConfig            is xml-element          is rw; 
-  has TargetGroupsConfig            $.targetGroupsConfig            is xml-element          is rw; 
+  has ClassicLoadBalancersConfig    $.ClassicLoadBalancersConfig    is xml-element    is xml-skip-null          is rw; 
+  has ClassicLoadBalancersConfig    $.classicLoadBalancersConfig    is xml-element    is xml-skip-null          is rw; 
+  has TargetGroupsConfig            $.TargetGroupsConfig            is xml-element    is xml-skip-null          is rw; 
+  has TargetGroupsConfig            $.targetGroupsConfig            is xml-element    is xml-skip-null          is rw; 
 }

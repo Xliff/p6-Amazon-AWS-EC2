@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::CancelSpotFleetRequestsSuccessItem is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.currentSpotFleetRequestState     is xml-element          is rw;   #=  submitted | active | cancelled | failed | cancelled_running | cancelled_terminating | modifying
-  has Str    $.previousSpotFleetRequestState    is xml-element          is rw;   #=  submitted | active | cancelled | failed | cancelled_running | cancelled_terminating | modifying
-  has Str    $.spotFleetRequestId               is xml-element          is rw; 
+  has Str    $.currentSpotFleetRequestState     is xml-element    is xml-skip-null          is rw;   #=  submitted | active | cancelled | failed | cancelled_running | cancelled_terminating | modifying
+  has Str    $.previousSpotFleetRequestState    is xml-element    is xml-skip-null          is rw;   #=  submitted | active | cancelled | failed | cancelled_running | cancelled_terminating | modifying
+  has Str    $.spotFleetRequestId               is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::ExportToS3TaskSpecification is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.ContainerFormat    is xml-element          is rw;   #=  ova
-  has Str    $.DiskImageFormat    is xml-element          is rw;   #=  VMDK | RAW | VHD
-  has Str    $.S3Bucket           is xml-element          is rw; 
-  has Str    $.S3Prefix           is xml-element          is rw; 
+  has Str    $.ContainerFormat    is xml-element    is xml-skip-null          is rw;   #=  ova
+  has Str    $.DiskImageFormat    is xml-element    is xml-skip-null          is rw;   #=  VMDK | RAW | VHD
+  has Str    $.S3Bucket           is xml-element    is xml-skip-null          is rw; 
+  has Str    $.S3Prefix           is xml-element    is xml-skip-null          is rw; 
 }

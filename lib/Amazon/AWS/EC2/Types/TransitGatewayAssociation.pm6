@@ -11,9 +11,9 @@ class Amazon::AWS::EC2::Types::TransitGatewayAssociation is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.resourceId                    is xml-element          is rw; 
-  has Str    $.resourceType                  is xml-element          is rw;   #=  vpc | vpn
-  has Str    $.state                         is xml-element          is rw;   #=  associating | associated | disassociating | disassociated
-  has Str    $.transitGatewayAttachmentId    is xml-element          is rw; 
-  has Str    $.transitGatewayRouteTableId    is xml-element          is rw; 
+  has Str    $.resourceId                    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.resourceType                  is xml-element    is xml-skip-null          is rw;   #=  vpc | vpn
+  has Str    $.state                         is xml-element    is xml-skip-null          is rw;   #=  associating | associated | disassociating | disassociated
+  has Str    $.transitGatewayAttachmentId    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.transitGatewayRouteTableId    is xml-element    is xml-skip-null          is rw; 
 }

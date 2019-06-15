@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::LaunchTemplateInstanceMarketOptionsRequest is exp
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                                       $.MarketType     is xml-element          is rw;   #=  spot
-  has LaunchTemplateSpotMarketOptionsRequest    $.SpotOptions    is xml-element          is rw; 
+  has Str                                       $.MarketType     is xml-element    is xml-skip-null          is rw;   #=  spot
+  has LaunchTemplateSpotMarketOptionsRequest    $.SpotOptions    is xml-element    is xml-skip-null          is rw; 
 }

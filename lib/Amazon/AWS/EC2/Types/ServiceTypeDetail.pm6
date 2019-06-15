@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::ServiceTypeDetail is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.serviceType    is xml-element          is rw;   #=  Interface | Gateway
+  has Str    $.serviceType    is xml-element    is xml-skip-null          is rw;   #=  Interface | Gateway
 }

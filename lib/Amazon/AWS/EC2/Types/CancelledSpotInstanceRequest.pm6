@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::CancelledSpotInstanceRequest is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.spotInstanceRequestId    is xml-element          is rw; 
-  has Str    $.state                    is xml-element          is rw;   #=  active | open | closed | cancelled | completed
+  has Str    $.spotInstanceRequestId    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.state                    is xml-element    is xml-skip-null          is rw;   #=  active | open | closed | cancelled | completed
 }

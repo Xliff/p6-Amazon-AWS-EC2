@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::DeleteLaunchTemplateVersionsResponseSuccessItem i
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.launchTemplateId      is xml-element          is rw; 
-  has Str    $.launchTemplateName    is xml-element          is rw; 
-  has Int    $.versionNumber         is xml-element          is rw; 
+  has Str    $.launchTemplateId      is xml-element    is xml-skip-null          is rw; 
+  has Str    $.launchTemplateName    is xml-element    is xml-skip-null          is rw; 
+  has Int    $.versionNumber         is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Types::Ipv6CidrBlock is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.ipv6CidrBlock    is xml-element          is rw; 
+  has Str    $.ipv6CidrBlock    is xml-element    is xml-skip-null          is rw; 
 }

@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::DnsEntry is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.dnsName         is xml-element          is rw; 
-  has Str    $.hostedZoneId    is xml-element          is rw; 
+  has Str    $.dnsName         is xml-element    is xml-skip-null          is rw; 
+  has Str    $.hostedZoneId    is xml-element    is xml-skip-null          is rw; 
 }

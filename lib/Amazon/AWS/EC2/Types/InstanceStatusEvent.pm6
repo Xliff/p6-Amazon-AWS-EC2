@@ -11,10 +11,10 @@ class Amazon::AWS::EC2::Types::InstanceStatusEvent is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.code                 is xml-element          is rw;   #=  instance-reboot | system-reboot | system-maintenance | instance-retirement | instance-stop
-  has Str    $.description          is xml-element          is rw; 
-  has Str    $.instanceEventId      is xml-element          is rw; 
-  has Str    $.notAfter             is xml-element          is rw; 
-  has Str    $.notBefore            is xml-element          is rw; 
-  has Str    $.notBeforeDeadline    is xml-element          is rw; 
+  has Str    $.code                 is xml-element    is xml-skip-null          is rw;   #=  instance-reboot | system-reboot | system-maintenance | instance-retirement | instance-stop
+  has Str    $.description          is xml-element    is xml-skip-null          is rw; 
+  has Str    $.instanceEventId      is xml-element    is xml-skip-null          is rw; 
+  has Str    $.notAfter             is xml-element    is xml-skip-null          is rw; 
+  has Str    $.notBefore            is xml-element    is xml-skip-null          is rw; 
+  has Str    $.notBeforeDeadline    is xml-element    is xml-skip-null          is rw; 
 }

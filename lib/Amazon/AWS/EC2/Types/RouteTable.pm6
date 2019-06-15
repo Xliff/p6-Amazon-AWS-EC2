@@ -14,11 +14,11 @@ class Amazon::AWS::EC2::Types::RouteTable is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has RouteTableAssociation    @.associations       is xml-element    is xml-container('associationSet')         is rw; 
-  has Str                      $.ownerId            is xml-element                                               is rw; 
-  has PropagatingVgw           @.propagatingVgws    is xml-element    is xml-container('propagatingVgwSet')      is rw; 
-  has Route                    @.routes             is xml-element    is xml-container('routeSet')               is rw; 
-  has Str                      $.routeTableId       is xml-element                                               is rw; 
-  has Tag                      @.tags               is xml-element    is xml-container('tagSet')                 is rw; 
-  has Str                      $.vpcId              is xml-element                                               is rw; 
+  has RouteTableAssociation    @.associations       is xml-element    is xml-skip-null    is xml-container('associationSet')         is rw; 
+  has Str                      $.ownerId            is xml-element    is xml-skip-null                                               is rw; 
+  has PropagatingVgw           @.propagatingVgws    is xml-element    is xml-skip-null    is xml-container('propagatingVgwSet')      is rw; 
+  has Route                    @.routes             is xml-element    is xml-skip-null    is xml-container('routeSet')               is rw; 
+  has Str                      $.routeTableId       is xml-element    is xml-skip-null                                               is rw; 
+  has Tag                      @.tags               is xml-element    is xml-skip-null    is xml-container('tagSet')                 is rw; 
+  has Str                      $.vpcId              is xml-element    is xml-skip-null                                               is rw; 
 }

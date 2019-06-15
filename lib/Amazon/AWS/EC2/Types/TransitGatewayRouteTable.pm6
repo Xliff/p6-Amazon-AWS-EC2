@@ -11,11 +11,11 @@ class Amazon::AWS::EC2::Types::TransitGatewayRouteTable is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str     $.creationTime                    is xml-element                                    is rw; 
-  has Bool    $.defaultAssociationRouteTable    is xml-element                                    is rw; 
-  has Bool    $.defaultPropagationRouteTable    is xml-element                                    is rw; 
-  has Str     $.state                           is xml-element                                    is rw;   #=  pending | available | deleting | deleted
-  has Tag     @.tags                            is xml-element    is xml-container('tagSet')      is rw; 
-  has Str     $.transitGatewayId                is xml-element                                    is rw; 
-  has Str     $.transitGatewayRouteTableId      is xml-element                                    is rw; 
+  has Str     $.creationTime                    is xml-element    is xml-skip-null                                    is rw; 
+  has Bool    $.defaultAssociationRouteTable    is xml-element    is xml-skip-null                                    is rw; 
+  has Bool    $.defaultPropagationRouteTable    is xml-element    is xml-skip-null                                    is rw; 
+  has Str     $.state                           is xml-element    is xml-skip-null                                    is rw;   #=  pending | available | deleting | deleted
+  has Tag     @.tags                            is xml-element    is xml-skip-null    is xml-container('tagSet')      is rw; 
+  has Str     $.transitGatewayId                is xml-element    is xml-skip-null                                    is rw; 
+  has Str     $.transitGatewayRouteTableId      is xml-element    is xml-skip-null                                    is rw; 
 }

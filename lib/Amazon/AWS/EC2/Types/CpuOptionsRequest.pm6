@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::CpuOptionsRequest is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int    $.CoreCount         is xml-element          is rw; 
-  has Int    $.ThreadsPerCore    is xml-element          is rw; 
+  has Int    $.CoreCount         is xml-element    is xml-skip-null          is rw; 
+  has Int    $.ThreadsPerCore    is xml-element    is xml-skip-null          is rw; 
 }

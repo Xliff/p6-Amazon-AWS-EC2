@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::TargetConfiguration is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int    $.instanceCount    is xml-element          is rw; 
-  has Str    $.offeringId       is xml-element          is rw; 
+  has Int    $.instanceCount    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.offeringId       is xml-element    is xml-skip-null          is rw; 
 }

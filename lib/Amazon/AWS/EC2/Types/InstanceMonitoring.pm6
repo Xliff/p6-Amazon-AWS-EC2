@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::InstanceMonitoring is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str           $.instanceId    is xml-element          is rw; 
-  has Monitoring    $.monitoring    is xml-element          is rw; 
+  has Str           $.instanceId    is xml-element    is xml-skip-null          is rw; 
+  has Monitoring    $.monitoring    is xml-element    is xml-skip-null          is rw; 
 }

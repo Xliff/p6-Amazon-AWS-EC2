@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::VpcAttachment is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.state    is xml-element          is rw;   #=  attaching | attached | detaching | detached
-  has Str    $.vpcId    is xml-element          is rw; 
+  has Str    $.state    is xml-element    is xml-skip-null          is rw;   #=  attaching | attached | detaching | detached
+  has Str    $.vpcId    is xml-element    is xml-skip-null          is rw; 
 }

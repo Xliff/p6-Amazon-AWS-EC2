@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::AllowedPrincipal is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.principal        is xml-element          is rw; 
-  has Str    $.principalType    is xml-element          is rw;   #=  All | Service | OrganizationUnit | Account | User | Role
+  has Str    $.principal        is xml-element    is xml-skip-null          is rw; 
+  has Str    $.principalType    is xml-element    is xml-skip-null          is rw;   #=  All | Service | OrganizationUnit | Account | User | Role
 }
