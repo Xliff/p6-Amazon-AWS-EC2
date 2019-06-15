@@ -12,12 +12,12 @@ class Amazon::AWS::EC2::Types::BundleTask is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                $.bundleId      is xml-element    is xml-skip-null          is rw; 
-  has BundleTaskError    $.error         is xml-element    is xml-skip-null          is rw; 
-  has Str                $.instanceId    is xml-element    is xml-skip-null          is rw; 
-  has Str                $.progress      is xml-element    is xml-skip-null          is rw; 
-  has Str                $.startTime     is xml-element    is xml-skip-null          is rw; 
-  has Str                $.state         is xml-element    is xml-skip-null          is rw;   #=  pending | waiting-for-shutdown | bundling | storing | cancelling | complete | failed
-  has Storage            $.storage       is xml-element    is xml-skip-null          is rw; 
-  has Str                $.updateTime    is xml-element    is xml-skip-null          is rw; 
+  has Str                $.bundleId      is xml-element                is xml-skip-null          is rw; 
+  has BundleTaskError    $.error         is xml-element(:over-ride)    is xml-skip-null          is rw;
+  has Str                $.instanceId    is xml-element                is xml-skip-null          is rw;
+  has Str                $.progress      is xml-element                is xml-skip-null          is rw;
+  has Str                $.startTime     is xml-element                is xml-skip-null          is rw;
+  has Str                $.state         is xml-element                is xml-skip-null          is rw;   #=  pending | waiting-for-shutdown | bundling | storing | cancelling | complete | failed
+  has Storage            $.storage       is xml-element(:over-ride)    is xml-skip-null          is rw;
+  has Str                $.updateTime    is xml-element                is xml-skip-null          is rw;
 }

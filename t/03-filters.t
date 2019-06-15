@@ -2,6 +2,9 @@ use v6.c;
 
 use Amazon::AWS::TestUtils;
 
-sub MAIN (:$unit) {
-  doBasicTests( getTestFiles('Filters::', :$unit) );
+sub MAIN (:$unit, :$number = 1) {
+  doBasicTests(
+    getTestFiles('Filters::', :$unit),
+    :$number
+  );
 }

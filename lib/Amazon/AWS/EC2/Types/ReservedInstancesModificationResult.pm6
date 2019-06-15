@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::ReservedInstancesModificationResult is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                               $.reservedInstancesId    is xml-element    is xml-skip-null          is rw; 
-  has ReservedInstancesConfiguration    $.targetConfiguration    is xml-element    is xml-skip-null          is rw; 
+  has Str                               $.reservedInstancesId    is xml-element                is xml-skip-null          is rw; 
+  has ReservedInstancesConfiguration    $.targetConfiguration    is xml-element(:over-ride)    is xml-skip-null          is rw;
 }

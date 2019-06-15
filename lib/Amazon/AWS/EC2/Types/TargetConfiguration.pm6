@@ -7,10 +7,10 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Types::TargetConfiguration is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Int    $.instanceCount    is xml-element    is xml-skip-null          is rw; 
-  has Str    $.offeringId       is xml-element    is xml-skip-null          is rw; 
+  has Int    $.instanceCount    is xml-element    is xml-skip-null          is rw;
+  has Str    $.offeringId       is xml-element    is xml-skip-null          is rw;
 }

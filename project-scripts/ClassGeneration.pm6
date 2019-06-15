@@ -32,6 +32,7 @@ sub makeClass (Str $url, :$response = False) is export {
     for $vl.find('span.term b').to_array -> $ne {
       my ($attrName, $attrType, $sigil, $validValues, $container, $skipnull) =
         ($ne.text, '');
+      my $override = False;
       next if $ne.text eq 'requestId';
       $skipnull = True;
 
@@ -54,6 +55,7 @@ sub makeClass (Str $url, :$response = False) is export {
                 $sigil = '@.';
                 if (my $link = $te.find('a').to_array[0]) {
                   $link.text;
+                  $override = True;
                 } else {
                   $te.text ~~ /'Array of ' (\w+)/;
                   do given $/[0] {
@@ -71,6 +73,7 @@ sub makeClass (Str $url, :$response = False) is export {
                 $te.text ~~ /'Type: ' (.+)$/;
                 if (my $link = $te.find('a').to_array[0]) {
                   $link.text;
+
                 } else {
                   do given $/[0] {
                     when 'String'    { 'Str'  }
@@ -116,7 +119,7 @@ sub makeClass (Str $url, :$response = False) is export {
         $attrType,
         $attrName,
         $sigil,
-        'is xml-element',
+        'is xml-element' ~ $override ?? '(:over-ride)' !! '',
         $container,
         $validValues,
         'is xml-skip-null',

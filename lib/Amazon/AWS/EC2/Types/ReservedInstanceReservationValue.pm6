@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::ReservedInstanceReservationValue is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has ReservationValue    $.reservationValue      is xml-element    is xml-skip-null          is rw; 
-  has Str                 $.reservedInstanceId    is xml-element    is xml-skip-null          is rw; 
+  has ReservationValue    $.reservationValue      is xml-element(:over-ride)    is xml-skip-null          is rw;
+  has Str                 $.reservedInstanceId    is xml-element                is xml-skip-null          is rw; 
 }

@@ -1,0 +1,8 @@
+Results of spot testing for Amazon::AWS::Roles::eqv
+---------------------------------------------------
+
++ Array issues when testing Amazon::AWS::EC2::Types::VolumeStatusItem
+                                                   ::VpcPeeringConnectionVpcInfo
+
++ Out of a 1000 run test on Amazon::AWS::EC2::Types::CapacityReservation,
+  only 6925 out of 7000 subtests were run.

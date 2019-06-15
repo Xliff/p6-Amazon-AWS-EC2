@@ -29,6 +29,7 @@ role Amazon::AWS::Roles::Eqv {
   method testval($a, $b) {
     do given $a {
       when .defined.not            { $b.is-empty ?? True !! False }
+      when Num                     { $a =~= $b                    }
       when Amazon::AWS::Roles::Eqv { .eqv($b)    ?? True !! False }
 
       when Positional              { return False unless $_.elems == $b.elems;

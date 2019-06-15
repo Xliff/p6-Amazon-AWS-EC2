@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Types::TerminateConnectionStatus is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                          $.connectionId      is xml-element    is xml-skip-null          is rw; 
-  has ClientVpnConnectionStatus    $.currentStatus     is xml-element    is xml-skip-null          is rw; 
-  has ClientVpnConnectionStatus    $.previousStatus    is xml-element    is xml-skip-null          is rw; 
+  has Str                          $.connectionId      is xml-element                is xml-skip-null          is rw; 
+  has ClientVpnConnectionStatus    $.currentStatus     is xml-element(:over-ride)    is xml-skip-null          is rw;
+  has ClientVpnConnectionStatus    $.previousStatus    is xml-element(:over-ride)    is xml-skip-null          is rw;
 }

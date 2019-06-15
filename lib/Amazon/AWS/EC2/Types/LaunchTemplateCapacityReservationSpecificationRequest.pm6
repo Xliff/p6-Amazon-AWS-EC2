@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::LaunchTemplateCapacityReservationSpecificationReq
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                          $.CapacityReservationPreference    is xml-element    is xml-skip-null          is rw;   #=  open | none
-  has CapacityReservationTarget    $.CapacityReservationTarget        is xml-element    is xml-skip-null          is rw; 
+  has Str                          $.CapacityReservationPreference    is xml-element                is xml-skip-null          is rw;   #=  open | none
+  has CapacityReservationTarget    $.CapacityReservationTarget        is xml-element(:over-ride)    is xml-skip-null          is rw;
 }

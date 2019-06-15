@@ -13,9 +13,9 @@ class Amazon::AWS::EC2::Types::VolumeStatusItem is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has VolumeStatusAction    @.actionss            is xml-element    is xml-skip-null    is xml-container('actionsSet')      is rw; 
-  has Str                   $.availabilityZone    is xml-element    is xml-skip-null                                        is rw; 
-  has VolumeStatusEvent     @.eventss             is xml-element    is xml-skip-null    is xml-container('eventsSet')       is rw; 
-  has Str                   $.volumeId            is xml-element    is xml-skip-null                                        is rw; 
-  has VolumeStatusInfo      $.volumeStatus        is xml-element    is xml-skip-null                                        is rw; 
+  has VolumeStatusAction    @.actions             is xml-element('item', :over-ride)    is xml-skip-null    is xml-container('actionsSet')      is rw;
+  has Str                   $.availabilityZone    is xml-element                        is xml-skip-null                                        is rw;
+  has VolumeStatusEvent     @.events              is xml-element('item', :over-ride)    is xml-skip-null    is xml-container('eventsSet')       is rw;
+  has Str                   $.volumeId            is xml-element                        is xml-skip-null                                        is rw;
+  has VolumeStatusInfo      $.volumeStatus        is xml-element(        :over-ride)    is xml-skip-null                                        is rw;
 }

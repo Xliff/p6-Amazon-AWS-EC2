@@ -7,9 +7,9 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Types::CertificateAuthentication is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.clientRootCertificateChain    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.clientRootCertificateChain    is xml-element    is xml-skip-null          is rw;
 }

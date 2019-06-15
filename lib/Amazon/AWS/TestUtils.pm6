@@ -56,18 +56,17 @@ sub getTestFiles($cat, :$unit) is export {
   });
 
   if $unit.defined {
-    @files .= grep({ .contains($unit) });
+    @files .= grep({ .split('::')[* - 1] eq $unit });
+    #@files .= grep( *.contains($unit) );
     die "Could not find '{ $unit }' in { $cat }'" unless @files;
   }
 
   @files;
 }
 
-sub changeRandomAttribute($o) {
-  diag 'CHANGE!';
+sub changeRandomAttribute($o is rw) {
   my $victim;
   repeat {
-    diag 'vicselect';
     $victim = $o.^attributes
                 .map({ .name.substr(2) })
                 .grep({ .defined && .chars})
@@ -75,51 +74,55 @@ sub changeRandomAttribute($o) {
   } until $o."$victim"() ~~
     (Str, Bool, Int, Positional, Amazon::AWS::EC2::Types::Base).any;
 
-  diag "{ $o.^attributes.map({ (.name // '$!WTF').substr(2) }).join(', ') }";
-  diag "$victim -- { $victim.^name }";
+  #diag "{ $o.^attributes.map({ (.name // '$!WTF').substr(2) }).join(', ') }";
+  #diag "$victim -- { $victim.^name }";
 
   my $val = $o."$victim"();
+  #diag "$victim = $val";
   my $newVal = do given $val {
     when Str                           { "syzygy!" ~ ($_ // '') }   # 3 Wyse, Man
-    when Int                           { ++$_                   }
     when Bool                          { .not                   }
-    when Positional                    { ($val.WHAT.new)        }
+    when Int                           { ++$_                   }
+    when Positional                    { [ $val.WHAT.new ]      }
     when Amazon::AWS::EC2::Types::Base { $val.WHAT.new          }
     default                            { die 'WTF?!?'           }
   }
-  diag "Setting {$victim} to {$newVal.gist}";
+  #diag "Setting {$victim} to {$newVal.gist}";
   $o."$victim"() = $newVal;
 }
 
-sub doBasicTests(@files) is export {
-  plan @files.elems * 7;
+sub doBasicTests(@files, :$number) is export {
+  say $number;
+  plan @files.elems * 7 * $number;
 
-  for @files {
-    CATCH { default { diag .message } }
+  for ^$number {
+    for @files {
+      CATCH { default { diag .message } }
 
-    my ($class, $a, $bx, $b);
+      my ($class, $a, $bx, $b);
 
-    $class := (try require ::($_));
+      $class := (try require ::($_));
 
-    ok         $class !~~ Failure,                                "$_ loads. Is not a Failure object";
-    ok         $class !=:= Nil,                                   "$_ exists";
-    lives-ok {
-      CATCH {
-        default {
-          $class.^name.say;
-          $class.HOW.say;
-          diag .message;
-          .rethrow
+      ok         $class !~~ Failure,                                "$_ loads. Is not a Failure object";
+      ok         $class !=:= Nil,                                   "$_ exists";
+      lives-ok {
+        CATCH {
+          default {
+            $class.^name.say;
+            $class.HOW.say;
+            diag .message;
+            .rethrow
+          }
         }
-      }
-      $a = populateTestObject(::($_).new, :!blanks)
-    },                                                            "$_ can be populated";
-    lives-ok { $bx = $a.to-xml                               },   "$_ serializes ok";
-    diag $bx;
-    lives-ok { $b = $class.from-xml($bx)                     },   "$_ deseralizes ok";
-    ok       $a.eqv($b),                                          "$_ compares ok";
-    diag $a.gist;
-    diag $b.gist;
-    nok      do { changeRandomAttribute($b); $a eqv $b       },   "Changed $_ fails eqv";
+        $a = populateTestObject(::($_).new, :!blanks)
+      },                                                            "$_ can be populated";
+      lives-ok { $bx = $a.to-xml                               },   "$_ serializes ok";
+      diag $bx;
+      lives-ok { $b = $class.from-xml($bx)                     },   "$_ deseralizes ok";
+      ok       $a.eqv($b),                                          "$_ compares ok";
+      #diag $a.gist;
+      #diag $b.gist;
+      nok      do { changeRandomAttribute($b); $a eqv $b       },   "Changed $_ fails eqv";
+    }
   }
 }

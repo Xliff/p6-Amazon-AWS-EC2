@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::CapacityReservationSpecificationResponse is expor
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                                  $.capacityReservationPreference    is xml-element    is xml-skip-null          is rw;   #=  open | none
-  has CapacityReservationTargetResponse    $.capacityReservationTarget        is xml-element    is xml-skip-null          is rw; 
+  has Str                                  $.capacityReservationPreference    is xml-element                is xml-skip-null          is rw;   #=  open | none
+  has CapacityReservationTargetResponse    $.capacityReservationTarget        is xml-element(:over-ride)    is xml-skip-null          is rw;
 }

@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::InstanceBlockDeviceMapping is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                       $.deviceName    is xml-element    is xml-skip-null          is rw; 
-  has EbsInstanceBlockDevice    $.ebs           is xml-element    is xml-skip-null          is rw; 
+  has Str                       $.deviceName    is xml-element                      is xml-skip-null          is rw;
+  has EbsInstanceBlockDevice    $.ebs           is xml-element(:over-ride)    is xml-skip-null          is rw;
 }

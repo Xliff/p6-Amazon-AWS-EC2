@@ -4,34 +4,43 @@ use Test;
 
 use Amazon::AWS::TestUtils;
 
-constant testsLocationPrefix = 'lib/Amazon/AWS/EC2/Tests';
-
-sub MAIN (:$unit) {
+sub MAIN (:$unit, :$number = 1, :$private) {
   my @files = getTestFiles('Action::', :$unit);
 
-  plan 2 * +@files;
+  my %prefixes = (
+    moreTests => 'lib/Amazon/AWS/EC2/AdditionalTests',
+    privTests => 'lib/Amazon/AWS/EC2/PrivateTests'
+  );
+  # So that privTests can live OUTSIDE the main repo.
+  %prefixes<privTests> = $private if $private.defined;
 
-  for @files {
-    subtest "{ .IO.basename } basic tests" => {
-      doBasicTests( getTestFiles('Action::', :$unit) );
-    }
+  plan 3 * +@files * $number;
 
-    if (my $testPackage = .IO.parts<basename>).IO.e {
-      my $testPackage := (try require ::("{ testsLocationPrefix }/{ $testPackage }"));
-      die "Could not load 'Tests/{ $testPackage }'!"
-        unless $testPackage !~~ Failure;
-      my $testClassName = "Amazon::AWS::EC2::Tests/{
-        S/'.pm'6? $// given $testPackage;
-      }";
-      die "Could not instantiate a { $testClassName } object"
-        unless (my $testClass := ::($testClassName).new);
-
-      subtest "$testPackage specific testing" => sub {
-        # Static classes!
-        $testClass.runTests;
+  for ^$number {
+    for @files {
+      subtest "{ .IO.basename } basic tests" => {
+        doBasicTests( getTestFiles('Action::', :$unit) );
       }
-    } else {
-      ok True, "No $testPackage specific tests found";
+
+      for %prefixes.kv -> $pk, $pv {
+        if "{ $pv }/{ $basename }".IO.e {
+          my $testPackage := (try require ::("{ $pv }/{ $basename }"));
+          die "Could not load 'Tests/{ $testPackage }'!"
+            unless $testPackage !~~ Failure;
+          my $testClassName = "Amazon::AWS::EC2::Tests/{
+            S/'.pm'6? $// given $testPackage;
+          }";
+          die "Could not instantiate a { $testClassName } object"
+            unless (my $testClass := ::($testClassName).new);
+
+          subtest "[{ $pk }] $testPackage specific testing" => sub {
+            # Static classes!
+            $testClass.runTests;
+          }
+        } else {
+          ok True, "[{ $pk }] No $testPackage specific tests found";
+        }
+      }
     }
   }
 }
