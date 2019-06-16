@@ -12,8 +12,8 @@ class Amazon::AWS::EC2::Types::LoadBalancersConfig is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has ClassicLoadBalancersConfig    $.ClassicLoadBalancersConfig    is xml-element    is xml-skip-null          is rw; 
-  has ClassicLoadBalancersConfig    $.classicLoadBalancersConfig    is xml-element    is xml-skip-null          is rw; 
-  has TargetGroupsConfig            $.TargetGroupsConfig            is xml-element    is xml-skip-null          is rw; 
-  has TargetGroupsConfig            $.targetGroupsConfig            is xml-element    is xml-skip-null          is rw; 
+  has ClassicLoadBalancersConfig    $.ClassicLoadBalancersConfig    is xml-element(:over-ride)    is xml-skip-null          is rw; 
+  has ClassicLoadBalancersConfig    $.classicLoadBalancersConfig    is xml-element(:over-ride)    is xml-skip-null          is rw; 
+  has TargetGroupsConfig            $.TargetGroupsConfig            is xml-element(:over-ride)    is xml-skip-null          is rw; 
+  has TargetGroupsConfig            $.targetGroupsConfig            is xml-element(:over-ride)    is xml-skip-null          is rw; 
 }

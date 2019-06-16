@@ -21,3 +21,34 @@ Results of spot testing for Amazon::AWS::Roles::eqv
 + Received th3e below error from Amazon::AWS::EC2::Types::ImportInstanceLaunchSpecification
   # Type check failed in assignment to @!GroupNames; expected Str but got Array ($[])
   # Type check failed in assignment to @!GroupIds; expected Str but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::ImportInstanceTaskDetails
+  # Type check failed in assignment to @!volumes; expected Amazon::AWS::EC2::Types::ImportInstanceVolumeDetailItem but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::InstanceNetworkInterface
+  # Type check failed in assignment to @!ipv6Addressess; expected Amazon::AWS::EC2::Types::InstanceIpv6Address but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::InstanceNetworkInterfaceSpecification
+  # Type check failed in assignment to @!privateIpAddressess; expected Amazon::AWS::EC2::Types::PrivateIpAddressSpecification but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::InstanceNetworkInterface
+  # Type check failed in assignment to @!ipv6Addressess; expected Amazon::AWS::EC2::Types::InstanceIpv6Address but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::InstanceStatus
+  # Type check failed in assignment to @!events; expected Amazon::AWS::EC2::Types::InstanceStatusEvent but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::LaunchSpecification
+  # Type check failed in assignment to @!groups; expected Amazon::AWS::EC2::Types::GroupIdentifier but got Array ($[])
+  # Type check failed in assignment to @!blockDeviceMapping; expected Amazon::AWS::EC2::Types::BlockDeviceMapping but got Array ($[])
+  # Type check failed in assignment to @!networkInterfaces; expected Amazon::AWS::EC2::Types::InstanceNetworkInterfaceSpecification but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::NatGateway
+  # Type check failed in assignment to @!natGatewayAddresss; expected Amazon::AWS::EC2::Types::NatGatewayAddress but got Array ($[])
+
++ Amazon::AWS::EC2::Types::LoadBalancersConfig had a small subseet of compare tests fail
+
++ Received the below error from Amazon::AWS::EC2::Types::NetworkAcl
+  # Type check failed in assignment to @!tags; expected Amazon::AWS::EC2::Types::Tag but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::NetworkInterface
+  # Type check failed in assignment to @!ipv6Addressess; expected Amazon::AWS::EC2::Types::NetworkInterfaceIpv6Address but got Array ($[])

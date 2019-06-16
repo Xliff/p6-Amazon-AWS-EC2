@@ -7,10 +7,10 @@ use XML::Class;
 
 
 class Amazon::AWS::EC2::Types::LaunchTemplateIamInstanceProfileSpecificationRequest is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.Arn     is xml-element    is xml-skip-null          is rw; 
-  has Str    $.Name    is xml-element    is xml-skip-null          is rw; 
+  has Str    $.Arn     is xml-element    is xml-skip-null          is rw;
+  has Str    $.Name    is xml-element    is xml-skip-null          is rw;
 }

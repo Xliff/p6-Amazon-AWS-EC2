@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::InstanceMarketOptionsRequest is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                  $.MarketType     is xml-element    is xml-skip-null          is rw;   #=  spot
-  has SpotMarketOptions    $.SpotOptions    is xml-element    is xml-skip-null          is rw; 
+  has Str                  $.MarketType     is xml-element                is xml-skip-null          is rw;   #=  spot
+  has SpotMarketOptions    $.SpotOptions    is xml-element(:over-ride)    is xml-skip-null          is rw;
 }

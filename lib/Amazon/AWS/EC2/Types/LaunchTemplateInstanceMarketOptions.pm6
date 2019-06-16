@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::LaunchTemplateInstanceMarketOptions is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                                $.marketType     is xml-element    is xml-skip-null          is rw;   #=  spot
-  has LaunchTemplateSpotMarketOptions    $.spotOptions    is xml-element    is xml-skip-null          is rw; 
+  has Str                                $.marketType     is xml-element                is xml-skip-null          is rw;   #=  spot
+  has LaunchTemplateSpotMarketOptions    $.spotOptions    is xml-element(:over-ride)    is xml-skip-null          is rw;
 }

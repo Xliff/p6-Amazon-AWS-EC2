@@ -12,17 +12,17 @@ class Amazon::AWS::EC2::Types::LaunchTemplateInstanceNetworkInterfaceSpecificati
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Bool                             $.AssociatePublicIpAddress          is xml-element    is xml-skip-null                                                is rw; 
-  has Bool                             $.DeleteOnTermination               is xml-element    is xml-skip-null                                                is rw; 
-  has Str                              $.Description                       is xml-element    is xml-skip-null                                                is rw; 
-  has Int                              $.DeviceIndex                       is xml-element    is xml-skip-null                                                is rw; 
-  has Str                              $.InterfaceType                     is xml-element    is xml-skip-null                                                is rw; 
-  has Int                              $.Ipv6AddressCount                  is xml-element    is xml-skip-null                                                is rw; 
-  has InstanceIpv6AddressRequest       @.Ipv6Addresses                     is xml-element    is xml-skip-null    is xml-container('Ipv6Addresses')           is rw; 
-  has Str                              $.NetworkInterfaceId                is xml-element    is xml-skip-null                                                is rw; 
-  has Str                              $.PrivateIpAddress                  is xml-element    is xml-skip-null                                                is rw; 
-  has PrivateIpAddressSpecification    @.PrivateIpAddresses                is xml-element    is xml-skip-null    is xml-container('PrivateIpAddresses')      is rw; 
-  has Int                              $.SecondaryPrivateIpAddressCount    is xml-element    is xml-skip-null                                                is rw; 
-  has Str                              @.Groups                            is xml-element    is xml-skip-null    is xml-container('Groups')                  is rw; 
-  has Str                              $.SubnetId                          is xml-element    is xml-skip-null                                                is rw; 
+  has Bool                             $.AssociatePublicIpAddress          is xml-element    is xml-skip-null                                                is rw;
+  has Bool                             $.DeleteOnTermination               is xml-element    is xml-skip-null                                                is rw;
+  has Str                              $.Description                       is xml-element    is xml-skip-null                                                is rw;
+  has Int                              $.DeviceIndex                       is xml-element    is xml-skip-null                                                is rw;
+  has Str                              $.InterfaceType                     is xml-element    is xml-skip-null                                                is rw;
+  has Int                              $.Ipv6AddressCount                  is xml-element    is xml-skip-null                                                is rw;
+  has InstanceIpv6AddressRequest       @.Ipv6Addresses                     is xml-element    is xml-skip-null    is xml-container('Ipv6Addresses')           is rw;
+  has Str                              $.NetworkInterfaceId                is xml-element    is xml-skip-null                                                is rw;
+  has Str                              $.PrivateIpAddress                  is xml-element    is xml-skip-null                                                is rw;
+  has PrivateIpAddressSpecification    @.PrivateIpAddresses                is xml-element    is xml-skip-null    is xml-container('PrivateIpAddresses')      is rw;
+  has Int                              $.SecondaryPrivateIpAddressCount    is xml-element    is xml-skip-null                                                is rw;
+  has Str                              @.Groups                            is xml-element    is xml-skip-null    is xml-container('Groups')                  is rw;
+  has Str                              $.SubnetId                          is xml-element    is xml-skip-null                                                is rw;
 }
