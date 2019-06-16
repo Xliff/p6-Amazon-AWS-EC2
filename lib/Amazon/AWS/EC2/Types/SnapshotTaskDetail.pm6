@@ -7,11 +7,11 @@ use XML::Class;
 use Amazon::AWS::EC2::Types::UserBucketDetails;
 
 class Amazon::AWS::EC2::Types::SnapshotTaskDetail is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                  $.description      is xml-element                is xml-skip-null          is rw; 
+  has Str                  $.description      is xml-element                is xml-skip-null          is rw;
   has Num                  $.diskImageSize    is xml-element                is xml-skip-null          is rw;
   has Bool                 $.encrypted        is xml-element                is xml-skip-null          is rw;
   has Str                  $.format           is xml-element                is xml-skip-null          is rw;

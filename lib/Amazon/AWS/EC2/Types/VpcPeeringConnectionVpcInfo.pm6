@@ -9,7 +9,7 @@ use Amazon::AWS::EC2::Types::Ipv6CidrBlock;
 use Amazon::AWS::EC2::Types::VpcPeeringConnectionOptionsDescription;
 
 class Amazon::AWS::EC2::Types::VpcPeeringConnectionVpcInfo is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 

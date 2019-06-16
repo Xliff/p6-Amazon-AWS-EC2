@@ -119,8 +119,8 @@ sub doBasicTests(@files, :$number) is export {
       diag $bx;
       lives-ok { $b = $class.from-xml($bx)                     },   "$_ deseralizes ok";
       ok       $a.eqv($b),                                          "$_ compares ok";
-      #diag $a.gist;
-      #diag $b.gist;
+      diag $a.gist;
+      diag $b.gist;
       nok      do { changeRandomAttribute($b); $a eqv $b       },   "Changed $_ fails eqv";
     }
   }

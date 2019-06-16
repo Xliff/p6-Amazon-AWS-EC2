@@ -65,3 +65,11 @@ Results of spot testing for Amazon::AWS::Roles::eqv
 
 + Received the below error from Amazon::AWS::EC2::Types::ServiceDetail
   # Type check failed in assignment to @!serviceType; expected Amazon::AWS::EC2::Types::ServiceTypeDetail but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::ConversionTask
+  # Type check failed in assignment to @!tags; expected Amazon::AWS::EC2::Types::Tag but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::DescribeFleetsInstances
+  # Type check failed in assignment to @!instanceIds; expected Str but got Array ($[])
+
++ FAILED COMPARISONS for Amazon::AWS::EC2::Types::ScheduledInstancesNetworkInterface

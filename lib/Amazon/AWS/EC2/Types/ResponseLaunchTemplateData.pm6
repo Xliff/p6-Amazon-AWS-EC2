@@ -20,7 +20,7 @@ use Amazon::AWS::EC2::Types::LaunchTemplateTagSpecification;
 use Amazon::AWS::EC2::Types::LaunchTemplatesMonitoring;
 
 class Amazon::AWS::EC2::Types::ResponseLaunchTemplateData is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 

@@ -11,12 +11,12 @@ class Amazon::AWS::EC2::Types::LaunchTemplateVersion is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                           $.createdBy             is xml-element    is xml-skip-null          is rw; 
-  has Str                           $.createTime            is xml-element    is xml-skip-null          is rw; 
-  has Bool                          $.defaultVersion        is xml-element    is xml-skip-null          is rw; 
-  has ResponseLaunchTemplateData    $.launchTemplateData    is xml-element    is xml-skip-null          is rw; 
-  has Str                           $.launchTemplateId      is xml-element    is xml-skip-null          is rw; 
-  has Str                           $.launchTemplateName    is xml-element    is xml-skip-null          is rw; 
-  has Str                           $.versionDescription    is xml-element    is xml-skip-null          is rw; 
-  has Int                           $.versionNumber         is xml-element    is xml-skip-null          is rw; 
+  has Str                           $.createdBy             is xml-element                is xml-skip-null          is rw; 
+  has Str                           $.createTime            is xml-element                is xml-skip-null          is rw; 
+  has Bool                          $.defaultVersion        is xml-element                is xml-skip-null          is rw; 
+  has ResponseLaunchTemplateData    $.launchTemplateData    is xml-element(:over-ride)    is xml-skip-null          is rw;
+  has Str                           $.launchTemplateId      is xml-element                is xml-skip-null          is rw;
+  has Str                           $.launchTemplateName    is xml-element                is xml-skip-null          is rw;
+  has Str                           $.versionDescription    is xml-element                is xml-skip-null          is rw;
+  has Int                           $.versionNumber         is xml-element                is xml-skip-null          is rw;
 }

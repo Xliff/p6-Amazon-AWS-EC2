@@ -6,20 +6,14 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Types::CapacityReservationTarget;
 
+
+# Needs Attribute tracking code
 class Amazon::AWS::EC2::Types::CapacityReservationSpecification is export
-  does XML::Class[xml-element => 'capacityReservationSpecification']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                       $.CapacityReservationPreference is xml-element is xml-skip-null is rw;
+  has Str                       $.CapacityReservationPreference is xml-element is xml-skip-null is rw;  #= open | none
   has CapacityReservationTarget $.CapacityReservationTarget                    is xml-skip-null is rw;
-
-  method setReservationPreference ($val) {
-    my @valid-values = <open none>;
-    die "Invalid value '{$val}' given. Valid options are {
-         @valid-values.join(', ') }"
-    unless $val ~~ @valid-values.any;
-    $!CapacityReservationPreference = $val;
-  }
 
 }
