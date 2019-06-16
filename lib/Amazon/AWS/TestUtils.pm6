@@ -85,12 +85,12 @@ sub changeRandomAttribute($o is rw) {
     when Str                           { "syzygy!" ~ ($_ // '') }   # 3 Wyse, Man
     when Bool                          { .not                   }
     when Int                           { ++$_                   }
-    when Positional                    { [ $val.WHAT.new ]      }
+    when Positional                    { $val.WHAT.new          }
     when Amazon::AWS::EC2::Types::Base { $val.WHAT.new          }
     default                            { die 'WTF?!?'           }
   }
-  #diag "Setting {$victim} to {$newVal.gist}";
-  $o."$victim"() = $newVal;
+  # diag "Setting {$victim} to {$newVal.gist}";
+  $o."$victim"() = $val ~~ Positional ?? $newVal.Array !! $newVal;
 }
 
 sub doBasicTests(@files, :$number) is export {
@@ -118,12 +118,12 @@ sub doBasicTests(@files, :$number) is export {
         $a = populateTestObject(::($_).new, :!blanks)
       },                                                            "$_ can be populated";
       lives-ok { $bx = $a.to-xml                               },   "$_ serializes ok";
-      diag $bx;
+      # diag $bx;
       lives-ok { $b = $class.from-xml($bx)                     },   "$_ deseralizes ok";
       ok       $a.eqv($b),                                          "$_ compares ok";
       # diag ddt($a, :get);
-      # diag ddt($b, :get);
       nok      do { changeRandomAttribute($b); $a eqv $b       },   "Changed $_ fails eqv";
+      # diag ddt($b, :get);
     }
   }
 }

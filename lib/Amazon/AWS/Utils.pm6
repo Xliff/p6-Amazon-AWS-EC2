@@ -147,8 +147,10 @@ sub populateTestObject(
     }
 
     $object."{ $a.name.substr(2) }"() = do given $a.type {
-      when Positional {
-        do gather for ^((^$elems).pick) -> $i { take generateValue(.of) }
+      when Positional | Array {
+        my $start;
+        ++$start unless $blanks;
+        do gather for ^(($start...$elems).pick) -> $i { take generateValue(.of) }
       }
 
       default         { generateValue($_) }
