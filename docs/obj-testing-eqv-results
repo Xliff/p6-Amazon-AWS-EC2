@@ -52,3 +52,13 @@ Results of spot testing for Amazon::AWS::Roles::eqv
 
 + Received the below error from Amazon::AWS::EC2::Types::NetworkInterface
   # Type check failed in assignment to @!ipv6Addressess; expected Amazon::AWS::EC2::Types::NetworkInterfaceIpv6Address but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::RequestLaunchTemplateData
+  # Type check failed in assignment to @!SecurityGroupIds; expected Str but got Array ($[])
+  # Type check failed in assignment to @!ElasticGpuSpecifications; expected Amazon::AWS::EC2::Types::ElasticGpuSpecification but got Array ($[])
+  # Type check failed in assignment to @!BlockDeviceMappings; expected Amazon::AWS::EC2::Types::LaunchTemplateBlockDeviceMappingRequest but got Array ($[])
+  # Type check failed in assignment to @!ElasticInferenceAccelerators; expected Amazon::AWS::EC2::Types::LaunchTemplateElasticInferenceAccelerator but got Array ($[])
+  # Type check failed in assignment to @!TagSpecifications; expected Amazon::AWS::EC2::Types::LaunchTemplateTagSpecificationRequest but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::ReservedInstanceModification
+  # Type check failed in assignment to @!modificationResults; expected Amazon::AWS::EC2::Types::ReservedInstancesModificationResult but got Array ($[])
