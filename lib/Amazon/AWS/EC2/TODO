@@ -29,8 +29,16 @@
 	- GetConsoleScreenshot
 - Following the development of the list of actions, above. Develope the Create analogs of all developed Describe actions
 - Add a better key management system to the API. This would allow keeping either multiple key files in .ec2, using EC2AccessKeys (no .csv) as managed file containing multiple keys. May want to check for accessKeys.csv as the default and fall back to EC2AccessKeys.csv. If no EC2AccessKeys file is found, the key name is the name of the file without the ".csv" suffix. If no .csv files are found then use EC2AccessKeys. If neither of the previous options are available, then error out.
-- Additional unit testing via EC2/Tests will contain private information. This should not be allowed. However creating examples which can be adjusted by organization would be helpful. Suggest creating two branches. One will be .AdditionalTests. An additional branch called .AdditionalTest.Distro will be spawned from .AdditionalTests with pre-commit hooks that will abort any commit that contains private IDs and identifiers. Once this is finished, the example tests are placed into the Tests.example directory, and can then be merged into master.
+- Additional unit testing via EC2/Tests will contain private information. This should not be allowed. However creating examples which can be adjusted by organization would be helpful. Suggest creating two branches. One will be .AdditionalTests. An additional branch called .AdditionalTest.Distro will be spawned from .AdditionalTests with pre-commit hooks that will abort any commit that contains private IDs and identifiers. Once this is finished, the example tests are placed into the
+  Tests.example directory, and can then be merged into master.
 - Add git submodule for AdditionalTests. This directory will be for organizational object tests. Like Tests directory, name of ACTION class is expected.
+- Attribute descriptions will now accept the following declarative, trailing comments:
+    "#=  <option1> | <option2> | ... | <optionN>"   || List of valid options for validation and testing
+    "#=  [ comp=<compunit> ] [ pick=<FQSN> ] [ check=<FQSN> ]" || Each listed option, and ONLY those options can appear in a signe trailing comment
+                                                               || check = Fully Qualified Subroutine Name (routine to check attribute values)
+                                                                  pick  = Fully Qualified Subroutine Name (routine to generate random attribute values for testing)
+                                                                  comp  = Name of CompUnit (will provide check and pick routines. Equivalent to:
+                                                                    "pick=<compunit>::<pickSub>" and "check=<compunit>::<checkSub")
 
 +  Known Id prefixes:
     eni      - Elastic Network Interface
