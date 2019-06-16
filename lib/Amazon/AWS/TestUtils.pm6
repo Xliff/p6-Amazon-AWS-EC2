@@ -10,6 +10,8 @@ use Amazon::AWS::EC2::Types::Base;
 use Amazon::AWS::Roles::Base;
 use XML::Class;
 
+use Data::Dump::Tree;
+
 unit package Amazon::AWS::TestUtils;
 
 my $DEBUG = $*ENV<P6_AMAZON_DEBUG>;
@@ -119,8 +121,8 @@ sub doBasicTests(@files, :$number) is export {
       diag $bx;
       lives-ok { $b = $class.from-xml($bx)                     },   "$_ deseralizes ok";
       ok       $a.eqv($b),                                          "$_ compares ok";
-      diag $a.gist;
-      diag $b.gist;
+      # diag ddt($a, :get);
+      # diag ddt($b, :get);
       nok      do { changeRandomAttribute($b); $a eqv $b       },   "Changed $_ fails eqv";
     }
   }

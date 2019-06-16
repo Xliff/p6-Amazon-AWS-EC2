@@ -72,4 +72,12 @@ Results of spot testing for Amazon::AWS::Roles::eqv
 + Received the below error from Amazon::AWS::EC2::Types::DescribeFleetsInstances
   # Type check failed in assignment to @!instanceIds; expected Str but got Array ($[])
 
-+ FAILED COMPARISONS for Amazon::AWS::EC2::Types::ScheduledInstancesNetworkInterface
++ FAILED COMPARISONS for Amazon::AWS::EC2::Types::ScheduledInstancesNetworkInterface (?)
++ FAILED COMPARISONS for Amazon::AWS::EC2::Types::ScheduledInstancesLaunchSpecification (+)
+
++ Received the below error from Amazon::AWS::EC2::Types::<???-- One of the items from CHECKPOINT #7 --???>
+  # Type check failed in assignment to @!launchTemplateConfigs; expected Amazon::AWS::EC2::Types::LaunchTemplateConfig but got Array ($[])
+  # Type check failed in assignment to @!launchSpecifications; expected Amazon::AWS::EC2::Types::SpotFleetLaunchSpecification but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::Instance
+  # Type check failed in assignment to @!elasticGpuAssociations; expected Amazon::AWS::EC2::Types::ElasticGpuAssociation but got Array ($[])
