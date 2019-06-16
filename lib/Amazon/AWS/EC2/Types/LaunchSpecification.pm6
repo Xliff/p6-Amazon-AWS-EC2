@@ -12,7 +12,7 @@ use Amazon::AWS::EC2::Types::RunInstancesMonitoringEnabled;
 use Amazon::AWS::EC2::Types::SpotPlacement;
 
 class Amazon::AWS::EC2::Types::LaunchSpecification is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 

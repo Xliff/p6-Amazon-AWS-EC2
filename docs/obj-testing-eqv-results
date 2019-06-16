@@ -62,3 +62,6 @@ Results of spot testing for Amazon::AWS::Roles::eqv
 
 + Received the below error from Amazon::AWS::EC2::Types::ReservedInstanceModification
   # Type check failed in assignment to @!modificationResults; expected Amazon::AWS::EC2::Types::ReservedInstancesModificationResult but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::ServiceDetail
+  # Type check failed in assignment to @!serviceType; expected Amazon::AWS::EC2::Types::ServiceTypeDetail but got Array ($[])

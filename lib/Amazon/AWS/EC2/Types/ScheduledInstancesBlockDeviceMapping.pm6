@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Types::ScheduledInstancesBlockDeviceMapping is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                      $.DeviceName     is xml-element    is xml-skip-null          is rw; 
-  has ScheduledInstancesEbs    $.Ebs            is xml-element    is xml-skip-null          is rw; 
-  has Str                      $.NoDevice       is xml-element    is xml-skip-null          is rw; 
-  has Str                      $.VirtualName    is xml-element    is xml-skip-null          is rw; 
+  has Str                      $.DeviceName     is xml-element                is xml-skip-null          is rw;
+  has ScheduledInstancesEbs    $.Ebs            is xml-element(:over-ride)    is xml-skip-null          is rw;
+  has Str                      $.NoDevice       is xml-element                is xml-skip-null          is rw;
+  has Str                      $.VirtualName    is xml-element                is xml-skip-null          is rw;
 }

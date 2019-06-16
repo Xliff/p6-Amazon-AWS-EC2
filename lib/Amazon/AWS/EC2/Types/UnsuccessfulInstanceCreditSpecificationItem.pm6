@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::UnsuccessfulInstanceCreditSpecificationItem is ex
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has UnsuccessfulInstanceCreditSpecificationItemError    $.error         is xml-element    is xml-skip-null          is rw; 
-  has Str                                                 $.instanceId    is xml-element    is xml-skip-null          is rw; 
+  has UnsuccessfulInstanceCreditSpecificationItemError    $.error         is xml-element(:over-ride)    is xml-skip-null          is rw;
+  has Str                                                 $.instanceId    is xml-element                is xml-skip-null          is rw; 
 }

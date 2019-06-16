@@ -11,14 +11,14 @@ class Amazon::AWS::EC2::Types::SnapshotDetail is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str                  $.description      is xml-element    is xml-skip-null          is rw; 
-  has Str                  $.deviceName       is xml-element    is xml-skip-null          is rw; 
-  has Num                  $.diskImageSize    is xml-element    is xml-skip-null          is rw; 
-  has Str                  $.format           is xml-element    is xml-skip-null          is rw; 
-  has Str                  $.progress         is xml-element    is xml-skip-null          is rw; 
-  has Str                  $.snapshotId       is xml-element    is xml-skip-null          is rw; 
-  has Str                  $.status           is xml-element    is xml-skip-null          is rw; 
-  has Str                  $.statusMessage    is xml-element    is xml-skip-null          is rw; 
-  has Str                  $.url              is xml-element    is xml-skip-null          is rw; 
-  has UserBucketDetails    $.userBucket       is xml-element    is xml-skip-null          is rw; 
+  has Str                  $.description      is xml-element                is xml-skip-null          is rw; 
+  has Str                  $.deviceName       is xml-element                is xml-skip-null          is rw; 
+  has Num                  $.diskImageSize    is xml-element                is xml-skip-null          is rw; 
+  has Str                  $.format           is xml-element                is xml-skip-null          is rw; 
+  has Str                  $.progress         is xml-element                is xml-skip-null          is rw; 
+  has Str                  $.snapshotId       is xml-element                is xml-skip-null          is rw; 
+  has Str                  $.status           is xml-element                is xml-skip-null          is rw; 
+  has Str                  $.statusMessage    is xml-element                is xml-skip-null          is rw; 
+  has Str                  $.url              is xml-element                is xml-skip-null          is rw; 
+  has UserBucketDetails    $.userBucket       is xml-element(:over-ride)    is xml-skip-null          is rw;
 }
