@@ -93,19 +93,25 @@ sub changeRandomAttribute($o is rw) {
   $o."$victim"() = $val ~~ Positional ?? $newVal.Array !! $newVal;
 }
 
-sub doBasicTests(@files, :$number) is export {
+sub doBasicTests(@files, :$elems, :$number) is export {
   plan @files.elems * 7 * $number;
+
+  my %classes;
 
   for ^$number {
     for @files {
       CATCH { default { diag .message } }
 
-      my ($class, $a, $bx, $b);
+      my ($class, $a, $bx, $b, $tl, $te);
 
-      $class := (try require ::($_));
+      $class := %classes{$_} // (try require ::($_));
 
-      ok         $class !~~ Failure,                                "$_ loads. Is not a Failure object";
-      ok         $class !=:= Nil,                                   "$_ exists";
+      ok         ($tl = $class !~~ Failure),  "$_ loads. Is not a Failure object";
+      ok         ($te = $class !=:= Nil),     "$_ exists";
+
+      # Attempt to speed things up.
+      %classes{$_} := $class if $tl && $te;
+
       lives-ok {
         CATCH {
           default {
@@ -115,7 +121,7 @@ sub doBasicTests(@files, :$number) is export {
             .rethrow
           }
         }
-        $a = populateTestObject(::($_).new, :!blanks)
+        $a = populateTestObject(::($_).new, :$elems, :!blanks)
       },                                                            "$_ can be populated";
       lives-ok { $bx = $a.to-xml                               },   "$_ serializes ok";
       # diag $bx;

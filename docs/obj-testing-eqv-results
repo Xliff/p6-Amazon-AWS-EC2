@@ -60,7 +60,7 @@ Results of spot testing for Amazon::AWS::Roles::eqv
   # Type check failed in assignment to @!ElasticInferenceAccelerators; expected Amazon::AWS::EC2::Types::LaunchTemplateElasticInferenceAccelerator but got Array ($[])
   # Type check failed in assignment to @!TagSpecifications; expected Amazon::AWS::EC2::Types::LaunchTemplateTagSpecificationRequest but got Array ($[])
 
-+ Received the below error from Amazon::AWS::EC2::Types::ReservedInstanceModification
++ Received the below error from Amazon::AWS::EC2::Types::ReservedInstancesModification
   # Type check failed in assignment to @!modificationResults; expected Amazon::AWS::EC2::Types::ReservedInstancesModificationResult but got Array ($[])
 
 + Received the below error from Amazon::AWS::EC2::Types::ServiceDetail
@@ -75,7 +75,7 @@ Results of spot testing for Amazon::AWS::Roles::eqv
 + FAILED COMPARISONS for Amazon::AWS::EC2::Types::ScheduledInstancesNetworkInterface (?)
 + FAILED COMPARISONS for Amazon::AWS::EC2::Types::ScheduledInstancesLaunchSpecification (+)
 
-+ Received the below error from Amazon::AWS::EC2::Types::<???-- One of the items from CHECKPOINT #7 --???>
++ Received the below error from Amazon::AWS::EC2::Types::<???-- One of the items from CHECKPOINT #7 (SpotFleetRequestConfigData?) --???>
   # Type check failed in assignment to @!launchTemplateConfigs; expected Amazon::AWS::EC2::Types::LaunchTemplateConfig but got Array ($[])
   # Type check failed in assignment to @!launchSpecifications; expected Amazon::AWS::EC2::Types::SpotFleetLaunchSpecification but got Array ($[])
 
