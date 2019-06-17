@@ -4,7 +4,7 @@ use Test;
 
 use Amazon::AWS::TestUtils;
 
-sub MAIN (:$unit, :$number = 1, :$private, :$tests is copy) {
+sub MAIN (:$unit, :$number = 1, :$elems = 5, :$private, :$tests is copy) {
   my @files = getTestFiles('Action::', :$unit);
 
   my %prefixes = (
@@ -12,7 +12,6 @@ sub MAIN (:$unit, :$number = 1, :$private, :$tests is copy) {
     private => 'Amazon::AWS::EC2::PrivateTests'
   );
   my @valid-tests = |%prefixes.keys, |<all basic>;
-  @valid-tests.say;
 
   $tests //= 'all';
   my @tests = $tests.split(',');
@@ -30,7 +29,7 @@ sub MAIN (:$unit, :$number = 1, :$private, :$tests is copy) {
     for @files {
       my $basename = .IO.basename;
       subtest "{ $basename } basic tests" => {
-        doBasicTests( .Array ) if <basic all>.any ∈ @tests;
+        doBasicTests( .Array, :$elems ) if <basic all>.any ∈ @tests;
       }
 
       for %prefixes.kv -> $pk, $pv {

@@ -5,6 +5,7 @@ use v6.d;
 use XML::Class;
 
 use Amazon::AWS::Roles::Base;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Filters::DescribeInstances::BlockDeviceMapping     { ... }
 class Amazon::AWS::EC2::Filters::DescribeInstances::HibernationOptions     { ... }
@@ -36,6 +37,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::BlockDeviceMapping
   does XML::Class[xml-element => 'block-device-mapping']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.attach-time               is xml-element is rw; #= default | host
   has Bool                      $.delete-on-termination     is xml-element is rw; #= i386 | x86_64 | arm64
@@ -48,6 +50,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::HibernationOptions
   does XML::Class[xml-element => 'hibernation-options']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Bool                      $.configured                is xml-element is rw;
 }
@@ -56,6 +59,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::IamInstanceProfile
   does XML::Class[xml-element => 'iam-instance-profile']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.arn                       is xml-element is rw;
 }
@@ -64,6 +68,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::Instance
   does XML::Class[xml-element => 'instance']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.group-id                  is xml-element is rw;
   has Str                       $.group-name                is xml-element is rw;
@@ -73,6 +78,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::Ipv6Address
   does XML::Class[xml-element => 'addresses']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.ipv6-address              is xml-element is rw;
 }
@@ -81,6 +87,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddrAssociation
   does XML::Class[xml-element => 'association']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.private-ip-address        is xml-element is rw;
   has Str                       $.ip-owner-id               is xml-element is rw;
@@ -90,6 +97,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddress
   does XML::Class[xml-element => 'address']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.private-ip-address        is xml-element is rw;
   has Bool                      $.primary                   is xml-element is rw;
@@ -100,6 +108,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAssociation
   does XML::Class[xml-element => 'association']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.public-ip                 is xml-element is rw;
   has Str                       $.ip-owner-id               is xml-element is rw;
@@ -111,6 +120,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAttachment
   does XML::Class[xml-element => 'attachment']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.attachment-id             is xml-element is rw;
   has Str                       $.instance-id               is xml-element is rw;
@@ -123,6 +133,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkInterface
   does XML::Class[xml-element => 'network-interface']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has NetworkAddress            $.addresses                                is rw;
   has NetworkAssociation        $.association                              is rw;
@@ -148,6 +159,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::ProductCode
   does XML::Class[xml-element => 'product-code']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.type                      is xml-element is rw; #= devpay | marketplace
 }
@@ -156,6 +168,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::Tag
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.key                       is xml-element is rw;
   has Str                       $.value                     is xml-element is rw;
@@ -163,9 +176,10 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::Tag
 
 # All objects used are local objects. Any EC2 objects used shall be fully qualified.
 class Amazon::AWS::EC2::Filters::DescribeInstancesFilter is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Str                       $.affinity                  is xml-element is rw;
   has Str                       $.architecture              is xml-element is rw;

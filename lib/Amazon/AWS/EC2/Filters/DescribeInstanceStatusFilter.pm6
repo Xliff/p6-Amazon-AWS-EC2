@@ -3,10 +3,14 @@ use v6.c;
 use XML::Class;
 
 use Amazon::AWS::Roles::Base;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter::Event
   does XML::Class[xml-element => 'event']
 {
+  also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
+
   has Str            $.code                is xml-element is rw;  #= instance-reboot | system-reboot | system-maintenance | instance-retirement | instance-stop
   has Str            $.description         is xml-element is rw;
   has Str            $.instance-event-id   is xml-element is rw;
@@ -18,6 +22,9 @@ class Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter::Event
 class Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter::InstanceStatus
   does XML::Class[xml-element => 'instance-status']
 {
+  also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
+
   has Str            $.reachability        is xml-element is rw;  #= passed | failed | initializing | insufficient-data
   has Str            $.status              is xml-element is rw;  #= ok | impaired | initializing | insufficient-data | not-applicable
 }
@@ -25,6 +32,9 @@ class Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter::InstanceStatus
 class Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter::SystemStatus
   does XML::Class[xml-element => 'system-status']
 {
+  also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
+
   has Str            $.reachability        is xml-element is rw;  #= passed | failed | initializing | insufficient-data
   has Str            $.status              is xml-element is rw;  #= ok | impaired | initializing | insufficient-data | not-applicable
 }
@@ -34,8 +44,11 @@ constant ReachabilityStatus := Amazon::AWS::EC2::Filters::DescribeInstanceStatus
 constant SystemStatus       := Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter::SystemStatus;
 
 class Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
+  also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
+
   has Str            $.availability-zone   is xml-element is rw;
   has Event          $.event                              is rw;
   has Int            $.instance-state-code is xml-element is rw;
