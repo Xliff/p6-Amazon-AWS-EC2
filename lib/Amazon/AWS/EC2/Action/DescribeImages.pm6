@@ -1,4 +1,4 @@
-ouse v6.c;
+use v6.c;
 
 use XML::Class;
 use Method::Also;

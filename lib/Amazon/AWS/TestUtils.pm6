@@ -124,12 +124,12 @@ sub doBasicTests(@files, :$elems, :$number) is export {
         $a = populateTestObject(::($_).new, :$elems, :!blanks)
       },                                                            "$_ can be populated";
       lives-ok { $bx = $a.to-xml                               },   "$_ serializes ok";
-      # diag $bx;
+      diag $bx;
       lives-ok { $b = $class.from-xml($bx)                     },   "$_ deseralizes ok";
       ok       $a.eqv($b),                                          "$_ compares ok";
-      # diag ddt($a, :get);
+      diag ddt($a, :get);
+      diag ddt($b, :get);
       nok      do { changeRandomAttribute($b); $a eqv $b       },   "Changed $_ fails eqv";
-      # diag ddt($b, :get);
     }
   }
 }

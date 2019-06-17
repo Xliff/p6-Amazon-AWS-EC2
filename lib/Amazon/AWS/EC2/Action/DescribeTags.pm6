@@ -18,7 +18,7 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                $.DryRun                                        is xml-element    is rw;
-  has DescribeTagsFilter  @.filters     is xml-container('filterSet')     is xml-element    is rw;
+  has DescribeTagsFilter  @.filters     is xml-container('filterSet')                       is rw;
   has Int                 $.maxResults                                    is xml-element    is rw;
   has Str                 $.nextToken                                     is xml-element    is rw;
 

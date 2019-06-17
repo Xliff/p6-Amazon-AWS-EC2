@@ -135,7 +135,7 @@ sub populateTestObject(
         when Str  {
           my @values;
           if (my $options = $a.WHY).defined {
-            $options ~~ /('?')? \s* (\w+)+ %% [ \s* '|' \s* ]/;
+            $options ~~ /('?')? \s* (<[\w\-]>+)+ %% [ \s* '|' \s* ]/;
             (do gather for $/[1].Array { take .Str }).flat.pick;
           } else {
             (gather for ^@range.pick { take @charValue.pick }).join()
@@ -157,4 +157,32 @@ sub populateTestObject(
     }
   }
   $object;
+}
+
+sub getAttributeData($type) is export  {
+  my %attributes;
+
+  die 'getAttributeData only runs on classes!'
+    unless $type.HOW.^name.ends-with('ClassHOW');
+
+  for $type.^attributes {
+    my $attrName = .name.substr(2);
+    %attributes{$attrName} = $_;
+    %attributes{$attrName}.WHY ~~ /('?')? \s* (<[\w\-]>+)+ %% [ \s* '|' \s* ]/;
+    if $/ {
+      %attributes{"{ $attrName }|ValidValues"} = (do gather for $/[1].Array {
+        take .Str
+      }).flat.Array;
+      %attributes{"{ $attrName }|MaxLength"} =
+        %attributes{"{ $attrName }|ValidValues"}.map( *.chars ).max;
+      %attributes{"{ $attrName }|Table"} = (do
+        gather for %attributes<Resource|ValidValues>.batch(3) {
+          take "\t" ~
+            .Array.fmt("%-{ %attributes{"{ $attrName }|MaxLength"} + 4 }s").join('')
+        }
+      ).join("\n");
+    }
+  }
+
+  %attributes;
 }
