@@ -20,10 +20,7 @@ sub MAIN (:$unit, :$number = 1, :$private) {
     for @files {
       my $basename = .IO.basename;
       subtest "{ $basename } basic tests" => {
-        doBasicTests(
-          $_.Array,
-          :$number
-        );
+        doBasicTests( .Array );
       }
 
       for %prefixes.kv -> $pk, $pv {
