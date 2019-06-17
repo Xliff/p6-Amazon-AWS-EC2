@@ -93,7 +93,7 @@ sub changeRandomAttribute($o is rw) {
   $o."$victim"() = $val ~~ Positional ?? $newVal.Array !! $newVal;
 }
 
-sub doBasicTests(@files, :$elems, :$number) is export {
+sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
   plan @files.elems * 7 * $number;
 
   my %classes;
