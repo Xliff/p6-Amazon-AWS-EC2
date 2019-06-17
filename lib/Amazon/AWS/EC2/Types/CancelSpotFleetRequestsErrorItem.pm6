@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::CancelSpotFleetRequestsErrorItem is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has CancelSpotFleetRequestsError    $.error                 is xml-element    is xml-skip-null          is rw; 
-  has Str                             $.spotFleetRequestId    is xml-element    is xml-skip-null          is rw; 
+  has CancelSpotFleetRequestsError    $.error                 is xml-element(:over-ride)    is xml-skip-null          is rw;
+  has Str                             $.spotFleetRequestId    is xml-element                is xml-skip-null          is rw; 
 }
