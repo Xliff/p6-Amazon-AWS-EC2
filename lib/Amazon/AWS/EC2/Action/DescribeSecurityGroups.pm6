@@ -9,12 +9,16 @@ use Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter;
 use Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse;
 use Amazon::AWS::Utils;
 
+use Amazon::AWS::Roles::Eqv;
+
 class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
   does XML::Class[
     xml-element   => 'DescribeInstances',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
+  also does Amazon::AWS::Roles::Eqv;
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                          $.DryRun                                      is xml-element               is rw;
