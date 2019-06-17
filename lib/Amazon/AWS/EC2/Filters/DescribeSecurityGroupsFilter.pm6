@@ -39,7 +39,7 @@ constant IpPermission := Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
 constant Tag          := Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter::Tag;
 
 class Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also does Amazon::AWS::Roles::Base;
   also does Amazon::AWS::Roles::Eqv;

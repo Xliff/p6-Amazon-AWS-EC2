@@ -7,6 +7,7 @@ use Amazon::AWS::EC2::Types::GroupIdentifier;
 
 use Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter;
 use Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse;
+
 use Amazon::AWS::Utils;
 
 use Amazon::AWS::Roles::Eqv;
@@ -21,12 +22,12 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool                          $.DryRun                                      is xml-element               is rw;
-  has DescribeSecurityGroupsFilter  @.filters     is xml-container('filterSet')   is xml-element               is rw;
-  has Str                           @.groupIds    is xml-container('groupIds')    is xml-element('groupId')    is rw;
-  has Str                           @.groupNames  is xml-container('groupNames')  is xml-element('groupName')  is rw;
-  has Int                           $.maxResults                                  is xml-element               is rw;
-  has Str                           $.nextToken                                   is xml-element               is rw;
+  has Bool                          $.DryRun                                      is xml-element                           is rw;
+  has DescribeSecurityGroupsFilter  @.filters     is xml-container('filterSet')   is xml-element('item',      :over-ride)  is rw;
+  has Str                           @.groupIds    is xml-container('groupIds')    is xml-element('item')                   is rw;
+  has Str                           @.groupNames  is xml-container('groupNames')  is xml-element('item')                   is rw;
+  has Int                           $.maxResults                                  is xml-element                           is rw;
+  has Str                           $.nextToken                                   is xml-element                           is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests

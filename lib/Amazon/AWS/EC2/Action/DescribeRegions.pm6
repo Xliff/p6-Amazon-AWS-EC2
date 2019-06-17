@@ -5,43 +5,52 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Filters::DescribeRegionsFilter;
 use Amazon::AWS::EC2::Response::DescribeRegionsResponse;
-use Amazon::AWS::EC2::Types::Instance;
+
 use Amazon::AWS::Utils;
+
 use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeRegions is export
-  does XML::Class[xml-element => 'DescribeRegions']
+  does XML::Class
 {
+  also does Amazon::AWS::Roles::Eqv;
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool                  $.DryRun                                         is xml-element               is rw;
-  has DescribeRegionsFilter @.filters     is xml-container('filterSet')                                   is rw;
-  has Str                   @.regions     is xml-container('regionNameSet')  is xml-element('region')     is rw;
+  has Bool                  $.DryRun                                         is xml-element                      is rw;
+  has DescribeRegionsFilter @.filters     is xml-container('filterSet')      is xml-element('item', :over-ride)  is rw;
+  has Str                   @.regions     is xml-container('regionNameSet')  is xml-element('item')              is rw;
 
   submethod BUILD (
     :$!DryRun = False,
+    :@!filters,
+    :@!regions,
     :@Filters,
     :@Regions
   ) {
-    @!filters = do given @Filters {
-      when .all ~~ DescribeRegionsFilter { @Filters }
+    if @Filters {
+      @!filters = do given @Filters {
+        when .all ~~ DescribeRegionsFilter { @Filters }
 
-      default {
-        die qq:to/DIE/.chomp;
-Invalid value passed to \@Filters. Should only contain DescribeRegionFilter objects, but contains:
-{ @Filters.grep( * !~~ DescribeRegionsFilter).map( *.^name ).unique.join(', ') }
-DIE
+        default {
+          die qq:to/DIE/.chomp;
+  Invalid value passed to \@Filters. Should only contain DescribeRegionFilter objects, but contains:
+  { @Filters.grep( * !~~ DescribeRegionsFilter).map( *.^name ).unique.join(', ') }
+  DIE
 
+        }
       }
     }
 
-    # This can be expanded top anything that returns a regionId
-    die qq:to/DIE/.chomp unless @Regions.all ~~ Str;
-Invalid value passed to @Regions. Should only contain region name strings, but contains:
-{ @Regions.grep( * !~~ Str ).map( *.^name ).unique.join(', ') }
-DIE
+    if @Regions {
+      # This can be expanded top anything that returns a regionId
+      die qq:to/DIE/.chomp unless @Regions.all ~~ Str;
+  Invalid value passed to @Regions. Should only contain region name strings, but contains:
+  { @Regions.grep( * !~~ Str ).map( *.^name ).unique.join(', ') }
+  DIE
 
-    @!regions = @Regions;
+      @!regions = @Regions;
+    }
   }
 
   method run (:$raw = False)
