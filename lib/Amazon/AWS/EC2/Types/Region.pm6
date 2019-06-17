@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Types::Region is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str    $.regionEndpoint    is xml-element    is xml-skip-null          is rw; 
-  has Str    $.regionName        is xml-element    is xml-skip-null          is rw; 
+  has Str    $.regionEndpoint    is xml-element    is xml-skip-null          is rw;
+  has Str    $.regionName        is xml-element    is xml-skip-null          is rw;
 }

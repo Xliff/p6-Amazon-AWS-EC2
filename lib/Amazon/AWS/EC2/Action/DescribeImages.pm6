@@ -1,4 +1,4 @@
-use v6.c;
+ouse v6.c;
 
 use XML::Class;
 use Method::Also;
@@ -17,7 +17,7 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
   ]
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                   $.DryRun                                            is xml-element                  is rw;

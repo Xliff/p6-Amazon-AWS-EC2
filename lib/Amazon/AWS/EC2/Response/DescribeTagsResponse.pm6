@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Response::DescribeTagsResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has Str               $.nextToken    is xml-element                                    is rw; 
-  has TagDescription    @.tags         is xml-element    is xml-container('tagSet')      is rw; 
+  has Str               $.nextToken    is xml-element                                    is rw;
+  has TagDescription    @.tags         is xml-element    is xml-container('tagSet')      is rw;
 }
