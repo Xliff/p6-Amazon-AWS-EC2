@@ -1,7 +1,7 @@
 use v6.d;
 
 use Amazon::AWS::Action::DescribeInstances;
-use Amazon::AWS::Action::StartInstances;
+use Amazon::AWS::Action::StopInstances;
 
 sub MAIN (
   :$name,           #= Use an instance name
@@ -33,12 +33,12 @@ sub MAIN (
   try {
     CATCH {
       default {
-        say "Could not start instance '{ $instanceID }':\n{ .message }";
+        say "Could not stop instance '{ $instanceID }':\n{ .message }";
         .rethrow;
       }
     }
 
-    my $r = StartInstances.new( :$instanceID ).run;
+    my $r = StopInstances.new( :$instanceID ).run;
     say "Instance state is now: { $r.instance-states[0].currentState.name }";
   }
 }
