@@ -20,12 +20,12 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool                          $.DryRun                                                   is xml-element               is rw;
-  has DescribeInstanceStatusFilter  @.filters                is xml-container('filterSet')     is xml-element               is rw;
-  has Bool                          $.IncludeAllInstances                                      is xml-element               is rw;
-  has Str                           @.InstanceIds            is xml-container('instanceIdSet') is xml-element('instanceId') is rw;
-  has Int                           $.maxResults                                               is xml-element               is rw;
-  has Str                           $.nextToken                                                is xml-element               is rw;
+  has Bool                          $.DryRun                                                   is xml-element                        is rw;
+  has DescribeInstanceStatusFilter  @.Filters                is xml-container('filterSet')     is xml-element('item', :over-ride)    is rw;
+  has Bool                          $.IncludeAllInstances                                      is xml-element                        is rw;
+  has Str                           @.InstanceIds            is xml-container('instanceIdSet') is xml-element('instanceId')          is rw;
+  has Int                           $.MaxResults                                               is xml-element                        is rw;
+  #has Str                           $.nextToken                                                is xml-element                        is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -33,43 +33,60 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
   #                 - One page (and then pass the next token).
 
   submethod BUILD (
-    :$!DryRun     = False,
-    :$!maxResults = 1000,
-    :$!nextToken  = '',
+    :$dryRun,
     :@filters,
     :@instances,
-    :$includeAll;
-    :$includeAllInstances,
+    :$maxResults,
+    :includeAll(:$includeAllInstances),
+    :$!DryRun              = False,
+    :@!Filters,
+    :$!IncludeAllInstances = False,
+    :@!InstanceIds,
+    :$!MaxResults          = 1000,
+    #:$!NextToken          = '',
   ) {
-    $!IncludeAllInstances = $includeAll // $includeAllInstances // False;
+    $!DryRun     = $dryRun     if $dryRun.defined;
+    $!MaxResults = $maxResults if $maxResults.defined;
+    
+    $!IncludeAllInstances = $includeAllInstances 
+      if $includeAllInstances.defined;
+    
+    die 'Cannot use @.instances and $.maxResults in the same call to DescribeInstanceStatus'
+      if $maxResults.defined && @instances;
+    
+    if @instances {
+      @!InstanceIds = @instances.map({
+        do {
+          when Str      { $_           }
+          when Instance { .instanceID }
+          when Volume   { .attachments.map( *.instanceId ) }
 
-    @!InstanceIds = @instances.map({
-      do {
-        when Str      { $_           }
-        when Instance { .instanceID }
-        when Volume   { .attachments.map( *.instanceId ) }
+          default {
+            die qq:to/DIE/.chomp;
+            Invalid value passed to \@instances. Should only contain instance-id compatible objects, but contains:
+            { @instances.map( *.^name ).unique.join(', ') }
+            DIE
+
+          }
+        }
+      }).flat;
+    }
+
+    if @filters {
+      @!Filters = do given @filters {
+        when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter { 
+          @!Filters 
+        }
 
         default {
           die qq:to/DIE/.chomp;
-          Invalid value passed to \@instances. Should only contain instance-id compatible objects, but contains:
-          { @instances.map( *.^name ).unique.join(', ') }
+          Invalid value passed to \@filers. Should only contain DescribeInstancsStatusFilter objects, but contains:
+          { @filters.map( *.^name ).unique.join('. ') }
           DIE
 
         }
-      }
-    }).flat;
-
-    @filters = do given @!filters {
-      when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter { @!filters }
-
-      default {
-        die qq:to/DIE/.chomp;
-        Invalid value passed to \@filers. Should only contain DescribeInstancsStatusFilter objects, but contains:
-        { @filters.map( *.^name ).unique.join('. ') }
-        DIE
-
-      }
-    };
+      };
+    }
 
   }
 
@@ -79,16 +96,15 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
       execute
     >
   {
-    die 'Cannot use @.instances and $.maxResults in the same call to DescribeInstanceStatus'
-      if $.maxResults.defined && @.InstanceIds;
-
+    $!MaxResults = -1 if @.InstanceIds;
+    
     my $cnt = 1;
     my @InstanceArgs;
     @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @.InstanceIds;
 
     my @FilterArgs;
     $cnt = 1;
-    for @!filters {
+    for @!Filters {
       @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
     }
 
@@ -103,10 +119,10 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
         IncludeAllInstances => $!IncludeAllInstances,
         |@InstanceArgs,
         |@FilterArgs,
-        MaxResults          => $.maxResults,
-        Version             => '2016-11-15'
       );
     }
+    @args.push: Pair.new('MaxResults', $!MaxResults) if $!MaxResults > 0;
+    @args.push: Pair.new('Version', '2016-11-15');
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
