@@ -16,6 +16,15 @@ unit package Amazon::AWS::TestUtils;
 
 my $DEBUG = $*ENV<P6_AMAZON_DEBUG>;
 
+sub diff ($da, $db) is export {
+  use File::Temp;
+
+  diag $da;                      diag $db;
+  my ($dfan, $dfah) = tempfile;  my ($dfbn, $dfbh) = tempfile;
+  $dfah.spurt($da, :close);      $dfbh.spurt($db, :close);
+  say qqx{diff $dfan $dfbn};
+}
+
 sub getTestFiles($cat, :$unit) is export {
   # Could have done this...
   #
@@ -101,14 +110,14 @@ sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
   for ^$number {
     for @files {
       CATCH { default { diag .message } }
-
+      
       my ($class, $a, $bx, $b, $tl, $te);
-
+      
       $class := %classes{$_} // (try require ::($_));
-
+      
       ok         ($tl = $class !~~ Failure),  "$_ loads. Is not a Failure object";
       ok         ($te = $class !=:= Nil),     "$_ exists";
-
+      
       # Attempt to speed things up.
       %classes{$_} := $class if $tl && $te;
 
@@ -124,11 +133,12 @@ sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
         $a = populateTestObject(::($_).new, :$elems, :!blanks)
       },                                                            "$_ can be populated";
       lives-ok { $bx = $a.to-xml                               },   "$_ serializes ok";
-      diag $bx;
+      # diag $bx;
       lives-ok { $b = $class.from-xml($bx)                     },   "$_ deseralizes ok";
-      ok       $a.eqv($b),                                          "$_ compares ok";
-      diag ddt($a, :get);
-      diag ddt($b, :get);
+      
+      ok       ( my $eqv = $a.eqv($b) ),                            "$_ compares ok";
+      diff( ddt($a, :get), ddt($b, :get) ) unless $eqv;
+      
       nok      do { changeRandomAttribute($b); $a eqv $b       },   "Changed $_ fails eqv";
     }
   }

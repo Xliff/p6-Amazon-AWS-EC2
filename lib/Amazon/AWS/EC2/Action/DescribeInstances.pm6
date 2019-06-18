@@ -20,10 +20,10 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                     $.DryRun                                        is xml-element               is rw;
-  has DescribeInstancesFilter  @.filters     is xml-container('filterSet')     is xml-element               is rw;
+  has DescribeInstancesFilter  @.Filters     is xml-container('filterSet')     is xml-element               is rw;
   has Str                      @.InstanceIds is xml-container('instanceIdSet') is xml-element('instanceId') is rw;
-  has Int                      $.maxResults                                    is xml-element               is rw;
-  has Str                      $.nextToken                                     is xml-element               is rw;
+  has Int                      $.MaxResults                                    is xml-element               is rw;
+  #has Str                      $.NextToken                                     is xml-element               is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -31,39 +31,49 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
   #                 - One page (and then pass the next token).
 
   submethod BUILD (
-    :$!DryRun     = False,
-    :$!maxResults = 1000,
-    :$!nextToken  = '',
+    :$dryRun,
     :@filters,
     :@instances,
+    :$maxResults,
+    :$nextToken,
+    # For testing purposes only
+    :$!DryRun     = False,
+    :@!Filters,
+    :@!InstanceIds,
+    :$!MaxResults = 1000,
+    # :$!NextToken  = '',
   ) {
-    @!InstanceIds = @instances.map({
-      do {
-        when Str      { $_          }
-        when Instance { .instanceID }
-        when Volume   { .attachments.map( *.instanceId ) }
+    if @instances {
+      @!InstanceIds = @instances.map({
+        do {
+          when Str      { $_          }
+          when Instance { .instanceID }
+          when Volume   { .attachments.map( *.instanceId ) }
+
+          default {
+            die qq:to/DIE/.chomp;
+            Invalid value passed to \@instances. Should only contain Instance objects, but contains:
+            { @instances.map( *.^name ).unique.join(', ') }
+            DIE
+
+          }
+        }
+      }).flat;
+    }
+
+    if @filters {
+      @!Filters = do given @filters {
+        when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @filters }
 
         default {
           die qq:to/DIE/.chomp;
-          Invalid value passed to \@instances. Should only contain Instance objects, but contains:
-          { @instances.map( *.^name ).unique.join(', ') }
+          Invalid value passed to \@filers. Should only contain Filter objects, but contains:
+          { @filters.map( *.^name ).unique.join('. ') }
           DIE
 
         }
-      }
-    }).flat;
-
-    @filters = do given @!filters {
-      when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @!filters }
-
-      default {
-        die qq:to/DIE/.chomp;
-        Invalid value passed to \@filers. Should only contain Filter objects, but contains:
-        { @filters.map( *.^name ).unique.join('. ') }
-        DIE
-
-      }
-    };
+      };
+    }
 
   }
 
@@ -74,7 +84,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     >
   {
     die 'Cannot use @.instances and $.maxResults in the same call to DescribeInstances'
-      if $.maxResults.defined && @.InstanceIds;
+      if $.MaxResults.defined && @.InstanceIds;
 
     my $cnt = 1;
     my @InstanceArgs;
@@ -82,7 +92,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
 
     my @FilterArgs;
     $cnt = 1;
-    for @!filters {
+    for @!Filters {
       @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
     }
 

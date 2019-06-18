@@ -21,18 +21,28 @@ class Amazon::AWS::EC2::Action::DescribeIdFormat is export
 
   has Str $.Resource is xml-element is rw;  #= bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway
 
+  # cw: We have to switch cases here, but the arrays use upper(param) to small(attr), 
+  #     whereas non-arrays use small(param) to Upper(attr). 
+  #
+  #     We should probably pick ONE set and stick with it, but that will force
+  #     a rename of the selected attribute type.
+  #
+  #     Decided-by-fiat: Using lower(param) to upper(attr). All other objects
+  #                      will be adjusted
   submethod BUILD (
-    Str :$Resource,
+    Str :$resource,
+    # Testing purposes ONLY!
+    Str :$!Resource
   ) {
     my $dieMsg = qq:to/DIE/.chomp;
       Invalid Resource value. Resource value should be any of:
       { %attributes<Resource|Table> }
       DIE
 
-    die $dieMsg unless $Resource.defined.not ||
-                       $Resource ~~ %attributes<Resource|ValidValues>.any;
-
-    $!Resource = $Resource
+    $!Resource = $resource if $resource;
+    
+    die $dieMsg unless $!Resource.defined.not ||
+                       $!Resource ~~ %attributes<Resource|ValidValues>.any;
   }
 
   method run (:$raw = False)

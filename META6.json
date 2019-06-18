@@ -1,14 +1,15 @@
 {
     "depends": [
-   	  "Base64::Native"
 	    "Cro::HTTP::Client",
 	    "DateTime::Format",
-	    "Digest",
 	    "Digest::HMAC",
 	    "Digest::SHA256::Native",
+	    "Digest",
 	    "File::Find",
 	    "Method::Also",
 	    "XML::Clas"
+   	  "Base64::Native"
+      "File::Temp",
     ],
     "description": "Perl6 API Bindings for Amazon AWS EC2",
     "version": "r0.0.1",
