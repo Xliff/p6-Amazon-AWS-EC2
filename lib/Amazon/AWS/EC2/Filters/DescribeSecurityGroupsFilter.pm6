@@ -1,6 +1,7 @@
 use v6.d;
 
 use Amazon::AWS::Roles::Base;
+use Amazon::AWS::Roles::Eqv;
 
 # WTF does this cause t/03-filters.t to fail and ONLY t/03-filters.t!
 # use Amazon::AWS::EC2::Types::Tag;
@@ -11,16 +12,18 @@ class Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter::Tag
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;
-  
+  also does Amazon::AWS::Roles::Eqv;
+
   has Str          $.key             is xml-element             is rw;
   has Str          $.value           is xml-element             is rw;
 }
 
 class Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter::IpPermission
-  does XML::Class[xml-element => 'ip-permission']
+  does XML::Class
 {
   also does Amazon::AWS::Roles::Base;
-  
+  also does Amazon::AWS::Roles::Eqv;
+
   has Str          $.cidr            is xml-element             is rw;
   has Int          $.from-port       is xml-element             is rw;
   has Str          $.group-id        is xml-element             is rw;
@@ -36,17 +39,18 @@ constant IpPermission := Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
 constant Tag          := Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter::Tag;
 
 class Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also does Amazon::AWS::Roles::Base;
-  
-  has Str          $.description     is xml-element             is rw;
-  has IpPermission $.egress          is xml-container('egress') is rw;
-  has IpPermission $.ip-permission                              is rw;
-  has Str          $.group-id        is xml-element             is rw;
-  has Str          $.group-name      is xml-element             is rw;
-  has Str          $.owner-id        is xml-element             is rw;
-  has Str          $.tag-key         is xml-element             is rw;
-  has Str          $.vpc-id          is xml-element             is rw;
-  has Tag          @.tags            is xml-container('tagSet') is rw;
+  also does Amazon::AWS::Roles::Eqv;
+
+  has Str          $.description     is xml-element                                                               is rw;
+  has IpPermission $.egress          is xml-element('egress',        :over-ride)                                  is rw;
+  has IpPermission $.ip-permission   is xml-element('ip-permission', :over-ride)                                  is rw;
+  has Str          $.group-id        is xml-element                                                               is rw;
+  has Str          $.group-name      is xml-element                                                               is rw;
+  has Str          $.owner-id        is xml-element                                                               is rw;
+  has Str          $.tag-key         is xml-element                                                               is rw;
+  has Str          $.vpc-id          is xml-element                                                               is rw;
+  has Tag          @.tags                                                           is xml-container('tagSet')    is rw;
 }

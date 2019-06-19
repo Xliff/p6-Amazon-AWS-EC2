@@ -1,0 +1,83 @@
+Results of spot testing for Amazon::AWS::Roles::eqv
+---------------------------------------------------
+
++ Array issues when testing Amazon::AWS::EC2::Types::VolumeStatusItem
+                                                   ::VpcPeeringConnectionVpcInfo
+
++ Out of a 1000 run test on Amazon::AWS::EC2::Types::CapacityReservation,
+  only 6925 out of 7000 subtests were run.
+
++ Received several errors of the following form:
+  Type check failed in assignment to @!associatedTargetNetwork; expected Amazon::AWS::EC2::Types::AssociatedTargetNetwork but got Array ($[])
+  While testing Amazon::AWS::EC2::Types::ClientVpnEndpoint (May be related to all items!)
+
++ Receiving the below error from Amazon::AWS::EC2::Types::FpgaImage
+                                                        ::Host
+  # Type check failed in assignment to @!tags; expected Amazon::AWS::EC2::Types::Tag but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::Image
+  # Type check failed in assignment to @!productCodes; expected Amazon::AWS::EC2::Types::ProductCode but got Array ($[])
+
++ Received th3e below error from Amazon::AWS::EC2::Types::ImportInstanceLaunchSpecification
+  # Type check failed in assignment to @!GroupNames; expected Str but got Array ($[])
+  # Type check failed in assignment to @!GroupIds; expected Str but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::ImportInstanceTaskDetails
+  # Type check failed in assignment to @!volumes; expected Amazon::AWS::EC2::Types::ImportInstanceVolumeDetailItem but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::InstanceNetworkInterface
+  # Type check failed in assignment to @!ipv6Addressess; expected Amazon::AWS::EC2::Types::InstanceIpv6Address but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::InstanceNetworkInterfaceSpecification
+  # Type check failed in assignment to @!privateIpAddressess; expected Amazon::AWS::EC2::Types::PrivateIpAddressSpecification but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::InstanceNetworkInterface
+  # Type check failed in assignment to @!ipv6Addressess; expected Amazon::AWS::EC2::Types::InstanceIpv6Address but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::InstanceStatus
+  # Type check failed in assignment to @!events; expected Amazon::AWS::EC2::Types::InstanceStatusEvent but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::LaunchSpecification
+  # Type check failed in assignment to @!groups; expected Amazon::AWS::EC2::Types::GroupIdentifier but got Array ($[])
+  # Type check failed in assignment to @!blockDeviceMapping; expected Amazon::AWS::EC2::Types::BlockDeviceMapping but got Array ($[])
+  # Type check failed in assignment to @!networkInterfaces; expected Amazon::AWS::EC2::Types::InstanceNetworkInterfaceSpecification but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::NatGateway
+  # Type check failed in assignment to @!natGatewayAddresss; expected Amazon::AWS::EC2::Types::NatGatewayAddress but got Array ($[])
+
++ Amazon::AWS::EC2::Types::LoadBalancersConfig had a small subseet of compare tests fail
+
++ Received the below error from Amazon::AWS::EC2::Types::NetworkAcl
+  # Type check failed in assignment to @!tags; expected Amazon::AWS::EC2::Types::Tag but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::NetworkInterface
+  # Type check failed in assignment to @!ipv6Addressess; expected Amazon::AWS::EC2::Types::NetworkInterfaceIpv6Address but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::RequestLaunchTemplateData
+  # Type check failed in assignment to @!SecurityGroupIds; expected Str but got Array ($[])
+  # Type check failed in assignment to @!ElasticGpuSpecifications; expected Amazon::AWS::EC2::Types::ElasticGpuSpecification but got Array ($[])
+  # Type check failed in assignment to @!BlockDeviceMappings; expected Amazon::AWS::EC2::Types::LaunchTemplateBlockDeviceMappingRequest but got Array ($[])
+  # Type check failed in assignment to @!ElasticInferenceAccelerators; expected Amazon::AWS::EC2::Types::LaunchTemplateElasticInferenceAccelerator but got Array ($[])
+  # Type check failed in assignment to @!TagSpecifications; expected Amazon::AWS::EC2::Types::LaunchTemplateTagSpecificationRequest but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::ReservedInstancesModification
+  # Type check failed in assignment to @!modificationResults; expected Amazon::AWS::EC2::Types::ReservedInstancesModificationResult but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::ServiceDetail
+  # Type check failed in assignment to @!serviceType; expected Amazon::AWS::EC2::Types::ServiceTypeDetail but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::ConversionTask
+  # Type check failed in assignment to @!tags; expected Amazon::AWS::EC2::Types::Tag but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::DescribeFleetsInstances
+  # Type check failed in assignment to @!instanceIds; expected Str but got Array ($[])
+
++ FAILED COMPARISONS for Amazon::AWS::EC2::Types::ScheduledInstancesNetworkInterface (?)
++ FAILED COMPARISONS for Amazon::AWS::EC2::Types::ScheduledInstancesLaunchSpecification (+)
+
++ Received the below error from Amazon::AWS::EC2::Types::<???-- One of the items from CHECKPOINT #7 (SpotFleetRequestConfigData?) --???>
+  # Type check failed in assignment to @!launchTemplateConfigs; expected Amazon::AWS::EC2::Types::LaunchTemplateConfig but got Array ($[])
+  # Type check failed in assignment to @!launchSpecifications; expected Amazon::AWS::EC2::Types::SpotFleetLaunchSpecification but got Array ($[])
+
++ Received the below error from Amazon::AWS::EC2::Types::Instance
+  # Type check failed in assignment to @!elasticGpuAssociations; expected Amazon::AWS::EC2::Types::ElasticGpuAssociation but got Array ($[])

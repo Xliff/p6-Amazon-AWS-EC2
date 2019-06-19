@@ -3,11 +3,13 @@ use v6.d;
 use XML::Class;
 
 use Amazon::AWS::Roles::Base;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Filters::DescribeImagesFilter::BlockDeviceMapping
   does XML::Class[xml-element => 'block-device-mapping']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
 
   has Bool                $.delete-on-termination                               is xml-element   is rw;
   has Str                 $.device-name                                         is xml-element   is rw;
@@ -21,15 +23,19 @@ class Amazon::AWS::EC2::Filters::DescribeImagesFilter::Tag
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;
-  
+  also does Amazon::AWS::Roles::Eqv;
+
   has Str                 $.key                                                 is xml-element   is rw;
   has Str                 $.value                                               is xml-element   is rw;
 }
 
 # See if we can make this a reusable type.
-class Amazon::AWS::EC2::Filters::DescribeImagesFilter::ProductCode 
+class Amazon::AWS::EC2::Filters::DescribeImagesFilter::ProductCode
   does XML::Class[xml-element => 'product-code']
 {
+  also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
+
   has Str                 $.type                                                is xml-element   is rw;  #= devpay | marketplace
 }
 
@@ -38,8 +44,11 @@ constant ProductCode        := Amazon::AWS::EC2::Filters::DescribeImagesFilter::
 constant Tag                := Amazon::AWS::EC2::Filters::DescribeImagesFilter::Tag;
 
 class Amazon::AWS::EC2::Filters::DescribeImagesFilter is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
+  also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
+
   has Str                 $.architecture                                        is xml-element   is rw;  #= i386 | x86_64 | arm64
   has BlockDeviceMapping  $.block-device-mapping                                                 is rw;
   has Str                 $.description                                         is xml-element   is rw;

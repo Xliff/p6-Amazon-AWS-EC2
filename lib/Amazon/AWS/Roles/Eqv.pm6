@@ -1,23 +1,60 @@
 use v6.d;
 
+use Test;
+
+# If this gets any larger, it will need a better name.
 role Amazon::AWS::Roles::Eqv {
-  
-  method eqv($b) {
-    return False unless self.defined == $b.defined;
-    return False unless self.WHAT =:= $b.WHAT; 
-  
-    for self.^attributes Z $b.^attributes -> ($x, $y) {
-      my $attr = $x.name.substr(2);
-      return False unless self."$attr"().defined == $b."$attr"().defined;
-      if self."$attr"().defined {
-        if self."$attr"() ~~ Amazon::AWS::Roles::Eqv {
-          return False unless self."$attr"().eqv( $b."$attr"() )
-        } else {
-          return False unless self."$attr"() eqv $b."$attr"();
-        }
-      }
+
+  multi method is-empty {
+    for self.^attributes {
+      return False if not self.is-empty( self."{ .name.substr(2) }"() );
     }
     True;
   }
-  
+
+  multi method is-empty ($v) {
+    return True if not $v.defined;
+    given $v {
+      when Str                     { .chars.not  }
+      when Int                     { 0           }
+      when Bool                    { False       }
+      #when Amazon::AWS::Roles::Eqv { $v.is-empty }
+
+      default {
+        die "Cannot determine the emptiness of a { .^name } object."
+      }
+    }
+  }
+
+  method testval($a, $b) {
+    do given $a {
+      when .defined.not            { $b.is-empty ?? True !! False }
+      when Num                     { $a =~= $b                    }
+      when Amazon::AWS::Roles::Eqv { .eqv($b)    ?? True !! False }
+
+      when Positional              { return False unless $_.elems == $b.elems;
+                                     for $_.Array Z $b.Array -> ($x, $y) {
+                                       return False
+                                         unless self.testval($x, $y);
+                                     }
+                                     True }
+
+      default                      { $_ eqv $b }
+    }
+  }
+
+  method eqv($b) {
+    #return False unless self.defined == $b.is-empty;
+    return False unless self.WHAT =:= $b.WHAT;
+
+    for self.^attributes Z $b.^attributes -> ($x, $y) {
+      my $attr = $x.name.substr(2);
+      #diag $attr;
+      my ($aval, $bval) = ( self."$attr"(), $b."$attr"() );
+      #return False unless $aval.defined == $bval.is-empty;
+      return False unless self.testval($aval, $bval);
+    }
+    True;
+  }
+
 }
