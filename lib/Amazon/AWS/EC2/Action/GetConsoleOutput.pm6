@@ -17,15 +17,23 @@ class Amazon::AWS::EC2::Action::GetConsoleOutput is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool $.DryRun                 is xml-element is rw;
-  has Str  $.InstanceId is required is xml-element is rw;
-  has Bool $.Latest                 is xml-element is rw;
+  has Bool $.DryRun        is xml-element is rw;
+  has Str  $.InstanceId    is xml-element is rw;
+  has Bool $.Latest        is xml-element is rw;
 
   submethod BUILD (
-    Bool :$!DryRun         = False,
-    Str  :$!InstanceId,
-    Bool :$!Latest
-  ) { }
+    :$dryRun,
+    :$instanceId,
+    :$latest,
+    # For deserialization purposes, only!
+    :$!DryRun         = False,
+    :$!InstanceId     = '',
+    :$!Latest         = False
+  ) { 
+    $!DryRun     = $dryRun     if $dryRun.defined;
+    $!InstanceId = $instanceId if $instanceId.defined;
+    $!Latest     = $latest     if $latest.defined;
+  }
 
   method run (:$raw)
     is also<
@@ -33,7 +41,8 @@ class Amazon::AWS::EC2::Action::GetConsoleOutput is export
       execute
     >
   {
-    die "InstanceId is required!" unless $.InstanceId.defined;
+    die 'InstanceId is required!' 
+      unless $.InstanceId.defined && $.InstanceId.trim.chars;
 
     # Should already be sorted.
     my @args = (
