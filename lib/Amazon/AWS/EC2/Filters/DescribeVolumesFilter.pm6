@@ -18,7 +18,7 @@ class Amazon::AWS::EC2::Filters::DescribeVolumesFilters::Attachment
 constant Attachment := Amazon::AWS::EC2::Filters::DescribeVolumesFilters::Attachment;
 
 class Amazon::AWS::EC2::Filters::DescribeVolumesFilter is export 
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also does Amazon::AWS::Roles::Base;
   
