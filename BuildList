@@ -464,6 +464,7 @@ Amazon::AWS::EC2::Types::VpcPeeringConnection
 Amazon::AWS::EC2::Types::VpnConnection
 Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::EC2::Action::DescribeIdFormat
+Amazon::AWS::EC2::Action::DescribeImageAttribute
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeTags
 Amazon::AWS::EC2::Action::GetConsoleOutput
