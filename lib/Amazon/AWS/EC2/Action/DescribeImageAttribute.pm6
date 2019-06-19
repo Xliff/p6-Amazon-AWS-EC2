@@ -4,7 +4,7 @@ use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::GetConsoleOutputResponse;
+use Amazon::AWS::EC2::Response::DescribeImageAttributeResponse;
 use Amazon::AWS::Utils;
 
 my %attributes;
@@ -39,8 +39,9 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeImageAttribute is e
       DIE
      
     $!Attribute     = $attribute  if $attribute.defined;
-    # die $dieMsg unless $!Attribute.defined.not ||
-    #                    $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
+    die $dieMsg unless $!Attribute.defined.not ||
+                       $!Attribute.chars.not   ||
+                       $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
     
     $!DryRun        = $dryRun     if $dryRun.defined;
     $!InstanceId    = $instanceId if $instanceId.defined;
@@ -60,11 +61,12 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeImageAttribute is e
 
     # Should already be sorted.
     my @args = (
-      Attribute  => $.Attribute,
       DryRun     => $.DryRun,
       InstanceId => $.InstanceId,
       Version    => '2016-11-15'
     );
+    @args.unshift: Pair.new('Attribute', $.Attribute) 
+      if $.Attribute.trim.chars;
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
