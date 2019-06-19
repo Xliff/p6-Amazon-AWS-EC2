@@ -25,22 +25,32 @@ class Amazon::AWS::EC2::Action::StartInstances is export
   has Str  @.InstanceIds   is xml-container('instancesIdSet') is xml-element('instanceId') is rw;
 
   submethod BUILD (
-    :$!AdditionalInfo? = '',
-    :$!DryRun = False,
-    :@instances
+    :$additionalInfo,
+    :$dryRun,
+    :@instances,
+    # For deserialization purposes only
+    :$!AdditionalInfo = '',
+    :$!DryRun         = False,
+    :@!InstanceIds
   ) {
-    when @instances.all ~~ Str {
-      @!InstanceIds = @instances;
-    }
-    when @instances.all ~~ Amazon::AWS::EC2::Types::Instance {
-      @!InstanceIds = @instances.map( *.instanceID );
-    }
-    default {
-      die qq:to/DIE/.chomp;
-Invalid value passed to \@instances. Should only contain Instance objects, but contains:
-{ @instances.map( *.^name ).unique.join(', ') }
-DIE
+    $!AdditionalInfo = $additionalInfo if $additionalInfo.defined;
+    $!DryRun         = $dryRun         if $dryRun.defined;
+    
+    if @instances {
+      @!InstanceIds = @instances.map({
+        do {
+          when Str       { $_ }
+          when Instance  { .instanceId }
+          
+          default {
+            die qq:to/DIE/.chomp;
+      Invalid value passed to \@instances. Should only contain Instance objects, but contains:
+      { @instances.map( *.^name ).unique.join(', ') }
+      DIE
 
+          }
+        }
+      });
     }
   }
 
