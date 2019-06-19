@@ -473,6 +473,7 @@
       "Amazon::AWS::EC2::Types::VpnConnection"                                              :  "lib/Amazon/AWS/EC2/Types/VpnConnection.pm6"                                              ,
       "Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification"                          :  "lib/Amazon/AWS/EC2/Types/VpnConnectionOptionsSpecification.pm6"                          ,
       "Amazon::AWS::EC2::Action::DescribeIdFormat"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeIdFormat.pm6"                                          ,
+      "Amazon::AWS::EC2::Action::DescribeRegions"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeRegions.pm6"                                           ,
       "Amazon::AWS::EC2::Action::DescribeTags"                                              :  "lib/Amazon/AWS/EC2/Action/DescribeTags.pm6"                                              ,
       "Amazon::AWS::EC2::Action::GetConsoleOutput"                                          :  "lib/Amazon/AWS/EC2/Action/GetConsoleOutput.pm6"                                          ,
       "Amazon::AWS::EC2::Action::GetConsoleScreenshot"                                      :  "lib/Amazon/AWS/EC2/Action/GetConsoleScreenshot.pm6"                                      ,
@@ -542,9 +543,9 @@
       "Amazon::AWS::EC2::Action::DescribeImages"                                            :  "lib/Amazon/AWS/EC2/Action/DescribeImages.pm6"                                            ,
       "Amazon::AWS::EC2::Action::DescribeInstanceStatus"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeInstanceStatus.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeKeyPairs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeKeyPairs.pm6"                                          ,
-      "Amazon::AWS::EC2::Action::DescribeRegions"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeRegions.pm6"                                           ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeVolumes"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeVolumes.pm6"                                           ,
+      "Amazon::AWS::EC2::Action::RebootInstances"                                           :  "lib/Amazon/AWS/EC2/Action/RebootInstances.pm6"                                           ,
       "Amazon::AWS::EC2::Action::StartInstances"                                            :  "lib/Amazon/AWS/EC2/Action/StartInstances.pm6"                                            ,
       "Amazon::AWS::EC2::Action::StopInstances"                                             :  "lib/Amazon/AWS/EC2/Action/StopInstances.pm6"                                             ,
       "Amazon::AWS::EC2::Response::CreateFleetResponse"                                     :  "lib/Amazon/AWS/EC2/Response/CreateFleetResponse.pm6"                                     ,
@@ -558,7 +559,7 @@
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfig"                                     :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfig.pm6"                                     ,
       "Amazon::AWS::EC2::Action::DescribeInstances"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeInstances.pm6"                                         ,
       "Amazon::AWS::EC2::Response::DescribeFleetsResponse"                                  :  "lib/Amazon/AWS/EC2/Response/DescribeFleetsResponse.pm6"                                  ,
-      "Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetRequestsResponse.pm6"
+      "Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetRequestsResponse.pm6"                       
     },
     "name": "Perl6-Amazon-AWS-EC2",
     "perl": "6.d",
@@ -570,3 +571,4 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
