@@ -549,6 +549,7 @@
       "Amazon::AWS::EC2::Action::DescribeInstanceStatus"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeInstanceStatus.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeKeyPairs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeKeyPairs.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute"                         :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaceAttribute.pm6"                         ,
+      "Amazon::AWS::EC2::Action::DescribePublicIpv4Pools"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePublicIpv4Pools.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeVolumes"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeVolumes.pm6"                                           ,
       "Amazon::AWS::EC2::Action::RebootInstances"                                           :  "lib/Amazon/AWS/EC2/Action/RebootInstances.pm6"                                           ,
@@ -577,6 +578,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
