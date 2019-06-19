@@ -536,6 +536,7 @@ Amazon::AWS::EC2::Action::DescribeImages
 Amazon::AWS::EC2::Action::DescribeInstanceAttribute
 Amazon::AWS::EC2::Action::DescribeInstanceStatus
 Amazon::AWS::EC2::Action::DescribeKeyPairs
+Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
 Amazon::AWS::EC2::Action::DescribeVolumes
 Amazon::AWS::EC2::Action::RebootInstances
