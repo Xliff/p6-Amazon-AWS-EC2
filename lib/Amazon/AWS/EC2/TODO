@@ -19,8 +19,8 @@
   item.
 - t/03-filter.t -- First test returns a false positive. Investigate why and solve.
 - List of targeted actions to be developed:
-	- DescribeImageAttribute
-	- DescribeInstanceAttribute
+	+ DescribeImageAttribute
+	+ DescribeInstanceAttribute
   - DescribeNetworkInterfaceAttribute
 	- DescribePublicIpv4Pools
 	- DescribeSnapshotAttribute

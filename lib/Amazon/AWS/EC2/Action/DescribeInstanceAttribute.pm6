@@ -57,7 +57,7 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeInstanceAttribute i
       unless $.InstanceId.defined && $.InstanceId.trim.chars;
       
     die 'Attribute is required'
-      unless $.Attribute.definedf && $.Attribute.trim.chars;
+      unless $.Attribute.defined && $.Attribute.trim.chars;
 
     # Should already be sorted.
     my @args = (
