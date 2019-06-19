@@ -464,7 +464,6 @@ Amazon::AWS::EC2::Types::VpcPeeringConnection
 Amazon::AWS::EC2::Types::VpnConnection
 Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::EC2::Action::DescribeIdFormat
-Amazon::AWS::EC2::Action::DescribeImageAttribute
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeTags
 Amazon::AWS::EC2::Action::GetConsoleOutput
@@ -532,7 +531,9 @@ Amazon::AWS::EC2::Types::SpotFleetLaunchSpecification
 Amazon::AWS::EC2::Types::SpotFleetRequestConfigData
 Amazon::AWS::EC2::Types::Vpc
 Amazon::AWS::EC2::Action::DescribeAddresses
+Amazon::AWS::EC2::Action::DescribeImageAttribute
 Amazon::AWS::EC2::Action::DescribeImages
+Amazon::AWS::EC2::Action::DescribeInstanceAttribute
 Amazon::AWS::EC2::Action::DescribeInstanceStatus
 Amazon::AWS::EC2::Action::DescribeKeyPairs
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
