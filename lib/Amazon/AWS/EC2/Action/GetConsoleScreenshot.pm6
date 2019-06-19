@@ -17,15 +17,23 @@ class Amazon::AWS::EC2::Action::GetConsoleScreenshot is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool $.DryRun                 is xml-element is rw;
-  has Str  $.InstanceId is required is xml-element is rw;
-  has Bool $.WakeUp                 is xml-element is rw;
+  has Bool $.DryRun                 is xml-element                     is rw;
+  has Str  $.InstanceId is required is xml-element('item', :over-ride) is rw;
+  has Bool $.WakeUp                 is xml-element                     is rw;
 
   submethod BUILD (
-    Bool :$!DryRun         = False,
-    Str  :$!InstanceId,
-    Bool :$!WakeUp         = True
-  ) { }
+    :$dryRun,
+    :$instanceId,
+    :$wakeUp,
+    # For deserialization purposes, only!
+    :$!DryRun         = False,
+    :$!InstanceId     = '',
+    :$!WakeUp         = True
+  ) { 
+    $!DryRun     = $dryRun     if $dryRun.defined;
+    $!InstanceId = $instanceId if $instanceId.defined;
+    $!WakeUp     = $wakeUp     if $wakeUp.defined;
+  }
 
   method run (:$raw)
     is also<
@@ -33,7 +41,8 @@ class Amazon::AWS::EC2::Action::GetConsoleScreenshot is export
       execute
     >
   {
-    die "InstanceId is required!" unless $.InstanceId.defined;
+    die "InstanceId is required!" 
+      unless $.InstanceId.defined && $.InstanceId.trim.chars;
 
     # Should already be sorted.
     my @args = (
