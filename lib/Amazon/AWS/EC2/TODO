@@ -22,7 +22,7 @@
 	+ DescribeImageAttribute
 	+ DescribeInstanceAttribute
   + DescribeNetworkInterfaceAttribute
-	- DescribePublicIpv4Pools
+	+ DescribePublicIpv4Pools
 	+ DescribeSnapshotAttribute
 	- DescribeVolumeStatus
 	+ GetConsoleOutput

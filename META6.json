@@ -333,6 +333,7 @@
       "Amazon::AWS::EC2::Response::DescribeSpotFleetRequestHistoryResponse"                 :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetRequestHistoryResponse.pm6"                 ,
       "Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse"                        :  "lib/Amazon/AWS/EC2/Response/DescribeSpotPriceHistoryResponse.pm6"                        ,
       "Amazon::AWS::EC2::Response::DescribeTagsResponse"                                    :  "lib/Amazon/AWS/EC2/Response/DescribeTagsResponse.pm6"                                    ,
+      "Amazon::AWS::EC2::Response::DescribeVolumeStatusResponse"                            :  "lib/Amazon/AWS/EC2/Response/DescribeVolumeStatusResponse.pm6"                            ,
       "Amazon::AWS::EC2::Response::DisassociateAddressResponse"                             :  "lib/Amazon/AWS/EC2/Response/DisassociateAddressResponse.pm6"                             ,
       "Amazon::AWS::EC2::Response::DisassociateIamInstanceProfileResponse"                  :  "lib/Amazon/AWS/EC2/Response/DisassociateIamInstanceProfileResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::GetConsoleOutputResponse"                                :  "lib/Amazon/AWS/EC2/Response/GetConsoleOutputResponse.pm6"                                ,
@@ -578,6 +579,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

@@ -324,6 +324,7 @@ Amazon::AWS::EC2::Response::DescribeSnapshotAttributeResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetRequestHistoryResponse
 Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse
 Amazon::AWS::EC2::Response::DescribeTagsResponse
+Amazon::AWS::EC2::Response::DescribeVolumeStatusResponse
 Amazon::AWS::EC2::Response::DisassociateAddressResponse
 Amazon::AWS::EC2::Response::DisassociateIamInstanceProfileResponse
 Amazon::AWS::EC2::Response::GetConsoleOutputResponse
