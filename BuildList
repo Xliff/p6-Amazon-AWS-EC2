@@ -20,6 +20,7 @@ Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter
 Amazon::AWS::EC2::Filters::DescribeRegionsFilter
 Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
 Amazon::AWS::EC2::Filters::DescribeTagsFilter
+Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter
 Amazon::AWS::EC2::Filters::DescribeVolumesFilter
 Amazon::AWS::EC2::Types::Base
 Amazon::AWS::EC2::Types::BlobAttributeValue
