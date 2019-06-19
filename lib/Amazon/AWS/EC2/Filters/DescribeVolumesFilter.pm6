@@ -3,11 +3,13 @@ use v6.d;
 use XML::Class;
 
 use Amazon::AWS::Roles::Base;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Filters::DescribeVolumesFilters::Attachment
   does XML::Class[xml-element => 'attachment']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
   
   has Str        $.attach-time             is xml-element    is rw;
   has Bool       $.delete-on-termination   is xml-element    is rw;
@@ -21,6 +23,7 @@ class Amazon::AWS::EC2::Filters::DescribeVolumesFilter is export
   does XML::Class
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
   
   has Attachment $.attachment                                is rw;
   has Str        $.availability-zone       is xml-element    is rw;

@@ -320,6 +320,7 @@ Amazon::AWS::EC2::Response::DescribePlacementGroupsResponse
 Amazon::AWS::EC2::Response::DescribePrincipalIdFormatResponse
 Amazon::AWS::EC2::Response::DescribeRegionsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesOfferingsResponse
+Amazon::AWS::EC2::Response::DescribeSnapshotAttributeResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetRequestHistoryResponse
 Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse
 Amazon::AWS::EC2::Response::DescribeTagsResponse
@@ -465,6 +466,7 @@ Amazon::AWS::EC2::Types::VpnConnection
 Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::EC2::Action::DescribeIdFormat
 Amazon::AWS::EC2::Action::DescribeRegions
+Amazon::AWS::EC2::Action::DescribeSnapshotAttribute
 Amazon::AWS::EC2::Action::DescribeTags
 Amazon::AWS::EC2::Action::GetConsoleOutput
 Amazon::AWS::EC2::Action::GetConsoleScreenshot
@@ -490,6 +492,7 @@ Amazon::AWS::EC2::Response::DescribeImagesResponse
 Amazon::AWS::EC2::Response::DescribeInstanceAttributeResponse
 Amazon::AWS::EC2::Response::DescribeInstanceStatusResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplatesResponse
+Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse
 Amazon::AWS::EC2::Response::DescribePublicIpv4PoolsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesListingsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesModificationsResponse

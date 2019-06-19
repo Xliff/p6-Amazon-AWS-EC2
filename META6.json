@@ -329,6 +329,7 @@
       "Amazon::AWS::EC2::Response::DescribePrincipalIdFormatResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribePrincipalIdFormatResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeRegionsResponse"                                 :  "lib/Amazon/AWS/EC2/Response/DescribeRegionsResponse.pm6"                                 ,
       "Amazon::AWS::EC2::Response::DescribeReservedInstancesOfferingsResponse"              :  "lib/Amazon/AWS/EC2/Response/DescribeReservedInstancesOfferingsResponse.pm6"              ,
+      "Amazon::AWS::EC2::Response::DescribeSnapshotAttributeResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeSnapshotAttributeResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeSpotFleetRequestHistoryResponse"                 :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetRequestHistoryResponse.pm6"                 ,
       "Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse"                        :  "lib/Amazon/AWS/EC2/Response/DescribeSpotPriceHistoryResponse.pm6"                        ,
       "Amazon::AWS::EC2::Response::DescribeTagsResponse"                                    :  "lib/Amazon/AWS/EC2/Response/DescribeTagsResponse.pm6"                                    ,
@@ -474,6 +475,7 @@
       "Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification"                          :  "lib/Amazon/AWS/EC2/Types/VpnConnectionOptionsSpecification.pm6"                          ,
       "Amazon::AWS::EC2::Action::DescribeIdFormat"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeIdFormat.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeRegions"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeRegions.pm6"                                           ,
+      "Amazon::AWS::EC2::Action::DescribeSnapshotAttribute"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshotAttribute.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeTags"                                              :  "lib/Amazon/AWS/EC2/Action/DescribeTags.pm6"                                              ,
       "Amazon::AWS::EC2::Action::GetConsoleOutput"                                          :  "lib/Amazon/AWS/EC2/Action/GetConsoleOutput.pm6"                                          ,
       "Amazon::AWS::EC2::Action::GetConsoleScreenshot"                                      :  "lib/Amazon/AWS/EC2/Action/GetConsoleScreenshot.pm6"                                      ,
@@ -499,6 +501,7 @@
       "Amazon::AWS::EC2::Response::DescribeInstanceAttributeResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeInstanceAttributeResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeInstanceStatusResponse"                          :  "lib/Amazon/AWS/EC2/Response/DescribeInstanceStatusResponse.pm6"                          ,
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplatesResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplatesResponse.pm6"                         ,
+      "Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse"               :  "lib/Amazon/AWS/EC2/Response/DescribeNetworkInterfaceAttributeResponse.pm6"               ,
       "Amazon::AWS::EC2::Response::DescribePublicIpv4PoolsResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribePublicIpv4PoolsResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribeReservedInstancesListingsResponse"               :  "lib/Amazon/AWS/EC2/Response/DescribeReservedInstancesListingsResponse.pm6"               ,
       "Amazon::AWS::EC2::Response::DescribeReservedInstancesModificationsResponse"          :  "lib/Amazon/AWS/EC2/Response/DescribeReservedInstancesModificationsResponse.pm6"          ,
@@ -574,6 +577,8 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
 
 
 

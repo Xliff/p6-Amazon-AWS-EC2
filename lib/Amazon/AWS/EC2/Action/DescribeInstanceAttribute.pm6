@@ -4,7 +4,7 @@ use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::DescribeImageAttributeResponse;
+use Amazon::AWS::EC2::Response::DescribeInstanceAttributeResponse;
 use Amazon::AWS::Utils;
 
 my %attributes;

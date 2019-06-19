@@ -3,11 +3,13 @@ use v6.d;
 use XML::Class;
 
 use Amazon::AWS::Roles::Base;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Filters::DescribeTagsFilter::Tag
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
   
   has Str          $.key             is xml-element             is rw;
   has Str          $.value           is xml-element             is rw;
@@ -19,6 +21,7 @@ class Amazon::AWS::EC2::Filters::DescribeTagsFilter is export
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;
+  also does Amazon::AWS::Roles::Eqv;
   
   has Str $.key                                            is xml-element is rw;
   has Str $.resource-id                                    is xml-element is rw;

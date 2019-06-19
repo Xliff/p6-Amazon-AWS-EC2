@@ -21,9 +21,9 @@
 - List of targeted actions to be developed:
 	+ DescribeImageAttribute
 	+ DescribeInstanceAttribute
-  - DescribeNetworkInterfaceAttribute
+  + DescribeNetworkInterfaceAttribute
 	- DescribePublicIpv4Pools
-	- DescribeSnapshotAttribute
+	+ DescribeSnapshotAttribute
 	- DescribeVolumeStatus
 	+ GetConsoleOutput
 	+ GetConsoleScreenshot
