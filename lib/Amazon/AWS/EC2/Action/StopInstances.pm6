@@ -19,28 +19,43 @@ class Amazon::AWS::EC2::Action::StopInstances is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool $.DryRun                                         is xml-element               is rw;
-  has Bool $.Force                                          is xml-element               is rw;
-  has Bool $.Hibernate                                      is xml-element               is rw;
-  has Str  @.InstanceIds is xml-container('instancesIdSet') is xml-element('instanceId') is rw;
+  has Bool $.DryRun                                         is xml-element                     is rw;
+  has Bool $.Force                                          is xml-element                     is rw;
+  has Bool $.Hibernate                                      is xml-element                     is rw;
+  has Str  @.InstanceIds is xml-container('instancesIdSet') is xml-element('item', :over-ride) is rw;
 
   submethod BUILD (
-    :$!DryRun    = False,
-    :$!Force     = False,
-    :$!Hibernate = False,
-    :@instances
+    :$dryRun,
+    :$force,
+    :$hibernate,
+    :@instances,
+    # For deserialization purposes, ONLY!
+    :$!DryRun      = False,
+    :$!Force       = False,
+    :$!Hibernate   = False,
+    :@!InstanceIds
   ) {
-    @!InstanceIds = do given @instances {
-      when .all ~~ Str      { @instances                     }
-      when .all ~~ Instance { @instances.map( *.instanceID ) }
-      default {
-        die qq:to/DIE/.chomp;
-Invalid value passed to \@instances. Should only contain EC2 Instance objects or strings, but contains:
-{ @instances.grep( *.^name ne <Amazon::AWS::EC2::Instance Str>.any  ).map( *.^name ).unique
-            .join(', ') }
-DIE
+    $!DryRun    = $dryRun    if $dryRun.defined;
+    $!Force     = $force     if $force.defined;
+    $!Hibernate = $hibernate if $hibernate.defined;
+    
+    if @instances {
+      my @valid-types = (Str, Instance);
+      @!InstanceIds = @instances.map({
+        do {
+          when  Instance { .instanceId }
+          when  Str      { $_          }
+          
+          default {
+            die qq:to/DIE/.chomp;
+    Invalid value passed to \@instances. Should only contain Instance-ID compatible Strings, but contains:
+    { @instances.grep( *.WHAT !~~ @valid-types.any ).map( *.^name ).unique
+                .join(', ') }
+    DIE
 
-      }
+          }
+        }
+      });
     }
   }
 

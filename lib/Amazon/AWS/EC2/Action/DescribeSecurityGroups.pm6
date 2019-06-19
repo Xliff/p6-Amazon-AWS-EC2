@@ -7,7 +7,10 @@ use Amazon::AWS::EC2::Types::GroupIdentifier;
 
 use Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter;
 use Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse;
+
 use Amazon::AWS::Utils;
+
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
   does XML::Class[
@@ -15,14 +18,16 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
+  also does Amazon::AWS::Roles::Eqv;
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool                          $.DryRun                                      is xml-element               is rw;
-  has DescribeSecurityGroupsFilter  @.filters     is xml-container('filterSet')   is xml-element               is rw;
-  has Str                           @.groupIds    is xml-container('groupIds')    is xml-element('groupId')    is rw;
-  has Str                           @.groupNames  is xml-container('groupNames')  is xml-element('groupName')  is rw;
-  has Int                           $.maxResults                                  is xml-element               is rw;
-  has Str                           $.nextToken                                   is xml-element               is rw;
+  has Bool                          $.DryRun                                      is xml-element                      is xml-skip-null is rw;
+  has DescribeSecurityGroupsFilter  @.Filters     is xml-container('filterSet')   is xml-element('item', :over-ride)  is xml-skip-null is rw;
+  has Str                           @.GroupIds    is xml-container('groupIds')    is xml-element('item', :over-ride)  is xml-skip-null is rw;
+  has Str                           @.GroupNames  is xml-container('groupNames')  is xml-element('item', :over-ride)  is xml-skip-null is rw;
+  has Int                           $.MaxResults                                  is xml-element                      is xml-skip-null is rw;
+  #has Str                           $.NextToken                                   is xml-element                      is xml-skip-null is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -30,52 +35,69 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
   #                 - One page (and then pass the next token).
 
   submethod BUILD (
+    :$dryRun,
+    :@filters,
+    :@groups,
+    :@groupIds,
+    :@groupNames,
+    :$maxResults,
+    # For testing purposes, only!
     :$!DryRun     = False,
-    :$!maxResults = 1000,
-    :$!nextToken  = '',
-    :@filters    is copy = (),
-    :@groups     is copy = (),
-    :@groupIds   is copy = (),
-    :@groupNames is copy = ()
+    :@!Filters,
+    :@!GroupIds,
+    :@!GroupNames,
+    :$!MaxResults = 1000,
+    #:$!NextToken  = '',
   ) {
-    die ':$maxResults must be a number from 5 to 1000'
-      unless $!maxResults ~~ 5..1000;
+    if $maxResults.defined {
+      die ':$maxResults must be a number from 5 to 1000'
+        unless $maxResults ~~ 5..1000;
+      $!MaxResults = $maxResults;
+    }
+      
+   # Will MaxResults work with @!GroupIds?
 
     for @groups {
       when GroupIdentifier {
-        @!groupIds.push:   .groupId;
-        @!groupNames.push: .groupNames;
+        @!GroupIds.push:   .groupId    if .groupId.defined;
+        @!GroupNames.push: .groupNames if .groupName.defined;
       }
       default { die "Invalid value '{ ^.name }' in \@groups" }
     }
 
-    @!groupIds = @groupIds.map({
-      do {
-        when Str             { $_       }
-        when GroupIdentifier { .groupId }
-        default              { die "Invalid type '{ .^name }' in \@groupIds!" }
-      }
-    }).unique;
+    if @groupIds {
+      @!GroupIds = @groupIds.map({
+        do {
+          when Str             { $_       }
+          when GroupIdentifier { .groupId }
+          default              { die "Invalid type '{ .^name }' in \@groupIds!" }
+        }
+      }).unique;
+    }
 
-    @!groupNames = @groupNames.= map({
-      do {
-        when Str             { $_       }
-        when GroupIdentifier { .groupName }
-        default              { die "Invalid type '{ .^name }' in \@groupNames!" }
-      }
-    }).unique;
+    if @groupNames {
+      @!GroupNames = @groupNames.map({
+        do {
+          when Str             { $_       }
+          when GroupIdentifier { .groupName }
+          default              { die "Invalid type '{ .^name }' in \@groupNames!" }
+        }
+      }).unique;
+    }
 
-    @!filters = do given @filters {
-      when .all ~~ DescribeSecurityGroupsFilter { $_ }
-        
-      default {
-        die qq:to/DIE/.chomp;
-        Invalid value passed to \@filers. Should only contain Filters::DescribeSecurityGroupFilter objects, but contains:
-        { @filters.map( *.^name ).unique.join('. ') }
-        DIE
+    if @filters {
+      @!Filters = do given @filters {
+        when .all ~~ DescribeSecurityGroupsFilter    { $_ }
 
-      }
-    };
+        default {
+          die qq:to/DIE/.chomp;
+          Invalid value passed to \@filers. Should only contain Filters::DescribeSecurityGroupFilter objects, but contains:
+          { @filters.map( *.^name ).unique.join('. ') }
+          DIE
+
+        }
+      };
+    }
 
   }
 
@@ -110,7 +132,7 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
         |@GroupIdArgs,
         |@GroupNameArgs,
         |@FilterArgs,
-        MaxResults     => $.maxResults,
+        MaxResults     => $.MaxResults,
         Version        => '2016-11-15'
       );
     }

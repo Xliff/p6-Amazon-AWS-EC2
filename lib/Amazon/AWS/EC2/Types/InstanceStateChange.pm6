@@ -1,28 +1,17 @@
-use v6.c;
-
-use XML::Class;
+use v6.d;
 
 use Amazon::AWS::EC2::Types::Base;
 
-role Amazon::AWS::EC2::Types::InstanceStateChange::InstanceState does XML::Class {
-  has Int $.code is xml-element is rw;
-  has Str $.name is xml-element is rw;
-}
+use XML::Class;
 
-class Amazon::AWS::EC2::Types::InstanceStateChange::currentState {
-  also does Amazon::AWS::EC2::Types::InstanceStateChange::InstanceState;
-}
-
-class Amazon::AWS::EC2::Types::InstanceStateChange::previousState {
-  also does Amazon::AWS::EC2::Types::InstanceStateChange::InstanceState;
-}
+use Amazon::AWS::EC2::Types::InstanceState;
 
 class Amazon::AWS::EC2::Types::InstanceStateChange is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Str           $.instanceID    is xml-element                  is rw;
-  has previousState $.previousState is xml-element('previousState') is rw;
-  has currentState  $.currentState  is xml-element('currentState')  is rw;
+  has InstanceState    $.currentState     is xml-element(:over-ride)    is xml-skip-null          is rw;
+  has Str              $.instanceId       is xml-element                is xml-skip-null          is rw;
+  has InstanceState    $.previousState    is xml-element(:over-ride)    is xml-skip-null          is rw;
 }

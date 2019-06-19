@@ -1,4 +1,52 @@
-- See about writing a spider that goes here: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Types.html
++ See about writing a spider that goes here: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Types.html
   And generates the reset of these?
 
   This should ONLY be considered after the type verification test has been written. See the obj-testing branch for the status on that initiative.
+  update (cw): ... Oops... I forgot this prerequisite.
+
++ Modify Utils::populateTestObject to honor Attribute WHY comments.
++ Add a switch to object tests in t/ to limit testing to a specific object
+- Regarding using Type objects in Actions and Filters, it may be best to smartmatch
+  objects against Amazon::AWS::EC2::Types::Base, and then using dynamic lookup
+  to special case. The default case would be whatever is appropriate for that filter,
+  which would usually be the object-id for the main type in question.
+
+  This may mean more complex logic in validation, although the above strategy
+  could be used to keep it as clean as possible.
+- Write script to test new actions. Would work like the basic test-new, except
+  would only key on new Action classes. From there it would test corresponding
+  Action, Response and Filter objects. Depends on completion of previous action
+  item.
+- t/03-filter.t -- First test returns a false positive. Investigate why and solve.
+- List of targeted actions to be developed:
+	- DescribeImageAttribute
+	- DescribeInstanceAttribute
+  - DescribeNetworkInterfaceAttribute
+	- DescribePublicIpv4Pools
+	- DescribeSnapshotAttribute
+	- DescribeVolumeStatus
+	+ GetConsoleOutput
+	+ GetConsoleScreenshot
+  - RestartInstance
+- Following the development of the list of actions, above. Develope the Create analogs of all developed Describe actions
+- Add a better key management system to the API. This would allow keeping either multiple key files in .ec2, using EC2AccessKeys (no .csv) as managed file containing multiple keys. May want to check for accessKeys.csv as the default and fall back to EC2AccessKeys.csv. If no EC2AccessKeys file is found, the key name is the name of the file without the ".csv" suffix. If no .csv files are found then use EC2AccessKeys. If neither of the previous options are available, then error out.
+- Additional unit testing via EC2/Tests may accidentally contain private information. This should not be allowed.  Should add pre-commit hooks that will abort any commit that contains private IDs and identifiers. 
+  Tests.example directory, and can then be merged into master.
+- Add git submodule for PrivateTests. This directory will be for organizational object tests and will contain private data. This repo will NOT be for public consumption. Like Tests directory, name of ACTION class is expected.
+- Attribute descriptions will now accept the following declarative, trailing comments:
+    "#=  <option1> | <option2> | ... | <optionN>"   || List of valid options for validation and testing
+    "#=  [ comp=<compunit> ] [ pick=<FQSN> ] [ check=<FQSN> ]" || Each listed option, and ONLY those options can appear in a signe trailing comment
+                                                               || check = Fully Qualified Subroutine Name (routine to check attribute values)
+                                                                  pick  = Fully Qualified Subroutine Name (routine to generate random attribute values for testing)
+                                                                  comp  = Name of CompUnit (will provide check and pick routines. Equivalent to:
+                                                                    "pick=<compunit>::<pickSub>" and "check=<compunit>::<checkSub")
+
++  Known Id prefixes:
+    eni      - Elastic Network Interface
+    i        - Instance
+    vol      - Volume
+    sub      - Subnet
+    vpc      - VPC
+    snap     - Snapshot
+    eipalloc - Elastic IP Allocation
+    policy   - Snapshot Lifecycle Policy
