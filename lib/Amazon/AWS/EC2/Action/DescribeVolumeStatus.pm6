@@ -3,15 +3,17 @@ use v6.c;
 use XML::Class;
 use Method::Also;
 
-use Amazon::AWS::EC2::Filters::DescribeInstancesFilter;
-use Amazon::AWS::EC2::Response::DescribeInstancesResponse;
+use Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter;
+use Amazon::AWS::EC2::Response::DescribeVolumeStatusResponse;
+use Amazon::AWS::EC2::Types::Instance;
+use Amazon::AWS::EC2::Types::Snapshot;
 use Amazon::AWS::EC2::Types::Volume;
 use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
 
-class Amazon::AWS::EC2::Action::DescribeInstances is export
+class Amazon::AWS::EC2::Action::DescribeVolumeStatus is export
   does XML::Class[
-    xml-element   => 'DescribeInstances',
+    xml-element   => 'DescribeVolumeStatus',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
@@ -19,11 +21,11 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool                     $.DryRun                                        is xml-element         is rw;
-  has DescribeInstancesFilter  @.Filters     is xml-container('filterSet')     is xml-element         is rw;
-  has Str                      @.InstanceIds is xml-container('instanceIdSet') is xml-element('item') is rw;
-  has Int                      $.MaxResults                                    is xml-element         is rw;
-  #has Str                      $.NextToken                                     is xml-element         is rw;
+  has Bool                        $.DryRun                                        is xml-element             is rw;
+  has DescribeVolumeStatusFilter  @.Filters     is xml-container('filterSet')     is xml-element             is rw;
+  has Int                         $.MaxResults                                    is xml-element             is rw;
+  has Str                         @.VolumeIds   is xml-container('volumeIdSet')   is xml-element('iitem')    is rw;
+  #has Str                         $.NextToken                                     is xml-element               is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -33,27 +35,30 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
   submethod BUILD (
     :$dryRun,
     :@filters,
-    :@instances,
     :$maxResults,
-    :$nextToken,
+    :@volumes,
     # For testing purposes only
     :$!DryRun     = False,
     :@!Filters,
-    :@!InstanceIds,
     :$!MaxResults = 1000,
+    :@!VolumeIds,
     # :$!NextToken  = '',
   ) {
-    if @instances {
-      @!InstanceIds = @instances.map({
+    if @volumes {
+      my @valid-types = (Str, Instance, Snapshot, Volume);
+      @!VolumeIds = @volumes.map({
         do {
-          when Str      { $_          }
-          when Instance { .instanceID }
-          when Volume   { .attachments.map( *.instanceId ) }
+          when Str      { $_                 }
+          when Instance { .volumeId          }
+          when Snapshot { .volumeId          }
+          when Volume   { .snapshot.volumeId }
 
           default {
             die qq:to/DIE/.chomp;
-            Invalid value passed to \@instances. Should only contain Instance objects, but contains:
-            { @instances.map( *.^name ).unique.join(', ') }
+            Invalid value passed to \@volumes. Should only contain VolumeId-compatible objects. 
+            Invalid objects found: { 
+              @volumes.map( * !~~ @valid-types.any ).unique.join(', ') 
+            }
             DIE
 
           }
@@ -63,7 +68,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
 
     if @filters {
       @!Filters = do given @filters {
-        when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @filters }
+        when .all ~~ DescribeVolumeStatusFilter { @filters }
 
         default {
           die qq:to/DIE/.chomp;
@@ -83,18 +88,18 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
       execute
     >
   {
-    die 'Cannot use @.instances and $.maxResults in the same call to DescribeInstances'
-      if $.MaxResults.defined && @.InstanceIds;
-
-    my $cnt = 1;
-    my @InstanceArgs;
-    @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @.InstanceIds;
+    die 'Cannot use @.volumes and $.maxResults in the same call to DescribeVolumeStatus'
+      if $.MaxResults.defined && @.VolumeIds;
 
     my @FilterArgs;
-    $cnt = 1;
+    my $cnt = 1;
     for @!Filters {
       @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
     }
+    
+    $cnt = 1;
+    my @VolumeArgs;
+    @VolumeArgs.push: Pair.new("VolumeId.{$cnt++}", $_) for @.VolumeIds;
 
     # Should already be sorted.
     my @args;
@@ -104,10 +109,10 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     } else {
       @args = (
         DryRun         => $.DryRun,
-        |@InstanceArgs,
         |@FilterArgs,
         MaxResults     => $.maxResults,
         Version        => '2016-11-15'
+        |@VolumeArgs,
       );
     }
 

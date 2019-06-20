@@ -24,7 +24,7 @@
   + DescribeNetworkInterfaceAttribute
 	+ DescribePublicIpv4Pools
 	+ DescribeSnapshotAttribute
-	- DescribeVolumeStatus
+	+ DescribeVolumeStatus
 	+ GetConsoleOutput
 	+ GetConsoleScreenshot
   + RestartInstance

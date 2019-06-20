@@ -470,6 +470,7 @@ Amazon::AWS::EC2::Action::DescribeIdFormat
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeSnapshotAttribute
 Amazon::AWS::EC2::Action::DescribeTags
+Amazon::AWS::EC2::Action::DescribeVolumeStatus
 Amazon::AWS::EC2::Action::GetConsoleOutput
 Amazon::AWS::EC2::Action::GetConsoleScreenshot
 Amazon::AWS::EC2::Response::BundleInstanceResponse
