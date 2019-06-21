@@ -160,7 +160,7 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::DescribeImagesResponse.from-xml($xml);
+      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
 
 }

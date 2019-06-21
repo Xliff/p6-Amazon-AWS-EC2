@@ -109,7 +109,7 @@ class Amazon::AWS::EC2::Action::DescribeAddresses is export
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::DescribeAddressesResponse.from-xml($xml);
+      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
 
 }

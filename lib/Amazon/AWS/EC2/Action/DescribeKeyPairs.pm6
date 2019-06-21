@@ -88,7 +88,7 @@ class Amazon::AWS::EC2::Action::DescribeKeyPairs is export
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::DescribeKeyPairsResponse.from-xml($xml);
+      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
 
 }

@@ -77,7 +77,7 @@ constant myclass := (
       $raw ??
         $xml
         !!
-        ::("Amazon::AWS::EC2::Response::{ $c }").from-xml($xml);
+        ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
     }
   }
 );

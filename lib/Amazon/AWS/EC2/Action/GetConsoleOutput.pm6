@@ -60,7 +60,7 @@ class Amazon::AWS::EC2::Action::GetConsoleOutput is export
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::GetConsoleOutputResponse.from-xml($xml);
+      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
 
 }

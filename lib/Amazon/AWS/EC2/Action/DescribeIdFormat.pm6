@@ -65,7 +65,7 @@ class Amazon::AWS::EC2::Action::DescribeIdFormat is export
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::DescribeIdFormatResponse.from-xml($xml);
+      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
 
 }

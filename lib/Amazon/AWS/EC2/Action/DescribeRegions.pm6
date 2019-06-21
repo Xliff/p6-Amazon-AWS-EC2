@@ -91,7 +91,7 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::DescribeRegionsResponse.from-xml($xml);
+      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
 
 }

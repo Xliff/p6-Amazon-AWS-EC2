@@ -76,7 +76,7 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeInstanceAttribute i
     $raw ??
       $xml
       !!
-      ::("Amazon::AWS::EC2::Response::{ $c }").from-xml($xml);
+      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
 });
 

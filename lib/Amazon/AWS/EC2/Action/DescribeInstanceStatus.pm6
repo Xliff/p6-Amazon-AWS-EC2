@@ -132,7 +132,7 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::DescribeInstanceStatusResponse.from-xml($xml);
+      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
 
 }

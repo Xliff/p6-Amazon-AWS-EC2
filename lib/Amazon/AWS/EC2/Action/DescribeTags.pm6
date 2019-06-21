@@ -93,7 +93,7 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
     $raw ??
       $xml
       !!
-      Amazon::AWS::EC2::Response::DescribeTagsResponse.from-xml($xml);
+      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
 
 }
