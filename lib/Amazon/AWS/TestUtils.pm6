@@ -102,21 +102,24 @@ sub changeRandomAttribute($o is rw) {
   $o."$victim"() = $val ~~ Positional ?? $newVal.Array !! $newVal;
 }
 
-sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
-  plan @files.elems * 7 * $number;
+# Must be global for duration of execution.
+my %classes;
 
-  my %classes;
+sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
+  plan @files.elems * 8 * $number;
 
   for ^$number {
     for @files {
       CATCH { default { diag .message } }
       
       my ($class, $a, $bx, $b, $tl, $te);
-      
-      $class := %classes{$_} // (try require ::($_));
-      
-      ok         ($tl = $class !~~ Failure),  "$_ loads. Is not a Failure object";
-      ok         ($te = $class !=:= Nil),     "$_ exists";
+ 
+      (%classes{$_} = try require ::($_)) if not %classes{$_}:exists;
+      $class := %classes{$_};
+         
+      ok         ($tl = $class !~~ Failure),             "$_ loads. Is not a Failure object";
+      ok         ($te = $class !=:= Nil),                "$_ exists";
+      ok         $class.HOW.^name.ends-with('ClassHOW'), "$_ is a class";
       
       # Attempt to speed things up.
       %classes{$_} := $class if $tl && $te;
@@ -124,13 +127,14 @@ sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
       lives-ok {
         CATCH {
           default {
-            $class.^name.say;
-            $class.HOW.say;
+            diag $class.^name;
+            diag $class.HOW;
+            diag %classes{$_}.gist;
             diag .message;
             .rethrow
           }
         }
-        $a = populateTestObject(::($_).new, :$elems, :!blanks)
+        $a = populateTestObject( %classes{$_}.new, :$elems, :!blanks )
       },                                                            "$_ can be populated";
       lives-ok { $bx = $a.to-xml                               },   "$_ serializes ok";
       # diag $bx;
@@ -141,5 +145,6 @@ sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
       
       nok      do { changeRandomAttribute($b); $a eqv $b       },   "Changed $_ fails eqv";
     }
+  
   }
 }
