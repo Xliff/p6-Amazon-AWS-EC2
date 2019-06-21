@@ -22,6 +22,7 @@
       "Amazon::AWS::Roles::Eqv"                                                             :  "lib/Amazon/AWS/Roles/Eqv.pm6"                                                            ,
       "Amazon::AWS::Roles::Base"                                                            :  "lib/Amazon/AWS/Roles/Base.pm6"                                                           ,
       "Amazon::AWS::EC2::Filters::DescribeAddressesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeAddressesFilter.pm6"                                  ,
+      "Amazon::AWS::EC2::Filters::DescribeAvailabilityZonesFilter"                          :  "lib/Amazon/AWS/EC2/Filters/DescribeAvailabilityZonesFilter.pm6"                          ,
       "Amazon::AWS::EC2::Filters::DescribeImagesFilter"                                     :  "lib/Amazon/AWS/EC2/Filters/DescribeImagesFilter.pm6"                                     ,
       "Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeInstanceStatusFilter.pm6"                             ,
       "Amazon::AWS::EC2::Filters::DescribeInstancesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeInstancesFilter.pm6"                                  ,
@@ -544,7 +545,6 @@
       "Amazon::AWS::EC2::Types::SpotFleetLaunchSpecification"                               :  "lib/Amazon/AWS/EC2/Types/SpotFleetLaunchSpecification.pm6"                               ,
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfigData"                                 :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfigData.pm6"                                 ,
       "Amazon::AWS::EC2::Types::Vpc"                                                        :  "lib/Amazon/AWS/EC2/Types/Vpc.pm6"                                                        ,
-      "Amazon::AWS::EC2::Action::DescribeAccountAttributes"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAccountAttributes.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeAddresses"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeAddresses.pm6"                                         ,
       "Amazon::AWS::EC2::Action::DescribeImageAttribute"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeImageAttribute.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeImages"                                            :  "lib/Amazon/AWS/EC2/Action/DescribeImages.pm6"                                            ,
@@ -568,6 +568,8 @@
       "Amazon::AWS::EC2::Response::RunInstancesResponse"                                    :  "lib/Amazon/AWS/EC2/Response/RunInstancesResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Types::FleetData"                                                  :  "lib/Amazon/AWS/EC2/Types/FleetData.pm6"                                                  ,
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfig"                                     :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfig.pm6"                                     ,
+      "Amazon::AWS::EC2::Action::DescribeAccountAttributes"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAccountAttributes.pm6"                                 ,
+      "Amazon::AWS::EC2::Action::DescribeAvailabilityZones"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAvailabilityZones.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeInstances"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeInstances.pm6"                                         ,
       "Amazon::AWS::EC2::Response::DescribeFleetsResponse"                                  :  "lib/Amazon/AWS/EC2/Response/DescribeFleetsResponse.pm6"                                  ,
       "Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetRequestsResponse.pm6"                       
@@ -582,6 +584,8 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
 
 
 
