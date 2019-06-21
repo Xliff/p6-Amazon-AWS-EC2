@@ -479,7 +479,6 @@
       "Amazon::AWS::EC2::Action::DescribeRegions"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeRegions.pm6"                                           ,
       "Amazon::AWS::EC2::Action::DescribeSnapshotAttribute"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshotAttribute.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeTags"                                              :  "lib/Amazon/AWS/EC2/Action/DescribeTags.pm6"                                              ,
-      "Amazon::AWS::EC2::Action::DescribeVolumeStatus"                                      :  "lib/Amazon/AWS/EC2/Action/DescribeVolumeStatus.pm6"                                      ,
       "Amazon::AWS::EC2::Action::GetConsoleOutput"                                          :  "lib/Amazon/AWS/EC2/Action/GetConsoleOutput.pm6"                                          ,
       "Amazon::AWS::EC2::Action::GetConsoleScreenshot"                                      :  "lib/Amazon/AWS/EC2/Action/GetConsoleScreenshot.pm6"                                      ,
       "Amazon::AWS::EC2::Response::BundleInstanceResponse"                                  :  "lib/Amazon/AWS/EC2/Response/BundleInstanceResponse.pm6"                                  ,
@@ -545,6 +544,7 @@
       "Amazon::AWS::EC2::Types::SpotFleetLaunchSpecification"                               :  "lib/Amazon/AWS/EC2/Types/SpotFleetLaunchSpecification.pm6"                               ,
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfigData"                                 :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfigData.pm6"                                 ,
       "Amazon::AWS::EC2::Types::Vpc"                                                        :  "lib/Amazon/AWS/EC2/Types/Vpc.pm6"                                                        ,
+      "Amazon::AWS::EC2::Action::DescribeAccountAttributes"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAccountAttributes.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeAddresses"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeAddresses.pm6"                                         ,
       "Amazon::AWS::EC2::Action::DescribeImageAttribute"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeImageAttribute.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeImages"                                            :  "lib/Amazon/AWS/EC2/Action/DescribeImages.pm6"                                            ,
@@ -554,6 +554,7 @@
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute"                         :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaceAttribute.pm6"                         ,
       "Amazon::AWS::EC2::Action::DescribePublicIpv4Pools"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePublicIpv4Pools.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
+      "Amazon::AWS::EC2::Action::DescribeVolumeStatus"                                      :  "lib/Amazon/AWS/EC2/Action/DescribeVolumeStatus.pm6"                                      ,
       "Amazon::AWS::EC2::Action::DescribeVolumes"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeVolumes.pm6"                                           ,
       "Amazon::AWS::EC2::Action::RebootInstances"                                           :  "lib/Amazon/AWS/EC2/Action/RebootInstances.pm6"                                           ,
       "Amazon::AWS::EC2::Action::StartInstances"                                            :  "lib/Amazon/AWS/EC2/Action/StartInstances.pm6"                                            ,
@@ -581,6 +582,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

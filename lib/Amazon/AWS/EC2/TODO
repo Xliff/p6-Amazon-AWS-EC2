@@ -40,12 +40,9 @@
   - DescribeIdFormat
   - DescribeAvailabilityZones
   - DescribeAddresses
-  - DescribeAccountAttributes
+  + DescribeAccountAttributes
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   - DescribeDhcpOptions
-  
-  
-  
   
 - Following the development of the list of actions, above. Develope the Create analogs of all developed Describe actions
 - Add a better key management system to the API. This would allow keeping either multiple key files in .ec2, using EC2AccessKeys (no .csv) as managed file containing multiple keys. May want to check for accessKeys.csv as the default and fall back to EC2AccessKeys.csv. If no EC2AccessKeys file is found, the key name is the name of the file without the ".csv" suffix. If no .csv files are found then use EC2AccessKeys. If neither of the previous options are available, then error out.

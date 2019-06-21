@@ -470,7 +470,6 @@ Amazon::AWS::EC2::Action::DescribeIdFormat
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeSnapshotAttribute
 Amazon::AWS::EC2::Action::DescribeTags
-Amazon::AWS::EC2::Action::DescribeVolumeStatus
 Amazon::AWS::EC2::Action::GetConsoleOutput
 Amazon::AWS::EC2::Action::GetConsoleScreenshot
 Amazon::AWS::EC2::Response::BundleInstanceResponse
@@ -536,6 +535,7 @@ Amazon::AWS::EC2::Types::ScheduledInstancesLaunchSpecification
 Amazon::AWS::EC2::Types::SpotFleetLaunchSpecification
 Amazon::AWS::EC2::Types::SpotFleetRequestConfigData
 Amazon::AWS::EC2::Types::Vpc
+Amazon::AWS::EC2::Action::DescribeAccountAttributes
 Amazon::AWS::EC2::Action::DescribeAddresses
 Amazon::AWS::EC2::Action::DescribeImageAttribute
 Amazon::AWS::EC2::Action::DescribeImages
@@ -545,6 +545,7 @@ Amazon::AWS::EC2::Action::DescribeKeyPairs
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute
 Amazon::AWS::EC2::Action::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
+Amazon::AWS::EC2::Action::DescribeVolumeStatus
 Amazon::AWS::EC2::Action::DescribeVolumes
 Amazon::AWS::EC2::Action::RebootInstances
 Amazon::AWS::EC2::Action::StartInstances
