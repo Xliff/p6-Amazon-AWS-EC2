@@ -4,7 +4,7 @@ use Test;
 
 unit package Amaszon::AWS::EC2::Tests::TestTemplate;
 
-our %classes;
+our %classes is export;
 
 sub runActionResponseTests(\action, \response) is export {    
   my ($o, $ro, $x);
