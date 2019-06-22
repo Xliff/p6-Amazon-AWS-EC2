@@ -75,7 +75,9 @@ class Amazon::AWS::EC2::Action::DescribePublicIpv4Pools is export
     } else {
       @args = (
         MaxResults     => $.MaxResults,
-        |@PoolArgs,
+      );
+      @args.append: @PoolArgs if @PoolArgs;
+      @args.append: (
         Version        => '2016-11-15'
       );
     }
