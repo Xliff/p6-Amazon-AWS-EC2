@@ -108,12 +108,14 @@ class Amazon::AWS::EC2::Action::DescribeVolumeStatus is export
       @args = ( nextToken => $nextToken );
     } else {
       @args = (
-        DryRun         => $.DryRun,
-        |@FilterArgs,
-        MaxResults     => $.maxResults,
-        Version        => '2016-11-15'
-        |@VolumeArgs,
+        DryRun         => $.DryRun
       );
+      @args.append: @FilterArgs if @FilterArgs;
+      @args.append: (
+        MaxResults     => $.MaxResults,
+        Version        => '2016-11-15'
+      );
+      @args.append: @VolumeArgs if @VolumeArgs;
     }
 
     # XXX - Add error handling to makeRequest!
