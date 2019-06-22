@@ -7,9 +7,9 @@
 	    "Digest",
 	    "File::Find",
 	    "Method::Also",
-	    "XML::Clas"
-   	  "Base64::Native"
-      "File::Temp",
+	    "XML::Class",
+   	  "Base64::Native",
+      "File::Temp"
     ],
     "description": "Perl6 API Bindings for Amazon AWS EC2",
     "version": "r0.0.1",
@@ -577,23 +577,10 @@
     "name": "Perl6-Amazon-AWS-EC2",
     "perl": "6.d",
     "test-depends": [
-      "Test::META",
+      "Test::META"
     ],
     "build-depends": [
     ],
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
