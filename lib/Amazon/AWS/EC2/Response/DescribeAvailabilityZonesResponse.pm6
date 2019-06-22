@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Response::DescribeAvailabilityZonesResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has AvailabilityZone    @.availabilityZoneInfo    is xml-element    is xml-container('availabilityZoneInfo')      is rw; 
+  has AvailabilityZone    @.availability-zones    is xml-container('availabilityZoneInfo')    is rw; 
 }
