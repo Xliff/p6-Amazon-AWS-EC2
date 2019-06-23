@@ -68,6 +68,11 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeAccountAttributes i
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
+  
+  method getAccountAttributeNames {
+    %attributes<AttributeName|ValidValues>
+  }
+  
 });
 
 BEGIN {

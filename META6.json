@@ -11,7 +11,9 @@
    	  "Base64::Native",
       "File::Temp",
       "Config::INI",
-      "Dependency::Sort"
+      "Dependency::Sort",
+      "Text::Table::Simple",
+      "Data::Dump::Tree"
     ],
     "description": "Perl6 API Bindings for Amazon AWS EC2",
     "version": "r0.0.1",

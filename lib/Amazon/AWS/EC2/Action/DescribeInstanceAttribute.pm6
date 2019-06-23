@@ -78,6 +78,11 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeInstanceAttribute i
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
+  
+  method getAttributes {
+    return %attributes<Attribute|ValidValues>;
+  }
+  
 });
 
 BEGIN {
