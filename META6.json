@@ -36,6 +36,23 @@
       "Amazon::AWS::EC2::Filters::DescribeTagsFilter"                                       :  "lib/Amazon/AWS/EC2/Filters/DescribeTagsFilter.pm6"                                       ,
       "Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter"                               :  "lib/Amazon/AWS/EC2/Filters/DescribeVolumeStatusFilter.pm6"                               ,
       "Amazon::AWS::EC2::Filters::DescribeVolumesFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeVolumesFilter.pm6"                                    ,
+      "Amazon::AWS::EC2::Tests::TestTemplate"                                               :  "lib/Amazon/AWS/EC2/Tests/TestTemplate.pm6"                                               ,
+      "Amazon::AWS::EC2::Tests::DescribeAccountAttributes"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAccountAttributes.pm6"                                  ,
+      "Amazon::AWS::EC2::Tests::DescribeAddresses"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeAddresses.pm6"                                          ,
+      "Amazon::AWS::EC2::Tests::DescribeAvailabilityZones"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAvailabilityZones.pm6"                                  ,
+      "Amazon::AWS::EC2::Tests::DescribeIdFormat"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeIdFormat.pm6"                                           ,
+      "Amazon::AWS::EC2::Tests::DescribeImageAttribute"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeImageAttribute.pm6"                                     ,
+      "Amazon::AWS::EC2::Tests::DescribeImages"                                             :  "lib/Amazon/AWS/EC2/Tests/DescribeImages.pm6"                                             ,
+      "Amazon::AWS::EC2::Tests::DescribeInstanceStatus"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeInstanceStatus.pm6"                                     ,
+      "Amazon::AWS::EC2::Tests::DescribeInstances"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeInstances.pm6"                                          ,
+      "Amazon::AWS::EC2::Tests::DescribeKeyPairs"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeKeyPairs.pm6"                                           ,
+      "Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribePublicIpv4Pools.pm6"                                    ,
+      "Amazon::AWS::EC2::Tests::DescribeRegions"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeRegions.pm6"                                            ,
+      "Amazon::AWS::EC2::Tests::DescribeSecurityGroups"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeSecurityGroups.pm6"                                     ,
+      "Amazon::AWS::EC2::Tests::DescribeSnapshotAttribute"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeSnapshotAttribute.pm6"                                  ,
+      "Amazon::AWS::EC2::Tests::DescribeTags"                                               :  "lib/Amazon/AWS/EC2/Tests/DescribeTags.pm6"                                               ,
+      "Amazon::AWS::EC2::Tests::DescribeVolumeStatus"                                       :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumeStatus.pm6"                                       ,
+      "Amazon::AWS::EC2::Tests::DescribeVolumes"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumes.pm6"                                            ,
       "Amazon::AWS::EC2::Types::Base"                                                       :  "lib/Amazon/AWS/EC2/Types/Base.pm6"                                                       ,
       "Amazon::AWS::EC2::Types::BlobAttributeValue"                                         :  "lib/Amazon/AWS/EC2/Types/BlobAttributeValue.pm6"                                         ,
       "Amazon::AWS::EC2::Types::BundleTaskError"                                            :  "lib/Amazon/AWS/EC2/Types/BundleTaskError.pm6"                                            ,
@@ -588,3 +605,4 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+

@@ -19,7 +19,7 @@ sub runActionResponseTests(\action, \response, $fixup?) is export {
   
   lives-ok { $x = $o.run(:raw)                }, "Can execute {$c}.run";
   ok       { $x.starts-with("<?xml version")  }, "Returned value looks XMLish";
-  diag $x;
+  # diag $x;
   lives-ok { $ro = response.from-xml($x)      }, "Can Instantiate response object from XML";
-  diag $ro.gist;
+  # diag $ro.gist;
 }

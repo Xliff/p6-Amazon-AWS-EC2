@@ -109,15 +109,15 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
   {
     my $cnt = 1;
     my @GroupIdArgs;
-    @GroupIdArgs.push: Pair.new("GroupId.{$cnt++}", $_) for @.groupIds;
+    @GroupIdArgs.push: Pair.new("GroupId.{$cnt++}", $_) for @.GroupIds;
 
     $cnt = 1;
     my @GroupNameArgs;
-    @GroupNameArgs.push: Pair.new("GroupName.{$cnt++}", $_) for @.groupNames;
+    @GroupNameArgs.push: Pair.new("GroupName.{$cnt++}", $_) for @.GroupNames;
 
     my @FilterArgs;
     $cnt = 1;
-    for @.filters {
+    for @.Filters {
       @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
     }
 

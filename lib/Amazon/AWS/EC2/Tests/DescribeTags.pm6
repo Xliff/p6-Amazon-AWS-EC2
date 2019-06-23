@@ -20,16 +20,6 @@ our sub runTests {
   }
   
   subtest 'Testing with all attributes' => sub {
-    my @attributes = $action.getAttributes;
-    
-    # Testing for REQUIRED Attribute value.
-    plan @attribute.elems;
-    for @attributes {
-      runActionResponseTests(
-        $action, 
-        $response, 
-        $o -> { $o.Attribute = $_ } 
-      );
-    }
+    runActionResponseTests($action, $response);
   }
 }

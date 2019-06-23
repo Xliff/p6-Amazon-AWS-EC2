@@ -106,7 +106,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
         DryRun         => $.DryRun,
         |@InstanceArgs,
         |@FilterArgs,
-        MaxResults     => $.maxResults,
+        MaxResults     => $.MaxResults,
         Version        => '2016-11-15'
       );
     }

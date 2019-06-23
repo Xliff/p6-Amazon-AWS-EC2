@@ -23,12 +23,12 @@ our sub runTests {
     my @attributes = $action.getAttributes;
     
     # Testing for REQUIRED Attribute value.
-    plan @attribute.elems;
+    plan @attributes.elems;
     for @attributes {
       runActionResponseTests(
         $action, 
         $response, 
-        $o -> { $o.Attribute = $_ } 
+        -> $o { $o.Attribute = $_ } 
       );
     }
   }

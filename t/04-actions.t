@@ -26,11 +26,11 @@ sub MAIN (:$unit, :$number = 1, :$elems = 5, :$private, :$tests is copy) {
   plan 3 * +@files * $number;
 
   for ^$number {
-    for @files {
-      my $baseName = .split('::')[* - 1];
+    for @files -> $f {
+      my $baseName = $f.split('::')[* - 1];
       subtest "{ $baseName } basic tests" => sub {
         plan :skip-all<Skipping Basic tests> unless <basic all>.any ∈ @tests;
-        doBasicTests( .Array, :$elems ) 
+        doBasicTests( $f.Array, :$elems ) 
       }
 
       for %prefixes.kv -> $pk, $pv {

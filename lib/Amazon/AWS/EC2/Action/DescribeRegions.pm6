@@ -73,7 +73,6 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
     $cnt = 1;
     my @RegionArgs;
     @RegionArgs.push: Pair.new("RegionName.{$cnt++}", $_) for @.Regions;
-    @RegionArgs.say;
 
     # Should already be sorted.
     my @args = (

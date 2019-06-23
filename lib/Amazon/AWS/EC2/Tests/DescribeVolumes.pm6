@@ -2,7 +2,7 @@ use v6.d;
 
 use Amazon::AWS::EC2::Tests::TestTemplate;
 
-unit package Amazon::AWS::EC2::Tests::DescribeRegions;
+unit package Amazon::AWS::EC2::Tests::DescribeVolumes;
 
 our sub runTests {
   my $c = $?FILE.split('::')[*-1].substr(0, * - 1);
