@@ -71,7 +71,7 @@ class Amazon::AWS::EC2::Action::RebootInstances is export
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
-      "?Action={ $c }}&{ @args.map({ "{.key}={.value}" }).join('&') }"
+      "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
 
     $raw ??
