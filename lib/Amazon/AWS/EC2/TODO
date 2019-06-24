@@ -68,3 +68,4 @@
     snap     - Snapshot
     eipalloc - Elastic IP Allocation
     policy   - Snapshot Lifecycle Policy
+    arn      - Amazon Resource Name

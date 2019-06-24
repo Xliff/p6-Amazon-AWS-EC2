@@ -14,5 +14,5 @@ class Amazon::AWS::EC2::Response::StopInstancesResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has InstanceStateChange @.instance-states is xml-container('instancesSet') is rw;
+  has InstanceStateChange @.instance-states is xml-container('instancesSet') is xml-element('item', :over-ride) is rw;
 }
