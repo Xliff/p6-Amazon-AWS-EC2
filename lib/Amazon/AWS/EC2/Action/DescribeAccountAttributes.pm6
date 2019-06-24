@@ -9,7 +9,7 @@ use Amazon::AWS::Utils;
 
 my %attributes;
 
-constant myclass := (class Amazon::AWS::EC2::Action::DescribeAccountAttributes is export
+class Amazon::AWS::EC2::Action::DescribeAccountAttributes is export
   does XML::Class[
     xml-element   => 'DescribeAccountAttributes',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
@@ -17,31 +17,42 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeAccountAttributes i
 {
   also does Amazon::AWS::Roles::Eqv;
 
-  my $c = BEGIN do { ::?CLASS.^name.split('::')[* - 1] };
+  my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Str  $.AttributeName    is xml-element is rw;  #= supported-platforms | default-vpc
-  has Bool $.DryRun           is xml-element is rw;
+  has Str  @.AttributeNames    is xml-element('item') is xml-container('attributeNameSet') is xml-skip-null is rw;  #= supported-platforms | default-vpc
+  has Bool $.DryRun            is xml-element                                              is xml-skip-null is rw;
 
   submethod BUILD (
-    :$attributeName,
+    :@attributeNames,
     :$dryRun,
     # For deserialization purposes, only!
-    :$!AttributeName = '',
-    :$!DryRun        = False,
+    :@!AttributeNames,
+    :$!DryRun         = False,
     
   ) { 
     # Abstract away into a sub done by Actions role?
     my $dieMsg = qq:to/DIE/.chomp;
-      Invalid Attribute value. Valid value should be any of:
-      { %attributes<AttributeName|Table> }
+      Invalid AttributeName value. Valid value should be any of:
+      { %attributes<AttributeNames|Table> }
       DIE
      
-    $!AttributeName     = $attributeName  if $attributeName.defined;
-    die $dieMsg unless $!AttributeName.defined.not ||
-                       $!AttributeName.chars.not   ||
-                       $!AttributeName ~~ %attributes<AttributeName|ValidValues>.any;
-    
-    $!DryRun        = $dryRun     if $dryRun.defined;
+    @!AttributeNames = @attributeNames.map({
+      when Str {
+        when %attributes<AttributeNames|ValidValues>.any 
+          { $_ }
+        
+        default { 
+          die qq:to/DIE/.chomp;
+            Invalid value for AttributeName. Must be one of:
+              { %attributes<AttributeNames|Table> }
+            DIE
+        }
+      }
+      
+      default    { die $dieMsg }
+    }) if @attributeNames;
+            
+    $!DryRun = $dryRun if $dryRun.defined;
   }
 
   method run (:$raw)
@@ -50,13 +61,21 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeAccountAttributes i
       execute
     >
   {
-    # Should already be sorted.
-    my @args = (
+    # Keep things sorted.
+    my @args;
+    if @.AttributeNames {
+      my @AttributeArgs;
+      my $cnt = 1;
+      for @.AttributeNames {
+        @AttributeArgs.push: Pair.new("AttributeName.{$cnt++}", .value) 
+          for .pairs;
+      }
+      @args.append: @AttributeArgs;
+    }
+    @args.append: (
       DryRun        => $.DryRun,
       Version       => '2016-11-15'
     );
-    @args.unshift: Pair.new('AttributeName', $.AttributeName)
-      if $.AttributeName.defined && $.AttributeName.chars;
     
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
@@ -70,11 +89,11 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeAccountAttributes i
   }
   
   method getAccountAttributeNames {
-    %attributes<AttributeName|ValidValues>
+    %attributes<AttributeNames|ValidValues>.Array
   }
   
-});
+};
 
 BEGIN {
-  %attributes = getAttributeData(myclass)
+  %attributes = getAttributeData(Amazon::AWS::EC2::Action::DescribeAccountAttributes)
 }

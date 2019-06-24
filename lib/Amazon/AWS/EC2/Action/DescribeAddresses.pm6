@@ -17,10 +17,10 @@ class Amazon::AWS::EC2::Action::DescribeAddresses is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Str                      @.AllocationIds is xml-container('allocationIdSet') is xml-element('allocationId')      is rw;
-  has DescribeAddressesFilter  @.Filters       is xml-container('filterSet')       is xml-element('item', :over-ride)  is rw;
-  has Bool                     $.DryRun                                            is xml-element                      is rw;
-  has Str                      @.PublicIps     is xml-container('publicIpSet')     is xml-element('publicIp')          is rw;
+  has Str                      @.AllocationIds is xml-container('allocationIdSet') is xml-element('allocationId')      is xml-skip-null is rw;
+  has DescribeAddressesFilter  @.Filters       is xml-container('filterSet')       is xml-element('item', :over-ride)  is xml-skip-null is rw;
+  has Bool                     $.DryRun                                            is xml-element                      is xml-skip-null is rw;
+  has Str                      @.PublicIps     is xml-container('publicIpSet')     is xml-element('publicIp')          is xml-skip-null is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests

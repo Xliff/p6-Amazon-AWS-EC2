@@ -6,12 +6,14 @@ unit package Amaszon::AWS::EC2::Tests::TestTemplate;
 
 our %classes is export;
 
-sub runActionResponseTests(\action, \response, $fixup?) is export {    
+constant actionResponseTests is export = 4;
+
+sub runActionResponseTests(\action, \response, $fixup?, :$plan = True) is export {    
   my ($o, $ro, $x);
   
   my $c = action.^name;
   
-  plan 4;
+  plan actionResponseTests if $plan;
   
   lives-ok { $o = action.new                  }, "Can Instantiate $c";
   

@@ -80,6 +80,11 @@ constant myclass := (
         !!
         ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
     }
+    
+    method getAttributes {
+      %attributes<Attribute|ValidValues>.Array;
+    }
+    
   }
 );
 

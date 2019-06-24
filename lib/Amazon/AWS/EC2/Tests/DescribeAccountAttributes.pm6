@@ -1,5 +1,7 @@
 use v6.d;
 
+use Test;
+
 use Amazon::AWS::EC2::Tests::TestTemplate;
 
 unit package Amazon::AWS::EC2::Tests::DescribeAccountAttributes;
@@ -21,16 +23,17 @@ our sub runTests {
     my @attributeNames = $action.getAccountAttributeNames;
     @attributeNames.unshift: Nil;
     
-    plan @attributeNames.elems;
+    plan @attributeNames.elems * actionResponseTests;
     for @attributeNames {
       # @attributeNames has Nil prepended so as to test WITHOUT the 
-      # AttributeName parameter. So the $fixup value must be conditional
+      # AttributeNames parameter. So the $fixup value must be conditional
       my $fixup;
-      $fixup = -> $o { $o.AttributeName = $_ } if .defined;
+      $fixup = -> $o { $o.AttributeNames = $_.Array } if .defined;
       runActionResponseTests(
         $action, 
         $response, 
-        $fixup
+        $fixup,
+        :!plan
       );
     }
   }
