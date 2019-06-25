@@ -67,6 +67,10 @@ class Amazon::AWS::EC2::Action::DescribeIdFormat is export
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
+  
+  method getResources {
+    %attributes<Resource|ValidValues>.Array;
+  }
 
 }
 
