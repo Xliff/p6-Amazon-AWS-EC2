@@ -27,6 +27,7 @@
       "Amazon::AWS::Roles::Base"                                                            :  "lib/Amazon/AWS/Roles/Base.pm6"                                                           ,
       "Amazon::AWS::EC2::Filters::DescribeAddressesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeAddressesFilter.pm6"                                  ,
       "Amazon::AWS::EC2::Filters::DescribeAvailabilityZonesFilter"                          :  "lib/Amazon/AWS/EC2/Filters/DescribeAvailabilityZonesFilter.pm6"                          ,
+      "Amazon::AWS::EC2::Filters::DescribeElasticGpusFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribeElasticGpusFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeImagesFilter"                                     :  "lib/Amazon/AWS/EC2/Filters/DescribeImagesFilter.pm6"                                     ,
       "Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeInstanceStatusFilter.pm6"                             ,
       "Amazon::AWS::EC2::Filters::DescribeInstancesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeInstancesFilter.pm6"                                  ,
@@ -41,7 +42,6 @@
       "Amazon::AWS::EC2::Tests::DescribeAddresses"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeAddresses.pm6"                                          ,
       "Amazon::AWS::EC2::Tests::DescribeAvailabilityZones"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAvailabilityZones.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeIdFormat"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeIdFormat.pm6"                                           ,
-      "Amazon::AWS::EC2::Tests::DescribeImageAttribute"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeImageAttribute.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeImages"                                             :  "lib/Amazon/AWS/EC2/Tests/DescribeImages.pm6"                                             ,
       "Amazon::AWS::EC2::Tests::DescribeInstanceStatus"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeInstanceStatus.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeInstances"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeInstances.pm6"                                          ,
@@ -49,9 +49,7 @@
       "Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribePublicIpv4Pools.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeRegions"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeRegions.pm6"                                            ,
       "Amazon::AWS::EC2::Tests::DescribeSecurityGroups"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeSecurityGroups.pm6"                                     ,
-      "Amazon::AWS::EC2::Tests::DescribeSnapshotAttribute"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeSnapshotAttribute.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeTags"                                               :  "lib/Amazon/AWS/EC2/Tests/DescribeTags.pm6"                                               ,
-      "Amazon::AWS::EC2::Tests::DescribeVolumeStatus"                                       :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumeStatus.pm6"                                       ,
       "Amazon::AWS::EC2::Tests::DescribeVolumes"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumes.pm6"                                            ,
       "Amazon::AWS::EC2::Types::Base"                                                       :  "lib/Amazon/AWS/EC2/Types/Base.pm6"                                                       ,
       "Amazon::AWS::EC2::Types::BlobAttributeValue"                                         :  "lib/Amazon/AWS/EC2/Types/BlobAttributeValue.pm6"                                         ,
@@ -567,6 +565,7 @@
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfigData"                                 :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfigData.pm6"                                 ,
       "Amazon::AWS::EC2::Types::Vpc"                                                        :  "lib/Amazon/AWS/EC2/Types/Vpc.pm6"                                                        ,
       "Amazon::AWS::EC2::Action::DescribeAddresses"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeAddresses.pm6"                                         ,
+      "Amazon::AWS::EC2::Action::DescribeElasticGpus"                                       :  "lib/Amazon/AWS/EC2/Action/DescribeElasticGpus.pm6"                                       ,
       "Amazon::AWS::EC2::Action::DescribeImageAttribute"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeImageAttribute.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeImages"                                            :  "lib/Amazon/AWS/EC2/Action/DescribeImages.pm6"                                            ,
       "Amazon::AWS::EC2::Action::DescribeInstanceAttribute"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeInstanceAttribute.pm6"                                 ,
@@ -605,4 +604,5 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
