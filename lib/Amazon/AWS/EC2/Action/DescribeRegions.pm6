@@ -84,7 +84,7 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
-      "?Action=DescribeRegions&{ @args.map({ "{.key}={.value}" }).join('&') }"
+      "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
 
     $raw ??
