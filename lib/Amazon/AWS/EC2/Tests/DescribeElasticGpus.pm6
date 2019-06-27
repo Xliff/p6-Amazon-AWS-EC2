@@ -4,17 +4,24 @@ use Amazon::AWS::EC2::Tests::TestTemplate;
 
 unit package Amazon::AWS::EC2::Tests::DescribeElasticGpus;
 
-our sub runTests {
+our sub runTests is export {
   my $c = $?FILE.split('::')[*-1].substr(0, * - 1);
   # YYY- Determine why quietly is needed, here!
   my ($action, $response);
   quietly {
-    $action := ( %classes{$c} := 
-      try require ::("Amazon::AWS::EC2::Action::{ $c }") )
-        if not %classes{$c}:exists;
-    $response := ( %classes{"{$c}Response"} := 
-      try require ::("Amazon::AWS::EC2::Response::{ $c }Response") )
-        if not %classes{"{$c}Response"}:exists;
+    $action := do {
+      if not %classes{$c}:exists {
+        %classes{$c} := try require ::("Amazon::AWS::EC2::Action::{ $c }");
+      }
+      %classes{$c}
+    };
+    $response := do {
+      if not %classes{"{$c}Response"}:exists {
+        %classes{"{$c}Response"} := 
+          try require ::("Amazon::AWS::EC2::Response::{ $c }Response");
+      }
+      %classes{"{$c}Response"};
+    };
   }
   
   runActionResponseTests($action, $response);
