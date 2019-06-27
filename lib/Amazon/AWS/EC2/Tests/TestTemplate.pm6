@@ -24,7 +24,7 @@ sub runActionResponseTests(\action, \response, $fixup?, :$plan = True) is export
              } 
              $x = $o.run(:raw)                }, "Can execute {$c}.run";
   ok       { $x.starts-with("<?xml version")  }, "Returned value looks XMLish";
-  # diag $x;
+  diag $x;
   lives-ok { CATCH {  
                default { $*ERR.say; "oops, $_" } 
              } 

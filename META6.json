@@ -40,6 +40,7 @@
       "Amazon::AWS::EC2::Tests::TestTemplate"                                               :  "lib/Amazon/AWS/EC2/Tests/TestTemplate.pm6"                                               ,
       "Amazon::AWS::EC2::Tests::DescribeAccountAttributes"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAccountAttributes.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeAddresses"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeAddresses.pm6"                                          ,
+      "Amazon::AWS::EC2::Tests::DescribeAggregateIdFormat"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAggregateIdFormat.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeAvailabilityZones"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAvailabilityZones.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeElasticGpus"                                        :  "lib/Amazon/AWS/EC2/Tests/DescribeElasticGpus.pm6"                                        ,
       "Amazon::AWS::EC2::Tests::DescribeIdFormat"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeIdFormat.pm6"                                           ,
@@ -585,6 +586,7 @@
       "Amazon::AWS::EC2::Response::CreateLaunchTemplateVersionResponse"                     :  "lib/Amazon/AWS/EC2/Response/CreateLaunchTemplateVersionResponse.pm6"                     ,
       "Amazon::AWS::EC2::Response::DescribeAccountAttributesResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeAccountAttributesResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeAvailabilityZonesResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeAvailabilityZonesResponse.pm6"                       ,
+      "Amazon::AWS::EC2::Response::DescribeConversionTasksResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeConversionTasksResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribeInstancesResponse"                               :  "lib/Amazon/AWS/EC2/Response/DescribeInstancesResponse.pm6"                               ,
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse"                  :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplateVersionsResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::RunInstancesResponse"                                    :  "lib/Amazon/AWS/EC2/Response/RunInstancesResponse.pm6"                                    ,
@@ -592,6 +594,7 @@
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfig"                                     :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfig.pm6"                                     ,
       "Amazon::AWS::EC2::Action::DescribeAccountAttributes"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAccountAttributes.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeAvailabilityZones"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAvailabilityZones.pm6"                                 ,
+      "Amazon::AWS::EC2::Action::DescribeConversionTasks"                                   :  "lib/Amazon/AWS/EC2/Action/DescribeConversionTasks.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeInstances"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeInstances.pm6"                                         ,
       "Amazon::AWS::EC2::Response::DescribeFleetsResponse"                                  :  "lib/Amazon/AWS/EC2/Response/DescribeFleetsResponse.pm6"                                  ,
       "Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetRequestsResponse.pm6"                       
@@ -606,6 +609,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

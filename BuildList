@@ -27,6 +27,7 @@ Amazon::AWS::EC2::Filters::DescribeVolumesFilter
 Amazon::AWS::EC2::Tests::TestTemplate
 Amazon::AWS::EC2::Tests::DescribeAccountAttributes
 Amazon::AWS::EC2::Tests::DescribeAddresses
+Amazon::AWS::EC2::Tests::DescribeAggregateIdFormat
 Amazon::AWS::EC2::Tests::DescribeAvailabilityZones
 Amazon::AWS::EC2::Tests::DescribeElasticGpus
 Amazon::AWS::EC2::Tests::DescribeIdFormat
@@ -572,6 +573,7 @@ Amazon::AWS::EC2::Response::CreateFleetResponse
 Amazon::AWS::EC2::Response::CreateLaunchTemplateVersionResponse
 Amazon::AWS::EC2::Response::DescribeAccountAttributesResponse
 Amazon::AWS::EC2::Response::DescribeAvailabilityZonesResponse
+Amazon::AWS::EC2::Response::DescribeConversionTasksResponse
 Amazon::AWS::EC2::Response::DescribeInstancesResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse
 Amazon::AWS::EC2::Response::RunInstancesResponse
@@ -579,6 +581,7 @@ Amazon::AWS::EC2::Types::FleetData
 Amazon::AWS::EC2::Types::SpotFleetRequestConfig
 Amazon::AWS::EC2::Action::DescribeAccountAttributes
 Amazon::AWS::EC2::Action::DescribeAvailabilityZones
+Amazon::AWS::EC2::Action::DescribeConversionTasks
 Amazon::AWS::EC2::Action::DescribeInstances
 Amazon::AWS::EC2::Response::DescribeFleetsResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse
