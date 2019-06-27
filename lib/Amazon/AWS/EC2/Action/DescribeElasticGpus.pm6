@@ -17,18 +17,18 @@ class Amazon::AWS::EC2::Action::DescribeElasticGpus is export
   
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool                      $.DryRun                                     is xml-element                is rw;
-  has DescribeElasticGpusFilter @.Filters   is xml-container('filterSet')                                  is rw;
-  has Str                       @.GpuIds    is xml-container('gpuIdSet')     is xml-element('keyName')     is rw;
+  has Bool                      $.DryRun                                              is xml-element                is rw;
+  has DescribeElasticGpusFilter @.Filters        is xml-container('filterSet')                                  is rw;
+  has Str                       @.ElasticGpuIds  is xml-container('elasticGpuIdSet')  is xml-element('keyName')     is rw;
 
   submethod BUILD (
     :$dryRun,
     :@filters,
-    :@gpuIds,
+    :@elasticGpuIds,
     # Testing purposes only!
     :$!DryRun = False,
     :@!Filters,
-    :@!GpuIds
+    :@!ElasticGpuIds
   ) {
     if @filters {
       @!Filters = do given @filters {
@@ -45,13 +45,13 @@ class Amazon::AWS::EC2::Action::DescribeElasticGpus is export
     }
 
     # This can be expanded top anything that returns a regionId
-    if @gpuIds {
-      die qq:to/DIE/.chomp unless @gpuIds.all ~~ Str;
-  Invalid value passed to \@keyNames. Should only strings, but contains:
-  { @gpuIds.grep( * !~~ Str ).map( *.^name ).unique.join(', ') }
+    if @elasticGpuIds {
+      die qq:to/DIE/.chomp unless @elasticGpuIds.all ~~ Str;
+  Invalid value passed to \@elasticGpuIds. Should only strings, but contains:
+  { @elasticGpuIds.grep( * !~~ Str ).map( *.^name ).unique.join(', ') }
   DIE
 
-      @!GpuIds = @gpuIds;
+      @!ElasticGpuIds = @elasticGpuIds;
     }
     
   }
@@ -70,14 +70,14 @@ class Amazon::AWS::EC2::Action::DescribeElasticGpus is export
     }
 
     $cnt = 1;
-    my @GpuIdArgs;
-    @GpuIdArgs.push: Pair.new("KeyName.{$cnt++}", $_) for @.gpuIds;
+    my @ElasticGpuIdArgs;
+    @ElasticGpuIdArgs.push: Pair.new("ElasticGpuId.{$cnt++}", $_) for @.ElasticGpuIds;
 
     # Should already be sorted.
     my @args = (
       DryRun         => $.DryRun,
+      |@ElasticGpuIdArgs,
       |@FilterArgs,
-      |@GpuIdArgs,
       Version        => '2016-11-15'
     );
 

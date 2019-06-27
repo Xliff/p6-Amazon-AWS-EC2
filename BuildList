@@ -28,6 +28,7 @@ Amazon::AWS::EC2::Tests::TestTemplate
 Amazon::AWS::EC2::Tests::DescribeAccountAttributes
 Amazon::AWS::EC2::Tests::DescribeAddresses
 Amazon::AWS::EC2::Tests::DescribeAvailabilityZones
+Amazon::AWS::EC2::Tests::DescribeElasticGpus
 Amazon::AWS::EC2::Tests::DescribeIdFormat
 Amazon::AWS::EC2::Tests::DescribeImages
 Amazon::AWS::EC2::Tests::DescribeInstanceStatus

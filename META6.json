@@ -41,6 +41,7 @@
       "Amazon::AWS::EC2::Tests::DescribeAccountAttributes"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAccountAttributes.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeAddresses"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeAddresses.pm6"                                          ,
       "Amazon::AWS::EC2::Tests::DescribeAvailabilityZones"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAvailabilityZones.pm6"                                  ,
+      "Amazon::AWS::EC2::Tests::DescribeElasticGpus"                                        :  "lib/Amazon/AWS/EC2/Tests/DescribeElasticGpus.pm6"                                        ,
       "Amazon::AWS::EC2::Tests::DescribeIdFormat"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeIdFormat.pm6"                                           ,
       "Amazon::AWS::EC2::Tests::DescribeImages"                                             :  "lib/Amazon/AWS/EC2/Tests/DescribeImages.pm6"                                             ,
       "Amazon::AWS::EC2::Tests::DescribeInstanceStatus"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeInstanceStatus.pm6"                                     ,
@@ -604,5 +605,6 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
