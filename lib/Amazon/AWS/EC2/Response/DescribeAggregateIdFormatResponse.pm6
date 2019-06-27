@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Response::DescribeAggregateIdFormatResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has IdFormat    @.statuss                 is xml-element    is xml-container('statusSet')      is rw; 
+  has IdFormat    @.status                                    is xml-container('statusSet')      is rw; 
   has Bool        $.useLongIdsAggregated    is xml-element                                       is rw; 
 }
