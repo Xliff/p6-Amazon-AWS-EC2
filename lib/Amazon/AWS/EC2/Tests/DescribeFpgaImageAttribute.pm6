@@ -37,10 +37,10 @@ our sub runTests {
     # Should have some mechanism where we can get maxResults passed in
     # from the command line using the naked value as a default.
     unless @fpgaImageIds {
-      @fpgaImageIds = @DescribeFpgaImages.new(maxResults => 50)
-                                         .run
-                                         .fpgaImages
-                                         .map( *.fpgaImageId ) 
+      @fpgaImageIds = DescribeFpgaImages.new(maxResults => 50)
+                                        .run
+                                        .fpgaImages
+                                        .map( *.fpgaImageId ) 
     }
     my $imageId = @fpgaImageIds.pick;
                                         

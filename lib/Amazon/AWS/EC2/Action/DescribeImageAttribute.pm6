@@ -9,7 +9,7 @@ use Amazon::AWS::Utils;
 
 my %attributes;
 
-constant myclass := (class Amazon::AWS::EC2::Action::DescribeImageAttribute is export
+class Amazon::AWS::EC2::Action::DescribeImageAttribute is export
   does XML::Class[
     xml-element   => 'DescribeImageAttribute',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
@@ -21,16 +21,16 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeImageAttribute is e
 
   has Str  $.Attribute     is xml-element is rw;  #= description | kernel | ramdisk | launchPermission | productCodes | blockDeviceMapping | sriovNetSupport
   has Bool $.DryRun        is xml-element is rw;
-  has Str  $.InstanceId    is xml-element is rw;
+  has Str  $.ImageId       is xml-element is rw;
 
   submethod BUILD (
     :$attribute,
     :$dryRun,
-    :$instanceId,
+    :$imageId,
     # For deserialization purposes, only!
-    :$!Attribute      = '',
-    :$!DryRun         = False,
-    :$!InstanceId     = '',
+    :$!Attribute   = '',
+    :$!DryRun      = False,
+    :$!ImageId     = '',
   ) { 
     # Abstract away into a sub done by Actions role?
     my $dieMsg = qq:to/DIE/.chomp;
@@ -43,8 +43,8 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeImageAttribute is e
                        $!Attribute.chars.not   ||
                        $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
     
-    $!DryRun        = $dryRun     if $dryRun.defined;
-    $!InstanceId    = $instanceId if $instanceId.defined;
+    $!DryRun     = $dryRun  if $dryRun.defined;
+    $!ImageId    = $imageId if $imageId.defined;
   }
 
   method run (:$raw)
@@ -53,21 +53,20 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeImageAttribute is e
       execute
     >
   {
-    die 'InstanceId is required!' 
-      unless $.InstanceId.defined && $.InstanceId.trim.chars;
+    die 'ImageId is required!' 
+      unless $.ImageId.defined && $.ImageId.trim.chars;
       
     die 'Attribute is required'
       unless $.Attribute.defined && $.Attribute.trim.chars;
 
     # Should already be sorted.
     my @args = (
-      DryRun     => $.DryRun,
-      InstanceId => $.InstanceId,
-      Version    => '2016-11-15'
+      Attribute => $.Attribute,
+      DryRun    => $.DryRun,
+      ImageId   => $.ImageId,
+      Version   => '2016-11-15'
     );
-    @args.unshift: Pair.new('Attribute', $.Attribute) 
-      if $.Attribute.trim.chars;
-
+    
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
@@ -83,8 +82,10 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeImageAttribute is e
     %attributes<Attribute|ValidValues>.Array
   }
   
-});
+}
 
 BEGIN {
-  %attributes = getAttributeData(myclass)
+  %attributes = getAttributeData(
+    Amazon::AWS::EC2::Action::DescribeImageAttribute
+  )
 }

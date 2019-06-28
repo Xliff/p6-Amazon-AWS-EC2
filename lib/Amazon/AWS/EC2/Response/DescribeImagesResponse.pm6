@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Response::DescribeImagesResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has Image    @.imagess    is xml-element    is xml-container('imagesSet')      is rw;
+  has Image    @.images    is xml-container('imagesSet')    is rw;
 }
