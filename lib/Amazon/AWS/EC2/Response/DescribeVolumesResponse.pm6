@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Response::DescribeVolumesResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has Str       $.nextToken    is xml-element                                       is rw;
-  has Volume    @.volumes      is xml-element    is xml-container('volumeSet')      is rw;
+  has Str       $.nextToken    is xml-element                                     is rw;
+  has Volume    @.volumes                        is xml-container('volumeSet')    is rw;
 }

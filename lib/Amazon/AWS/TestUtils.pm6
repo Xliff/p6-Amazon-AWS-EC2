@@ -75,12 +75,13 @@ sub getTestFiles($cat, :$unit) is export {
   @files;
 }
 
-sub changeRandomAttribute($o is rw) {
+sub changeRandomAttribute($o is rw) is export {
   my $victim;
   repeat {
     $victim = $o.^attributes
+                .grep({ .WHY.defined.not })
                 .map({ .name.substr(2) })
-                .grep({ .defined && .chars})
+                .grep({ .defined && .chars })
                 .pick;
   } until $o."$victim"() ~~
     (Str, Bool, Int, Positional, Amazon::AWS::EC2::Types::Base).any;
@@ -100,6 +101,7 @@ sub changeRandomAttribute($o is rw) {
   }
   # diag "Setting {$victim} to {$newVal.gist}";
   $o."$victim"() = $val ~~ Positional ?? $newVal.Array !! $newVal;
+  $o;
 }
 
 # Must be global for duration of execution.
