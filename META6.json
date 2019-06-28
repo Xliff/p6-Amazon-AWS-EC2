@@ -46,6 +46,7 @@
       "Amazon::AWS::EC2::Tests::DescribeAvailabilityZones"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAvailabilityZones.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeConversionTasks"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribeConversionTasks.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeElasticGpus"                                        :  "lib/Amazon/AWS/EC2/Tests/DescribeElasticGpus.pm6"                                        ,
+      "Amazon::AWS::EC2::Tests::DescribeFpgaImages"                                         :  "lib/Amazon/AWS/EC2/Tests/DescribeFpgaImages.pm6"                                         ,
       "Amazon::AWS::EC2::Tests::DescribeIdFormat"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeIdFormat.pm6"                                           ,
       "Amazon::AWS::EC2::Tests::DescribeImages"                                             :  "lib/Amazon/AWS/EC2/Tests/DescribeImages.pm6"                                             ,
       "Amazon::AWS::EC2::Tests::DescribeInstanceStatus"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeInstanceStatus.pm6"                                     ,
@@ -574,6 +575,7 @@
       "Amazon::AWS::EC2::Types::Vpc"                                                        :  "lib/Amazon/AWS/EC2/Types/Vpc.pm6"                                                        ,
       "Amazon::AWS::EC2::Action::DescribeAddresses"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeAddresses.pm6"                                         ,
       "Amazon::AWS::EC2::Action::DescribeElasticGpus"                                       :  "lib/Amazon/AWS/EC2/Action/DescribeElasticGpus.pm6"                                       ,
+      "Amazon::AWS::EC2::Action::DescribeFpgaImageAttribute"                                :  "lib/Amazon/AWS/EC2/Action/DescribeFpgaImageAttribute.pm6"                                ,
       "Amazon::AWS::EC2::Action::DescribeFpgaImages"                                        :  "lib/Amazon/AWS/EC2/Action/DescribeFpgaImages.pm6"                                        ,
       "Amazon::AWS::EC2::Action::DescribeImageAttribute"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeImageAttribute.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeImages"                                            :  "lib/Amazon/AWS/EC2/Action/DescribeImages.pm6"                                            ,
@@ -615,6 +617,8 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
 
 
 
