@@ -28,6 +28,7 @@
       "Amazon::AWS::EC2::Filters::DescribeAddressesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeAddressesFilter.pm6"                                  ,
       "Amazon::AWS::EC2::Filters::DescribeAvailabilityZonesFilter"                          :  "lib/Amazon/AWS/EC2/Filters/DescribeAvailabilityZonesFilter.pm6"                          ,
       "Amazon::AWS::EC2::Filters::DescribeElasticGpusFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribeElasticGpusFilter.pm6"                                ,
+      "Amazon::AWS::EC2::Filters::DescribeFlowLogsFilter"                                   :  "lib/Amazon/AWS/EC2/Filters/DescribeFlowLogsFilter.pm6"                                   ,
       "Amazon::AWS::EC2::Filters::DescribeImagesFilter"                                     :  "lib/Amazon/AWS/EC2/Filters/DescribeImagesFilter.pm6"                                     ,
       "Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeInstanceStatusFilter.pm6"                             ,
       "Amazon::AWS::EC2::Filters::DescribeInstancesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeInstancesFilter.pm6"                                  ,
@@ -42,6 +43,7 @@
       "Amazon::AWS::EC2::Tests::DescribeAddresses"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeAddresses.pm6"                                          ,
       "Amazon::AWS::EC2::Tests::DescribeAggregateIdFormat"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAggregateIdFormat.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeAvailabilityZones"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAvailabilityZones.pm6"                                  ,
+      "Amazon::AWS::EC2::Tests::DescribeConversionTasks"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribeConversionTasks.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeElasticGpus"                                        :  "lib/Amazon/AWS/EC2/Tests/DescribeElasticGpus.pm6"                                        ,
       "Amazon::AWS::EC2::Tests::DescribeIdFormat"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeIdFormat.pm6"                                           ,
       "Amazon::AWS::EC2::Tests::DescribeImages"                                             :  "lib/Amazon/AWS/EC2/Tests/DescribeImages.pm6"                                             ,
@@ -341,6 +343,7 @@
       "Amazon::AWS::EC2::Response::DescribeByoipCidrsResponse"                              :  "lib/Amazon/AWS/EC2/Response/DescribeByoipCidrsResponse.pm6"                              ,
       "Amazon::AWS::EC2::Response::DescribeElasticGpusResponse"                             :  "lib/Amazon/AWS/EC2/Response/DescribeElasticGpusResponse.pm6"                             ,
       "Amazon::AWS::EC2::Response::DescribeFleetHistoryResponse"                            :  "lib/Amazon/AWS/EC2/Response/DescribeFleetHistoryResponse.pm6"                            ,
+      "Amazon::AWS::EC2::Response::DescribeFlowLogsResponse"                                :  "lib/Amazon/AWS/EC2/Response/DescribeFlowLogsResponse.pm6"                                ,
       "Amazon::AWS::EC2::Response::DescribeHostReservationOfferingsResponse"                :  "lib/Amazon/AWS/EC2/Response/DescribeHostReservationOfferingsResponse.pm6"                ,
       "Amazon::AWS::EC2::Response::DescribeIamInstanceProfileAssociationsResponse"          :  "lib/Amazon/AWS/EC2/Response/DescribeIamInstanceProfileAssociationsResponse.pm6"          ,
       "Amazon::AWS::EC2::Response::DescribeIdFormatResponse"                                :  "lib/Amazon/AWS/EC2/Response/DescribeIdFormatResponse.pm6"                                ,
@@ -498,6 +501,7 @@
       "Amazon::AWS::EC2::Types::VpnConnection"                                              :  "lib/Amazon/AWS/EC2/Types/VpnConnection.pm6"                                              ,
       "Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification"                          :  "lib/Amazon/AWS/EC2/Types/VpnConnectionOptionsSpecification.pm6"                          ,
       "Amazon::AWS::EC2::Action::DescribeAggregateIdFormat"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAggregateIdFormat.pm6"                                 ,
+      "Amazon::AWS::EC2::Action::DescribeFlowLogs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeFlowLogs.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeIdFormat"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeIdFormat.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeRegions"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeRegions.pm6"                                           ,
       "Amazon::AWS::EC2::Action::DescribeSnapshotAttribute"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshotAttribute.pm6"                                 ,
@@ -609,6 +613,8 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
 
 
 

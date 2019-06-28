@@ -15,6 +15,7 @@ Amazon::AWS::Roles::Base
 Amazon::AWS::EC2::Filters::DescribeAddressesFilter
 Amazon::AWS::EC2::Filters::DescribeAvailabilityZonesFilter
 Amazon::AWS::EC2::Filters::DescribeElasticGpusFilter
+Amazon::AWS::EC2::Filters::DescribeFlowLogsFilter
 Amazon::AWS::EC2::Filters::DescribeImagesFilter
 Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter
 Amazon::AWS::EC2::Filters::DescribeInstancesFilter
@@ -29,6 +30,7 @@ Amazon::AWS::EC2::Tests::DescribeAccountAttributes
 Amazon::AWS::EC2::Tests::DescribeAddresses
 Amazon::AWS::EC2::Tests::DescribeAggregateIdFormat
 Amazon::AWS::EC2::Tests::DescribeAvailabilityZones
+Amazon::AWS::EC2::Tests::DescribeConversionTasks
 Amazon::AWS::EC2::Tests::DescribeElasticGpus
 Amazon::AWS::EC2::Tests::DescribeIdFormat
 Amazon::AWS::EC2::Tests::DescribeImages
@@ -328,6 +330,7 @@ Amazon::AWS::EC2::Response::DescribeAggregateIdFormatResponse
 Amazon::AWS::EC2::Response::DescribeByoipCidrsResponse
 Amazon::AWS::EC2::Response::DescribeElasticGpusResponse
 Amazon::AWS::EC2::Response::DescribeFleetHistoryResponse
+Amazon::AWS::EC2::Response::DescribeFlowLogsResponse
 Amazon::AWS::EC2::Response::DescribeHostReservationOfferingsResponse
 Amazon::AWS::EC2::Response::DescribeIamInstanceProfileAssociationsResponse
 Amazon::AWS::EC2::Response::DescribeIdFormatResponse
@@ -485,6 +488,7 @@ Amazon::AWS::EC2::Types::VpcPeeringConnection
 Amazon::AWS::EC2::Types::VpnConnection
 Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::EC2::Action::DescribeAggregateIdFormat
+Amazon::AWS::EC2::Action::DescribeFlowLogs
 Amazon::AWS::EC2::Action::DescribeIdFormat
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeSnapshotAttribute
