@@ -20,11 +20,12 @@ sub runActionResponseTests(\action, \response, $fixup?, :$plan = True) is export
   $fixup($o) if $fixup.defined;
   
   lives-ok { CATCH {  
-               default { $*ERR.say; "oops, $_" } 
+               default { use fatal; $*ERR.say; "oops, $_" } 
              } 
+             # Can generate a fatal exception and return a false positive!!
              $x = $o.run(:raw)                }, "Can execute {$c}.run";
   ok       { $x.starts-with("<?xml version")  }, "Returned value looks XMLish";
-  diag $x;
+  # diag $x;
   lives-ok { CATCH {  
                default { $*ERR.say; "oops, $_" } 
              } 

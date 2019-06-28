@@ -17,9 +17,9 @@ class Amazon::AWS::EC2::Action::DescribeElasticGpus is export
   
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool                      $.DryRun                                              is xml-element                is rw;
-  has DescribeElasticGpusFilter @.Filters        is xml-container('filterSet')                                  is rw;
-  has Str                       @.ElasticGpuIds  is xml-container('elasticGpuIdSet')  is xml-element('keyName')     is rw;
+  has Bool                      $.DryRun                                              is xml-element                         is rw;
+  has DescribeElasticGpusFilter @.Filters        is xml-container('filterSet')                                               is rw;
+  has Str                       @.ElasticGpuIds  is xml-container('elasticGpuIdSet')  is xml-element('item', :over-ride)     is rw;
 
   submethod BUILD (
     :$dryRun,
