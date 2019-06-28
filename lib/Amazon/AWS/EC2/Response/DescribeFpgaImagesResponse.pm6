@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Response::DescribeFpgaImagesResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has FpgaImage    @.fpgaImages    is xml-element    is xml-container('fpgaImageSet')      is rw; 
+  has FpgaImage    @.fpgaImages                      is xml-container('fpgaImageSet')      is rw; 
   has Str          $.nextToken     is xml-element                                          is rw; 
 }
