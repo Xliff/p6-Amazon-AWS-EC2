@@ -95,5 +95,7 @@ class Amazon::AWS::EC2::Action::DescribeAccountAttributes is export
 };
 
 BEGIN {
-  %attributes = getAttributeData(Amazon::AWS::EC2::Action::DescribeAccountAttributes)
+  %attributes = getAttributeData(
+    Amazon::AWS::EC2::Action::DescribeAccountAttributes
+  );
 }
