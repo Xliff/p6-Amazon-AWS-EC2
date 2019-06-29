@@ -12,5 +12,5 @@ class Amazon::AWS::EC2::Response::DescribePrincipalIdFormatResponse is export
   also does Amazon::AWS::Roles::Response;
 
   has Str                  $.nextToken     is xml-element                                          is rw; 
-  has PrincipalIdFormat    @.principals    is xml-element    is xml-container('principalSet')      is rw; 
+  has PrincipalIdFormat    @.principals                      is xml-container('principalSet')      is rw; 
 }
