@@ -9,7 +9,7 @@ use Amazon::AWS::Utils;
 
 my %attributes;
 
-constant myclass := (class Amazon::AWS::EC2::Action::DescribeInstanceAttribute is export
+class Amazon::AWS::EC2::Action::DescribeInstanceAttribute is export
   does XML::Class[
     xml-element   => 'DescribeInstanceAttribute',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
@@ -19,7 +19,7 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeInstanceAttribute i
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Str  $.Attribute     is xml-element is rw;  #= instanceType | kernel | ramdisk | userData | disableApiTermination | instanceInitiatedShutdownBehavior | rootDeviceName | blockDeviceMapping | productCodes | sourceDestCheck | groupSet | ebsOptimized | sriovNetSupport | enaSupport
+  has Str  $.Attribute     is xml-element is rw;  #=  instanceType | kernel | ramdisk | userData | disableApiTermination | instanceInitiatedShutdownBehavior | rootDeviceName | blockDeviceMapping | productCodes | sourceDestCheck | groupSet | ebsOptimized | sriovNetSupport | enaSupport
   has Bool $.DryRun        is xml-element is rw;
   has Str  $.InstanceId    is xml-element is rw;
 
@@ -80,11 +80,13 @@ constant myclass := (class Amazon::AWS::EC2::Action::DescribeInstanceAttribute i
   }
   
   method getAttributes {
-    return %attributes<Attribute|ValidValues>;
+    return %attributes<Attribute|ValidValues>.Array;
   }
   
-});
+}
 
 BEGIN {
-  %attributes = getAttributeData(myclass)
+  %attributes = getAttributeData(
+    Amazon::AWS::EC2::Action::DescribeInstanceAttribute
+  )
 }

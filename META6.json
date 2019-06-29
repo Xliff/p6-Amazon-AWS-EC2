@@ -48,7 +48,9 @@
       "Amazon::AWS::EC2::Tests::DescribeElasticGpus"                                        :  "lib/Amazon/AWS/EC2/Tests/DescribeElasticGpus.pm6"                                        ,
       "Amazon::AWS::EC2::Tests::DescribeFpgaImages"                                         :  "lib/Amazon/AWS/EC2/Tests/DescribeFpgaImages.pm6"                                         ,
       "Amazon::AWS::EC2::Tests::DescribeIdFormat"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeIdFormat.pm6"                                           ,
+      "Amazon::AWS::EC2::Tests::DescribeImageAttribute"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeImageAttribute.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeImages"                                             :  "lib/Amazon/AWS/EC2/Tests/DescribeImages.pm6"                                             ,
+      "Amazon::AWS::EC2::Tests::DescribeInstanceAttribute"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeInstanceAttribute.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeInstanceStatus"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeInstanceStatus.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeInstances"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeInstances.pm6"                                          ,
       "Amazon::AWS::EC2::Tests::DescribeKeyPairs"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeKeyPairs.pm6"                                           ,
@@ -601,7 +603,6 @@
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse"                  :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplateVersionsResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::RunInstancesResponse"                                    :  "lib/Amazon/AWS/EC2/Response/RunInstancesResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute"                                 :  "lib/Amazon/AWS/EC2/Tests/DescribeFpgaImageAttribute.pm6"                                 ,
-      "Amazon::AWS::EC2::Tests::DescribeImageAttribute"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeImageAttribute.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeVolumeAttribute"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumeAttribute.pm6"                                    ,
       "Amazon::AWS::EC2::Types::FleetData"                                                  :  "lib/Amazon/AWS/EC2/Types/FleetData.pm6"                                                  ,
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfig"                                     :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfig.pm6"                                     ,
@@ -622,6 +623,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

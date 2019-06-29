@@ -15,19 +15,19 @@ class Amazon::AWS::EC2::Response::DescribeInstanceAttributeResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has InstanceBlockDeviceMapping    @.blockDeviceMapping                   is xml-element    is xml-container('blockDeviceMapping')      is rw; 
-  has AttributeBooleanValue         $.disableApiTermination                is xml-element                                                is rw; 
-  has AttributeBooleanValue         $.ebsOptimized                         is xml-element                                                is rw; 
-  has AttributeBooleanValue         $.enaSupport                           is xml-element                                                is rw; 
-  has GroupIdentifier               @.groups                               is xml-element    is xml-container('groupSet')                is rw; 
-  has Str                           $.instanceId                           is xml-element                                                is rw; 
-  has AttributeValue                $.instanceInitiatedShutdownBehavior    is xml-element                                                is rw; 
-  has AttributeValue                $.instanceType                         is xml-element                                                is rw; 
-  has AttributeValue                $.kernel                               is xml-element                                                is rw; 
-  has ProductCode                   @.productCodes                         is xml-element    is xml-container('productCodes')            is rw; 
-  has AttributeValue                $.ramdisk                              is xml-element                                                is rw; 
-  has AttributeValue                $.rootDeviceName                       is xml-element                                                is rw; 
-  has AttributeBooleanValue         $.sourceDestCheck                      is xml-element                                                is rw; 
-  has AttributeValue                $.sriovNetSupport                      is xml-element                                                is rw; 
-  has AttributeValue                $.userData                             is xml-element                                                is rw; 
+  has InstanceBlockDeviceMapping    @.blockDeviceMapping                                                         is xml-container('blockDeviceMapping')    is xml-skip-null is rw; 
+  has AttributeBooleanValue         $.disableApiTermination                is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
+  has AttributeBooleanValue         $.ebsOptimized                         is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
+  has AttributeBooleanValue         $.enaSupport                           is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
+  has GroupIdentifier               @.groups                               is xml-element('item', :over-ride)    is xml-container('groupSet')              is xml-skip-null is rw; 
+  has Str                           $.instanceId                           is xml-element                                                                  is xml-skip-null is rw; 
+  has AttributeValue                $.instanceInitiatedShutdownBehavior    is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
+  has AttributeValue                $.instanceType                         is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
+  has AttributeValue                $.kernel                               is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
+  has ProductCode                   @.productCodes                         is xml-element('item', :over-ride)    is xml-container('productCodes')          is xml-skip-null is rw; 
+  has AttributeValue                $.ramdisk                              is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
+  has AttributeValue                $.rootDeviceName                       is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
+  has AttributeBooleanValue         $.sourceDestCheck                      is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
+  has AttributeValue                $.sriovNetSupport                      is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
+  has AttributeValue                $.userData                             is xml-element(        :over-ride)                                              is xml-skip-null is rw; 
 }

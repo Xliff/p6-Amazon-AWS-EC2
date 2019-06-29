@@ -35,7 +35,9 @@ Amazon::AWS::EC2::Tests::DescribeConversionTasks
 Amazon::AWS::EC2::Tests::DescribeElasticGpus
 Amazon::AWS::EC2::Tests::DescribeFpgaImages
 Amazon::AWS::EC2::Tests::DescribeIdFormat
+Amazon::AWS::EC2::Tests::DescribeImageAttribute
 Amazon::AWS::EC2::Tests::DescribeImages
+Amazon::AWS::EC2::Tests::DescribeInstanceAttribute
 Amazon::AWS::EC2::Tests::DescribeInstanceStatus
 Amazon::AWS::EC2::Tests::DescribeInstances
 Amazon::AWS::EC2::Tests::DescribeKeyPairs
@@ -588,7 +590,6 @@ Amazon::AWS::EC2::Response::DescribeInstancesResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse
 Amazon::AWS::EC2::Response::RunInstancesResponse
 Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute
-Amazon::AWS::EC2::Tests::DescribeImageAttribute
 Amazon::AWS::EC2::Tests::DescribeVolumeAttribute
 Amazon::AWS::EC2::Types::FleetData
 Amazon::AWS::EC2::Types::SpotFleetRequestConfig

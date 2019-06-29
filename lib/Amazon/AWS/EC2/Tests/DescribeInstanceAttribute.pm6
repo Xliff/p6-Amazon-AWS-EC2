@@ -6,7 +6,7 @@ use Amazon::AWS::EC2::Tests::TestTemplate;
 
 unit package Amazon::AWS::EC2::Tests::DescribeInstanceAttribute;
 
-my @imageIds;
+my @instanceIds;
 
 our sub runTests {
   my $c = $?FILE.split('::')[*-1].substr(0, * - 1);
@@ -28,28 +28,31 @@ our sub runTests {
     };
     
     # Load extra classes LAST!
-    %classes<DescribeImages> = try require ::('Amazon::AWS::EC2::Action::DescribeImages');
+    %classes<DescribeInstances> = 
+      try require ::('Amazon::AWS::EC2::Action::DescribeInstances');
   }
   
   subtest 'Testing with all attributes' => sub {
     my @attributes = $action.getAttributes;
     
-    # Get random image attribute from images.
+    # Get random instance attribute from instamces.
     # Should have some mechanism where we can get maxResults passed in
     # from the command line using the naked value as a default.
-    unless @imageIds {
-      @imageIds = %classes<DescribeImages>.new(maxResults => 50)
-                                          .run
-                                          .images
-                                          .map( *.imageId ) 
+    unless @instanceIds {
+      @instanceIds = %classes<DescribeInstances>.new(maxResults => 5)
+                                                .run
+                                                .reservations
+                                                .map( 
+                                                  *.instances.map( *.instanceId )
+                                                ).flat;
     }
-    my $imageId = @imageIds.pick;
+    my $instanceId = @instanceIds.pick;
                                         
-    diag "Using imageID: { $imageId }"; 
+    diag "Using instanceID: { $instanceId }"; 
     plan @attributes.elems * actionResponseTests;
     for @attributes {
       my $fixup = -> $o { 
-        $o.ImageId = $imageId;
+        $o.InstanceId = $instanceId;
         $o.Attribute = $_;
       };
       runActionResponseTests(
