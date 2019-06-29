@@ -30,6 +30,7 @@
       "Amazon::AWS::EC2::Filters::DescribeElasticGpusFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribeElasticGpusFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeFlowLogsFilter"                                   :  "lib/Amazon/AWS/EC2/Filters/DescribeFlowLogsFilter.pm6"                                   ,
       "Amazon::AWS::EC2::Filters::DescribeFpgaImagesFilter"                                 :  "lib/Amazon/AWS/EC2/Filters/DescribeFpgaImagesFilter.pm6"                                 ,
+      "Amazon::AWS::EC2::Filters::DescribeIamInstanceProfileAssociationsFilter"             :  "lib/Amazon/AWS/EC2/Filters/DescribeIamInstanceProfileAssociationsFilter.pm6"             ,
       "Amazon::AWS::EC2::Filters::DescribeImagesFilter"                                     :  "lib/Amazon/AWS/EC2/Filters/DescribeImagesFilter.pm6"                                     ,
       "Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeInstanceStatusFilter.pm6"                             ,
       "Amazon::AWS::EC2::Filters::DescribeInstancesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeInstancesFilter.pm6"                                  ,
@@ -507,6 +508,7 @@
       "Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification"                          :  "lib/Amazon/AWS/EC2/Types/VpnConnectionOptionsSpecification.pm6"                          ,
       "Amazon::AWS::EC2::Action::DescribeAggregateIdFormat"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAggregateIdFormat.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeFlowLogs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeFlowLogs.pm6"                                          ,
+      "Amazon::AWS::EC2::Action::DescribeIamInstanceProfileAssociations"                    :  "lib/Amazon/AWS/EC2/Action/DescribeIamInstanceProfileAssociations.pm6"                    ,
       "Amazon::AWS::EC2::Action::DescribeIdFormat"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeIdFormat.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeIdentityIdFormat"                                  :  "lib/Amazon/AWS/EC2/Action/DescribeIdentityIdFormat.pm6"                                  ,
       "Amazon::AWS::EC2::Action::DescribeRegions"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeRegions.pm6"                                           ,
@@ -624,6 +626,8 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
 
 
 

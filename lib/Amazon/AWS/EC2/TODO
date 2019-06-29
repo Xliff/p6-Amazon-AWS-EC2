@@ -28,6 +28,7 @@
 	+ GetConsoleOutput
 	+ GetConsoleScreenshot
   + RestartInstance
+  - DescribeIamInstanceProfileAssociations
   - DescribeSnapshots
   - DescribeSubnets
   + DescribeVolumeAttribute

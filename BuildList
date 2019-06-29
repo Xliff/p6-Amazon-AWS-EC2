@@ -17,6 +17,7 @@ Amazon::AWS::EC2::Filters::DescribeAvailabilityZonesFilter
 Amazon::AWS::EC2::Filters::DescribeElasticGpusFilter
 Amazon::AWS::EC2::Filters::DescribeFlowLogsFilter
 Amazon::AWS::EC2::Filters::DescribeFpgaImagesFilter
+Amazon::AWS::EC2::Filters::DescribeIamInstanceProfileAssociationsFilter
 Amazon::AWS::EC2::Filters::DescribeImagesFilter
 Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter
 Amazon::AWS::EC2::Filters::DescribeInstancesFilter
@@ -494,6 +495,7 @@ Amazon::AWS::EC2::Types::VpnConnection
 Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::EC2::Action::DescribeAggregateIdFormat
 Amazon::AWS::EC2::Action::DescribeFlowLogs
+Amazon::AWS::EC2::Action::DescribeIamInstanceProfileAssociations
 Amazon::AWS::EC2::Action::DescribeIdFormat
 Amazon::AWS::EC2::Action::DescribeIdentityIdFormat
 Amazon::AWS::EC2::Action::DescribeRegions
