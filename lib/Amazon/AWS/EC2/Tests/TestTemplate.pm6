@@ -24,7 +24,10 @@ sub runActionResponseTests(\action, \response, $fixup?, :$plan = True) is export
              } 
              # Can generate a fatal exception and return a false positive!!
              $x = $o.run(:raw)                }, "Can execute {$c}.run";
-  ok       { $x.starts-with("<?xml version")  }, "Returned value looks XMLish";
+  ok         $x.defined.not || [&&](
+               $x.chars,
+               $x.starts-with("<?xml version")
+            )                                  , "Returned value looks XMLish";
   # diag $x;
   lives-ok { CATCH {  
                default { $*ERR.say; "oops, $_" } 

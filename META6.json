@@ -361,7 +361,6 @@
       "Amazon::AWS::EC2::Response::DescribeSpotFleetRequestHistoryResponse"                 :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetRequestHistoryResponse.pm6"                 ,
       "Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse"                        :  "lib/Amazon/AWS/EC2/Response/DescribeSpotPriceHistoryResponse.pm6"                        ,
       "Amazon::AWS::EC2::Response::DescribeTagsResponse"                                    :  "lib/Amazon/AWS/EC2/Response/DescribeTagsResponse.pm6"                                    ,
-      "Amazon::AWS::EC2::Response::DescribeVolumeAttributeResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeVolumeAttributeResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribeVolumeStatusResponse"                            :  "lib/Amazon/AWS/EC2/Response/DescribeVolumeStatusResponse.pm6"                            ,
       "Amazon::AWS::EC2::Response::DisassociateAddressResponse"                             :  "lib/Amazon/AWS/EC2/Response/DisassociateAddressResponse.pm6"                             ,
       "Amazon::AWS::EC2::Response::DisassociateIamInstanceProfileResponse"                  :  "lib/Amazon/AWS/EC2/Response/DisassociateIamInstanceProfileResponse.pm6"                  ,
@@ -509,7 +508,6 @@
       "Amazon::AWS::EC2::Action::DescribeRegions"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeRegions.pm6"                                           ,
       "Amazon::AWS::EC2::Action::DescribeSnapshotAttribute"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshotAttribute.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeTags"                                              :  "lib/Amazon/AWS/EC2/Action/DescribeTags.pm6"                                              ,
-      "Amazon::AWS::EC2::Action::DescribeVolumeAttribute"                                   :  "lib/Amazon/AWS/EC2/Action/DescribeVolumeAttribute.pm6"                                   ,
       "Amazon::AWS::EC2::Action::GetConsoleOutput"                                          :  "lib/Amazon/AWS/EC2/Action/GetConsoleOutput.pm6"                                          ,
       "Amazon::AWS::EC2::Action::GetConsoleScreenshot"                                      :  "lib/Amazon/AWS/EC2/Action/GetConsoleScreenshot.pm6"                                      ,
       "Amazon::AWS::EC2::Response::BundleInstanceResponse"                                  :  "lib/Amazon/AWS/EC2/Response/BundleInstanceResponse.pm6"                                  ,
@@ -545,6 +543,7 @@
       "Amazon::AWS::EC2::Response::DescribeSpotDatafeedSubscriptionResponse"                :  "lib/Amazon/AWS/EC2/Response/DescribeSpotDatafeedSubscriptionResponse.pm6"                ,
       "Amazon::AWS::EC2::Response::DescribeSpotFleetInstancesResponse"                      :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetInstancesResponse.pm6"                      ,
       "Amazon::AWS::EC2::Response::DescribeSpotInstanceRequestsResponse"                    :  "lib/Amazon/AWS/EC2/Response/DescribeSpotInstanceRequestsResponse.pm6"                    ,
+      "Amazon::AWS::EC2::Response::DescribeVolumeAttributeResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeVolumeAttributeResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribeVolumesResponse"                                 :  "lib/Amazon/AWS/EC2/Response/DescribeVolumesResponse.pm6"                                 ,
       "Amazon::AWS::EC2::Response::GetLaunchTemplateDataResponse"                           :  "lib/Amazon/AWS/EC2/Response/GetLaunchTemplateDataResponse.pm6"                           ,
       "Amazon::AWS::EC2::Response::ModifyFpgaImageAttributeResponse"                        :  "lib/Amazon/AWS/EC2/Response/ModifyFpgaImageAttributeResponse.pm6"                        ,
@@ -587,6 +586,7 @@
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute"                         :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaceAttribute.pm6"                         ,
       "Amazon::AWS::EC2::Action::DescribePublicIpv4Pools"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePublicIpv4Pools.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
+      "Amazon::AWS::EC2::Action::DescribeVolumeAttribute"                                   :  "lib/Amazon/AWS/EC2/Action/DescribeVolumeAttribute.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeVolumeStatus"                                      :  "lib/Amazon/AWS/EC2/Action/DescribeVolumeStatus.pm6"                                      ,
       "Amazon::AWS::EC2::Action::DescribeVolumes"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeVolumes.pm6"                                           ,
       "Amazon::AWS::EC2::Action::RebootInstances"                                           :  "lib/Amazon/AWS/EC2/Action/RebootInstances.pm6"                                           ,
@@ -601,6 +601,7 @@
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse"                  :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplateVersionsResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::RunInstancesResponse"                                    :  "lib/Amazon/AWS/EC2/Response/RunInstancesResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute"                                 :  "lib/Amazon/AWS/EC2/Tests/DescribeFpgaImageAttribute.pm6"                                 ,
+      "Amazon::AWS::EC2::Tests::DescribeImageAttribute"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeImageAttribute.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeVolumeAttribute"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumeAttribute.pm6"                                    ,
       "Amazon::AWS::EC2::Types::FleetData"                                                  :  "lib/Amazon/AWS/EC2/Types/FleetData.pm6"                                                  ,
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfig"                                     :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfig.pm6"                                     ,
@@ -621,6 +622,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
