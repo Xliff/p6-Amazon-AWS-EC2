@@ -58,6 +58,7 @@
       "Amazon::AWS::EC2::Tests::DescribeRegions"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeRegions.pm6"                                            ,
       "Amazon::AWS::EC2::Tests::DescribeSecurityGroups"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeSecurityGroups.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeTags"                                               :  "lib/Amazon/AWS/EC2/Tests/DescribeTags.pm6"                                               ,
+      "Amazon::AWS::EC2::Tests::DescribeVolumeAttribute"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumeAttribute.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeVolumes"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumes.pm6"                                            ,
       "Amazon::AWS::EC2::Types::Base"                                                       :  "lib/Amazon/AWS/EC2/Types/Base.pm6"                                                       ,
       "Amazon::AWS::EC2::Types::BlobAttributeValue"                                         :  "lib/Amazon/AWS/EC2/Types/BlobAttributeValue.pm6"                                         ,
@@ -507,6 +508,7 @@
       "Amazon::AWS::EC2::Action::DescribeAggregateIdFormat"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAggregateIdFormat.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeFlowLogs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeFlowLogs.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeIdFormat"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeIdFormat.pm6"                                          ,
+      "Amazon::AWS::EC2::Action::DescribeIdentityIdFormat"                                  :  "lib/Amazon/AWS/EC2/Action/DescribeIdentityIdFormat.pm6"                                  ,
       "Amazon::AWS::EC2::Action::DescribeRegions"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeRegions.pm6"                                           ,
       "Amazon::AWS::EC2::Action::DescribeSnapshotAttribute"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshotAttribute.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeTags"                                              :  "lib/Amazon/AWS/EC2/Action/DescribeTags.pm6"                                              ,
@@ -603,7 +605,6 @@
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse"                  :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplateVersionsResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::RunInstancesResponse"                                    :  "lib/Amazon/AWS/EC2/Response/RunInstancesResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute"                                 :  "lib/Amazon/AWS/EC2/Tests/DescribeFpgaImageAttribute.pm6"                                 ,
-      "Amazon::AWS::EC2::Tests::DescribeVolumeAttribute"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumeAttribute.pm6"                                    ,
       "Amazon::AWS::EC2::Types::FleetData"                                                  :  "lib/Amazon/AWS/EC2/Types/FleetData.pm6"                                                  ,
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfig"                                     :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfig.pm6"                                     ,
       "Amazon::AWS::EC2::Action::DescribeAccountAttributes"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAccountAttributes.pm6"                                 ,
@@ -623,6 +624,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

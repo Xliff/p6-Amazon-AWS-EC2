@@ -45,6 +45,7 @@ Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Tests::DescribeRegions
 Amazon::AWS::EC2::Tests::DescribeSecurityGroups
 Amazon::AWS::EC2::Tests::DescribeTags
+Amazon::AWS::EC2::Tests::DescribeVolumeAttribute
 Amazon::AWS::EC2::Tests::DescribeVolumes
 Amazon::AWS::EC2::Types::Base
 Amazon::AWS::EC2::Types::BlobAttributeValue
@@ -494,6 +495,7 @@ Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::EC2::Action::DescribeAggregateIdFormat
 Amazon::AWS::EC2::Action::DescribeFlowLogs
 Amazon::AWS::EC2::Action::DescribeIdFormat
+Amazon::AWS::EC2::Action::DescribeIdentityIdFormat
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeSnapshotAttribute
 Amazon::AWS::EC2::Action::DescribeTags
@@ -590,7 +592,6 @@ Amazon::AWS::EC2::Response::DescribeInstancesResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse
 Amazon::AWS::EC2::Response::RunInstancesResponse
 Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute
-Amazon::AWS::EC2::Tests::DescribeVolumeAttribute
 Amazon::AWS::EC2::Types::FleetData
 Amazon::AWS::EC2::Types::SpotFleetRequestConfig
 Amazon::AWS::EC2::Action::DescribeAccountAttributes

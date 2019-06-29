@@ -30,16 +30,16 @@
   + RestartInstance
   - DescribeSnapshots
   - DescribeSubnets
-  - DescribeVolumeAttribute
+  + DescribeVolumeAttribute
   - DescribeSecurityGroupReferences
   - DescribePrefixLists
   - DescribeNetworkInterfaces
   - DescribePrincipalIdFormat
   - DescribePrincipalAcls
   - DescribeIdentityIdFormat
-  - DescribeIdFormat
-  - DescribeAvailabilityZones
-  - DescribeAddresses
+  + DescribeIdFormat
+  + DescribeAvailabilityZones
+  + DescribeAddresses
   + DescribeAccountAttributes
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   - DescribeDhcpOptions
