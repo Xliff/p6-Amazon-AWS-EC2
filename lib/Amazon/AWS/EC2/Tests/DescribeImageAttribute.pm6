@@ -28,6 +28,9 @@ our sub runTests {
       }
       %classes{"{$c}Response"};
     };
+    
+    # Load extra classes LAST!
+    %classes<DescribeImages> = try require ::('Amazon::AWS::EC2::Action::DescribeImages');
   }
   
   %classes.gist.say;
@@ -38,22 +41,21 @@ our sub runTests {
     # Get random image attribute from images.
     # Should have some mechanism where we can get maxResults passed in
     # from the command line using the naked value as a default.
-    # unless @imageIds {
-    #   @imageIds = DescribeImages.new(maxResults => 50)
-    #                             .run
-    #                             .images
-    #                             .map( *.imageId ) 
-    # }
-    # my $imageId = @imageIds.pick;
+    unless @imageIds {
+      @imageIds = %classes<DescribeImages>.new(maxResults => 50)
+                                          .run
+                                          .images
+                                          .map( *.imageId ) 
+    }
+    my $imageId = @imageIds.pick;
                                         
-    # diag "Using imageID: { $imageId }"; 
+    diag "Using imageID: { $imageId }"; 
     plan @attributes.elems * actionResponseTests;
     for @attributes {
-      my $fixup;
-      # my $fixup = -> $o { 
-      #   $o.ImageId = $imageId;
-      #   $o.Attribute = $_;
-      # };
+      my $fixup = -> $o { 
+        $o.ImageId = $imageId;
+        $o.Attribute = $_;
+      };
       runActionResponseTests(
         $action, 
         $response, 
