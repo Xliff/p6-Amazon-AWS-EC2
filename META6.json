@@ -511,6 +511,7 @@
       "Amazon::AWS::EC2::Action::DescribeIamInstanceProfileAssociations"                    :  "lib/Amazon/AWS/EC2/Action/DescribeIamInstanceProfileAssociations.pm6"                    ,
       "Amazon::AWS::EC2::Action::DescribeIdFormat"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeIdFormat.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeIdentityIdFormat"                                  :  "lib/Amazon/AWS/EC2/Action/DescribeIdentityIdFormat.pm6"                                  ,
+      "Amazon::AWS::EC2::Action::DescribePrincipalIdFormat"                                 :  "lib/Amazon/AWS/EC2/Action/DescribePrincipalIdFormat.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeRegions"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeRegions.pm6"                                           ,
       "Amazon::AWS::EC2::Action::DescribeSnapshotAttribute"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshotAttribute.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeTags"                                              :  "lib/Amazon/AWS/EC2/Action/DescribeTags.pm6"                                              ,
@@ -626,6 +627,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
