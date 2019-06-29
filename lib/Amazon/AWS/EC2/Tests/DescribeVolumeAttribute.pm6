@@ -2,8 +2,6 @@ use v6.d;
 
 use Test;
 
-use Amazon::AWS::EC2::Action::DescribeVolumes;
-
 use Amazon::AWS::EC2::Tests::TestTemplate;
 
 unit package Amazon::AWS::EC2::Tests::DescribeVolumeAttribute;
@@ -28,6 +26,10 @@ our sub runTests {
       }
       %classes{"{$c}Response"};
     };
+    
+    # Load extra classes LAST!
+    %classes<DescribeVolumes> = 
+      try require ::('Amazon::AWS::EC2::Action::DescribeVolumes');
   }
   
   subtest 'Testing with all attributes' => sub {
@@ -37,10 +39,10 @@ our sub runTests {
     # Should have some mechanism where we can get maxResults passed in
     # from the command line using the naked value as a default.
     unless @volumeIds {
-      @volumeIds = DescribeVolumes.new(maxResults => 50 )
-                                  .run
-                                  .volumes
-                                  .map( *.volumeId ) 
+      @volumeIds = %classes<DescribeVolumes>.new(maxResults => 50 )
+                                            .run
+                                            .volumes
+                                            .map( *.volumeId ) 
     }
     my $volumeId = @volumeIds.pick;
                                         

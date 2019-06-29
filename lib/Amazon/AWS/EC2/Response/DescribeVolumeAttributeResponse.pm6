@@ -12,7 +12,7 @@ class Amazon::AWS::EC2::Response::DescribeVolumesAttributeResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has AttributeBooleanValue $.autoEnableIO is xml-element                                                            is xml-skip-null is rw;
+  has AttributeBooleanValue $.autoEnableIO is xml-element(        :over-ride)                                        is xml-skip-null is rw;                                                            is xml-skip-null is rw;
   has ProductCode           @.productCodes is xml-element('item', :over-ride)  is xml-container('productCodeSet')    is xml-skip-null is rw;
   has Str                   $.volumeId     is xml-element                                                            is xml-skip-null is rw;
 }

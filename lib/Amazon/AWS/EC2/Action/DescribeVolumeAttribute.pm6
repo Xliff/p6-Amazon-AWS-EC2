@@ -73,10 +73,10 @@ class Amazon::AWS::EC2::Action::DescribeVolumeAttribute is export
     my @args;
     
     @args.append: (
-      Attribute       => $.Attribute,
-      DryRun          => $.DryRun,
-      VolumeImageId   => $.VolumeId,
-      Version         => '2016-11-15'
+      Attribute  => $.Attribute,
+      DryRun     => $.DryRun,
+      VolumeId   => $.VolumeId,
+      Version    => '2016-11-15'
     );
     
     # XXX - Add error handling to makeRequest!
