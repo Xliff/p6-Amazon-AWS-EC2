@@ -1,0 +1,59 @@
+use v6.d;
+
+use Test;
+
+use Amazon::AWS::EC2::Tests::TestTemplate;
+
+unit package Amazon::AWS::EC2::Tests::DescribePrincipalIdFormat;
+
+# Must learn more about the specifics of this end-point, since specifying ANY
+# Resource value (especially the ones listed) will provide a NIL result set!
+#
+# Test is currently off.
+
+our sub runTests {
+  my $c = $?FILE.split('::')[*-1].substr(0, * - 1);
+  # YYY- Determine why quietly is needed, here!
+  my ($action, $response);
+  quietly {
+    $action := do {
+      if not %classes{$c}:exists {
+        %classes{$c} := try require ::("Amazon::AWS::EC2::Action::{ $c }");
+      }
+      %classes{$c}
+    };
+    $response := do {
+      if not %classes{"{$c}Response"}:exists {
+        %classes{"{$c}Response"} := 
+          try require ::("Amazon::AWS::EC2::Response::{ $c }Response");
+      }
+      %classes{"{$c}Response"};
+    };
+   
+  }
+  
+  subtest 'Testing with various resources' => sub {
+    my @resources = $action.getResources;
+    my @base = 1...5;
+    
+    plan @base.elems * (actionResponseTests + 1);
+    
+    for @base {
+      my $num = @base.pick;
+      my $fixup = -> $o { 
+        #$o.Resources = @resources.pick xx $num;
+        $o.Resources = <arn vpc image>;
+      }
+      my $ro = runActionResponseTests(
+        $action, 
+        $response, 
+        $fixup,
+        :!plan
+      );
+      
+      ok 
+        $ro.principals.elems == $num, 
+        'Number of principal elements returned equals number given';
+    }
+  }
+}

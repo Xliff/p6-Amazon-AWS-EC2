@@ -35,7 +35,7 @@
   - DescribeSecurityGroupReferences
   - DescribePrefixLists
   - DescribeNetworkInterfaces
-  - DescribePrincipalIdFormat
+  + DescribePrincipalIdFormat
   - DescribePrincipalAcls
   - DescribeIdentityIdFormat
   + DescribeIdFormat

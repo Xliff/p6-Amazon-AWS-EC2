@@ -28,10 +28,12 @@ sub runActionResponseTests(\action, \response, $fixup?, :$plan = True) is export
                $x.chars,
                $x.starts-with("<?xml version")
             )                                  , "Returned value looks XMLish";
-  # diag $x;
+  diag $x;
   lives-ok { CATCH {  
                default { $*ERR.say; "oops, $_" } 
              } 
              $ro = response.from-xml($x)      }, "Can Instantiate response object from XML";
-  # diag $ro.gist;
+  diag $ro.gist;
+  
+  $ro;
 }
