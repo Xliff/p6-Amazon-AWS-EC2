@@ -594,7 +594,6 @@ Amazon::AWS::EC2::Response::DescribeConversionTasksResponse
 Amazon::AWS::EC2::Response::DescribeInstancesResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse
 Amazon::AWS::EC2::Response::RunInstancesResponse
-Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute
 Amazon::AWS::EC2::Types::FleetData
 Amazon::AWS::EC2::Types::SpotFleetRequestConfig
 Amazon::AWS::EC2::Action::DescribeAccountAttributes

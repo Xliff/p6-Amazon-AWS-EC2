@@ -4,7 +4,7 @@ use Test;
 
 use Amazon::AWS::EC2::Tests::TestTemplate;
 
-unit package Amazon::AWS::EC2::Tests::DescribeInstanceAttribute;
+unit package Amazon::AWS::EC2::Tests::DescribeImageAttribute;
 
 my @imageIds;
 
