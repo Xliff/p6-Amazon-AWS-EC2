@@ -37,6 +37,7 @@
       "Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter"                                   :  "lib/Amazon/AWS/EC2/Filters/DescribeKeyPairsFilter.pm6"                                   ,
       "Amazon::AWS::EC2::Filters::DescribeRegionsFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeRegionsFilter.pm6"                                    ,
       "Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeSecurityGroupsFilter.pm6"                             ,
+      "Amazon::AWS::EC2::Filters::DescribeSnapshotsFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeSnapshotsFilter.pm6"                                  ,
       "Amazon::AWS::EC2::Filters::DescribeTagsFilter"                                       :  "lib/Amazon/AWS/EC2/Filters/DescribeTagsFilter.pm6"                                       ,
       "Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter"                               :  "lib/Amazon/AWS/EC2/Filters/DescribeVolumeStatusFilter.pm6"                               ,
       "Amazon::AWS::EC2::Filters::DescribeVolumesFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeVolumesFilter.pm6"                                    ,
@@ -58,6 +59,7 @@
       "Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribePublicIpv4Pools.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeRegions"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeRegions.pm6"                                            ,
       "Amazon::AWS::EC2::Tests::DescribeSecurityGroups"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeSecurityGroups.pm6"                                     ,
+      "Amazon::AWS::EC2::Tests::DescribeSnapshots"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeSnapshots.pm6"                                          ,
       "Amazon::AWS::EC2::Tests::DescribeTags"                                               :  "lib/Amazon/AWS/EC2/Tests/DescribeTags.pm6"                                               ,
       "Amazon::AWS::EC2::Tests::DescribeVolumeAttribute"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumeAttribute.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeVolumes"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumes.pm6"                                            ,
@@ -547,6 +549,7 @@
       "Amazon::AWS::EC2::Response::DescribeScheduledInstanceAvailabilityResponse"           :  "lib/Amazon/AWS/EC2/Response/DescribeScheduledInstanceAvailabilityResponse.pm6"           ,
       "Amazon::AWS::EC2::Response::DescribeScheduledInstancesResponse"                      :  "lib/Amazon/AWS/EC2/Response/DescribeScheduledInstancesResponse.pm6"                      ,
       "Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse"                          :  "lib/Amazon/AWS/EC2/Response/DescribeSecurityGroupsResponse.pm6"                          ,
+      "Amazon::AWS::EC2::Response::DescribeSnapshotsResponse"                               :  "lib/Amazon/AWS/EC2/Response/DescribeSnapshotsResponse.pm6"                               ,
       "Amazon::AWS::EC2::Response::DescribeSpotDatafeedSubscriptionResponse"                :  "lib/Amazon/AWS/EC2/Response/DescribeSpotDatafeedSubscriptionResponse.pm6"                ,
       "Amazon::AWS::EC2::Response::DescribeSpotFleetInstancesResponse"                      :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetInstancesResponse.pm6"                      ,
       "Amazon::AWS::EC2::Response::DescribeSpotInstanceRequestsResponse"                    :  "lib/Amazon/AWS/EC2/Response/DescribeSpotInstanceRequestsResponse.pm6"                    ,
@@ -593,6 +596,7 @@
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute"                         :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaceAttribute.pm6"                         ,
       "Amazon::AWS::EC2::Action::DescribePublicIpv4Pools"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePublicIpv4Pools.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
+      "Amazon::AWS::EC2::Action::DescribeSnapshots"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshots.pm6"                                         ,
       "Amazon::AWS::EC2::Action::DescribeVolumeAttribute"                                   :  "lib/Amazon/AWS/EC2/Action/DescribeVolumeAttribute.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeVolumeStatus"                                      :  "lib/Amazon/AWS/EC2/Action/DescribeVolumeStatus.pm6"                                      ,
       "Amazon::AWS::EC2::Action::DescribeVolumes"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeVolumes.pm6"                                           ,
@@ -607,6 +611,7 @@
       "Amazon::AWS::EC2::Response::DescribeInstancesResponse"                               :  "lib/Amazon/AWS/EC2/Response/DescribeInstancesResponse.pm6"                               ,
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse"                  :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplateVersionsResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::RunInstancesResponse"                                    :  "lib/Amazon/AWS/EC2/Response/RunInstancesResponse.pm6"                                    ,
+      "Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute"                                 :  "lib/Amazon/AWS/EC2/Tests/DescribeFpgaImageAttribute.pm6"                                 ,
       "Amazon::AWS::EC2::Types::FleetData"                                                  :  "lib/Amazon/AWS/EC2/Types/FleetData.pm6"                                                  ,
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfig"                                     :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfig.pm6"                                     ,
       "Amazon::AWS::EC2::Action::DescribeAccountAttributes"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAccountAttributes.pm6"                                 ,
@@ -626,6 +631,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

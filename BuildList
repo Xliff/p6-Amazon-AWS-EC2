@@ -24,6 +24,7 @@ Amazon::AWS::EC2::Filters::DescribeInstancesFilter
 Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter
 Amazon::AWS::EC2::Filters::DescribeRegionsFilter
 Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
+Amazon::AWS::EC2::Filters::DescribeSnapshotsFilter
 Amazon::AWS::EC2::Filters::DescribeTagsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter
 Amazon::AWS::EC2::Filters::DescribeVolumesFilter
@@ -45,6 +46,7 @@ Amazon::AWS::EC2::Tests::DescribeKeyPairs
 Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Tests::DescribeRegions
 Amazon::AWS::EC2::Tests::DescribeSecurityGroups
+Amazon::AWS::EC2::Tests::DescribeSnapshots
 Amazon::AWS::EC2::Tests::DescribeTags
 Amazon::AWS::EC2::Tests::DescribeVolumeAttribute
 Amazon::AWS::EC2::Tests::DescribeVolumes
@@ -534,6 +536,7 @@ Amazon::AWS::EC2::Response::DescribeReservedInstancesResponse
 Amazon::AWS::EC2::Response::DescribeScheduledInstanceAvailabilityResponse
 Amazon::AWS::EC2::Response::DescribeScheduledInstancesResponse
 Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse
+Amazon::AWS::EC2::Response::DescribeSnapshotsResponse
 Amazon::AWS::EC2::Response::DescribeSpotDatafeedSubscriptionResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetInstancesResponse
 Amazon::AWS::EC2::Response::DescribeSpotInstanceRequestsResponse
@@ -580,6 +583,7 @@ Amazon::AWS::EC2::Action::DescribeKeyPairs
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute
 Amazon::AWS::EC2::Action::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
+Amazon::AWS::EC2::Action::DescribeSnapshots
 Amazon::AWS::EC2::Action::DescribeVolumeAttribute
 Amazon::AWS::EC2::Action::DescribeVolumeStatus
 Amazon::AWS::EC2::Action::DescribeVolumes
@@ -594,6 +598,7 @@ Amazon::AWS::EC2::Response::DescribeConversionTasksResponse
 Amazon::AWS::EC2::Response::DescribeInstancesResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse
 Amazon::AWS::EC2::Response::RunInstancesResponse
+Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute
 Amazon::AWS::EC2::Types::FleetData
 Amazon::AWS::EC2::Types::SpotFleetRequestConfig
 Amazon::AWS::EC2::Action::DescribeAccountAttributes

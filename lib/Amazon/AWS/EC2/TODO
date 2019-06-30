@@ -29,7 +29,7 @@
 	+ GetConsoleScreenshot
   + RestartInstance
   - DescribeIamInstanceProfileAssociations
-  - DescribeSnapshots
+  + DescribeSnapshots
   - DescribeSubnets
   + DescribeVolumeAttribute
   - DescribeSecurityGroupReferences
