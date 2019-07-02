@@ -530,6 +530,7 @@ Amazon::AWS::EC2::Response::DescribeInstanceAttributeResponse
 Amazon::AWS::EC2::Response::DescribeInstanceStatusResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplatesResponse
 Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse
+Amazon::AWS::EC2::Response::DescribeNetworkInterfacesResponse
 Amazon::AWS::EC2::Response::DescribePublicIpv4PoolsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesListingsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesModificationsResponse
@@ -582,6 +583,7 @@ Amazon::AWS::EC2::Action::DescribeInstanceAttribute
 Amazon::AWS::EC2::Action::DescribeInstanceStatus
 Amazon::AWS::EC2::Action::DescribeKeyPairs
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute
+Amazon::AWS::EC2::Action::DescribeNetworkInterfaces
 Amazon::AWS::EC2::Action::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
 Amazon::AWS::EC2::Action::DescribeSnapshots

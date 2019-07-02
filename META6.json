@@ -543,6 +543,7 @@
       "Amazon::AWS::EC2::Response::DescribeInstanceStatusResponse"                          :  "lib/Amazon/AWS/EC2/Response/DescribeInstanceStatusResponse.pm6"                          ,
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplatesResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplatesResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse"               :  "lib/Amazon/AWS/EC2/Response/DescribeNetworkInterfaceAttributeResponse.pm6"               ,
+      "Amazon::AWS::EC2::Response::DescribeNetworkInterfacesResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeNetworkInterfacesResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribePublicIpv4PoolsResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribePublicIpv4PoolsResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribeReservedInstancesListingsResponse"               :  "lib/Amazon/AWS/EC2/Response/DescribeReservedInstancesListingsResponse.pm6"               ,
       "Amazon::AWS::EC2::Response::DescribeReservedInstancesModificationsResponse"          :  "lib/Amazon/AWS/EC2/Response/DescribeReservedInstancesModificationsResponse.pm6"          ,
@@ -595,6 +596,7 @@
       "Amazon::AWS::EC2::Action::DescribeInstanceStatus"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeInstanceStatus.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeKeyPairs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeKeyPairs.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute"                         :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaceAttribute.pm6"                         ,
+      "Amazon::AWS::EC2::Action::DescribeNetworkInterfaces"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaces.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribePublicIpv4Pools"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePublicIpv4Pools.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeSnapshots"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshots.pm6"                                         ,
@@ -632,6 +634,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
