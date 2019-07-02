@@ -30,6 +30,8 @@
       "Amazon::AWS::EC2::Filters::DescribeElasticGpusFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribeElasticGpusFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeFlowLogsFilter"                                   :  "lib/Amazon/AWS/EC2/Filters/DescribeFlowLogsFilter.pm6"                                   ,
       "Amazon::AWS::EC2::Filters::DescribeFpgaImagesFilter"                                 :  "lib/Amazon/AWS/EC2/Filters/DescribeFpgaImagesFilter.pm6"                                 ,
+      "Amazon::AWS::EC2::validInstanceTypes"                                                :  "lib/Amazon/AWS/EC2/validInstanceTypes.pm6"                                               ,
+      "Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter"                   :  "lib/Amazon/AWS/EC2/Filters/DescribeHostReservationOfferingsFilter.pm6"                   ,
       "Amazon::AWS::EC2::Filters::DescribeIamInstanceProfileAssociationsFilter"             :  "lib/Amazon/AWS/EC2/Filters/DescribeIamInstanceProfileAssociationsFilter.pm6"             ,
       "Amazon::AWS::EC2::Filters::DescribeImagesFilter"                                     :  "lib/Amazon/AWS/EC2/Filters/DescribeImagesFilter.pm6"                                     ,
       "Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeInstanceStatusFilter.pm6"                             ,
@@ -51,6 +53,7 @@
       "Amazon::AWS::EC2::Tests::DescribeConversionTasks"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribeConversionTasks.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeElasticGpus"                                        :  "lib/Amazon/AWS/EC2/Tests/DescribeElasticGpus.pm6"                                        ,
       "Amazon::AWS::EC2::Tests::DescribeFpgaImages"                                         :  "lib/Amazon/AWS/EC2/Tests/DescribeFpgaImages.pm6"                                         ,
+      "Amazon::AWS::EC2::Tests::DescribeHostReservationOfferings"                           :  "lib/Amazon/AWS/EC2/Tests/DescribeHostReservationOfferings.pm6"                           ,
       "Amazon::AWS::EC2::Tests::DescribeIdFormat"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeIdFormat.pm6"                                           ,
       "Amazon::AWS::EC2::Tests::DescribeImageAttribute"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeImageAttribute.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeImages"                                             :  "lib/Amazon/AWS/EC2/Tests/DescribeImages.pm6"                                             ,
@@ -119,7 +122,6 @@
       "Amazon::AWS::EC2::Types::ElasticGpuSpecification"                                    :  "lib/Amazon/AWS/EC2/Types/ElasticGpuSpecification.pm6"                                    ,
       "Amazon::AWS::EC2::Types::ElasticGpuSpecificationResponse"                            :  "lib/Amazon/AWS/EC2/Types/ElasticGpuSpecificationResponse.pm6"                            ,
       "Amazon::AWS::EC2::Types::ElasticGpus"                                                :  "lib/Amazon/AWS/EC2/Types/ElasticGpus.pm6"                                                ,
-      "Amazon::AWS::EC2::validInstanceTypes"                                                :  "lib/Amazon/AWS/EC2/validInstanceTypes.pm6"                                               ,
       "Amazon::AWS::EC2::Types::ElasticInferenceAccelerator"                                :  "lib/Amazon/AWS/EC2/Types/ElasticInferenceAccelerator.pm6"                                ,
       "Amazon::AWS::EC2::Types::ElasticInferenceAcceleratorAssociation"                     :  "lib/Amazon/AWS/EC2/Types/ElasticInferenceAcceleratorAssociation.pm6"                     ,
       "Amazon::AWS::EC2::Types::EventInformation"                                           :  "lib/Amazon/AWS/EC2/Types/EventInformation.pm6"                                           ,
@@ -515,6 +517,7 @@
       "Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification"                          :  "lib/Amazon/AWS/EC2/Types/VpnConnectionOptionsSpecification.pm6"                          ,
       "Amazon::AWS::EC2::Action::DescribeAggregateIdFormat"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAggregateIdFormat.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeFlowLogs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeFlowLogs.pm6"                                          ,
+      "Amazon::AWS::EC2::Action::DescribeHostReservationOfferings"                          :  "lib/Amazon/AWS/EC2/Action/DescribeHostReservationOfferings.pm6"                          ,
       "Amazon::AWS::EC2::Action::DescribeIamInstanceProfileAssociations"                    :  "lib/Amazon/AWS/EC2/Action/DescribeIamInstanceProfileAssociations.pm6"                    ,
       "Amazon::AWS::EC2::Action::DescribeIdFormat"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeIdFormat.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeIdentityIdFormat"                                  :  "lib/Amazon/AWS/EC2/Action/DescribeIdentityIdFormat.pm6"                                  ,
@@ -639,6 +642,13 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
+
+
+
+
+
 
 
 

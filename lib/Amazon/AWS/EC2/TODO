@@ -45,6 +45,7 @@
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   - DescribeDhcpOptions
   - DescribeVolumeModifications
+  + DescribeHostReservationOfferings
 
 - Fix tests for DescribeIdentityIdFormat, as the private test always returns a:
      URI: ?Action=DescribeIdentityIdFormat&Version=2016-11-15&PrincipalArn=arn:aws:iam::839618952316:root
@@ -80,3 +81,4 @@
     eipalloc - Elastic IP Allocation
     policy   - Snapshot Lifecycle Policy
     arn      - Amazon Resource Name
+    hro      - Host Reservation Offering

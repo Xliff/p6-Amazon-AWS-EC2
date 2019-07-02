@@ -159,6 +159,20 @@ sub populateTestObject(
   $object;
 }
 
+sub makeAttributeTable(%attributes, $attrName) is export {
+  %attributes{"{ $attrName }|MaxLength"} =
+    %attributes{"{ $attrName }|ValidValues"}.map( *.chars ).max;
+  if %attributes{"{ $attrName }|ValidValues"}:exists {
+    %attributes{"{ $attrName }|Table"} = (
+      do gather for %attributes{"{ $attrName }|ValidValues"}.batch(3) {
+        take 'a';
+        take "\t" ~
+          .Array.fmt("%-{ %attributes{"{ $attrName }|MaxLength"} + 4 }s").join('')
+      }
+    ).join("\n");
+  }
+}
+
 sub getAttributeData($type) is export  {
   my %attributes;
 
@@ -170,21 +184,11 @@ sub getAttributeData($type) is export  {
     %attributes{$attrName} = $_;
     quietly {
       %attributes{$attrName}.WHY ~~ /('?')? \s* (<[\w\-]>+)+ %% [ \s* '|' \s* ]/;
-      if $/ {
-        %attributes{"{ $attrName }|ValidValues"} = (do gather for $/[1].Array {
-          take .Str
-        }).flat.Array;
-        %attributes{"{ $attrName }|MaxLength"} =
-          %attributes{"{ $attrName }|ValidValues"}.map( *.chars ).max;
-        if %attributes{"{ $attrName }|ValidValues"}:exists {
-          %attributes{"{ $attrName }|Table"} = (
-            do gather for %attributes{"{ $attrName }|ValidValues"}.batch(3) {
-              take "\t" ~
-                .Array.fmt("%-{ %attributes{"{ $attrName }|MaxLength"} + 4 }s").join('')
-            }
-          ).join("\n");
-        }
-      }
+      %attributes{"{ $attrName }|ValidValues"} = (do gather for $/[1].Array {
+        take .Str
+      }).flat.Array;
+      %attributes{"{ $attrName }|ValidValues"}.^name.say;
+      makeAttributeTable(%attributes, $attrName) if $/;
     }
   }
 

@@ -17,6 +17,8 @@ Amazon::AWS::EC2::Filters::DescribeAvailabilityZonesFilter
 Amazon::AWS::EC2::Filters::DescribeElasticGpusFilter
 Amazon::AWS::EC2::Filters::DescribeFlowLogsFilter
 Amazon::AWS::EC2::Filters::DescribeFpgaImagesFilter
+Amazon::AWS::EC2::validInstanceTypes
+Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter
 Amazon::AWS::EC2::Filters::DescribeIamInstanceProfileAssociationsFilter
 Amazon::AWS::EC2::Filters::DescribeImagesFilter
 Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter
@@ -38,6 +40,7 @@ Amazon::AWS::EC2::Tests::DescribeAvailabilityZones
 Amazon::AWS::EC2::Tests::DescribeConversionTasks
 Amazon::AWS::EC2::Tests::DescribeElasticGpus
 Amazon::AWS::EC2::Tests::DescribeFpgaImages
+Amazon::AWS::EC2::Tests::DescribeHostReservationOfferings
 Amazon::AWS::EC2::Tests::DescribeIdFormat
 Amazon::AWS::EC2::Tests::DescribeImageAttribute
 Amazon::AWS::EC2::Tests::DescribeImages
@@ -106,7 +109,6 @@ Amazon::AWS::EC2::Types::ElasticGpuHealth
 Amazon::AWS::EC2::Types::ElasticGpuSpecification
 Amazon::AWS::EC2::Types::ElasticGpuSpecificationResponse
 Amazon::AWS::EC2::Types::ElasticGpus
-Amazon::AWS::EC2::validInstanceTypes
 Amazon::AWS::EC2::Types::ElasticInferenceAccelerator
 Amazon::AWS::EC2::Types::ElasticInferenceAcceleratorAssociation
 Amazon::AWS::EC2::Types::EventInformation
@@ -502,6 +504,7 @@ Amazon::AWS::EC2::Types::VpnConnection
 Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::EC2::Action::DescribeAggregateIdFormat
 Amazon::AWS::EC2::Action::DescribeFlowLogs
+Amazon::AWS::EC2::Action::DescribeHostReservationOfferings
 Amazon::AWS::EC2::Action::DescribeIamInstanceProfileAssociations
 Amazon::AWS::EC2::Action::DescribeIdFormat
 Amazon::AWS::EC2::Action::DescribeIdentityIdFormat

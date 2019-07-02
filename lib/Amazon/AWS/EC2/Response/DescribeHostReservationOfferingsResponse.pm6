@@ -12,5 +12,5 @@ class Amazon::AWS::EC2::Response::DescribeHostReservationOfferingsResponse is ex
   also does Amazon::AWS::Roles::Response;
 
   has Str             $.nextToken    is xml-element                                         is rw; 
-  has HostOffering    @.offerings    is xml-element    is xml-container('offeringSet')      is rw; 
+  has HostOffering    @.offerings                    is xml-container('offeringSet')      is rw; 
 }
