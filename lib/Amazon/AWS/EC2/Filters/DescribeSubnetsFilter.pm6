@@ -30,7 +30,7 @@ constant Ipv6CidrBlockAssociation := Amazon::AWS::EC2::Filters::DescribeSubnetsF
 constant Tag                      := Amazon::AWS::EC2::Filters::DescribeSubnetsFilter::Tag;
 
 class Amazon::AWS::EC2::Filters::DescribeSubnetsFilter is export
-  does XML::Class[xml-element => 'DescribeSubnetsFilter']
+  does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;
   also does Amazon::AWS::Roles::Eqv;

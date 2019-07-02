@@ -564,6 +564,7 @@
       "Amazon::AWS::EC2::Response::DescribeSpotDatafeedSubscriptionResponse"                :  "lib/Amazon/AWS/EC2/Response/DescribeSpotDatafeedSubscriptionResponse.pm6"                ,
       "Amazon::AWS::EC2::Response::DescribeSpotFleetInstancesResponse"                      :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetInstancesResponse.pm6"                      ,
       "Amazon::AWS::EC2::Response::DescribeSpotInstanceRequestsResponse"                    :  "lib/Amazon/AWS/EC2/Response/DescribeSpotInstanceRequestsResponse.pm6"                    ,
+      "Amazon::AWS::EC2::Response::DescribeSubnetsResponse"                                 :  "lib/Amazon/AWS/EC2/Response/DescribeSubnetsResponse.pm6"                                 ,
       "Amazon::AWS::EC2::Response::DescribeVolumeAttributeResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeVolumeAttributeResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribeVolumesResponse"                                 :  "lib/Amazon/AWS/EC2/Response/DescribeVolumesResponse.pm6"                                 ,
       "Amazon::AWS::EC2::Response::GetLaunchTemplateDataResponse"                           :  "lib/Amazon/AWS/EC2/Response/GetLaunchTemplateDataResponse.pm6"                           ,
@@ -609,6 +610,7 @@
       "Amazon::AWS::EC2::Action::DescribePublicIpv4Pools"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePublicIpv4Pools.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeSnapshots"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshots.pm6"                                         ,
+      "Amazon::AWS::EC2::Action::DescribeSubnets"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeSubnets.pm6"                                           ,
       "Amazon::AWS::EC2::Action::DescribeVolumeAttribute"                                   :  "lib/Amazon/AWS/EC2/Action/DescribeVolumeAttribute.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeVolumeStatus"                                      :  "lib/Amazon/AWS/EC2/Action/DescribeVolumeStatus.pm6"                                      ,
       "Amazon::AWS::EC2::Action::DescribeVolumes"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeVolumes.pm6"                                           ,
@@ -643,6 +645,11 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
+
+
+
 
 
 

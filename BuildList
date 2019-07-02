@@ -551,6 +551,7 @@ Amazon::AWS::EC2::Response::DescribeSnapshotsResponse
 Amazon::AWS::EC2::Response::DescribeSpotDatafeedSubscriptionResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetInstancesResponse
 Amazon::AWS::EC2::Response::DescribeSpotInstanceRequestsResponse
+Amazon::AWS::EC2::Response::DescribeSubnetsResponse
 Amazon::AWS::EC2::Response::DescribeVolumeAttributeResponse
 Amazon::AWS::EC2::Response::DescribeVolumesResponse
 Amazon::AWS::EC2::Response::GetLaunchTemplateDataResponse
@@ -596,6 +597,7 @@ Amazon::AWS::EC2::Action::DescribeNetworkInterfaces
 Amazon::AWS::EC2::Action::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
 Amazon::AWS::EC2::Action::DescribeSnapshots
+Amazon::AWS::EC2::Action::DescribeSubnets
 Amazon::AWS::EC2::Action::DescribeVolumeAttribute
 Amazon::AWS::EC2::Action::DescribeVolumeStatus
 Amazon::AWS::EC2::Action::DescribeVolumes
