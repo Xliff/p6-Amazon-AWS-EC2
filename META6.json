@@ -57,6 +57,7 @@
       "Amazon::AWS::EC2::Tests::DescribeInstanceStatus"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeInstanceStatus.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeInstances"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeInstances.pm6"                                          ,
       "Amazon::AWS::EC2::Tests::DescribeKeyPairs"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeKeyPairs.pm6"                                           ,
+      "Amazon::AWS::EC2::Tests::DescribeNetworkInterfaces"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeNetworkInterfaces.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribePublicIpv4Pools.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeRegions"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeRegions.pm6"                                            ,
       "Amazon::AWS::EC2::Tests::DescribeSecurityGroups"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeSecurityGroups.pm6"                                     ,
@@ -634,6 +635,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
