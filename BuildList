@@ -22,9 +22,12 @@ Amazon::AWS::EC2::Filters::DescribeImagesFilter
 Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter
 Amazon::AWS::EC2::Filters::DescribeInstancesFilter
 Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter
+Amazon::AWS::EC2::Filters::DescribeNetworkInterfacesFilter
 Amazon::AWS::EC2::Filters::DescribeRegionsFilter
 Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
+Amazon::AWS::EC2::Filters::DescribeSnapshotsFilter
 Amazon::AWS::EC2::Filters::DescribeTagsFilter
+Amazon::AWS::EC2::Filters::DescribeVolumeModificationsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter
 Amazon::AWS::EC2::Filters::DescribeVolumesFilter
 Amazon::AWS::EC2::Tests::TestTemplate
@@ -42,11 +45,14 @@ Amazon::AWS::EC2::Tests::DescribeInstanceAttribute
 Amazon::AWS::EC2::Tests::DescribeInstanceStatus
 Amazon::AWS::EC2::Tests::DescribeInstances
 Amazon::AWS::EC2::Tests::DescribeKeyPairs
+Amazon::AWS::EC2::Tests::DescribeNetworkInterfaces
 Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Tests::DescribeRegions
 Amazon::AWS::EC2::Tests::DescribeSecurityGroups
+Amazon::AWS::EC2::Tests::DescribeSnapshots
 Amazon::AWS::EC2::Tests::DescribeTags
 Amazon::AWS::EC2::Tests::DescribeVolumeAttribute
+Amazon::AWS::EC2::Tests::DescribeVolumeModifications
 Amazon::AWS::EC2::Tests::DescribeVolumes
 Amazon::AWS::EC2::Types::Base
 Amazon::AWS::EC2::Types::BlobAttributeValue
@@ -352,6 +358,7 @@ Amazon::AWS::EC2::Response::DescribeSnapshotAttributeResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetRequestHistoryResponse
 Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse
 Amazon::AWS::EC2::Response::DescribeTagsResponse
+Amazon::AWS::EC2::Response::DescribeVolumeModificationsResponse
 Amazon::AWS::EC2::Response::DescribeVolumeStatusResponse
 Amazon::AWS::EC2::Response::DisassociateAddressResponse
 Amazon::AWS::EC2::Response::DisassociateIamInstanceProfileResponse
@@ -502,6 +509,7 @@ Amazon::AWS::EC2::Action::DescribePrincipalIdFormat
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeSnapshotAttribute
 Amazon::AWS::EC2::Action::DescribeTags
+Amazon::AWS::EC2::Action::DescribeVolumeModifications
 Amazon::AWS::EC2::Action::GetConsoleOutput
 Amazon::AWS::EC2::Action::GetConsoleScreenshot
 Amazon::AWS::EC2::Response::BundleInstanceResponse
@@ -527,6 +535,7 @@ Amazon::AWS::EC2::Response::DescribeInstanceAttributeResponse
 Amazon::AWS::EC2::Response::DescribeInstanceStatusResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplatesResponse
 Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse
+Amazon::AWS::EC2::Response::DescribeNetworkInterfacesResponse
 Amazon::AWS::EC2::Response::DescribePublicIpv4PoolsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesListingsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesModificationsResponse
@@ -534,6 +543,7 @@ Amazon::AWS::EC2::Response::DescribeReservedInstancesResponse
 Amazon::AWS::EC2::Response::DescribeScheduledInstanceAvailabilityResponse
 Amazon::AWS::EC2::Response::DescribeScheduledInstancesResponse
 Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse
+Amazon::AWS::EC2::Response::DescribeSnapshotsResponse
 Amazon::AWS::EC2::Response::DescribeSpotDatafeedSubscriptionResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetInstancesResponse
 Amazon::AWS::EC2::Response::DescribeSpotInstanceRequestsResponse
@@ -578,8 +588,10 @@ Amazon::AWS::EC2::Action::DescribeInstanceAttribute
 Amazon::AWS::EC2::Action::DescribeInstanceStatus
 Amazon::AWS::EC2::Action::DescribeKeyPairs
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute
+Amazon::AWS::EC2::Action::DescribeNetworkInterfaces
 Amazon::AWS::EC2::Action::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
+Amazon::AWS::EC2::Action::DescribeSnapshots
 Amazon::AWS::EC2::Action::DescribeVolumeAttribute
 Amazon::AWS::EC2::Action::DescribeVolumeStatus
 Amazon::AWS::EC2::Action::DescribeVolumes

@@ -2,7 +2,7 @@ use v6.d;
 
 use Amazon::AWS::EC2::Tests::TestTemplate;
 
-unit package Amazon::AWS::EC2::Tests::DescribeIdFormat;
+unit package Amazon::AWS::EC2::Tests::DescribeVolumeModifications;
 
 our sub runTests {
   my $c = $?FILE.split('::')[*-1].substr(0, * - 1);
@@ -17,6 +17,5 @@ our sub runTests {
         if not %classes{"{$c}Response"}:exists;
   }
   
-  my $ro = runActionResponseTests($action, $response);
-  $ro.to-xml.say;
+  runActionResponseTests($action, $response);
 }

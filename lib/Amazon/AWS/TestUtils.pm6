@@ -16,6 +16,8 @@ unit package Amazon::AWS::TestUtils;
 
 my $DEBUG = $*ENV<P6_AMAZON_DEBUG>;
 
+class X::NoAttributesRemaining is Exception { }
+
 sub diff ($da, $db) is export {
   use File::Temp;
 
@@ -77,14 +79,20 @@ sub getTestFiles($cat, :$unit) is export {
 
 sub changeRandomAttribute($o is rw) is export {
   my $victim;
+  my @options = $o.^attributes
+                  .grep({ 
+                    .WHY.defined.not && 
+                    .name.defined    && 
+                    .name.chars      
+                  });
+  # Must put the next line inside an elements check, or an undefined
+  # value will be created.
+  @options .= map({ .name.substr(2) }) if @options;
+  X::NoAttributesRemaining.new.throw unless @options;
   repeat {
-    $victim = $o.^attributes
-                .grep({ .WHY.defined.not })
-                .map({ .name.substr(2) })
-                .grep({ .defined && .chars })
-                .pick;
+    $victim = @options.pick;
   } until $o."$victim"() ~~
-    (Str, Bool, Int, Positional, Amazon::AWS::EC2::Types::Base).any;
+    (Str, Bool, Num, Int, Positional, Amazon::AWS::EC2::Types::Base).any;
 
   #diag "{ $o.^attributes.map({ (.name // '$!WTF').substr(2) }).join(', ') }";
   #diag "$victim -- { $victim.^name }";
@@ -92,12 +100,13 @@ sub changeRandomAttribute($o is rw) is export {
   my $val = $o."$victim"();
   #diag "$victim = $val";
   my $newVal = do given $val {
-    when Str                           { "syzygy!" ~ ($_ // '') }   # 3 Wyse, Man
-    when Bool                          { .not                   }
-    when Int                           { ++$_                   }
-    when Positional                    { $val.WHAT.new          }
-    when Amazon::AWS::EC2::Types::Base { $val.WHAT.new          }
-    default                            { die 'WTF?!?'           }
+    when Str                           { "syzygy!" ~ ($_ // '')  }   # 3 Wyse, Man
+    when Bool                          { .not                    }
+    when Int                           { ++$_                    }
+    when Num                           { $_ + 2.5                }
+    when Positional                    { $val.WHAT.new           }
+    when Amazon::AWS::EC2::Types::Base { $val.WHAT.new           }
+    default                            { die "WTF?: { .^name }"  }
   }
   # diag "Setting {$victim} to {$newVal.gist}";
   $o."$victim"() = $val ~~ Positional ?? $newVal.Array !! $newVal;
@@ -145,8 +154,15 @@ sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
       ok       ( my $eqv = $a.eqv($b) ),                            "$_ compares ok";
       diff( ddt($a, :get), ddt($b, :get) ) unless $eqv;
       
-      nok      do { changeRandomAttribute($b); $a eqv $b       },   "Changed $_ fails eqv";
-    }
-  
+      {
+        CATCH { 
+          when X::NoAttributesRemaining {
+            pass 'No atributes left to change, so skipping...';
+          }
+        }
+        changeRandomAttribute($b);
+        nok do { $a eqv $b                                     },   "Changed $_ fails eqv";
+      }
+    } 
   }
 }

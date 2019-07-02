@@ -66,10 +66,10 @@ class Amazon::AWS::EC2::Action::DescribePrincipalIdFormat is export
     
     # Should already be sorted.
     my @args = (
-      DryRun     => $.DryRun,
+      DryRun           => $.DryRun,
       |@ResourceArgs,
-      MaxResults => $!MaxResults,
-      Version    => '2016-11-15'
+      MaxResults       => $!MaxResults,
+      Version          => '2016-11-15'
     );
 
     # XXX - Add error handling to makeRequest!

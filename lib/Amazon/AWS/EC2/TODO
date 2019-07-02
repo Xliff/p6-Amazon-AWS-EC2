@@ -29,13 +29,13 @@
 	+ GetConsoleScreenshot
   + RestartInstance
   - DescribeIamInstanceProfileAssociations
-  - DescribeSnapshots
+  + DescribeSnapshots
   - DescribeSubnets
   + DescribeVolumeAttribute
   - DescribeSecurityGroupReferences
   - DescribePrefixLists
-  - DescribeNetworkInterfaces
-  - DescribePrincipalIdFormat
+  + DescribeNetworkInterfaces
+  + DescribePrincipalIdFormat
   - DescribePrincipalAcls
   - DescribeIdentityIdFormat
   + DescribeIdFormat
@@ -44,7 +44,16 @@
   + DescribeAccountAttributes
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   - DescribeDhcpOptions
+  - DescribeVolumeModifications
 
+- Fix tests for DescribeIdentityIdFormat, as the private test always returns a:
+     URI: ?Action=DescribeIdentityIdFormat&Version=2016-11-15&PrincipalArn=arn:aws:iam::839618952316:root
+      not ok 2 - Can run action
+      # Failed test 'Can run action'
+      # at /usr/local/home/cbwood/Projects/p6-Amazon-AWS-EC2/../p6-Amazon-AWS-EC2-Private/lib/Amazon/AWS/EC2/Tests/Private/DescribeIdentityIdFormat.pm6 (Amazon::AWS::EC2::Tests::Private::DescribeIdentityIdFormat) line 23
+      # Server responded with 401 Unauthorized
+  This could be a console-related issue, but the proper policy has been estanlished twice. So it could be something else!
+      
 - For all Describe*Attribute actions, a list of attribute parameter to response object member should be developed and a definedness check performed, to insure that deserialization is being done properly.
 - Following the development of the list of actions, above. Develope the Create analogs of all developed Describe actions
 - Add a better key management system to the API. This would allow keeping either multiple key files in .ec2, using EC2AccessKeys (no .csv) as managed file containing multiple keys. May want to check for accessKeys.csv as the default and fall back to EC2AccessKeys.csv. If no EC2AccessKeys file is found, the key name is the name of the file without the ".csv" suffix. If no .csv files are found then use EC2AccessKeys. If neither of the previous options are available, then error out.

@@ -1,5 +1,7 @@
 .precomp/
 lib/.precomp/
+lib/.precomp/locok
+lib/.precomp/*
 *.bak
 test-files/
 LastBuildResults
