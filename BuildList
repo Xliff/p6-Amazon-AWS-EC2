@@ -28,6 +28,7 @@ Amazon::AWS::EC2::Filters::DescribeNetworkInterfacesFilter
 Amazon::AWS::EC2::Filters::DescribeRegionsFilter
 Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
 Amazon::AWS::EC2::Filters::DescribeSnapshotsFilter
+Amazon::AWS::EC2::Filters::DescribeSubnetsFilter
 Amazon::AWS::EC2::Filters::DescribeTagsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumeModificationsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter

@@ -44,7 +44,7 @@
   + DescribeAccountAttributes
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   - DescribeDhcpOptions
-  - DescribeVolumeModifications
+  + DescribeVolumeModifications
   + DescribeHostReservationOfferings
 
 - Fix tests for DescribeIdentityIdFormat, as the private test always returns a:
