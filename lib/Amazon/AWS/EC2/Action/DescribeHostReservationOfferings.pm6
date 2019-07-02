@@ -10,7 +10,7 @@ use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
   does XML::Class[
-    xml-element   => 'DescribeHostReservation',
+    xml-element   => 'DescribeHostReservationOfferings',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
