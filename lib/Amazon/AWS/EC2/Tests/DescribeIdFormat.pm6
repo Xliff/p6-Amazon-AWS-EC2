@@ -17,5 +17,6 @@ our sub runTests {
         if not %classes{"{$c}Response"}:exists;
   }
   
-  runActionResponseTests($action, $response);
+  my $ro = runActionResponseTests($action, $response);
+  $ro.to-xml.say;
 }

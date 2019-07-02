@@ -19,14 +19,14 @@ class Amazon::AWS::EC2::Action::DescribeIdentityIdFormat is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Str $.PrincipleArn is xml-element is xml-skip-null is rw;
+  has Str $.PrincipalArn is xml-element is xml-skip-null is rw;
   has Str $.Resource     is xml-element is xml-skip-null is rw;  #= bundle | conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association | export-task | flow-log | image | import-task | instance | internet-gateway | network-acl | network-acl-association | network-interface | network-interface-attachment | prefix-list | reservation | route-table | route-table-association | security-group | snapshot | subnet | subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway
   
   submethod BUILD (
-    Str :$principleArn,
+    Str :$principalArn,
     Str :$resource,
     # Testing purposes ONLY!
-    Str :$!PrincipleArn,
+    Str :$!PrincipalArn,
     Str :$!Resource
   ) {
     my $dieMsg = qq:to/DIE/.chomp;
@@ -34,7 +34,7 @@ class Amazon::AWS::EC2::Action::DescribeIdentityIdFormat is export
       { %attributes<Resource|Table> }
       DIE
 
-    $!PrincipleArn = $principleArn if $principleArn.defined;
+    $!PrincipalArn = $principalArn if $principalArn.defined;
     $!Resource     = $resource     if $resource.defined;
     
     die $dieMsg unless $!Resource.defined.not ||
@@ -49,7 +49,7 @@ class Amazon::AWS::EC2::Action::DescribeIdentityIdFormat is export
   {
     # Should already be sorted.
     my @args = (
-      PrincipleArn => $.PrincipleArn,  
+      PrincipalArn => $.PrincipalArn,  
     );
     @args.unshift: Pair.new('Resource', $.Resource) if $.Resource.defined;
     @args.unshift: Pair.new('Version', '2016-11-15');
