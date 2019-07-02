@@ -377,6 +377,7 @@
       "Amazon::AWS::EC2::Response::DescribeTagsResponse"                                    :  "lib/Amazon/AWS/EC2/Response/DescribeTagsResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Response::DescribeVolumeModificationsResponse"                     :  "lib/Amazon/AWS/EC2/Response/DescribeVolumeModificationsResponse.pm6"                     ,
       "Amazon::AWS::EC2::Response::DescribeVolumeStatusResponse"                            :  "lib/Amazon/AWS/EC2/Response/DescribeVolumeStatusResponse.pm6"                            ,
+      "Amazon::AWS::EC2::Response::DescribeVpcAttributeResponse"                            :  "lib/Amazon/AWS/EC2/Response/DescribeVpcAttributeResponse.pm6"                            ,
       "Amazon::AWS::EC2::Response::DisassociateAddressResponse"                             :  "lib/Amazon/AWS/EC2/Response/DisassociateAddressResponse.pm6"                             ,
       "Amazon::AWS::EC2::Response::DisassociateIamInstanceProfileResponse"                  :  "lib/Amazon/AWS/EC2/Response/DisassociateIamInstanceProfileResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::GetConsoleOutputResponse"                                :  "lib/Amazon/AWS/EC2/Response/GetConsoleOutputResponse.pm6"                                ,
@@ -528,6 +529,7 @@
       "Amazon::AWS::EC2::Action::DescribeSnapshotAttribute"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshotAttribute.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeTags"                                              :  "lib/Amazon/AWS/EC2/Action/DescribeTags.pm6"                                              ,
       "Amazon::AWS::EC2::Action::DescribeVolumeModifications"                               :  "lib/Amazon/AWS/EC2/Action/DescribeVolumeModifications.pm6"                               ,
+      "Amazon::AWS::EC2::Action::DescribeVpcAttribute"                                      :  "lib/Amazon/AWS/EC2/Action/DescribeVpcAttribute.pm6"                                      ,
       "Amazon::AWS::EC2::Action::GetConsoleOutput"                                          :  "lib/Amazon/AWS/EC2/Action/GetConsoleOutput.pm6"                                          ,
       "Amazon::AWS::EC2::Action::GetConsoleScreenshot"                                      :  "lib/Amazon/AWS/EC2/Action/GetConsoleScreenshot.pm6"                                      ,
       "Amazon::AWS::EC2::Response::BundleInstanceResponse"                                  :  "lib/Amazon/AWS/EC2/Response/BundleInstanceResponse.pm6"                                  ,
@@ -646,6 +648,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
