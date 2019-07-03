@@ -89,7 +89,7 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfaces is export
 
     my $cnt = 1;
     my @NetworkInterfaceIdArgs;
-    @NetworkInterfaceIdArgs.push: Pair.new("NetworkInterfaceId.{$cnt++}", $_) for @.InstanceIds;
+    @NetworkInterfaceIdArgs.push: Pair.new("NetworkInterfaceId.{$cnt++}", $_) for @.NetworkInterfaceIds;
 
     my @FilterArgs;
     $cnt = 1;
