@@ -46,6 +46,7 @@
       "Amazon::AWS::EC2::Filters::DescribeVolumeModificationsFilter"                        :  "lib/Amazon/AWS/EC2/Filters/DescribeVolumeModificationsFilter.pm6"                        ,
       "Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter"                               :  "lib/Amazon/AWS/EC2/Filters/DescribeVolumeStatusFilter.pm6"                               ,
       "Amazon::AWS::EC2::Filters::DescribeVolumesFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeVolumesFilter.pm6"                                    ,
+      "Amazon::AWS::EC2::Filters::DescribeVpcsFilter"                                       :  "lib/Amazon/AWS/EC2/Filters/DescribeVpcsFilter.pm6"                                       ,
       "Amazon::AWS::EC2::Tests::TestTemplate"                                               :  "lib/Amazon/AWS/EC2/Tests/TestTemplate.pm6"                                               ,
       "Amazon::AWS::EC2::Tests::DescribeAccountAttributes"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAccountAttributes.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeAddresses"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeAddresses.pm6"                                          ,
@@ -650,6 +651,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

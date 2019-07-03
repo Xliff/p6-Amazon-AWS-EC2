@@ -33,6 +33,7 @@ Amazon::AWS::EC2::Filters::DescribeTagsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumeModificationsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter
 Amazon::AWS::EC2::Filters::DescribeVolumesFilter
+Amazon::AWS::EC2::Filters::DescribeVpcsFilter
 Amazon::AWS::EC2::Tests::TestTemplate
 Amazon::AWS::EC2::Tests::DescribeAccountAttributes
 Amazon::AWS::EC2::Tests::DescribeAddresses
