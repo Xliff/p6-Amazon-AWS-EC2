@@ -15,7 +15,6 @@ class Amazon::AWS::EC2::Filters::DescribeVpcsFilter::Association
   has Str $.association-id            is xml-element is xml-skip-null is rw;
   has Str $.cidr-block                is xml-element is xml-skip-null is rw;
   has Str $.state                     is xml-element is xml-skip-null is rw;
-  
 }
 
 class Amazon::AWS::EC2::Filters::DescribeVpcsFilter::Tag

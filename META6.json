@@ -638,6 +638,7 @@
       "Amazon::AWS::EC2::Action::DescribeAvailabilityZones"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAvailabilityZones.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeConversionTasks"                                   :  "lib/Amazon/AWS/EC2/Action/DescribeConversionTasks.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeInstances"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeInstances.pm6"                                         ,
+      "Amazon::AWS::EC2::Action::DescribeVpcs"                                              :  "lib/Amazon/AWS/EC2/Action/DescribeVpcs.pm6"                                              ,
       "Amazon::AWS::EC2::Response::DescribeFleetsResponse"                                  :  "lib/Amazon/AWS/EC2/Response/DescribeFleetsResponse.pm6"                                  ,
       "Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetRequestsResponse.pm6"                       
     },
@@ -651,6 +652,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

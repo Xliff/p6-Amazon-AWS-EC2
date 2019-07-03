@@ -625,5 +625,6 @@ Amazon::AWS::EC2::Action::DescribeAccountAttributes
 Amazon::AWS::EC2::Action::DescribeAvailabilityZones
 Amazon::AWS::EC2::Action::DescribeConversionTasks
 Amazon::AWS::EC2::Action::DescribeInstances
+Amazon::AWS::EC2::Action::DescribeVpcs
 Amazon::AWS::EC2::Response::DescribeFleetsResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse
