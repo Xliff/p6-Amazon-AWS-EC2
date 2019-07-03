@@ -628,6 +628,7 @@
       "Amazon::AWS::EC2::Response::DescribeConversionTasksResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeConversionTasksResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribeInstancesResponse"                               :  "lib/Amazon/AWS/EC2/Response/DescribeInstancesResponse.pm6"                               ,
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse"                  :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplateVersionsResponse.pm6"                  ,
+      "Amazon::AWS::EC2::Response::DescribeVpcsResponse"                                    :  "lib/Amazon/AWS/EC2/Response/DescribeVpcsResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Response::RunInstancesResponse"                                    :  "lib/Amazon/AWS/EC2/Response/RunInstancesResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute"                                 :  "lib/Amazon/AWS/EC2/Tests/DescribeFpgaImageAttribute.pm6"                                 ,
       "Amazon::AWS::EC2::Types::FleetData"                                                  :  "lib/Amazon/AWS/EC2/Types/FleetData.pm6"                                                  ,
@@ -649,6 +650,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

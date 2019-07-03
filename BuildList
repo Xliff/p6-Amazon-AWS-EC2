@@ -615,6 +615,7 @@ Amazon::AWS::EC2::Response::DescribeAvailabilityZonesResponse
 Amazon::AWS::EC2::Response::DescribeConversionTasksResponse
 Amazon::AWS::EC2::Response::DescribeInstancesResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse
+Amazon::AWS::EC2::Response::DescribeVpcsResponse
 Amazon::AWS::EC2::Response::RunInstancesResponse
 Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute
 Amazon::AWS::EC2::Types::FleetData
