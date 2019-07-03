@@ -556,6 +556,7 @@
       "Amazon::AWS::EC2::Response::DescribeImagesResponse"                                  :  "lib/Amazon/AWS/EC2/Response/DescribeImagesResponse.pm6"                                  ,
       "Amazon::AWS::EC2::Response::DescribeInstanceAttributeResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeInstanceAttributeResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeInstanceStatusResponse"                          :  "lib/Amazon/AWS/EC2/Response/DescribeInstanceStatusResponse.pm6"                          ,
+      "Amazon::AWS::EC2::Response::DescribeInternetGatewaysResponse"                        :  "lib/Amazon/AWS/EC2/Response/DescribeInternetGatewaysResponse.pm6"                        ,
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplatesResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplatesResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse"               :  "lib/Amazon/AWS/EC2/Response/DescribeNetworkInterfaceAttributeResponse.pm6"               ,
       "Amazon::AWS::EC2::Response::DescribeNetworkInterfacesResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeNetworkInterfacesResponse.pm6"                       ,
@@ -657,6 +658,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
