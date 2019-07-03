@@ -55,6 +55,7 @@ Amazon::AWS::EC2::Tests::DescribeInstances
 Amazon::AWS::EC2::Tests::DescribeInternetGateways
 Amazon::AWS::EC2::Tests::DescribeKeyPairs
 Amazon::AWS::EC2::Tests::DescribeNetworkAcls
+Amazon::AWS::EC2::Tests::DescribeNetworkInterfacePermissions
 Amazon::AWS::EC2::Tests::DescribeNetworkInterfaces
 Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Tests::DescribeRegions
@@ -606,6 +607,7 @@ Amazon::AWS::EC2::Action::DescribeInstanceStatus
 Amazon::AWS::EC2::Action::DescribeInternetGateways
 Amazon::AWS::EC2::Action::DescribeKeyPairs
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute
+Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaces
 Amazon::AWS::EC2::Action::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
