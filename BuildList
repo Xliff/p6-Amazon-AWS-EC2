@@ -51,6 +51,7 @@ Amazon::AWS::EC2::Tests::DescribeImages
 Amazon::AWS::EC2::Tests::DescribeInstanceAttribute
 Amazon::AWS::EC2::Tests::DescribeInstanceStatus
 Amazon::AWS::EC2::Tests::DescribeInstances
+Amazon::AWS::EC2::Tests::DescribeInternetGateways
 Amazon::AWS::EC2::Tests::DescribeKeyPairs
 Amazon::AWS::EC2::Tests::DescribeNetworkAcls
 Amazon::AWS::EC2::Tests::DescribeNetworkInterfaces

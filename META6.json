@@ -64,6 +64,7 @@
       "Amazon::AWS::EC2::Tests::DescribeInstanceAttribute"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeInstanceAttribute.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeInstanceStatus"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeInstanceStatus.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeInstances"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeInstances.pm6"                                          ,
+      "Amazon::AWS::EC2::Tests::DescribeInternetGateways"                                   :  "lib/Amazon/AWS/EC2/Tests/DescribeInternetGateways.pm6"                                   ,
       "Amazon::AWS::EC2::Tests::DescribeKeyPairs"                                           :  "lib/Amazon/AWS/EC2/Tests/DescribeKeyPairs.pm6"                                           ,
       "Amazon::AWS::EC2::Tests::DescribeNetworkAcls"                                        :  "lib/Amazon/AWS/EC2/Tests/DescribeNetworkAcls.pm6"                                        ,
       "Amazon::AWS::EC2::Tests::DescribeNetworkInterfaces"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeNetworkInterfaces.pm6"                                  ,
@@ -660,6 +661,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
