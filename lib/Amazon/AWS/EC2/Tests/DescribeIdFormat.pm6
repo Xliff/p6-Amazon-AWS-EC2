@@ -18,5 +18,4 @@ our sub runTests {
   }
   
   my $ro = runActionResponseTests($action, $response);
-  $ro.to-xml.say;
 }
