@@ -12,7 +12,7 @@ class Amazon::AWS::EC2::Types::InternetGateway is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has InternetGatewayAttachment    @.attachments          is xml-element    is xml-skip-null    is xml-container('attachmentSet')      is rw; 
+  has InternetGatewayAttachment    @.attachments                            is xml-skip-null    is xml-container('attachmentSet')      is rw; 
   has Str                          $.internetGatewayId    is xml-element    is xml-skip-null                                           is rw; 
   has Str                          $.ownerId              is xml-element    is xml-skip-null                                           is rw; 
   has Tag                          @.tags                 is xml-element    is xml-skip-null    is xml-container('tagSet')             is rw; 

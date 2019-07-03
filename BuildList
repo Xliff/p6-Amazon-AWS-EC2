@@ -600,6 +600,7 @@ Amazon::AWS::EC2::Action::DescribeImageAttribute
 Amazon::AWS::EC2::Action::DescribeImages
 Amazon::AWS::EC2::Action::DescribeInstanceAttribute
 Amazon::AWS::EC2::Action::DescribeInstanceStatus
+Amazon::AWS::EC2::Action::DescribeInternetGateways
 Amazon::AWS::EC2::Action::DescribeKeyPairs
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaces
