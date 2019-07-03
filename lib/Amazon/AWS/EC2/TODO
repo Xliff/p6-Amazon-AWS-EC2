@@ -40,11 +40,11 @@
   + DescribeHostReservationOfferings
   + DescribeSubnets
   + DescribeVpcAttribute
+  + DescribeVpcs
   - DescribeSecurityGroupReferences
   - DescribePrefixLists
   - DescribeIdentityIdFormat
   - DescribeNetworkAcls
-  - DescribeVpcs
   - DescribeDhcpOptions
   - DescribeIamInstanceProfileAssociations
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
