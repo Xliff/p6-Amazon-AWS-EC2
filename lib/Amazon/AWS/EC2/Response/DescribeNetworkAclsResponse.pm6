@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Response::DescribeNetworkAclsResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has NetworkAcl    @.NetworkAcls                    is xml-container('networkAclset')  is rw; 
+  has NetworkAcl    @.NetworkAcls                    is xml-container('networkAclSet')  is rw; 
   has Str           $.nextToken    is xml-element                                       is rw; 
 }

@@ -84,3 +84,6 @@
     policy   - Snapshot Lifecycle Policy
     arn      - Amazon Resource Name
     hro      - Host Reservation Offering
+    aclassoc - ACL Association
+    acl-     - Network ACL
+    

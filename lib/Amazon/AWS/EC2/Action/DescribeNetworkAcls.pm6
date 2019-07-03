@@ -106,8 +106,8 @@ class Amazon::AWS::EC2::Action::DescribeNetworkAcls is export
         DryRun         => $.DryRun,
         |@FilterArgs,
         MaxResults     => $.MaxResults,
-        Version        => '2016-11-15'
-        |@VpcIdArgs,
+        Version        => '2016-11-15',
+        |@VpcIdArgs
       );
     }
 
