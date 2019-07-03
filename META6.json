@@ -37,6 +37,7 @@
       "Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeInstanceStatusFilter.pm6"                             ,
       "Amazon::AWS::EC2::Filters::DescribeInstancesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeInstancesFilter.pm6"                                  ,
       "Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter"                                   :  "lib/Amazon/AWS/EC2/Filters/DescribeKeyPairsFilter.pm6"                                   ,
+      "Amazon::AWS::EC2::Filters::DescribeNetworkAclsFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribeNetworkAclsFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeNetworkInterfacesFilter"                          :  "lib/Amazon/AWS/EC2/Filters/DescribeNetworkInterfacesFilter.pm6"                          ,
       "Amazon::AWS::EC2::Filters::DescribeRegionsFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeRegionsFilter.pm6"                                    ,
       "Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeSecurityGroupsFilter.pm6"                             ,
@@ -654,6 +655,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

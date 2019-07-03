@@ -129,18 +129,25 @@ sub populateTestObject(
     sub generateValue($_) {
       do {
         when Bool { Bool.pick         }
-        when Int  { @range.pick       }
-        when Num  { @range.max * rand }
-
         when Str  {
           my @values;
           if (my $options = $a.WHY).defined {
-            $options ~~ /('?')? \s* (<[\w\-]>+)+ %% [ \s* '|' \s* ]/;
-            (do gather for $/[1].Array { take .Str }).flat.pick;
+            $options ~~ /('?')? \s* (<[\\\w\-\:]>+)+ %% [ \s* '|' \s* ]/;
+            # YYY - TODO: Do away with implicit conversion fom Array to Str
+            my $vals = $/[1];
+            # Remove 'regex:' from beginning of alternation string, if present.
+            $vals .= substr( 'regex:'.chars ) if $vals.starts-with('regex:');
+            # Split on space. Select random value from resulting array.
+            my $v = (do gather for $vals.split(' ').Array { take .Str }).flat.pick;
+            # Int as Str (conditional)
+            $v = @range.pick.Str if $v.starts-with('\\d');
+            $v; 
           } else {
             (gather for ^@range.pick { take @charValue.pick }).join()
           }
         }
+        when Int  { @range.pick       }
+        when Num  { @range.max * rand }
 
         default   { populateTestObject( .new, :$blanks, :$chance, :$invert, :$elems ) }
       }
@@ -182,11 +189,18 @@ sub getAttributeData($type) is export  {
     my $attrName = .name.substr(2);
     %attributes{$attrName} = $_;
     quietly {
-      %attributes{$attrName}.WHY ~~ /('?')? \s* (<[\w\-]>+)+ %% [ \s* '|' \s* ]/;
-      %attributes{"{ $attrName }|ValidValues"} = (do gather for $/[1].Array {
-        take .Str
-      }).flat.Array;
-      makeAttributeTable(%attributes, $attrName) if $/;
+      given %attributes{$attrName}.WHY {
+        when /\s* 'regex:' (.+) $/ {
+          my $regex = $/[0].Str;
+          %attributes{"{ $attrName }|ValidRegex"} = / $regex /;
+        }
+        when /('?')? \s* (<[\w\-]>+)+ %% [ \s* '|' \s* ]/ {
+          %attributes{"{ $attrName }|ValidValues"} = (do gather for $/[1].Array {
+            take .Str
+          }).flat.Array;
+          makeAttributeTable(%attributes, $attrName) if $/;
+        }
+      }
     }
   }
 

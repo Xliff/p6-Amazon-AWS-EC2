@@ -24,6 +24,7 @@ Amazon::AWS::EC2::Filters::DescribeImagesFilter
 Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter
 Amazon::AWS::EC2::Filters::DescribeInstancesFilter
 Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter
+Amazon::AWS::EC2::Filters::DescribeNetworkAclsFilter
 Amazon::AWS::EC2::Filters::DescribeNetworkInterfacesFilter
 Amazon::AWS::EC2::Filters::DescribeRegionsFilter
 Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter

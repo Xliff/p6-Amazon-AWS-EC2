@@ -7,33 +7,33 @@ use XML::Class;
 use Amazon::AWS::Roles::Base;
 use Amazon::AWS::Roles::Eqv;
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::BlockDeviceMapping     { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::HibernationOptions     { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::IamInstanceProfile     { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::Instance               { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::Ipv6Address            { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddrAssociation { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddress         { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAssociation     { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAttachment      { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkInterface       { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::ProductCode            { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstances::Tag                    { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::BlockDeviceMapping     { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::HibernationOptions     { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::IamInstanceProfile     { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Instance               { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Ipv6Address            { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAddrAssociation { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAddress         { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAssociation     { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAttachment      { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkInterface       { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::ProductCode            { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Tag                    { ... }
 
-constant BlockDeviceMapping     :=  Amazon::AWS::EC2::Filters::DescribeInstances::BlockDeviceMapping;
-constant HibernationOptions     :=  Amazon::AWS::EC2::Filters::DescribeInstances::HibernationOptions;
-constant IamInstanceProfile     :=  Amazon::AWS::EC2::Filters::DescribeInstances::IamInstanceProfile;
-constant Instance               :=  Amazon::AWS::EC2::Filters::DescribeInstances::Instance;
-constant Ipv6Address            :=  Amazon::AWS::EC2::Filters::DescribeInstances::Ipv6Address;
-constant NetworkAddrAssociation :=  Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddrAssociation;
-constant NetworkAddress         :=  Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddress;
-constant NetworkAssociation     :=  Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAssociation;
-constant NetworkAttachment      :=  Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAttachment;
-constant NetworkInterface       :=  Amazon::AWS::EC2::Filters::DescribeInstances::NetworkInterface;
-constant ProductCode            :=  Amazon::AWS::EC2::Filters::DescribeInstances::ProductCode;
-constant Tag                    :=  Amazon::AWS::EC2::Filters::DescribeInstances::Tag;
+constant BlockDeviceMapping     :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::BlockDeviceMapping;
+constant HibernationOptions     :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::HibernationOptions;
+constant IamInstanceProfile     :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::IamInstanceProfile;
+constant Instance               :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Instance;
+constant Ipv6Address            :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Ipv6Address;
+constant NetworkAddrAssociation :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAddrAssociation;
+constant NetworkAddress         :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAddress;
+constant NetworkAssociation     :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAssociation;
+constant NetworkAttachment      :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAttachment;
+constant NetworkInterface       :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkInterface;
+constant ProductCode            :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::ProductCode;
+constant Tag                    :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Tag;
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::BlockDeviceMapping
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::BlockDeviceMapping
   does XML::Class[xml-element => 'block-device-mapping']
 {
   also does Amazon::AWS::Roles::Base;
@@ -46,7 +46,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::BlockDeviceMapping
   has Str                       $.volume-id                 is xml-element is xml-skip-null is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::HibernationOptions
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::HibernationOptions
   does XML::Class[xml-element => 'hibernation-options']
 {
   also does Amazon::AWS::Roles::Base;
@@ -55,7 +55,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::HibernationOptions
   has Bool                      $.configured                is xml-element is xml-skip-null is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::IamInstanceProfile
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::IamInstanceProfile
   does XML::Class[xml-element => 'iam-instance-profile']
 {
   also does Amazon::AWS::Roles::Base;
@@ -64,7 +64,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::IamInstanceProfile
   has Str                       $.arn                       is xml-element is xml-skip-null is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::Instance
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Instance
   does XML::Class[xml-element => 'instance']
 {
   also does Amazon::AWS::Roles::Base;
@@ -74,7 +74,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::Instance
   has Str                       $.group-name                is xml-element is xml-skip-null is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::Ipv6Address
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Ipv6Address
   does XML::Class[xml-element => 'addresses']
 {
   also does Amazon::AWS::Roles::Base;
@@ -83,7 +83,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::Ipv6Address
   has Str                       $.ipv6-address              is xml-element is xml-skip-null is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddrAssociation
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAddrAssociation
   does XML::Class[xml-element => 'association']
 {
   also does Amazon::AWS::Roles::Base;
@@ -93,7 +93,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddrAssociation
   has Str                       $.ip-owner-id               is xml-element is xml-skip-null is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddress
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAddress
   does XML::Class[xml-element => 'address']
 {
   also does Amazon::AWS::Roles::Base;
@@ -104,7 +104,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAddress
   has NetworkAddrAssociation    $.association                              is xml-skip-null is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAssociation
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAssociation
   does XML::Class[xml-element => 'association']
 {
   also does Amazon::AWS::Roles::Base;
@@ -116,7 +116,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAssociation
   has Str                       $.attachment-id             is xml-element is xml-skip-null is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAttachment
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAttachment
   does XML::Class[xml-element => 'attachment']
 {
   also does Amazon::AWS::Roles::Base;
@@ -129,7 +129,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkAttachment
   has Int                       $.device-index              is xml-element is xml-skip-null is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkInterface
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkInterface
   does XML::Class[xml-element => 'network-interface']
 {
   also does Amazon::AWS::Roles::Base;
@@ -155,7 +155,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::NetworkInterface
   has Str                       $.vpc-id                    is xml-element is xml-skip-null is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::ProductCode
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::ProductCode
   does XML::Class[xml-element => 'product-code']
 {
   also does Amazon::AWS::Roles::Base;
@@ -164,7 +164,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstances::ProductCode
   has Str                       $.type                      is xml-element is xml-skip-null is rw; #= devpay | marketplace
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstances::Tag
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Tag
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;
