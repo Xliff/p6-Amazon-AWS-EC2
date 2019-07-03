@@ -28,24 +28,26 @@
 	+ GetConsoleOutput
 	+ GetConsoleScreenshot
   + RestartInstance
-  - DescribeIamInstanceProfileAssociations
   + DescribeSnapshots
-  - DescribeSubnets
   + DescribeVolumeAttribute
-  - DescribeSecurityGroupReferences
-  - DescribePrefixLists
   + DescribeNetworkInterfaces
   + DescribePrincipalIdFormat
-  - DescribePrincipalAcls
-  - DescribeIdentityIdFormat
   + DescribeIdFormat
   + DescribeAvailabilityZones
   + DescribeAddresses
   + DescribeAccountAttributes
-  x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
-  - DescribeDhcpOptions
   + DescribeVolumeModifications
   + DescribeHostReservationOfferings
+  + DescribeSubnets
+  + DescribeVpcAttribute
+  - DescribeSecurityGroupReferences
+  - DescribePrefixLists
+  - DescribeIdentityIdFormat
+  - DescribeNetworkAcls
+  - DescribeVpcs
+  - DescribeDhcpOptions
+  - DescribeIamInstanceProfileAssociations
+  x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
 
 - Fix tests for DescribeIdentityIdFormat, as the private test always returns a:
      URI: ?Action=DescribeIdentityIdFormat&Version=2016-11-15&PrincipalArn=arn:aws:iam::839618952316:root

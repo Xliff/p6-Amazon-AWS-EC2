@@ -46,9 +46,9 @@ class Amazon::AWS::EC2::Action::DescribeVpcAttribute is export
     die '$VpcId is required!'     unless $!VpcId.chars;
     die '$Attribute is required!' unless $!Attribute.chars; 
     
-    die "Invalid value given for \$Attribute. Must be one of:\n{ 
+    die "Invalid value given for \$Attribute ('$!Attribute'). Must be one of:\n{ 
       %attributes<Attribute|Table> 
-    }" unless $!Attribute eq <Attribute|ValidValues>.any;
+    }" unless $!Attribute eq self.getValidAttributes.any;
     
     my @args.append: (
       Attribute     => $.Attribute,
@@ -66,6 +66,10 @@ class Amazon::AWS::EC2::Action::DescribeVpcAttribute is export
      $xml
      !!
      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
+  }
+  
+  method getValidAttributes {
+    %attributes<Attribute|ValidValues>.Array;
   }
   
 };

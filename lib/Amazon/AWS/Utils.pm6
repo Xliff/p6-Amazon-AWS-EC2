@@ -165,7 +165,6 @@ sub makeAttributeTable(%attributes, $attrName) is export {
   if %attributes{"{ $attrName }|ValidValues"}:exists {
     %attributes{"{ $attrName }|Table"} = (
       do gather for %attributes{"{ $attrName }|ValidValues"}.batch(3) {
-        take 'a';
         take "\t" ~
           .Array.fmt("%-{ %attributes{"{ $attrName }|MaxLength"} + 4 }s").join('')
       }
@@ -187,7 +186,6 @@ sub getAttributeData($type) is export  {
       %attributes{"{ $attrName }|ValidValues"} = (do gather for $/[1].Array {
         take .Str
       }).flat.Array;
-      %attributes{"{ $attrName }|ValidValues"}.^name.say;
       makeAttributeTable(%attributes, $attrName) if $/;
     }
   }

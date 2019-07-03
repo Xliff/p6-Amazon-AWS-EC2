@@ -72,6 +72,7 @@
       "Amazon::AWS::EC2::Tests::DescribeVolumeAttribute"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumeAttribute.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeVolumeModifications"                                :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumeModifications.pm6"                                ,
       "Amazon::AWS::EC2::Tests::DescribeVolumes"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeVolumes.pm6"                                            ,
+      "Amazon::AWS::EC2::Tests::DescribeVpcAttribute"                                       :  "lib/Amazon/AWS/EC2/Tests/DescribeVpcAttribute.pm6"                                       ,
       "Amazon::AWS::EC2::Types::Base"                                                       :  "lib/Amazon/AWS/EC2/Types/Base.pm6"                                                       ,
       "Amazon::AWS::EC2::Types::BlobAttributeValue"                                         :  "lib/Amazon/AWS/EC2/Types/BlobAttributeValue.pm6"                                         ,
       "Amazon::AWS::EC2::Types::BundleTaskError"                                            :  "lib/Amazon/AWS/EC2/Types/BundleTaskError.pm6"                                            ,
@@ -648,6 +649,14 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
+
+
+
+
+
+
 
 
 

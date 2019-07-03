@@ -12,5 +12,5 @@ class Amazon::AWS::EC2::Response::DescribeSubnetsResponse is export
   also does Amazon::AWS::Roles::Response;
 
   has Str       $.nextToken    is xml-element                                                     is xml-skip-null is rw;
-  has Subnet    @.tags         is xml-element('item', :over-ride)  is xml-container('subnetSet')  is xml-skip-null is rw;
+  has Subnet    @.subnets      is xml-element('item', :over-ride)  is xml-container('subnetSet')  is xml-skip-null is rw;
 }
