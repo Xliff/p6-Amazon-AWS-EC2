@@ -61,7 +61,7 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfaces is export
 
     if @filters {
       @!Filters = do given @filters {
-        when .all ~~ Amazon::AWS::EC2::Filters::DescribeNetworkInterfaces { @filters }
+        when .all ~~ Amazon::AWS::EC2::Filters::DescribeNetworkInterfacesFilter { @filters }
 
         default {
           die qq:to/DIE/.chomp;
