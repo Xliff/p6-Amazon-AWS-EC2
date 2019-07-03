@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Response::DescribeVpcsResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has Vpc               @.tags                       is xml-container('tagSet')  is xml-skip-null is rw;
+  has Vpc               @.vpcs                       is xml-container('vpcSet')  is xml-skip-null is rw;
   has Str               $.nextToken  is xml-element                              is xml-skip-null is rw;
 }
