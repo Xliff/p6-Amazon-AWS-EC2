@@ -5,6 +5,10 @@ use XML::Class;
 use Amazon::AWS::Roles::Base;
 use Amazon::AWS::Roles::Eqv;
 
+use Amazon::AWS::Utils;
+
+my %attributes;
+
 class Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter::Action 
   does XML::Class[xml-element => 'action']
 {
@@ -24,22 +28,30 @@ class Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter::Event
 
   has Str $.description is xml-element is xml-skip-null is rw;
   has Str $.event-id    is xml-element is xml-skip-null is rw;
-  has Str $.event-type  is xml-element is xml-skip-null is rw; #= !! for io-enabled: passed | failed
-                                                               #= !! for io-performance: degraded | severely-degraded | stalled
+  has Str $.event-type  is xml-element is xml-skip-null is rw; # !! for io-enabled: passed | failed
+                                                               # !! for io-performance: degraded | severely-degraded | stalled
   has Str $.not-after   is xml-element is xml-skip-null is rw;
   has Str $.not-before  is xml-element is xml-skip-null is rw;                                                             
 }
 
-class Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter::VolumeStatus
+our class Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter::VolumeStatus
   does XML::Class[xml-element => 'volume-status']
 {
   also does Amazon::AWS::Roles::Base;
   also does Amazon::AWS::Roles::Eqv;
   
-  has Str $.details-name    is xml-element is xml-skip-null is rw;  #=  io-enabled | io-performance
-  has Str $.details-status  is xml-element is xml-skip-null is rw;  #= !! for io-enabled: passed | failed
-                                                                    #= !! for io-performance: normal | degraded | severely-degraded | stalled
+  has Str $.details-name    is xml-element is xml-skip-null is rw;  #= io-enabled | io-performance
+  has Str $.details-status  is xml-element is xml-skip-null is rw;  # !! for io-enabled: passed | failed
+                                                                    # !! for io-performance: normal | degraded | severely-degraded | stalled
   has Str $.status          is xml-element is xml-skip-null is rw;  #= ok | impaired | warning | insufficient-data
+  
+  method getValidDetails {
+    %attributes<VolumeStatus><details-name|ValidValues>.Array;
+  }
+  
+  method getValidStatus {
+    %attributes<VolumeStatus><status|ValidValues>.Array;
+  }
 }
 
 constant Action       := Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter::Action;
@@ -57,3 +69,8 @@ class Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter is export
   has Event        $.event                            is xml-skip-null is rw;
   has VolumeStatus $.volume-status                    is xml-skip-null is rw;
 }
+
+BEGIN {
+  %attributes<VolumeStatus> = getAttributeData(VolumeStatus)
+}
+    

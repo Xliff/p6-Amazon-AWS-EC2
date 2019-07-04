@@ -20,7 +20,7 @@
 - t/03-filter.t -- First test returns a false positive. Investigate why and solve.
 - List of targeted actions to be developed:
 	+ DescribeImageAttribute
-	+ DescribeInstanceAttribute
+	+ DescribeInstanceAtdetribute
   + DescribeNetworkInterfaceAttribute
 	+ DescribePublicIpv4Pools
 	+ DescribeSnapshotAttribute
@@ -41,13 +41,17 @@
   + DescribeSubnets
   + DescribeVpcAttribute
   + DescribeVpcs
+  + DescribeNetworkAcls
+  + DescribeNetworkInterfacesPermissions
   - DescribeSecurityGroupReferences
   - DescribePrefixLists
   - DescribeIdentityIdFormat
-  - DescribeNetworkAcls
   - DescribeDhcpOptions
   - DescribeIamInstanceProfileAssociations
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
+  
+  - AllocateAddress
+  - ReleaseAddress
 
 - Fix tests for DescribeIdentityIdFormat, as the private test always returns a:
      URI: ?Action=DescribeIdentityIdFormat&Version=2016-11-15&PrincipalArn=arn:aws:iam::839618952316:root
