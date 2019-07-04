@@ -6,7 +6,7 @@ unit package Amaszon::AWS::EC2::Tests::TestTemplate;
 
 our %classes is export;
 
-constant actionResponseTests is export = 4;
+constant actionResponseTests is export = 5;
 
 sub runActionResponseTests(\action, \response, $fixup?, :$plan = True) is export {    
   my ($o, $ro, $x);
@@ -30,9 +30,14 @@ sub runActionResponseTests(\action, \response, $fixup?, :$plan = True) is export
             )                                  , "Returned value looks XMLish";
   # diag $x;
   lives-ok { CATCH {  
-               default { $*ERR.say; "oops, $_" } 
+               default { 
+                 $*ERR.say; 
+                .rethrow;
+               }
              } 
-             $ro = response.from-xml($x)      }, "Can Instantiate response object from XML";
+             $ro = response.from-xml($x)      }, "Deserialization does not throw an exception";
+             
+  isa-ok     $ro, response,                      "Response object is the correct type.";
   # diag $ro.gist;
   
   $ro;

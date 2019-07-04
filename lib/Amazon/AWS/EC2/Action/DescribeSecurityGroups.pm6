@@ -14,7 +14,7 @@ use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
   does XML::Class[
-    xml-element   => 'DescribeInstances',
+    xml-element   => 'DescribeSecurityGroups',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
@@ -27,7 +27,6 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
   has Str                           @.GroupIds    is xml-container('groupIds')    is xml-element('item', :over-ride)  is xml-skip-null is rw;
   has Str                           @.GroupNames  is xml-container('groupNames')  is xml-element('item', :over-ride)  is xml-skip-null is rw;
   has Int                           $.MaxResults                                  is xml-element                      is xml-skip-null is rw;
-  #has Str                           $.NextToken                                   is xml-element                      is xml-skip-null is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -145,7 +144,8 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
     $raw ??
       $xml
       !!
-      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
+      #::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
+      ::("{ $c }Response").from-xml($xml);
   }
 
 }

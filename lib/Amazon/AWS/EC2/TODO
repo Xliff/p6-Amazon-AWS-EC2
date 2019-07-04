@@ -48,6 +48,7 @@
   - DescribeIdentityIdFormat
   - DescribeDhcpOptions
   - DescribeIamInstanceProfileAssociations
+  - DescribeSecurityGroupReferences
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   
   - AllocateAddress
