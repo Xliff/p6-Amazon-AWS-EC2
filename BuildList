@@ -558,6 +558,7 @@ Amazon::AWS::EC2::Response::DescribeReservedInstancesModificationsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesResponse
 Amazon::AWS::EC2::Response::DescribeScheduledInstanceAvailabilityResponse
 Amazon::AWS::EC2::Response::DescribeScheduledInstancesResponse
+Amazon::AWS::EC2::Response::DescribeSecurityGroupReferencesResponse
 Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse
 Amazon::AWS::EC2::Response::DescribeSnapshotsResponse
 Amazon::AWS::EC2::Response::DescribeSpotDatafeedSubscriptionResponse
@@ -610,6 +611,7 @@ Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute
 Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaces
 Amazon::AWS::EC2::Action::DescribePublicIpv4Pools
+Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
 Amazon::AWS::EC2::Action::DescribeSnapshots
 Amazon::AWS::EC2::Action::DescribeSubnets

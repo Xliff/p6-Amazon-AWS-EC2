@@ -571,6 +571,7 @@
       "Amazon::AWS::EC2::Response::DescribeReservedInstancesResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeReservedInstancesResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeScheduledInstanceAvailabilityResponse"           :  "lib/Amazon/AWS/EC2/Response/DescribeScheduledInstanceAvailabilityResponse.pm6"           ,
       "Amazon::AWS::EC2::Response::DescribeScheduledInstancesResponse"                      :  "lib/Amazon/AWS/EC2/Response/DescribeScheduledInstancesResponse.pm6"                      ,
+      "Amazon::AWS::EC2::Response::DescribeSecurityGroupReferencesResponse"                 :  "lib/Amazon/AWS/EC2/Response/DescribeSecurityGroupReferencesResponse.pm6"                 ,
       "Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse"                          :  "lib/Amazon/AWS/EC2/Response/DescribeSecurityGroupsResponse.pm6"                          ,
       "Amazon::AWS::EC2::Response::DescribeSnapshotsResponse"                               :  "lib/Amazon/AWS/EC2/Response/DescribeSnapshotsResponse.pm6"                               ,
       "Amazon::AWS::EC2::Response::DescribeSpotDatafeedSubscriptionResponse"                :  "lib/Amazon/AWS/EC2/Response/DescribeSpotDatafeedSubscriptionResponse.pm6"                ,
@@ -623,6 +624,7 @@
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions"                       :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfacePermissions.pm6"                       ,
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaces"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaces.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribePublicIpv4Pools"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePublicIpv4Pools.pm6"                                   ,
+      "Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences"                           :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroupReferences.pm6"                           ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeSnapshots"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshots.pm6"                                         ,
       "Amazon::AWS::EC2::Action::DescribeSubnets"                                           :  "lib/Amazon/AWS/EC2/Action/DescribeSubnets.pm6"                                           ,
@@ -665,6 +667,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
