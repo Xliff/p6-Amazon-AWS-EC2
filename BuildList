@@ -367,6 +367,7 @@ Amazon::AWS::EC2::Response::DescribePlacementGroupsResponse
 Amazon::AWS::EC2::Response::DescribePrincipalIdFormatResponse
 Amazon::AWS::EC2::Response::DescribeRegionsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesOfferingsResponse
+Amazon::AWS::EC2::Response::DescribeSecurityGroupReferencesResponse
 Amazon::AWS::EC2::Response::DescribeSnapshotAttributeResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetRequestHistoryResponse
 Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse
@@ -558,7 +559,6 @@ Amazon::AWS::EC2::Response::DescribeReservedInstancesModificationsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesResponse
 Amazon::AWS::EC2::Response::DescribeScheduledInstanceAvailabilityResponse
 Amazon::AWS::EC2::Response::DescribeScheduledInstancesResponse
-Amazon::AWS::EC2::Response::DescribeSecurityGroupReferencesResponse
 Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse
 Amazon::AWS::EC2::Response::DescribeSnapshotsResponse
 Amazon::AWS::EC2::Response::DescribeSpotDatafeedSubscriptionResponse

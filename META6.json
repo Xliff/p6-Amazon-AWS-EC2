@@ -380,6 +380,7 @@
       "Amazon::AWS::EC2::Response::DescribePrincipalIdFormatResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribePrincipalIdFormatResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeRegionsResponse"                                 :  "lib/Amazon/AWS/EC2/Response/DescribeRegionsResponse.pm6"                                 ,
       "Amazon::AWS::EC2::Response::DescribeReservedInstancesOfferingsResponse"              :  "lib/Amazon/AWS/EC2/Response/DescribeReservedInstancesOfferingsResponse.pm6"              ,
+      "Amazon::AWS::EC2::Response::DescribeSecurityGroupReferencesResponse"                 :  "lib/Amazon/AWS/EC2/Response/DescribeSecurityGroupReferencesResponse.pm6"                 ,
       "Amazon::AWS::EC2::Response::DescribeSnapshotAttributeResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeSnapshotAttributeResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeSpotFleetRequestHistoryResponse"                 :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetRequestHistoryResponse.pm6"                 ,
       "Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse"                        :  "lib/Amazon/AWS/EC2/Response/DescribeSpotPriceHistoryResponse.pm6"                        ,
@@ -571,7 +572,6 @@
       "Amazon::AWS::EC2::Response::DescribeReservedInstancesResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeReservedInstancesResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeScheduledInstanceAvailabilityResponse"           :  "lib/Amazon/AWS/EC2/Response/DescribeScheduledInstanceAvailabilityResponse.pm6"           ,
       "Amazon::AWS::EC2::Response::DescribeScheduledInstancesResponse"                      :  "lib/Amazon/AWS/EC2/Response/DescribeScheduledInstancesResponse.pm6"                      ,
-      "Amazon::AWS::EC2::Response::DescribeSecurityGroupReferencesResponse"                 :  "lib/Amazon/AWS/EC2/Response/DescribeSecurityGroupReferencesResponse.pm6"                 ,
       "Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse"                          :  "lib/Amazon/AWS/EC2/Response/DescribeSecurityGroupsResponse.pm6"                          ,
       "Amazon::AWS::EC2::Response::DescribeSnapshotsResponse"                               :  "lib/Amazon/AWS/EC2/Response/DescribeSnapshotsResponse.pm6"                               ,
       "Amazon::AWS::EC2::Response::DescribeSpotDatafeedSubscriptionResponse"                :  "lib/Amazon/AWS/EC2/Response/DescribeSpotDatafeedSubscriptionResponse.pm6"                ,
@@ -667,6 +667,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
