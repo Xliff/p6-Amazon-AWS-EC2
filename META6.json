@@ -41,6 +41,7 @@
       "Amazon::AWS::EC2::Filters::DescribeNetworkAclsFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribeNetworkAclsFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeNetworkInterfacePermissionsFilter"                :  "lib/Amazon/AWS/EC2/Filters/DescribeNetworkInterfacePermissionsFilter.pm6"                ,
       "Amazon::AWS::EC2::Filters::DescribeNetworkInterfacesFilter"                          :  "lib/Amazon/AWS/EC2/Filters/DescribeNetworkInterfacesFilter.pm6"                          ,
+      "Amazon::AWS::EC2::Filters::DescribePlacementGroupsFilter"                            :  "lib/Amazon/AWS/EC2/Filters/DescribePlacementGroupsFilter.pm6"                            ,
       "Amazon::AWS::EC2::Filters::DescribeRegionsFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeRegionsFilter.pm6"                                    ,
       "Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeSecurityGroupsFilter.pm6"                             ,
       "Amazon::AWS::EC2::Filters::DescribeSnapshotsFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeSnapshotsFilter.pm6"                                  ,
@@ -623,6 +624,7 @@
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute"                         :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaceAttribute.pm6"                         ,
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions"                       :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfacePermissions.pm6"                       ,
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaces"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaces.pm6"                                 ,
+      "Amazon::AWS::EC2::Action::DescribePlacementGroups"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePlacementGroups.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribePublicIpv4Pools"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePublicIpv4Pools.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences"                           :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroupReferences.pm6"                           ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
@@ -667,6 +669,8 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
 
 
 
