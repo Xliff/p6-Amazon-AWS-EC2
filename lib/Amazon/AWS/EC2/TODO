@@ -43,7 +43,8 @@
   + DescribeVpcs
   + DescribeNetworkAcls
   + DescribeNetworkInterfacesPermissions
-  - DescribeSecurityGroupReferences
+  + DescribePlacementGroups
+  + DescribeSecurityGroupReferences
   - DescribePrefixLists
   - DescribeIdentityIdFormat
   - DescribeDhcpOptions
