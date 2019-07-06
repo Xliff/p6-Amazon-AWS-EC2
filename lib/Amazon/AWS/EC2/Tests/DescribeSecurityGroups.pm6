@@ -23,13 +23,17 @@ our sub runTests {
       ( try require ::("Amazon::AWS::EC2::Action::{ $c }") )
         if not %classes{$c}:exists;
     $action := %classes{$c};
-    %classes{"{$c}Response"} := 
-      ( try require ::("Amazon::AWS::EC2::Response::{ $c }Response") )
-        if not %classes{"{$c}Response"}:exists;
-    %classes.gist.say;
-    $response := %classes{"{$c}Response"};
+    try {
+      CATCH { default { diag .Str; .rethrow } }
+      %classes{"{ $c }Response"} := 
+        ( try require ::("Amazon::AWS::EC2::Response::{ $c }Response") )
+          if not %classes{"{ $c }Response"}:exists;     
+    }
+    $response := %classes{"{ $c }Response"};
   }
   
+  %classes.gist.say;
+   
   my $ro = runActionResponseTests($action, $response);
   my $sgId = $ro.groups.map( *.groupId ).pick;
   

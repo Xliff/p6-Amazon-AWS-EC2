@@ -17,3 +17,5 @@ our class Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse is export
   has Str            $.nextToken is xml-element                        is rw;
   has SecurityGroup  @.groups    is xml-container('securityGroupInfo') is rw;
 }
+
+INIT say "MEEP!";

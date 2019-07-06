@@ -26,7 +26,5 @@ our sub runTests {
     };
   }
   
-  subtest 'Testing with all attributes' => sub {
-    runActionResponseTests($action, $response);
-  }
+  runActionResponseTests($action, $response);s
 }

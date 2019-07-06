@@ -24,6 +24,7 @@ sub runActionResponseTests(\action, \response, $fixup?, :$plan = True) is export
              } 
              # Can generate a fatal exception and return a false positive!!
              $x = $o.run(:raw)                }, "Can execute {$c}.run";
+             diag $o.run.^name;
   ok         $x.defined.not || [&&](
                $x.chars,
                $x.starts-with("<?xml version")
