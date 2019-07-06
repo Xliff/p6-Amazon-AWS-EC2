@@ -528,6 +528,7 @@
       "Amazon::AWS::EC2::Types::VpcPeeringConnection"                                       :  "lib/Amazon/AWS/EC2/Types/VpcPeeringConnection.pm6"                                       ,
       "Amazon::AWS::EC2::Types::VpnConnection"                                              :  "lib/Amazon/AWS/EC2/Types/VpnConnection.pm6"                                              ,
       "Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification"                          :  "lib/Amazon/AWS/EC2/Types/VpnConnectionOptionsSpecification.pm6"                          ,
+      "Amazon::AWS::EC2::Action::CreateKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/CreateKeyPair.pm6"                                             ,
       "Amazon::AWS::EC2::Action::DescribeAggregateIdFormat"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAggregateIdFormat.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeFlowLogs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeFlowLogs.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeHostReservationOfferings"                          :  "lib/Amazon/AWS/EC2/Action/DescribeHostReservationOfferings.pm6"                          ,
@@ -669,6 +670,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
