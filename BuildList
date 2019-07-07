@@ -516,6 +516,7 @@ Amazon::AWS::EC2::Types::VpcPeeringConnection
 Amazon::AWS::EC2::Types::VpnConnection
 Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::EC2::Action::CreateKeyPair
+Amazon::AWS::EC2::Action::DeleteKeyPair
 Amazon::AWS::EC2::Action::DescribeAggregateIdFormat
 Amazon::AWS::EC2::Action::DescribeFlowLogs
 Amazon::AWS::EC2::Action::DescribeHostReservationOfferings
