@@ -195,9 +195,11 @@ sub getAttributeData($type) is export  {
           %attributes{"{ $attrName }|ValidRegex"} = / $regex /;
         }
         when /('?')? \s* (<[\w\-]>+)+ %% [ \s* '|' \s* ]/ {
-          %attributes{"{ $attrName }|ValidValues"} = (do gather for $/[1].Array {
-            take .Str
-          }).flat.Array;
+          %attributes{"{ $attrName }|ValidValues"} = (do 
+            gather for $/[1].Array {
+              take .Str
+            }
+          ).flat.Array;
           makeAttributeTable(%attributes, $attrName) if $/;
         }
       }
