@@ -22,7 +22,7 @@ class Amazon::AWS::EC2::Action::CreateVpc is export
   has Bool $.AmazonProvidedIpv6CidrBlock is xml-element is xml-skip-null is rw;
   has Str  $.CidrBlock                   is xml-element is xml-skip-null is rw;
   has Bool $.DryRun                      is xml-element is xml-skip-null is rw;
-  has Str  $.InstanceTenacy              is xml-element is xml-skip-null is rw;   #= default | dedicated | host 
+  has Str  $.InstanceTenacy              is xml-element is xml-skip-null is rw;   # = default | dedicated | host 
 
   submethod BUILD (
     :$amazonProvidedIpv6CidrBlock,
@@ -48,7 +48,7 @@ class Amazon::AWS::EC2::Action::CreateVpc is export
     
     die $dieMsg 
       unless $!InstanceTenacy.chars || 
-             $!InstanceTenacy ~~ %attributes<InistanceTenacy|ValidValues>.any
+             $!InstanceTenacy ~~ %attributes<InstanceTenacy|ValidValues>.any
       
   }
 
@@ -69,6 +69,11 @@ class Amazon::AWS::EC2::Action::CreateVpc is export
     
     die $dieMsg unless $.CidrBlock ~~ / '/' (\d ** 2) $/;
     die $dieMsg unless $/[0].Int ~~ 16..28;
+    
+    # Added due to comment on documentation page, located here: 
+    # https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpc.html
+    die '"host" value currently not allowed for InstanceTenacy'
+      if $.InstanceTenacy eq 'host'
     
     # Should already be sorted.
     my @args = (
