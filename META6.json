@@ -641,6 +641,7 @@
       "Amazon::AWS::EC2::Action::StopInstances"                                             :  "lib/Amazon/AWS/EC2/Action/StopInstances.pm6"                                             ,
       "Amazon::AWS::EC2::Response::CreateFleetResponse"                                     :  "lib/Amazon/AWS/EC2/Response/CreateFleetResponse.pm6"                                     ,
       "Amazon::AWS::EC2::Response::CreateLaunchTemplateVersionResponse"                     :  "lib/Amazon/AWS/EC2/Response/CreateLaunchTemplateVersionResponse.pm6"                     ,
+      "Amazon::AWS::EC2::Response::CreateVpcResponse"                                       :  "lib/Amazon/AWS/EC2/Response/CreateVpcResponse.pm6"                                       ,
       "Amazon::AWS::EC2::Response::DescribeAccountAttributesResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeAccountAttributesResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeAvailabilityZonesResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeAvailabilityZonesResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeConversionTasksResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeConversionTasksResponse.pm6"                         ,
@@ -652,6 +653,7 @@
       "Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute"                                 :  "lib/Amazon/AWS/EC2/Tests/DescribeFpgaImageAttribute.pm6"                                 ,
       "Amazon::AWS::EC2::Types::FleetData"                                                  :  "lib/Amazon/AWS/EC2/Types/FleetData.pm6"                                                  ,
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfig"                                     :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfig.pm6"                                     ,
+      "Amazon::AWS::EC2::Action::CreateVpc"                                                 :  "lib/Amazon/AWS/EC2/Action/CreateVpc.pm6"                                                 ,
       "Amazon::AWS::EC2::Action::DescribeAccountAttributes"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAccountAttributes.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeAvailabilityZones"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAvailabilityZones.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeConversionTasks"                                   :  "lib/Amazon/AWS/EC2/Action/DescribeConversionTasks.pm6"                                   ,
@@ -671,6 +673,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

@@ -628,6 +628,7 @@ Amazon::AWS::EC2::Action::StartInstances
 Amazon::AWS::EC2::Action::StopInstances
 Amazon::AWS::EC2::Response::CreateFleetResponse
 Amazon::AWS::EC2::Response::CreateLaunchTemplateVersionResponse
+Amazon::AWS::EC2::Response::CreateVpcResponse
 Amazon::AWS::EC2::Response::DescribeAccountAttributesResponse
 Amazon::AWS::EC2::Response::DescribeAvailabilityZonesResponse
 Amazon::AWS::EC2::Response::DescribeConversionTasksResponse
@@ -639,6 +640,7 @@ Amazon::AWS::EC2::Response::RunInstancesResponse
 Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute
 Amazon::AWS::EC2::Types::FleetData
 Amazon::AWS::EC2::Types::SpotFleetRequestConfig
+Amazon::AWS::EC2::Action::CreateVpc
 Amazon::AWS::EC2::Action::DescribeAccountAttributes
 Amazon::AWS::EC2::Action::DescribeAvailabilityZones
 Amazon::AWS::EC2::Action::DescribeConversionTasks
