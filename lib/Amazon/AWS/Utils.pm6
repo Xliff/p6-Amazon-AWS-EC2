@@ -65,12 +65,21 @@ sub makeRequest (
   $canonUri = '/' unless $canonUri.chars;
   %headers.append: (x-amz-date => $amzdate, host => host);
 
+  
   my $canonHeaders = %headers
     .pairs
     .sort( *.key )
     .map({ "{.key.lc}:{.value}" })
     .join("\n") ~ "\n";
-  my $signedHeaders = 'host;x-amz-date'; # %headers.pairs.sort( *.key ).map( *.key.lc ).join(';');
+  
+  # Note, Content-Type is not included. Future versions of this API will need 
+  # to adjust for this omission.
+  
+  # Original:
+  my $signedHeaders = %headers.pairs.sort( *.key ).map( *.key.lc ).join(';');
+  # Stubbed:
+  # my $signedHeaders = 'host;x-amz-date'; 
+  
   my $canonReq = (
     $method,
     $canonUri,

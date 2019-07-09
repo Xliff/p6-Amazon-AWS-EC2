@@ -18,9 +18,12 @@
   Action, Response and Filter objects. Depends on completion of previous action
   item.
 - t/03-filter.t -- First test returns a false positive. Investigate why and solve.
-- Currently, Region is hardcoded to us-east-1 at the Request level. Add a mechanism that changes
+
++ Currently, Region is hardcoded to us-east-1 at the Request level. Add a mechanism that changes
   this to a default and allows it to be overridden at the ACTION, level.
   This should be POSTPONED until testing has been validated project-wide... or at least moved to a branch.
+  »» See branch RegionAtActionLevel
+  
 - List of targeted actions to be developed:
 	+ DescribeImageAttribute
 	+ DescribeInstanceAtdetribute
