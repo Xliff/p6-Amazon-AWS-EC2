@@ -50,6 +50,7 @@ sub getLocalAccess {
       }
     );    
     
+    # Embedded spaces in key so curly brace hash access is mandatory.
     ($ak, $sk) = $access_file.lines[1].split(',')[
       %idx{'Access key ID'},
       %idx{'Secret access key'},
