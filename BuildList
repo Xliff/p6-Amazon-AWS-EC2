@@ -651,3 +651,4 @@ Amazon::AWS::EC2::Action::DescribeNetworkAcls
 Amazon::AWS::EC2::Action::DescribeVpcs
 Amazon::AWS::EC2::Response::DescribeFleetsResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse
+Amazon::AWS::EC2::Tests::CreateDefaultSubnet
