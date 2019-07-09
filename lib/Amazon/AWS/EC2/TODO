@@ -52,11 +52,13 @@
   + DescribePlacementGroups
   + DescribeSecurityGroupReferences
   + CreateKeyPair
-  + CreateDefaultSubnet
-  - DescribePrefixLists
-  - DescribeIdentityIdFormat
+  + DescribePrefixLists
+  e CreateDefaultSubnet (Completed, but no valid response retrieved)
+  e DescribeIdentityIdFormat (Completed, but no valid response retrieved)
   - DescribeDhcpOptions
   - DescribeIamInstanceProfileAssociations
+  - DescribeRouteTable
+  - DescribeNatGateway
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   
   - AllocateAddress
