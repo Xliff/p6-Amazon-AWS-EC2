@@ -8,7 +8,7 @@ use Digest::HMAC;
 use Digest::SHA256::Native;
 
 constant algorithm            = 'AWS4-HMAC-SHA256';
-constant default_key_location = '/home/cbwood/.ec2/EC2AccessKeys.csv';
+constant default_key_location = '/home/cbwood/.ec2/default.csv';
 constant empty_payload_hash   = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
 constant host                 = 'ec2.amazonaws.com';
 constant region               = 'us-east-1';
@@ -39,8 +39,19 @@ sub getLocalAccess {
     unless default_key_location.IO.e;
   my ($ak, $sk);
   try {
-    CATCH { default { die 'Invalid format'; } }
-    ($ak, $sk) = default_key_location.IO.slurp.lines[1].split(',');
+    CATCH { default { .message.say; die 'Invalid format'; } }
+    my $access_file = default_key_location.IO.slurp;
+    my %idx = (
+      do gather for $access_file.lines[0].split(',').kv -> $k, $v {
+        take Pair.new($v, $k) 
+          if $v eq ('Access key ID', 'Secret access key').any;
+      }
+    );    
+    
+    ($ak, $sk) = $access_file.lines[1].split(',')[
+      %idx{'Access key ID'},
+      %idx{'Secret access key'},
+    ];
   }
   ($ak, $sk);
 }
@@ -105,6 +116,14 @@ sub makeRequest (
 
   # # FINALLY make the request
   my $r = do given $method {
+    CATCH {
+      when X::Cro::HTTP::Error {
+        my $body = await .response.body;
+        say "Additional Error Message: { $body.decode }" if $body;
+        .rethrow
+      }
+    }
+    
     my $url = "https://{host}$uri";
     %headers<host>:delete;
     when 'GET' {
