@@ -117,7 +117,12 @@ sub changeRandomAttribute($o is rw) is export {
 # Must be global for duration of execution.
 my %classes;
 
-sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
+sub doBasicTests(
+  @files, 
+  :$elems = 1, 
+  :$number = 1,
+  :$do-timings = True
+) is export {
   plan @files.elems * 8 * $number;
   my ($elev, $timeStart) = (0, DateTime.now);
   my %timings;
@@ -125,11 +130,12 @@ sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
   my $iteration;
   for ^$number {
     # If you really want speed, this needs to be in nqp!
-    if $iteration++ > (my $exp = 10 ** $elev) {
+    if $do-timings && $iteration++ > (my $exp = 10 ** $elev) {
       %timings{$exp} = DateTime.now - $timeStart;
       $timeStart = DateTime.now;
       $elev++;
     }
+    
     for @files {
       CATCH { default { diag .message } }
       
@@ -155,8 +161,9 @@ sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
             .rethrow
           }
         }
-        die 'Undefined object' unless $a.^name ne 'Any';
-        $a = populateTestObject( %classes{$_}.new, :$elems, :!blanks )
+        my $ci = %classes{$_}.new;
+        #diag "CI: { $ci.gist }";
+        $a = populateTestObject( $ci, :$elems, :!blanks )
       },                                                            "$_ can be populated";
       lives-ok { 
         CATCH { 
@@ -185,6 +192,8 @@ sub doBasicTests(@files, :$elems = 1, :$number = 1) is export {
       }
     }
   }
-  %timings{$iteration} = DateTime.now - $timeStart;
-  diag %timings.gist;
+  if $do-timings {
+    %timings{$iteration} = DateTime.now - $timeStart;
+    diag %timings.gist;
+  }
 }
