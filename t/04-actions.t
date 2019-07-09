@@ -28,12 +28,24 @@ sub MAIN (:$unit, :$number = 1, :$elems = 5, :$private, :$tests is copy) {
     
   plan 3 * +@files * $number;
 
+  # Should be a better way to abstract the timing code out... Think about it.
+  my ($elev, $timeStart) = (0, DateTime.now);
+  my %timings;
+  my $iteration;
+  
   for ^$number {
+    # If you really want speed, this needs to be in nqp!
+    if $do-timings && $iteration++ > (my $exp = 10 ** $elev) {
+      %timings{$exp} = DateTime.now - $timeStart;
+      $timeStart = DateTime.now;
+      $elev++;
+    }
+    
     for @files -> $f {
       my $baseName = $f.split('::')[* - 1];
       subtest "{ $baseName } basic tests" => sub {
         plan :skip-all<Skipping Basic tests> unless <basic all>.any ∈ @tests;
-        doBasicTests( $f.Array, :$elems ) 
+        doBasicTests( $f.Array, :$elems, :!do-timings ) 
       }
 
       for %prefixes.kv -> $pk, $pv {
@@ -60,5 +72,9 @@ sub MAIN (:$unit, :$number = 1, :$elems = 5, :$private, :$tests is copy) {
         }
       }
     }
+  }
+  if $do-timings {
+    %timings{$iteration} = DateTime.now - $timeStart;
+    diag %timings.gist;
   }
 }
