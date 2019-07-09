@@ -337,6 +337,7 @@ Amazon::AWS::EC2::Response::CancelSpotInstanceRequestsResponse
 Amazon::AWS::EC2::Response::ConfirmProductInstanceResponse
 Amazon::AWS::EC2::Response::CopyFpgaImageResponse
 Amazon::AWS::EC2::Response::CopyImageResponse
+Amazon::AWS::EC2::Response::CreateDefaultSubnetResponse
 Amazon::AWS::EC2::Response::CreateFpgaImageResponse
 Amazon::AWS::EC2::Response::CreateImageResponse
 Amazon::AWS::EC2::Response::CreateKeyPairResponse
@@ -515,6 +516,7 @@ Amazon::AWS::EC2::Types::VpcCidrBlockAssociation
 Amazon::AWS::EC2::Types::VpcPeeringConnection
 Amazon::AWS::EC2::Types::VpnConnection
 Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
+Amazon::AWS::EC2::Action::CreateDefaultSubnet
 Amazon::AWS::EC2::Action::CreateKeyPair
 Amazon::AWS::EC2::Action::DeleteKeyPair
 Amazon::AWS::EC2::Action::DescribeAggregateIdFormat

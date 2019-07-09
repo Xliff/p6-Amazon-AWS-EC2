@@ -350,6 +350,7 @@
       "Amazon::AWS::EC2::Response::ConfirmProductInstanceResponse"                          :  "lib/Amazon/AWS/EC2/Response/ConfirmProductInstanceResponse.pm6"                          ,
       "Amazon::AWS::EC2::Response::CopyFpgaImageResponse"                                   :  "lib/Amazon/AWS/EC2/Response/CopyFpgaImageResponse.pm6"                                   ,
       "Amazon::AWS::EC2::Response::CopyImageResponse"                                       :  "lib/Amazon/AWS/EC2/Response/CopyImageResponse.pm6"                                       ,
+      "Amazon::AWS::EC2::Response::CreateDefaultSubnetResponse"                             :  "lib/Amazon/AWS/EC2/Response/CreateDefaultSubnetResponse.pm6"                             ,
       "Amazon::AWS::EC2::Response::CreateFpgaImageResponse"                                 :  "lib/Amazon/AWS/EC2/Response/CreateFpgaImageResponse.pm6"                                 ,
       "Amazon::AWS::EC2::Response::CreateImageResponse"                                     :  "lib/Amazon/AWS/EC2/Response/CreateImageResponse.pm6"                                     ,
       "Amazon::AWS::EC2::Response::CreateKeyPairResponse"                                   :  "lib/Amazon/AWS/EC2/Response/CreateKeyPairResponse.pm6"                                   ,
@@ -528,6 +529,7 @@
       "Amazon::AWS::EC2::Types::VpcPeeringConnection"                                       :  "lib/Amazon/AWS/EC2/Types/VpcPeeringConnection.pm6"                                       ,
       "Amazon::AWS::EC2::Types::VpnConnection"                                              :  "lib/Amazon/AWS/EC2/Types/VpnConnection.pm6"                                              ,
       "Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification"                          :  "lib/Amazon/AWS/EC2/Types/VpnConnectionOptionsSpecification.pm6"                          ,
+      "Amazon::AWS::EC2::Action::CreateDefaultSubnet"                                       :  "lib/Amazon/AWS/EC2/Action/CreateDefaultSubnet.pm6"                                       ,
       "Amazon::AWS::EC2::Action::CreateKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/CreateKeyPair.pm6"                                             ,
       "Amazon::AWS::EC2::Action::DeleteKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/DeleteKeyPair.pm6"                                             ,
       "Amazon::AWS::EC2::Action::DescribeAggregateIdFormat"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAggregateIdFormat.pm6"                                 ,
@@ -673,6 +675,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
