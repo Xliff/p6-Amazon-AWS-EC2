@@ -7,6 +7,8 @@ use Digest;
 use Digest::HMAC;
 use Digest::SHA256::Native;
 
+use Amazon::AWS::Response::ErrorResponse;
+
 constant algorithm            = 'AWS4-HMAC-SHA256';
 constant default_key_location = '/home/cbwood/.ec2/default.csv';
 constant empty_payload_hash   = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
@@ -117,9 +119,18 @@ sub makeRequest (
   # # FINALLY make the request
   my $r = do given $method {
     CATCH {
+      # Dynamic lookup performed 
       when X::Cro::HTTP::Error {
         my $body = await .response.body;
-        say "Additional Error Message: { $body.decode }" if $body;
+        $body .= decode if $body ~~ Buf;
+        if $body.starts-with('<?xml') {
+          $body = ErrorResponse.from-xml($body);
+          say "\nAdditional Error Message(s):";
+          say "    - { .Message } ({ .Code })" for $body.errors;
+        } else {
+          say "\nAdditional Error Message: { $body.decode }";
+        }
+        say '';
         .rethrow
       }
     }
