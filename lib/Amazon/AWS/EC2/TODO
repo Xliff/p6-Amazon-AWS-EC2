@@ -62,6 +62,9 @@
   - AllocateAddress
   - ReleaseAddress
   - CreateTags
+  
+- Add timing harness to TestUtils and TestTemplate so that timings per e-level
+  can be obtained and documented. E-level = 10, 100, 1000, ... *
 
 - Fix tests for DescribeIdentityIdFormat, as the private test always returns a:
      URI: ?Action=DescribeIdentityIdFormat&Version=2016-11-15&PrincipalArn=arn:aws:iam::839618952316:root
