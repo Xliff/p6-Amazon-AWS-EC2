@@ -363,6 +363,7 @@
       "Amazon::AWS::EC2::Response::DescribeKeyPairsResponse"                                :  "lib/Amazon/AWS/EC2/Response/DescribeKeyPairsResponse.pm6"                                ,
       "Amazon::AWS::EC2::Response::DescribeMovingAddressesResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeMovingAddressesResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribePlacementGroupsResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribePlacementGroupsResponse.pm6"                         ,
+      "Amazon::AWS::EC2::Response::DescribePrefixListsResponse"                             :  "lib/Amazon/AWS/EC2/Response/DescribePrefixListsResponse.pm6"                             ,
       "Amazon::AWS::EC2::Response::DescribePrincipalIdFormatResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribePrincipalIdFormatResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::DescribeRegionsResponse"                                 :  "lib/Amazon/AWS/EC2/Response/DescribeRegionsResponse.pm6"                                 ,
       "Amazon::AWS::EC2::Response::DescribeSecurityGroupReferencesResponse"                 :  "lib/Amazon/AWS/EC2/Response/DescribeSecurityGroupReferencesResponse.pm6"                 ,
@@ -627,6 +628,7 @@
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions"                       :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfacePermissions.pm6"                       ,
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaces"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaces.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribePlacementGroups"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePlacementGroups.pm6"                                   ,
+      "Amazon::AWS::EC2::Action::DescribePrefixLists"                                       :  "lib/Amazon/AWS/EC2/Action/DescribePrefixLists.pm6"                                       ,
       "Amazon::AWS::EC2::Action::DescribePublicIpv4Pools"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePublicIpv4Pools.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences"                           :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroupReferences.pm6"                           ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
@@ -678,6 +680,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

@@ -350,6 +350,7 @@ Amazon::AWS::EC2::Response::DescribeInstanceCreditSpecificationsResponse
 Amazon::AWS::EC2::Response::DescribeKeyPairsResponse
 Amazon::AWS::EC2::Response::DescribeMovingAddressesResponse
 Amazon::AWS::EC2::Response::DescribePlacementGroupsResponse
+Amazon::AWS::EC2::Response::DescribePrefixListsResponse
 Amazon::AWS::EC2::Response::DescribePrincipalIdFormatResponse
 Amazon::AWS::EC2::Response::DescribeRegionsResponse
 Amazon::AWS::EC2::Response::DescribeSecurityGroupReferencesResponse
@@ -614,6 +615,7 @@ Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute
 Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaces
 Amazon::AWS::EC2::Action::DescribePlacementGroups
+Amazon::AWS::EC2::Action::DescribePrefixLists
 Amazon::AWS::EC2::Action::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
