@@ -18,6 +18,9 @@
   Action, Response and Filter objects. Depends on completion of previous action
   item.
 - t/03-filter.t -- First test returns a false positive. Investigate why and solve.
+- Currently, Region is hardcoded to us-east-1 at the Request level. Add a mechanism that changes
+  this to a default and allows it to be overridden at the ACTION, level.
+  This should be POSTPONED until testing has been validated project-wide... or at least moved to a branch.
 - List of targeted actions to be developed:
 	+ DescribeImageAttribute
 	+ DescribeInstanceAtdetribute
@@ -45,6 +48,8 @@
   + DescribeNetworkInterfacesPermissions
   + DescribePlacementGroups
   + DescribeSecurityGroupReferences
+  + CreateKeyPair
+  + CreateDefaultSubnet
   - DescribePrefixLists
   - DescribeIdentityIdFormat
   - DescribeDhcpOptions
@@ -54,7 +59,6 @@
   - AllocateAddress
   - ReleaseAddress
   - CreateTags
-  - CreateKeyPair
 
 - Fix tests for DescribeIdentityIdFormat, as the private test always returns a:
      URI: ?Action=DescribeIdentityIdFormat&Version=2016-11-15&PrincipalArn=arn:aws:iam::839618952316:root
