@@ -35,7 +35,7 @@ sub MAIN (:$unit, :$number = 1, :$elems = 5, :$private, :$tests is copy) {
   
   for ^$number {
     # If you really want speed, this needs to be in nqp!
-    if $do-timings && $iteration++ > (my $exp = 10 ** $elev) {
+    if $iteration++ > (my $exp = 10 ** $elev) {
       %timings{$exp} = DateTime.now - $timeStart;
       $timeStart = DateTime.now;
       $elev++;
@@ -73,9 +73,7 @@ sub MAIN (:$unit, :$number = 1, :$elems = 5, :$private, :$tests is copy) {
       }
     }
   }
-  if $do-timings {
-    %timings{$iteration} = DateTime.now - $timeStart;
-    diag %timings.gist;
-    diag "Total time: { %timings.values.sum }s";
-  }
+  %timings{$iteration} = DateTime.now - $timeStart;
+  diag %timings.gist;
+  diag "Total time: { %timings.values.sum }s";
 }

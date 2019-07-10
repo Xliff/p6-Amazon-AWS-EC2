@@ -110,4 +110,6 @@
     aclassoc - ACL Association
     acl      - Network ACL
     pl       - Prefix List
+    rtb      - Route Table
+    rtbassoc - Route Table Association
     
