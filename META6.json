@@ -21,7 +21,6 @@
     "license": "",
     "source-url": "https://github.com/Xliff/p6-Amazon-AWS-EC2",
     "provides": {
-      "Amazon::AWS::EC2::Filters::DescribeRouteTableFilter"                                 :  "lib/Amazon/AWS/EC2/Filters/DescribeRouteTableFilter.pm6"                                 ,
       "Amazon::AWS::EC2::Roles::InstanceState"                                              :  "lib/Amazon/AWS/EC2/Roles/InstanceState.pm6"                                              ,
       "Amazon::AWS::Roles::Eqv"                                                             :  "lib/Amazon/AWS/Roles/Eqv.pm6"                                                            ,
       "Amazon::AWS::Roles::Base"                                                            :  "lib/Amazon/AWS/Roles/Base.pm6"                                                           ,
@@ -37,6 +36,7 @@
       "Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter"                                   :  "lib/Amazon/AWS/EC2/Filters/DescribeKeyPairsFilter.pm6"                                   ,
       "Amazon::AWS::EC2::Filters::DescribePrefixListsFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribePrefixListsFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeRegionsFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeRegionsFilter.pm6"                                    ,
+      "Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribeRouteTablesFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeSecurityGroupsFilter.pm6"                             ,
       "Amazon::AWS::EC2::Filters::DescribeTagsFilter"                                       :  "lib/Amazon/AWS/EC2/Filters/DescribeTagsFilter.pm6"                                       ,
       "Amazon::AWS::EC2::Filters::DescribeVolumesFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeVolumesFilter.pm6"                                    ,
@@ -568,6 +568,7 @@
       "Amazon::AWS::EC2::Response::DescribePublicIpv4PoolsResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribePublicIpv4PoolsResponse.pm6"                         ,
       "Amazon::AWS::EC2::Response::DescribeReservedInstancesListingsResponse"               :  "lib/Amazon/AWS/EC2/Response/DescribeReservedInstancesListingsResponse.pm6"               ,
       "Amazon::AWS::EC2::Response::DescribeReservedInstancesModificationsResponse"          :  "lib/Amazon/AWS/EC2/Response/DescribeReservedInstancesModificationsResponse.pm6"          ,
+      "Amazon::AWS::EC2::Response::DescribeRouteTablesResponse"                             :  "lib/Amazon/AWS/EC2/Response/DescribeRouteTablesResponse.pm6"                             ,
       "Amazon::AWS::EC2::Response::DescribeScheduledInstanceAvailabilityResponse"           :  "lib/Amazon/AWS/EC2/Response/DescribeScheduledInstanceAvailabilityResponse.pm6"           ,
       "Amazon::AWS::EC2::Response::DescribeScheduledInstancesResponse"                      :  "lib/Amazon/AWS/EC2/Response/DescribeScheduledInstancesResponse.pm6"                      ,
       "Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse"                          :  "lib/Amazon/AWS/EC2/Response/DescribeSecurityGroupsResponse.pm6"                          ,
@@ -631,6 +632,7 @@
       "Amazon::AWS::EC2::Action::DescribePlacementGroups"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePlacementGroups.pm6"                                   ,
       "Amazon::AWS::EC2::Action::DescribePrefixLists"                                       :  "lib/Amazon/AWS/EC2/Action/DescribePrefixLists.pm6"                                       ,
       "Amazon::AWS::EC2::Action::DescribePublicIpv4Pools"                                   :  "lib/Amazon/AWS/EC2/Action/DescribePublicIpv4Pools.pm6"                                   ,
+      "Amazon::AWS::EC2::Action::DescribeRouteTables"                                       :  "lib/Amazon/AWS/EC2/Action/DescribeRouteTables.pm6"                                       ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences"                           :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroupReferences.pm6"                           ,
       "Amazon::AWS::EC2::Action::DescribeSecurityGroups"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeSecurityGroups.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeSnapshots"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeSnapshots.pm6"                                         ,
@@ -681,5 +683,6 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 

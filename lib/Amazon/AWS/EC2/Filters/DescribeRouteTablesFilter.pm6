@@ -5,8 +5,8 @@ use XML::Class;
 use Amazon::AWS::Roles::Base;
 use Amazon::AWS::Roles::Eqv;
 
-class Amazon::AWS::EC2::Filters::DescribeRouteTableFilter::Association 
-  does XML::Class[xml-elements => 'association']
+class Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter::Association 
+  does XML::Class[xml-element => 'association']
 {
   also does Amazon::AWS::Roles::Base;
   also does Amazon::AWS::Roles::Eqv;
@@ -17,8 +17,8 @@ class Amazon::AWS::EC2::Filters::DescribeRouteTableFilter::Association
   has Bool                $.main                                            is xml-skip-null is xml-element is rw;
 }
 
-class Amazon::AWS::EC2::Filters::DescribeRouteTableFilter::Route is export
-  does XML::Class[xml-elements => 'route']
+class Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter::Route is export
+  does XML::Class[xml-element => 'route']
 {
   also does Amazon::AWS::Roles::Base;
   also does Amazon::AWS::Roles::Eqv;
@@ -31,13 +31,13 @@ class Amazon::AWS::EC2::Filters::DescribeRouteTableFilter::Route is export
   has Str                 $.instance-id                                     is xml-skip-null is xml-element is rw;
   has Str                 $.nat-gateway-id                                  is xml-skip-null is xml-element is rw;
   has Str                 $.transit-gateway-id                              is xml-skip-null is xml-element is rw;
-  has Str                 $.origin                                          is xml-skip-null is xml-element is rw;  #=  CreateRouteTable | CreateRoute | EnableVgwRoutePropagation
+  has Str                 $.origin                                          is xml-skip-null is xml-element is rw;  #=  CreateRouteTables | CreateRoute | EnableVgwRoutePropagation
   has Str                 $.state                                           is xml-skip-null is xml-element is rw;  #=  active | blackhole
   has Str                 $.vpc-peering-connection-id                       is xml-skip-null is xml-element is rw;
 }
 
 
-class Amazon::AWS::EC2::Filters::DescribeRouteTableFilter::Tag
+class Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter::Tag
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;
@@ -47,11 +47,11 @@ class Amazon::AWS::EC2::Filters::DescribeRouteTableFilter::Tag
   has Str                 $.value                                           is xml-skip-null is xml-element is rw;
 }
 
-constant Association := Amazon::AWS::EC2::Filters::DescribeRouteTableFilter::Association;
-constant Route       := Amazon::AWS::EC2::Filters::DescribeRouteTableFilter::Route;
-constant Tag         := Amazon::AWS::EC2::Filters::DescribeRouteTableFilter::Tag;
+constant Association := Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter::Association;
+constant Route       := Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter::Route;
+constant Tag         := Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter::Tag;
 
-class Amazon::AWS::EC2::Filters::DescribeRouteTableFilter is export
+class Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter is export
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;

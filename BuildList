@@ -23,6 +23,7 @@ Amazon::AWS::EC2::Filters::DescribeInstancesFilter
 Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter
 Amazon::AWS::EC2::Filters::DescribePrefixListsFilter
 Amazon::AWS::EC2::Filters::DescribeRegionsFilter
+Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter
 Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
 Amazon::AWS::EC2::Filters::DescribeTagsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumesFilter
@@ -554,6 +555,7 @@ Amazon::AWS::EC2::Response::DescribeNetworkInterfacesResponse
 Amazon::AWS::EC2::Response::DescribePublicIpv4PoolsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesListingsResponse
 Amazon::AWS::EC2::Response::DescribeReservedInstancesModificationsResponse
+Amazon::AWS::EC2::Response::DescribeRouteTablesResponse
 Amazon::AWS::EC2::Response::DescribeScheduledInstanceAvailabilityResponse
 Amazon::AWS::EC2::Response::DescribeScheduledInstancesResponse
 Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse
@@ -617,6 +619,7 @@ Amazon::AWS::EC2::Action::DescribeNetworkInterfaces
 Amazon::AWS::EC2::Action::DescribePlacementGroups
 Amazon::AWS::EC2::Action::DescribePrefixLists
 Amazon::AWS::EC2::Action::DescribePublicIpv4Pools
+Amazon::AWS::EC2::Action::DescribeRouteTables
 Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences
 Amazon::AWS::EC2::Action::DescribeSecurityGroups
 Amazon::AWS::EC2::Action::DescribeSnapshots
