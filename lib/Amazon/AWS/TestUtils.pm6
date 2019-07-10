@@ -195,5 +195,6 @@ sub doBasicTests(
   if $do-timings {
     %timings{$iteration} = DateTime.now - $timeStart;
     diag %timings.gist;
+    diag "Total time: { %timings.values.sum }s";
   }
 }

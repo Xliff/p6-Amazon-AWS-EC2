@@ -69,7 +69,7 @@
   can be obtained and documented. E-level = 10, 100, 1000, ... *
   + Completed initial version, but see about writing TestTimings.pm6 to abstract
     away as much of the timing code as possible.
-  - Add total execution time.
+  + Add total execution time.
 
 - Fix tests for DescribeIdentityIdFormat, as the private test always returns a:
      URI: ?Action=DescribeIdentityIdFormat&Version=2016-11-15&PrincipalArn=arn:aws:iam::839618952316:root

@@ -76,5 +76,6 @@ sub MAIN (:$unit, :$number = 1, :$elems = 5, :$private, :$tests is copy) {
   if $do-timings {
     %timings{$iteration} = DateTime.now - $timeStart;
     diag %timings.gist;
+    diag "Total time: { %timings.values.sum }s";
   }
 }
