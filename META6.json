@@ -21,6 +21,7 @@
     "license": "",
     "source-url": "https://github.com/Xliff/p6-Amazon-AWS-EC2",
     "provides": {
+      "Amazon::AWS::EC2::Filters::DescribeRouteTableFilter"                                 :  "lib/Amazon/AWS/EC2/Filters/DescribeRouteTableFilter.pm6"                                 ,
       "Amazon::AWS::EC2::Roles::InstanceState"                                              :  "lib/Amazon/AWS/EC2/Roles/InstanceState.pm6"                                              ,
       "Amazon::AWS::Roles::Eqv"                                                             :  "lib/Amazon/AWS/Roles/Eqv.pm6"                                                            ,
       "Amazon::AWS::Roles::Base"                                                            :  "lib/Amazon/AWS/Roles/Base.pm6"                                                           ,
@@ -680,3 +681,5 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
