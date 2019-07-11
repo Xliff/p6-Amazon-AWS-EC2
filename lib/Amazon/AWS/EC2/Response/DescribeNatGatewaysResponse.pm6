@@ -11,8 +11,8 @@ class Amazon::AWS::EC2::Response::DescribeNatGatewaysResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has NatGateway        @.natGateways                    is xml-container('natGatewaysSet')  is xml-skip-null is rw; 
-  has Str               $.nextToken      is xml-element                                      is xml-skip-null is rw; 
+  has NatGateway        @.natGateways                    is xml-container('natGatewaySet')  is xml-skip-null is rw; 
+  has Str               $.nextToken      is xml-element                                     is xml-skip-null is rw; 
   
   # Member aliases.
   method gateways         { @.natGateways }
