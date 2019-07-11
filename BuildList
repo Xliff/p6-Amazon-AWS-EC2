@@ -539,6 +539,7 @@ Amazon::AWS::EC2::Response::DeleteLaunchTemplateVersionsResponse
 Amazon::AWS::EC2::Response::DescribeAddressesResponse
 Amazon::AWS::EC2::Response::DescribeBundleTasksResponse
 Amazon::AWS::EC2::Response::DescribeCapacityReservationsResponse
+Amazon::AWS::EC2::Response::DescribeDhcpOptionsResponse
 Amazon::AWS::EC2::Response::DescribeFleetInstancesResponse
 Amazon::AWS::EC2::Response::DescribeFpgaImageAttributeResponse
 Amazon::AWS::EC2::Response::DescribeFpgaImagesResponse
@@ -603,6 +604,7 @@ Amazon::AWS::EC2::Types::TransitGatewayVpcAttachmentOptions
 Amazon::AWS::EC2::Types::Vpc
 Amazon::AWS::TestUtils
 Amazon::AWS::EC2::Action::DescribeAddresses
+Amazon::AWS::EC2::Action::DescribeDhcpOptions
 Amazon::AWS::EC2::Action::DescribeElasticGpus
 Amazon::AWS::EC2::Action::DescribeFpgaImageAttribute
 Amazon::AWS::EC2::Action::DescribeFpgaImages
