@@ -529,6 +529,7 @@
       "Amazon::AWS::EC2::Action::DescribeTags"                                              :  "lib/Amazon/AWS/EC2/Action/DescribeTags.pm6"                                              ,
       "Amazon::AWS::EC2::Action::GetConsoleOutput"                                          :  "lib/Amazon/AWS/EC2/Action/GetConsoleOutput.pm6"                                          ,
       "Amazon::AWS::EC2::Action::GetConsoleScreenshot"                                      :  "lib/Amazon/AWS/EC2/Action/GetConsoleScreenshot.pm6"                                      ,
+      "Amazon::AWS::EC2::Action::ReleaseAddress"                                            :  "lib/Amazon/AWS/EC2/Action/ReleaseAddress.pm6"                                            ,
       "Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter"                   :  "lib/Amazon/AWS/EC2/Filters/DescribeHostReservationOfferingsFilter.pm6"                   ,
       "Amazon::AWS::EC2::Filters::DescribeIamInstanceProfileAssociationsFilter"             :  "lib/Amazon/AWS/EC2/Filters/DescribeIamInstanceProfileAssociationsFilter.pm6"             ,
       "Amazon::AWS::EC2::Filters::DescribeInternetGatewaysFilter"                           :  "lib/Amazon/AWS/EC2/Filters/DescribeInternetGatewaysFilter.pm6"                           ,
@@ -690,6 +691,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 

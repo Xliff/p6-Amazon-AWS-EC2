@@ -61,8 +61,9 @@
   e DescribeIdentityIdFormat (Completed, but no valid response retrieved)
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   
-  - AllocateAddress
-  - ReleaseAddress
+  + AllocateAddress
+  + ReleaseAddress
+  
   - CreateTags
   
 - Add timing harness to TestUtils and TestTemplate so that timings per e-level
