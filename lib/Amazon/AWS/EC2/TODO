@@ -55,9 +55,9 @@
   + DescribePrefixLists
   e CreateDefaultSubnet (Completed, but no valid response retrieved)
   e DescribeIdentityIdFormat (Completed, but no valid response retrieved)
+  + DescribeRouteTable
   - DescribeDhcpOptions
   - DescribeIamInstanceProfileAssociations
-  - DescribeRouteTable
   - DescribeNatGateway
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   

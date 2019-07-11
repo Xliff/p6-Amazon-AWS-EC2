@@ -42,7 +42,7 @@ class Amazon::AWS::EC2::Action::DescribeFlowLogs is export
     $!MaxResults = $maxResults if $maxResults.defined;
     
     if @flowLogs {
-      die '@allocationIds must only contain strings'
+      die '@flowLogIds must only contain strings'
        unless @flowLogs.all ~~ Str;
       @!FlowLogIds = @flowLogs
     }
