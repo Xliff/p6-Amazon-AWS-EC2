@@ -12,8 +12,11 @@ class Amazon::AWS::EC2::Types::DhcpOptions is export
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has DhcpConfiguration    @.dhcpConfigurations    is xml-element    is xml-skip-null    is xml-container('dhcpConfigurationSet')      is rw; 
+  has DhcpConfiguration    @.dhcpConfigurations                      is xml-skip-null    is xml-container('dhcpConfigurationSet')      is rw; 
   has Str                  $.dhcpOptionsId         is xml-element    is xml-skip-null                                                  is rw; 
   has Str                  $.ownerId               is xml-element    is xml-skip-null                                                  is rw; 
   has Tag                  @.tags                  is xml-element    is xml-skip-null    is xml-container('tagSet')                    is rw; 
+  
+  # Member aliases.
+  method configurations    { @.dhcpConfigurations }
 }

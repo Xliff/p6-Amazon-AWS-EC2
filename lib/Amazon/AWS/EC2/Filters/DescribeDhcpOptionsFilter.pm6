@@ -26,8 +26,7 @@ class Amazon::AWS::EC2::Filters::DescribeDhcpOptionsFilter is export
   has Str  $.dhcp-option-id                     is xml-element is xml-skip-null is rw;
   has Str  $.key                                is xml-element is xml-skip-null is rw;
   has Str  $.value                              is xml-element is xml-skip-null is rw;
-  has Str  $.name                               is xml-element is xml-skip-null is rw;
   has Str  $.owner-id                           is xml-element is xml-skip-null is rw;
   has Tag  @.tags is xml-container('tagSet')                   is xml-skip-null is rw;
-  has Str  $.tag-key                            is xml-element is xml-skip-null is rw
+  has Str  $.tag-key                            is xml-element is xml-skip-null is rw;
 } 
