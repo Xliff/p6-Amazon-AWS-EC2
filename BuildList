@@ -13,6 +13,7 @@ Amazon::AWS::Roles::Eqv
 Amazon::AWS::Roles::Base
 Amazon::AWS::EC2::Filters::DescribeAddressesFilter
 Amazon::AWS::EC2::Filters::DescribeAvailabilityZonesFilter
+Amazon::AWS::EC2::Filters::DescribeDhcpOptionsFilter
 Amazon::AWS::EC2::Filters::DescribeElasticGpusFilter
 Amazon::AWS::EC2::Filters::DescribeFlowLogsFilter
 Amazon::AWS::EC2::Filters::DescribeFpgaImagesFilter

@@ -26,6 +26,7 @@
       "Amazon::AWS::Roles::Base"                                                            :  "lib/Amazon/AWS/Roles/Base.pm6"                                                           ,
       "Amazon::AWS::EC2::Filters::DescribeAddressesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeAddressesFilter.pm6"                                  ,
       "Amazon::AWS::EC2::Filters::DescribeAvailabilityZonesFilter"                          :  "lib/Amazon/AWS/EC2/Filters/DescribeAvailabilityZonesFilter.pm6"                          ,
+      "Amazon::AWS::EC2::Filters::DescribeDhcpOptionsFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribeDhcpOptionsFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeElasticGpusFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribeElasticGpusFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeFlowLogsFilter"                                   :  "lib/Amazon/AWS/EC2/Filters/DescribeFlowLogsFilter.pm6"                                   ,
       "Amazon::AWS::EC2::Filters::DescribeFpgaImagesFilter"                                 :  "lib/Amazon/AWS/EC2/Filters/DescribeFpgaImagesFilter.pm6"                                 ,
@@ -683,6 +684,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
