@@ -64,7 +64,15 @@
   + AllocateAddress
   + ReleaseAddress
   
-  - CreateTags
+  - CreateTags (Needs resource id)
+  - CreateCapacityReservation
+  - CreateNatGateway
+  - CreateNetworkAcl
+  - CreateNetworkAclEntry
+  - CreateNetworkInterface
+  - CreateSnapshot
+  
+  # Should create corresponding Delete actions for all Create actions!
   
 - Add timing harness to TestUtils and TestTemplate so that timings per e-level
   can be obtained and documented. E-level = 10, 100, 1000, ... *
