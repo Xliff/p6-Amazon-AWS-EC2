@@ -11,7 +11,7 @@ class Amazon::AWS::EC2::Response::DescribeDhcpOptionsResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has DhcpOptions        @.DhcpOptions    is xml-element    is xml-container('dhcpOptionSet') is xml-skip-null is rw; 
+  has DhcpOptions        @.DhcpOptions                    is xml-container('dhcpOptionsSet')  is xml-skip-null is rw; 
   has Str                $.nextToken      is xml-element                                      is xml-skip-null is rw; 
   
   # Member aliases.
