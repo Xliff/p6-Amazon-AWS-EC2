@@ -552,6 +552,7 @@ Amazon::AWS::EC2::Response::DescribeInstanceAttributeResponse
 Amazon::AWS::EC2::Response::DescribeInstanceStatusResponse
 Amazon::AWS::EC2::Response::DescribeInternetGatewaysResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplatesResponse
+Amazon::AWS::EC2::Response::DescribeNatGatewaysResponse
 Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse
 Amazon::AWS::EC2::Response::DescribeNetworkInterfacePermissionsResponse
 Amazon::AWS::EC2::Response::DescribeNetworkInterfacesResponse
@@ -617,6 +618,7 @@ Amazon::AWS::EC2::Action::DescribeInstanceAttribute
 Amazon::AWS::EC2::Action::DescribeInstanceStatus
 Amazon::AWS::EC2::Action::DescribeInternetGateways
 Amazon::AWS::EC2::Action::DescribeKeyPairs
+Amazon::AWS::EC2::Action::DescribeNatGateways
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute
 Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions
 Amazon::AWS::EC2::Action::DescribeNetworkInterfaces

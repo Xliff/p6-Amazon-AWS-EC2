@@ -565,6 +565,7 @@
       "Amazon::AWS::EC2::Response::DescribeInstanceStatusResponse"                          :  "lib/Amazon/AWS/EC2/Response/DescribeInstanceStatusResponse.pm6"                          ,
       "Amazon::AWS::EC2::Response::DescribeInternetGatewaysResponse"                        :  "lib/Amazon/AWS/EC2/Response/DescribeInternetGatewaysResponse.pm6"                        ,
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplatesResponse"                         :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplatesResponse.pm6"                         ,
+      "Amazon::AWS::EC2::Response::DescribeNatGatewaysResponse"                             :  "lib/Amazon/AWS/EC2/Response/DescribeNatGatewaysResponse.pm6"                             ,
       "Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse"               :  "lib/Amazon/AWS/EC2/Response/DescribeNetworkInterfaceAttributeResponse.pm6"               ,
       "Amazon::AWS::EC2::Response::DescribeNetworkInterfacePermissionsResponse"             :  "lib/Amazon/AWS/EC2/Response/DescribeNetworkInterfacePermissionsResponse.pm6"             ,
       "Amazon::AWS::EC2::Response::DescribeNetworkInterfacesResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeNetworkInterfacesResponse.pm6"                       ,
@@ -630,6 +631,7 @@
       "Amazon::AWS::EC2::Action::DescribeInstanceStatus"                                    :  "lib/Amazon/AWS/EC2/Action/DescribeInstanceStatus.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeInternetGateways"                                  :  "lib/Amazon/AWS/EC2/Action/DescribeInternetGateways.pm6"                                  ,
       "Amazon::AWS::EC2::Action::DescribeKeyPairs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeKeyPairs.pm6"                                          ,
+      "Amazon::AWS::EC2::Action::DescribeNatGateways"                                       :  "lib/Amazon/AWS/EC2/Action/DescribeNatGateways.pm6"                                       ,
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaceAttribute"                         :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaceAttribute.pm6"                         ,
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions"                       :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfacePermissions.pm6"                       ,
       "Amazon::AWS::EC2::Action::DescribeNetworkInterfaces"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeNetworkInterfaces.pm6"                                 ,
@@ -687,6 +689,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
