@@ -4,7 +4,7 @@ use Test;
 
 use Amazon::AWS::TestUtils;
 
-sub MAIN (:$unit, :$number = 1, :$elems = 5, :$private, :$tests is copy) {  
+sub MAIN (:$unit, :$number = 1, :$elems = 1, :$private, :$tests is copy) {  
   # Figure out a more robust way to invoke this.
   qqx{scripts/dependencies.pl6};
   
