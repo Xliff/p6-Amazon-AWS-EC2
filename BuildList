@@ -518,6 +518,7 @@ Amazon::AWS::EC2::Action::GetConsoleScreenshot
 Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter
 Amazon::AWS::EC2::Filters::DescribeIamInstanceProfileAssociationsFilter
 Amazon::AWS::EC2::Filters::DescribeInternetGatewaysFilter
+Amazon::AWS::EC2::Filters::DescribeNatGatewaysFilter
 Amazon::AWS::EC2::Filters::DescribeNetworkAclsFilter
 Amazon::AWS::EC2::Filters::DescribeNetworkInterfacePermissionsFilter
 Amazon::AWS::EC2::Filters::DescribeNetworkInterfacesFilter
