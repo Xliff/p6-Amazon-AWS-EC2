@@ -502,6 +502,7 @@ Amazon::AWS::EC2::Types::VpnConnection
 Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::Response::ErrorResponse
 Amazon::AWS::Utils
+Amazon::AWS::EC2::Action::AllocateAddress
 Amazon::AWS::EC2::Action::CreateDefaultSubnet
 Amazon::AWS::EC2::Action::CreateKeyPair
 Amazon::AWS::EC2::Action::DeleteKeyPair

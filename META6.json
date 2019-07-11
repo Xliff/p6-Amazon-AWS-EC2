@@ -515,6 +515,7 @@
       "Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification"                          :  "lib/Amazon/AWS/EC2/Types/VpnConnectionOptionsSpecification.pm6"                          ,
       "Amazon::AWS::Response::ErrorResponse"                                                :  "lib/Amazon/AWS/Response/ErrorResponse.pm6"                                               ,
       "Amazon::AWS::Utils"                                                                  :  "lib/Amazon/AWS/Utils.pm6"                                                                ,
+      "Amazon::AWS::EC2::Action::AllocateAddress"                                           :  "lib/Amazon/AWS/EC2/Action/AllocateAddress.pm6"                                           ,
       "Amazon::AWS::EC2::Action::CreateDefaultSubnet"                                       :  "lib/Amazon/AWS/EC2/Action/CreateDefaultSubnet.pm6"                                       ,
       "Amazon::AWS::EC2::Action::CreateKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/CreateKeyPair.pm6"                                             ,
       "Amazon::AWS::EC2::Action::DeleteKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/DeleteKeyPair.pm6"                                             ,
@@ -689,6 +690,23 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
