@@ -116,6 +116,42 @@ sub changeRandomAttribute($o is rw) is export {
 
 # Must be global for duration of execution.
 my %classes;
+my (%timings, $benchmark-real-start, $benchmark-iterations);
+my ($benchmark-start, $benchmark-lev);
+
+# Use only if you have LOTS of loops!
+#constant exp = 10
+constant exponent = 5;
+
+# Potential change:
+# Can remove exponent constant and that functionality can be set by the 
+# end-user with a parameter on startTiming...
+sub startTiming is export {
+  ($benchmark-start, 
+   $benchmark-real-start, 
+   $benchmark-iterations, 
+   $benchmark-lev) = (DateTime.now, DateTime.now, 0, 0);
+}
+
+# If you really want speed, this needs to be in nqp!
+sub checkNextTiming is export {
+  if $benchmark-iterations++ > (my $exp = exponent ** $benchmark-lev) {
+    %timings{$exp} = DateTime.now - $benchmark-start;
+    %timings{$exp} /= exponent if $exp > 1;
+    $benchmark-start = DateTime.now;
+    $benchmark-lev++;
+  }
+}
+
+sub finishTiming is export {
+  my $end = DateTime.now;
+  %timings{$benchmark-iterations} = $end - $benchmark-start;
+  #my $log-last = $benchmark-iterations.log(exponent) 
+  #%timings{$benchmark-iterations} /= exponent if $log-last =~= $log-last.floor;
+  %timings{$benchmark-iterations} /= exponent;
+  diag %timings.pairs.sort( *.key.Int ).map( *.gist ).join(' / ');
+  diag "Total time: { $end - $benchmark-real-start }s";
+}
 
 sub doBasicTests(
   @files, 
@@ -123,24 +159,19 @@ sub doBasicTests(
   :$number = 1,
   :$do-timings = True
 ) is export {
-  plan @files.elems * 8 * $number;
   my ($elev, $timeStart) = (0, DateTime.now);
-  my %timings;
-
-  my $iteration;
-  for ^$number {
-    # If you really want speed, this needs to be in nqp!
-    if $do-timings && $iteration++ > (my $exp = 10 ** $elev) {
-      %timings{$exp} = DateTime.now - $timeStart;
-      $timeStart = DateTime.now;
-      $elev++;
-    }
+  
+  plan @files.elems * 8 * $number;
+  
+  startTiming if $do-timings;
+  for ^$number {  
+    checkNextTiming if $do-timings;
     
     for @files {
       CATCH { default { diag .message } }
       
       my ($class, $a, $bx, $b, $tl, $te);
- 
+      
       (%classes{$_} = try require ::($_)) if not %classes{$_}:exists;
       $class := %classes{$_};
          
@@ -192,9 +223,5 @@ sub doBasicTests(
       }
     }
   }
-  if $do-timings {
-    %timings{$iteration} = DateTime.now - $timeStart;
-    diag %timings.gist;
-    diag "Total time: { %timings.values.sum }s";
-  }
+  finishTiming if $do-timings;
 }

@@ -56,9 +56,9 @@
   + DescribeRouteTable
   + DescribeDhcpOptions
   + DescribeIamInstanceProfileAssociations (No results, but can get a response object)
+  + DescribeNatGateway
   e CreateDefaultSubnet (Completed, but no valid response retrieved)
   e DescribeIdentityIdFormat (Completed, but no valid response retrieved)
-  - DescribeNatGateway
   x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   
   - AllocateAddress

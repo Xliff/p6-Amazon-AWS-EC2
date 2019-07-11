@@ -28,18 +28,10 @@ sub MAIN (:$unit, :$number = 1, :$elems = 1, :$private, :$tests is copy) {
     
   plan 3 * +@files * $number;
 
-  # Should be a better way to abstract the timing code out... Think about it.
-  my ($elev, $timeStart) = (0, DateTime.now);
-  my %timings;
-  my $iteration;
-  
+  startTiming;
   for ^$number {
     # If you really want speed, this needs to be in nqp!
-    if $iteration++ > (my $exp = 10 ** $elev) {
-      %timings{$exp} = DateTime.now - $timeStart;
-      $timeStart = DateTime.now;
-      $elev++;
-    }
+    checkNextTiming;
     
     for @files -> $f {
       my $baseName = $f.split('::')[* - 1];
@@ -73,7 +65,5 @@ sub MAIN (:$unit, :$number = 1, :$elems = 1, :$private, :$tests is copy) {
       }
     }
   }
-  %timings{$iteration} = DateTime.now - $timeStart;
-  diag %timings.gist;
-  diag "Total time: { %timings.values.sum }s";
+  finishTiming;
 }
