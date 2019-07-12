@@ -83,7 +83,7 @@ class Amazon::AWS::EC2::Action::CreateNetworkInterface is export
     >
   {
     die "SubnetId is required. Please set this attribute before executing .run!"
-      unless $.SecurityGroupId.chars;
+      unless $.SubnetId.chars;
       
     my (@PrivateIpAddressArgs, @Ipv6AddressArgs, @SecurityGroupArgs, $cnt);
    

@@ -69,7 +69,7 @@
   - CreateNatGateway
   - CreateNetworkAcl
   - CreateNetworkAclEntry
-  - CreateNetworkInterface
+  + CreateNetworkInterface
   - CreateSnapshot
   
   # Should create corresponding Delete actions for all Create actions!
