@@ -21,10 +21,10 @@ Broken
     (Bail out! #3 failed, so no further tests needed)
   - This is a dynamic loading issue that does not seem to want to be solved.
 ==============================
-- DescribePublicIpv4Pools 
-- DescribePrincipalIdFormat 
-- DeleteNetworkInterface
-- DescribeIdFormat
++ DescribePublicIpv4Pools 
++ DescribePrincipalIdFormat 
++ DeleteNetworkInterface
++ DescribeIdFormat
     
 - Bail-Out updates:
   + Was able to alter DeleteNetworkInterface to work after renaming the object,
@@ -34,4 +34,6 @@ Broken
     commenting out much of the functionality, renaming the object back, and then
     slowly uncommenting the necessary bits. This object is now working.
   + Unexplained... DescribePublicIpv4Pools is now working with no changes.
+  + DescribeIdFormat was fixed by simply reordering the use statements so that
+    the Response compunit was loaded LAST!
   
