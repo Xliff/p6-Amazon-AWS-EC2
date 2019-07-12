@@ -26,3 +26,12 @@ Broken
 - DeleteNetworkInterface
 - DescribeIdFormat
     
+- Bail-Out updates:
+  + Was able to alter DeleteNetworkInterface to work after renaming the object,
+    commenting out much of the functionality, renaming the object back, and then
+    slowly uncommenting the necessary bits. This object is now working.
+  + Was able to alter DescribePrincipalIdFormat to work after renaming the object,
+    commenting out much of the functionality, renaming the object back, and then
+    slowly uncommenting the necessary bits. This object is now working.
+  + Unexplained... DescribePublicIpv4Pools is now working with no changes.
+  
