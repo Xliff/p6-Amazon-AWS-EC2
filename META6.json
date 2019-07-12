@@ -61,9 +61,7 @@
       "Amazon::AWS::EC2::Tests::DescribeNetworkAcls"                                        :  "lib/Amazon/AWS/EC2/Tests/DescribeNetworkAcls.pm6"                                        ,
       "Amazon::AWS::EC2::Tests::DescribeNetworkInterfacePermissions"                        :  "lib/Amazon/AWS/EC2/Tests/DescribeNetworkInterfacePermissions.pm6"                        ,
       "Amazon::AWS::EC2::Tests::DescribeNetworkInterfaces"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeNetworkInterfaces.pm6"                                  ,
-      "Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribePublicIpv4Pools.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeRegions"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeRegions.pm6"                                            ,
-      "Amazon::AWS::EC2::Tests::DescribeSecurityGroups"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeSecurityGroups.pm6"                                     ,
       "Amazon::AWS::EC2::Tests::DescribeSnapshots"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeSnapshots.pm6"                                          ,
       "Amazon::AWS::EC2::Tests::DescribeSubnets"                                            :  "lib/Amazon/AWS/EC2/Tests/DescribeSubnets.pm6"                                            ,
       "Amazon::AWS::EC2::Tests::DescribeTags"                                               :  "lib/Amazon/AWS/EC2/Tests/DescribeTags.pm6"                                               ,
@@ -346,6 +344,7 @@
       "Amazon::AWS::EC2::Response::DeleteFleetsResponse"                                    :  "lib/Amazon/AWS/EC2/Response/DeleteFleetsResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Response::DeleteFpgaImageResponse"                                 :  "lib/Amazon/AWS/EC2/Response/DeleteFpgaImageResponse.pm6"                                 ,
       "Amazon::AWS::EC2::Response::DeleteKeyPairResponse"                                   :  "lib/Amazon/AWS/EC2/Response/DeleteKeyPairResponse.pm6"                                   ,
+      "Amazon::AWS::EC2::Response::DeleteNetworkInterfaceResponse"                          :  "lib/Amazon/AWS/EC2/Response/DeleteNetworkInterfaceResponse.pm6"                          ,
       "Amazon::AWS::EC2::Response::DeletePlacementGroupResponse"                            :  "lib/Amazon/AWS/EC2/Response/DeletePlacementGroupResponse.pm6"                            ,
       "Amazon::AWS::EC2::Response::DeleteSecurityGroupResponse"                             :  "lib/Amazon/AWS/EC2/Response/DeleteSecurityGroupResponse.pm6"                             ,
       "Amazon::AWS::EC2::Response::DeleteSpotDatafeedSubscriptionResponse"                  :  "lib/Amazon/AWS/EC2/Response/DeleteSpotDatafeedSubscriptionResponse.pm6"                  ,
@@ -519,6 +518,7 @@
       "Amazon::AWS::EC2::Action::CreateDefaultSubnet"                                       :  "lib/Amazon/AWS/EC2/Action/CreateDefaultSubnet.pm6"                                       ,
       "Amazon::AWS::EC2::Action::CreateKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/CreateKeyPair.pm6"                                             ,
       "Amazon::AWS::EC2::Action::DeleteKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/DeleteKeyPair.pm6"                                             ,
+      "Amazon::AWS::EC2::Action::DeleteNetworkInterface"                                    :  "lib/Amazon/AWS/EC2/Action/DeleteNetworkInterface.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeAggregateIdFormat"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAggregateIdFormat.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeFlowLogs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeFlowLogs.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeIdFormat"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeIdFormat.pm6"                                          ,
@@ -669,6 +669,8 @@
       "Amazon::AWS::EC2::Response::DescribeVpcsResponse"                                    :  "lib/Amazon/AWS/EC2/Response/DescribeVpcsResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Response::RunInstancesResponse"                                    :  "lib/Amazon/AWS/EC2/Response/RunInstancesResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute"                                 :  "lib/Amazon/AWS/EC2/Tests/DescribeFpgaImageAttribute.pm6"                                 ,
+      "Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools"                                    :  "lib/Amazon/AWS/EC2/Tests/DescribePublicIpv4Pools.pm6"                                    ,
+      "Amazon::AWS::EC2::Tests::DescribeSecurityGroups"                                     :  "lib/Amazon/AWS/EC2/Tests/DescribeSecurityGroups.pm6"                                     ,
       "Amazon::AWS::EC2::Types::FleetData"                                                  :  "lib/Amazon/AWS/EC2/Types/FleetData.pm6"                                                  ,
       "Amazon::AWS::EC2::Types::SpotFleetRequestConfig"                                     :  "lib/Amazon/AWS/EC2/Types/SpotFleetRequestConfig.pm6"                                     ,
       "Amazon::AWS::EC2::Types::TransitGatewayVpcAttachment"                                :  "lib/Amazon/AWS/EC2/Types/TransitGatewayVpcAttachment.pm6"                                ,
@@ -693,6 +695,44 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

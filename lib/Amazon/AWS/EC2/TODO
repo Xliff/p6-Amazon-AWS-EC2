@@ -70,6 +70,7 @@
   - CreateNetworkAcl
   - CreateNetworkAclEntry
   + CreateNetworkInterface
+  - DeleteNetworkInterface (low hanging fruit. Do ASAP!)
   - CreateSnapshot
   
   # Should create corresponding Delete actions for all Create actions!

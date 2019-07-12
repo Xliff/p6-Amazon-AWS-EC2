@@ -48,9 +48,7 @@ Amazon::AWS::EC2::Tests::DescribeKeyPairs
 Amazon::AWS::EC2::Tests::DescribeNetworkAcls
 Amazon::AWS::EC2::Tests::DescribeNetworkInterfacePermissions
 Amazon::AWS::EC2::Tests::DescribeNetworkInterfaces
-Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools
 Amazon::AWS::EC2::Tests::DescribeRegions
-Amazon::AWS::EC2::Tests::DescribeSecurityGroups
 Amazon::AWS::EC2::Tests::DescribeSnapshots
 Amazon::AWS::EC2::Tests::DescribeSubnets
 Amazon::AWS::EC2::Tests::DescribeTags
@@ -333,6 +331,7 @@ Amazon::AWS::EC2::Response::CreateTagsResponse
 Amazon::AWS::EC2::Response::DeleteFleetsResponse
 Amazon::AWS::EC2::Response::DeleteFpgaImageResponse
 Amazon::AWS::EC2::Response::DeleteKeyPairResponse
+Amazon::AWS::EC2::Response::DeleteNetworkInterfaceResponse
 Amazon::AWS::EC2::Response::DeletePlacementGroupResponse
 Amazon::AWS::EC2::Response::DeleteSecurityGroupResponse
 Amazon::AWS::EC2::Response::DeleteSpotDatafeedSubscriptionResponse
@@ -506,6 +505,7 @@ Amazon::AWS::EC2::Action::AllocateAddress
 Amazon::AWS::EC2::Action::CreateDefaultSubnet
 Amazon::AWS::EC2::Action::CreateKeyPair
 Amazon::AWS::EC2::Action::DeleteKeyPair
+Amazon::AWS::EC2::Action::DeleteNetworkInterface
 Amazon::AWS::EC2::Action::DescribeAggregateIdFormat
 Amazon::AWS::EC2::Action::DescribeFlowLogs
 Amazon::AWS::EC2::Action::DescribeIdFormat
@@ -656,6 +656,8 @@ Amazon::AWS::EC2::Response::DescribeReservedInstancesResponse
 Amazon::AWS::EC2::Response::DescribeVpcsResponse
 Amazon::AWS::EC2::Response::RunInstancesResponse
 Amazon::AWS::EC2::Tests::DescribeFpgaImageAttribute
+Amazon::AWS::EC2::Tests::DescribePublicIpv4Pools
+Amazon::AWS::EC2::Tests::DescribeSecurityGroups
 Amazon::AWS::EC2::Types::FleetData
 Amazon::AWS::EC2::Types::SpotFleetRequestConfig
 Amazon::AWS::EC2::Types::TransitGatewayVpcAttachment
