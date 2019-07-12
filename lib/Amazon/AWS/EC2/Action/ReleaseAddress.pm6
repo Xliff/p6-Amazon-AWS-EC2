@@ -43,11 +43,14 @@ class Amazon::AWS::EC2::Action::ReleaseAddress is export
       execute
     >
   {
+    die 'You may specify public IP or allocation id, but not both in the same call'
+      if $.AllocationId.chars && $.PublicIp.chars;
+      
     # @Args must be sorted by key name.
     my @args; 
     @args.push: (AllocationId   => $.AllocationId)  if $.AllocationId.chars;
     @args.push: (DryRun         => $.DryRun);    
-    @args.push: (PublicIpv4Pool => $.PublicIp)      if $.PublicIp.chars;
+    @args.push: (PublicIp       => $.PublicIp)      if $.PublicIp.chars;
     @args.push: (Version        => '2016-11-15');
 
     # XXX - Add error handling to makeRequest!
