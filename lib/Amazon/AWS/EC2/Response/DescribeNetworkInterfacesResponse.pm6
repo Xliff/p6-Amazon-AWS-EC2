@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Response::DescribeNetworkInterfacesResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has NetworkInterface    @.NetworkInterfaces                    is xml-container('networkInterfaceSet')      is rw; 
-  has Str                 $.nextToken            is xml-element                                                 is rw; 
+  has NetworkInterface    @.NetworkInterfaces    is xml-element('item', :over-ride) is xml-container('networkInterfaceSet')  is xml-skip-null is rw; 
+  has Str                 $.nextToken            is xml-element                                                              is xml-skip-null is rw; 
 }

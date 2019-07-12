@@ -12,7 +12,7 @@ use Amazon::AWS::EC2::Types::NetworkInterfacePrivateIpAddress;
 use Amazon::AWS::EC2::Types::Tag;
 
 class Amazon::AWS::EC2::Types::NetworkInterface is export
-  does XML::Class[xml-element => 'item']
+  does XML::Class
 {
   also is Amazon::AWS::EC2::Types::Base;
 

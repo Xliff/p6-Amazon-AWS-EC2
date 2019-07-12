@@ -548,6 +548,7 @@
       "Amazon::AWS::EC2::Response::CancelReservedInstancesListingResponse"                  :  "lib/Amazon/AWS/EC2/Response/CancelReservedInstancesListingResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::CreateCapacityReservationResponse"                       :  "lib/Amazon/AWS/EC2/Response/CreateCapacityReservationResponse.pm6"                       ,
       "Amazon::AWS::EC2::Response::CreateLaunchTemplateResponse"                            :  "lib/Amazon/AWS/EC2/Response/CreateLaunchTemplateResponse.pm6"                            ,
+      "Amazon::AWS::EC2::Response::CreateNetworkInterfaceResponse"                          :  "lib/Amazon/AWS/EC2/Response/CreateNetworkInterfaceResponse.pm6"                          ,
       "Amazon::AWS::EC2::Response::CreateReservedInstancesListingResponse"                  :  "lib/Amazon/AWS/EC2/Response/CreateReservedInstancesListingResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::CreateSpotDatafeedSubscriptionResponse"                  :  "lib/Amazon/AWS/EC2/Response/CreateSpotDatafeedSubscriptionResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::DeleteLaunchTemplateResponse"                            :  "lib/Amazon/AWS/EC2/Response/DeleteLaunchTemplateResponse.pm6"                            ,
@@ -620,6 +621,7 @@
       "Amazon::AWS::EC2::Types::TransitGatewayVpcAttachmentOptions"                         :  "lib/Amazon/AWS/EC2/Types/TransitGatewayVpcAttachmentOptions.pm6"                         ,
       "Amazon::AWS::EC2::Types::Vpc"                                                        :  "lib/Amazon/AWS/EC2/Types/Vpc.pm6"                                                        ,
       "Amazon::AWS::TestUtils"                                                              :  "lib/Amazon/AWS/TestUtils.pm6"                                                            ,
+      "Amazon::AWS::EC2::Action::CreateNetworkInterface"                                    :  "lib/Amazon/AWS/EC2/Action/CreateNetworkInterface.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeAddresses"                                         :  "lib/Amazon/AWS/EC2/Action/DescribeAddresses.pm6"                                         ,
       "Amazon::AWS::EC2::Action::DescribeDhcpOptions"                                       :  "lib/Amazon/AWS/EC2/Action/DescribeDhcpOptions.pm6"                                       ,
       "Amazon::AWS::EC2::Action::DescribeElasticGpus"                                       :  "lib/Amazon/AWS/EC2/Action/DescribeElasticGpus.pm6"                                       ,
@@ -691,6 +693,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
