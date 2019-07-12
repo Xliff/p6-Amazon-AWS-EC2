@@ -1,0 +1,23 @@
+Broken 
+======
+√ DescribeInstances
+    + Filter object was misnamed. Fixed and retested for verification.
+- DescribeVolumeModifications (The action DescribeVolumeModifications is not valid for this web service.)
+    + It is not yet known what the proper fix for this is!
+√ DescribeSecurityGroups (not ok 5 - Response object is the correct type.)
+    + Looks to be an error with the test harness. This works fine:
+    
+      perl6 -Ilib -e \
+        'use Amazon::AWS::EC2::Action::DescribeSecurityGroups;          \
+        my $x = DescribeSecurityGroups.new.run(:raw);                   \
+        use Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse; \ 
+        DescribeSecurityGroupsResponse.from-xml($x).gist.say
+    + Had to remove dynamic loading, altogether to get this to work. FYI, This
+      is the pure form of the test. This should ALWAYS work. The tests so far
+      have been written with abstraction in mind. Maybe someone will come up 
+      with something better. Could pass the types to an abstracted sub, maybe?
+    
+- DescribePublicIpv4Pools (Bail out! #3 failed, so no further tests needed)
+    - This is a dynamic loading issue that does not seem to want to be solved.
+- DescribePrincipalIdFormat (Same as above)
+    
