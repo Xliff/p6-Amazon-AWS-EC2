@@ -2,6 +2,9 @@ use v6.d;
 
 use Amazon::AWS::EC2::Tests::TestTemplate;
 
+use Amazon::AWS::EC2::Action::DescribeSecurityGroups;
+use Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse;
+
 unit package Amazon::AWS::EC2::Tests::DescribeSecurityGroups;
 
 our sub runTests {
@@ -9,12 +12,9 @@ our sub runTests {
   # YYY- Determine why quietly is needed, here!
   my ($action, $response);
   quietly {
-    $action := ( %classes{$c} := 
-      try require ::("Amazon::AWS::EC2::Action::{ $c }") )
-        if not %classes{$c}:exists;
-    $response := ( %classes{"{$c}Response"} := 
-      try require ::("Amazon::AWS::EC2::Response::{ $c }Response") )
-        if not %classes{"{$c}Response"}:exists;
+    # For some reason, these objects do not like dynamic loading.
+    $response := DescribeSecurityGroupsResponse;
+    $action   := DescribeSecurityGroups;
   }
   
   runActionResponseTests($action, $response);

@@ -63,12 +63,13 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
 
     if @filters {
       @!Filters = do given @filters {
-        when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstances { @filters }
+        when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstancesFilter
+          { @filters }
 
         default {
           die qq:to/DIE/.chomp;
-          Invalid value passed to \@filers. Should only contain Filter objects, but contains:
-          { @filters.map( *.^name ).unique.join('. ') }
+          Invalid value passed to \@filers. Should only contain DescribeInstancesFilter objects, but also contains:
+          { @filters.grep( * !~~ DescribeInstancesFilter ).map( *.^name ).unique.join('. ') }
           DIE
 
         }

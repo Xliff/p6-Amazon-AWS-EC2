@@ -4,6 +4,7 @@ use XML::Class;
 use Method::Also;
 
 use Amazon::AWS::EC2::Response::DescribePublicIpv4PoolsResponse;
+use Amazon::AWS::Roles::Eqv;
 use Amazon::AWS::Utils;
 
 class Amazon::AWS::EC2::Action::DescribePublicIpv4Pools is export
@@ -63,9 +64,7 @@ class Amazon::AWS::EC2::Action::DescribePublicIpv4Pools is export
   {
     my @PoolArgs;
     my $cnt = 1;
-    for @!Pools {
-      @PoolArgs.push: Pair.new("PoolId.{$cnt++}.{.key}", .value) for .pairs;
-    }
+    @PoolArgs.push: Pair.new("PoolId.{$cnt++}", $_) for @!Pools;
 
     # Should already be sorted.
     my @args;

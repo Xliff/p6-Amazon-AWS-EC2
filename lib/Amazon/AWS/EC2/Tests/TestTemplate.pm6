@@ -12,6 +12,7 @@ sub runActionResponseTests(\action, \response, $fixup?, :$plan = True) is export
   my ($o, $ro, $x);
   
   my $c = action.^name;
+  diag $c;
   
   plan actionResponseTests if $plan;
   

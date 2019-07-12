@@ -9,12 +9,14 @@ our sub runTests {
   # YYY- Determine why quietly is needed, here!
   my ($action, $response);
   quietly {
-    $action := ( %classes{$c} := 
+    ( %classes{$c} := 
       try require ::("Amazon::AWS::EC2::Action::{ $c }") )
         if not %classes{$c}:exists;
-    $response := ( %classes{"{$c}Response"} := 
+    $action := %classes{$c};
+    ( %classes{"{$c}Response"} := 
       try require ::("Amazon::AWS::EC2::Response::{ $c }Response") )
         if not %classes{"{$c}Response"}:exists;
+    $response := %classes{"{$c}Response"};
   }
   
   runActionResponseTests($action, $response);
