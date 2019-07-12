@@ -170,20 +170,24 @@ sub doBasicTests(
     for @files {
       CATCH { default { diag .message } }
       
-      my ($class, $a, $bx, $b, $tl, $te);
+      my ($class, $a, $bx, $b, $tl, $te, $na);
       
-      (%classes{$_} = try require ::($_)) if not %classes{$_}:exists;
+      %classes{$_} := (try require ::($ = "$_")) if not %classes{$_}:exists;
       $class := %classes{$_};
          
       ok         ($tl = $class !~~ Failure),             "$_ loads. Is not a Failure object";
       ok         ($te = $class !=:= Nil),                "$_ exists";
-      ok         $class.HOW.^name.ends-with('ClassHOW'), "$_ is a class";
+      ok         ($na = $class.^name ne 'Any'),          "$_ is not (Any)";
       
       # Attempt to speed things up.
       %classes{$_} := $class if $tl && $te;
+      if $tl.not || $te.not || $na.not {
+        diag %classes.gist;
+        bail-out 'One if the first three tests failed, so no further tests needed';
+      }     
 
       lives-ok {
-        CATCH {
+        CATCH { 
           default {
             diag $class.^name;
             diag $class.HOW;
