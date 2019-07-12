@@ -17,8 +17,12 @@ Broken
       have been written with abstraction in mind. Maybe someone will come up 
       with something better. Could pass the types to an abstracted sub, maybe?
     
-- DescribePublicIpv4Pools (Bail out! #3 failed, so no further tests needed)
-    - This is a dynamic loading issue that does not seem to want to be solved.
-- DescribePrincipalIdFormat (Same as above)
-- DeleteNetworkInterface (Most recently written, see DescribePublicIpv4Pools)
+ Objects suffering from the following error:
+    (Bail out! #3 failed, so no further tests needed)
+  - This is a dynamic loading issue that does not seem to want to be solved.
+==============================
+- DescribePublicIpv4Pools 
+- DescribePrincipalIdFormat 
+- DeleteNetworkInterface
+- DescribeIdFormat
     

@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::DeleteNetworkInterfaceResponse;
+use Amazon::AWS::Roles::Eqv;
 use Amazon::AWS::Utils;
+
+use Amazon::AWS::EC2::Response::DeleteNetworkInterfaceResponse;
 
 class Amazon::AWS::EC2::Action::DeleteNetworkInterface is export
   does XML::Class[
@@ -17,8 +19,8 @@ class Amazon::AWS::EC2::Action::DeleteNetworkInterface is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool $.DryRun              is xml-element is xml-skip-null is rw;
-  has Str  $.NetworkInterfaceId  is xml-element is xml-skip-null is rw;
+  has Bool $.DryRun             is xml-element is xml-skip-null is rw;
+  has Str  $.NetworkInterfaceId is xml-element is xml-skip-null is rw;
 
   submethod BUILD (
     :$dryRun,
@@ -30,7 +32,7 @@ class Amazon::AWS::EC2::Action::DeleteNetworkInterface is export
     $!DryRun             = $dryRun             if $dryRun;
     $!NetworkInterfaceId = $networkInterfaceId if $networkInterfaceId.defined;
   }
-
+  
   method run (:$raw)
     is also<
       do
@@ -39,19 +41,19 @@ class Amazon::AWS::EC2::Action::DeleteNetworkInterface is export
   {
     die 'NetworkInterfaceId is required!' 
       unless $.NetworkInterfaceId.defined && $.NetworkInterfaceId.trim.chars;
-
+  
     # Should already be sorted.
     my @args = (
       DryRun             => $.DryRun,
       NetworkInterfaceId => $.NetworkInterfaceId,
       Version            => '2016-11-15'
     );
-
+  
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
-
+  
     $raw ??
       $xml
       !!
