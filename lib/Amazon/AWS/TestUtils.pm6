@@ -69,7 +69,7 @@ sub getTestFiles($cat, :$unit) is export {
   });
 
   if $unit.defined {
-    @files .= grep({ .split('::')[* - 1] eq $unit });
+    @files .= grep({ .split('::')[* - 1] eq $unit.split(',').any });
     #@files .= grep( *.contains($unit) );
     die "Could not find '{ $unit }' in { $cat }'" unless @files;
   }
@@ -148,7 +148,7 @@ sub finishTiming is export {
   %timings{$benchmark-iterations} = $end - $benchmark-start;
   #my $log-last = $benchmark-iterations.log(exponent) 
   #%timings{$benchmark-iterations} /= exponent if $log-last =~= $log-last.floor;
-  %timings{$benchmark-iterations} /= exponent;
+  %timings{$benchmark-iterations} /= exponent if %timings.elems > 1;
   diag %timings.pairs.sort( *.key.Int ).map( *.gist ).join(' / ');
   diag "Total time: { $end - $benchmark-real-start }s";
 }
@@ -164,7 +164,7 @@ sub doBasicTests(
   plan @files.elems * 8 * $number;
   
   startTiming if $do-timings;
-  for ^$number {  
+  NUMLOOP: for ^$number {  
     checkNextTiming if $do-timings;
     
     for @files {
@@ -173,6 +173,7 @@ sub doBasicTests(
       my ($class, $a, $bx, $b, $tl, $te, $na);
       
       %classes{$_} := (try require ::($ = "$_")) if not %classes{$_}:exists;
+      
       $class := %classes{$_};
          
       ok         ($tl = $class !~~ Failure),             "$_ loads. Is not a Failure object";
@@ -183,7 +184,8 @@ sub doBasicTests(
       %classes{$_} := $class if $tl && $te;
       if $tl.not || $te.not || $na.not {
         diag %classes.gist;
-        bail-out 'One if the first three tests failed, so no further tests needed';
+        skip-rest 'One if the first three tests failed, so no further tests needed';
+        last NUMLOOP;
       }     
 
       lives-ok {
