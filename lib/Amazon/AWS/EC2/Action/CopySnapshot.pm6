@@ -52,12 +52,13 @@ class Amazon::AWS::EC2::Action::CopySnapshot is export
     $!DryRun            = False if $dryRun;
     $!Encrypted         = False if $encrypted;
     
-    $!KmsKeyId          = '' if $kmsKeyId.defined && $kmsKeyId.trim.chars;
-    $!PresignedUrl      = '' 
+    $!KmsKeyId          = $kmsKeyId 
+      if $kmsKeyId.defined && $kmsKeyId.trim.chars;
+    $!PresignedUrl      = $presignedUrl
       if $presignedUrl.defined && $presignedUrl.trim.chars;
-    $!SourceRegion      = '' 
+    $!SourceRegion      = $sourceRegion 
       if $sourceRegion.defined && $sourceRegion.trim.chars;
-    $!SourceSnapshotId  = '' 
+    $!SourceSnapshotId  = $sourceSnapshotId 
       if $sourceSnapshotId.defined && $sourceSnapshotId.trim.chars;
     
   }
@@ -78,7 +79,7 @@ class Amazon::AWS::EC2::Action::CopySnapshot is export
     @args.push:   (Description       => $!Description)       if $!Description.chars;
     @args.push:   (DestinationRegion => $!DestinationRegion) if $!DestinationRegion.chars;
     @args.push:   (DryRun            => $!DryRun);
-    @args.push:   (Encrypted         => $!Encrypted);
+    @args.push:   (Encrypted         => $!Encrypted)         if $!Encrypted;
     @args.push:   (KmsKeyId          => $!KmsKeyId)          if $!KmsKeyId.chars;
     @args.push:   (PresignedUrl      => $!PresignedUrl)      if $!PresignedUrl.chars;
     @args.append: (
