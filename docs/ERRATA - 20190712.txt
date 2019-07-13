@@ -37,3 +37,6 @@ Broken
   + DescribeIdFormat was fixed by simply reordering the use statements so that
     the Response compunit was loaded LAST!
   
+# CreateSnapshotResponse Timings.
+# 1 => 0.611909 / 5 => 0.08187203075386115 / 25 => 0.3567764307015705 / 125 => 2.344410416639488 / 625 => 28.847617259613877 / 1000 => 43.997291136500216
+# Total time: 378.76120279s

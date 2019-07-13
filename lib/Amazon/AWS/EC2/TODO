@@ -65,6 +65,7 @@
   + ReleaseAddress
   + CreateNetworkInterface
   + DeleteNetworkInterface 
+  + CopySnapshot
   + CreateSnapshot
   + DeleteSnapshot
   
