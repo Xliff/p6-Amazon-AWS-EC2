@@ -335,6 +335,7 @@ Amazon::AWS::EC2::Response::DeleteKeyPairResponse
 Amazon::AWS::EC2::Response::DeleteNetworkInterfaceResponse
 Amazon::AWS::EC2::Response::DeletePlacementGroupResponse
 Amazon::AWS::EC2::Response::DeleteSecurityGroupResponse
+Amazon::AWS::EC2::Response::DeleteSnapshotResponse
 Amazon::AWS::EC2::Response::DeleteSpotDatafeedSubscriptionResponse
 Amazon::AWS::EC2::Response::DeleteTagsResponse
 Amazon::AWS::EC2::Response::DeprovisionByoipCidrResponse
@@ -508,6 +509,7 @@ Amazon::AWS::EC2::Action::CreateKeyPair
 Amazon::AWS::EC2::Action::CreateSnapshot
 Amazon::AWS::EC2::Action::DeleteKeyPair
 Amazon::AWS::EC2::Action::DeleteNetworkInterface
+Amazon::AWS::EC2::Action::DeleteSnapshot
 Amazon::AWS::EC2::Action::DescribeAggregateIdFormat
 Amazon::AWS::EC2::Action::DescribeFlowLogs
 Amazon::AWS::EC2::Action::DescribeIdFormat

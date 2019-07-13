@@ -348,6 +348,7 @@
       "Amazon::AWS::EC2::Response::DeleteNetworkInterfaceResponse"                          :  "lib/Amazon/AWS/EC2/Response/DeleteNetworkInterfaceResponse.pm6"                          ,
       "Amazon::AWS::EC2::Response::DeletePlacementGroupResponse"                            :  "lib/Amazon/AWS/EC2/Response/DeletePlacementGroupResponse.pm6"                            ,
       "Amazon::AWS::EC2::Response::DeleteSecurityGroupResponse"                             :  "lib/Amazon/AWS/EC2/Response/DeleteSecurityGroupResponse.pm6"                             ,
+      "Amazon::AWS::EC2::Response::DeleteSnapshotResponse"                                  :  "lib/Amazon/AWS/EC2/Response/DeleteSnapshotResponse.pm6"                                  ,
       "Amazon::AWS::EC2::Response::DeleteSpotDatafeedSubscriptionResponse"                  :  "lib/Amazon/AWS/EC2/Response/DeleteSpotDatafeedSubscriptionResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::DeleteTagsResponse"                                      :  "lib/Amazon/AWS/EC2/Response/DeleteTagsResponse.pm6"                                      ,
       "Amazon::AWS::EC2::Response::DeprovisionByoipCidrResponse"                            :  "lib/Amazon/AWS/EC2/Response/DeprovisionByoipCidrResponse.pm6"                            ,
@@ -521,6 +522,7 @@
       "Amazon::AWS::EC2::Action::CreateSnapshot"                                            :  "lib/Amazon/AWS/EC2/Action/CreateSnapshot.pm6"                                            ,
       "Amazon::AWS::EC2::Action::DeleteKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/DeleteKeyPair.pm6"                                             ,
       "Amazon::AWS::EC2::Action::DeleteNetworkInterface"                                    :  "lib/Amazon/AWS/EC2/Action/DeleteNetworkInterface.pm6"                                    ,
+      "Amazon::AWS::EC2::Action::DeleteSnapshot"                                            :  "lib/Amazon/AWS/EC2/Action/DeleteSnapshot.pm6"                                            ,
       "Amazon::AWS::EC2::Action::DescribeAggregateIdFormat"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAggregateIdFormat.pm6"                                 ,
       "Amazon::AWS::EC2::Action::DescribeFlowLogs"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeFlowLogs.pm6"                                          ,
       "Amazon::AWS::EC2::Action::DescribeIdFormat"                                          :  "lib/Amazon/AWS/EC2/Action/DescribeIdFormat.pm6"                                          ,
@@ -697,6 +699,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
