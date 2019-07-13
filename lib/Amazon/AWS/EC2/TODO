@@ -63,15 +63,15 @@
   
   + AllocateAddress
   + ReleaseAddress
+  + CreateNetworkInterface
+  + DeleteNetworkInterface 
+  + CreateSnapshot
   
   - CreateTags (Needs resource id)
   - CreateCapacityReservation
   - CreateNatGateway
   - CreateNetworkAcl
   - CreateNetworkAclEntry
-  + CreateNetworkInterface
-  - DeleteNetworkInterface (low hanging fruit. Do ASAP!)
-  - CreateSnapshot
   
   # Should create corresponding Delete actions for all Create actions!
   

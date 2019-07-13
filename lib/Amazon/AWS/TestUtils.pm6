@@ -216,7 +216,10 @@ sub doBasicTests(
       
       ok       ( my $eqv = $a.eqv($b) ),                            "$_ compares ok";
       
-      diff( ddt($a, :get), ddt($b, :get) ) unless $eqv;
+      unless $eqv {
+        diag $bx;
+        diff( ddt($a, :get), ddt($b, :get) )
+      }
       
       {
         CATCH { 
