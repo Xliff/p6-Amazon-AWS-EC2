@@ -340,6 +340,7 @@
       "Amazon::AWS::EC2::Response::CreateKeyPairResponse"                                   :  "lib/Amazon/AWS/EC2/Response/CreateKeyPairResponse.pm6"                                   ,
       "Amazon::AWS::EC2::Response::CreatePlacementGroupResponse"                            :  "lib/Amazon/AWS/EC2/Response/CreatePlacementGroupResponse.pm6"                            ,
       "Amazon::AWS::EC2::Response::CreateSecurityGroupResponse"                             :  "lib/Amazon/AWS/EC2/Response/CreateSecurityGroupResponse.pm6"                             ,
+      "Amazon::AWS::EC2::Response::CreateSnapshotResponse"                                  :  "lib/Amazon/AWS/EC2/Response/CreateSnapshotResponse.pm6"                                  ,
       "Amazon::AWS::EC2::Response::CreateTagsResponse"                                      :  "lib/Amazon/AWS/EC2/Response/CreateTagsResponse.pm6"                                      ,
       "Amazon::AWS::EC2::Response::DeleteFleetsResponse"                                    :  "lib/Amazon/AWS/EC2/Response/DeleteFleetsResponse.pm6"                                    ,
       "Amazon::AWS::EC2::Response::DeleteFpgaImageResponse"                                 :  "lib/Amazon/AWS/EC2/Response/DeleteFpgaImageResponse.pm6"                                 ,
@@ -517,6 +518,7 @@
       "Amazon::AWS::EC2::Action::AllocateAddress"                                           :  "lib/Amazon/AWS/EC2/Action/AllocateAddress.pm6"                                           ,
       "Amazon::AWS::EC2::Action::CreateDefaultSubnet"                                       :  "lib/Amazon/AWS/EC2/Action/CreateDefaultSubnet.pm6"                                       ,
       "Amazon::AWS::EC2::Action::CreateKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/CreateKeyPair.pm6"                                             ,
+      "Amazon::AWS::EC2::Action::CreateSnapshot"                                            :  "lib/Amazon/AWS/EC2/Action/CreateSnapshot.pm6"                                            ,
       "Amazon::AWS::EC2::Action::DeleteKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/DeleteKeyPair.pm6"                                             ,
       "Amazon::AWS::EC2::Action::DeleteNetworkInterface"                                    :  "lib/Amazon/AWS/EC2/Action/DeleteNetworkInterface.pm6"                                    ,
       "Amazon::AWS::EC2::Action::DescribeAggregateIdFormat"                                 :  "lib/Amazon/AWS/EC2/Action/DescribeAggregateIdFormat.pm6"                                 ,
@@ -695,4 +697,10 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
+
+
+
+
 
