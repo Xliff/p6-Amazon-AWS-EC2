@@ -66,8 +66,8 @@
   + CreateNetworkInterface
   + DeleteNetworkInterface 
   + CreateSnapshot
+  + DeleteSnapshot
   
-  - DeleteSnapshot
   - CreateTags (Needs resource id)
   - CreateCapacityReservation
   - CreateNatGateway

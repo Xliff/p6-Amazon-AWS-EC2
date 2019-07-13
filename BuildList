@@ -321,6 +321,7 @@ Amazon::AWS::EC2::Response::CancelSpotInstanceRequestsResponse
 Amazon::AWS::EC2::Response::ConfirmProductInstanceResponse
 Amazon::AWS::EC2::Response::CopyFpgaImageResponse
 Amazon::AWS::EC2::Response::CopyImageResponse
+Amazon::AWS::EC2::Response::CopySnapshotResponse
 Amazon::AWS::EC2::Response::CreateDefaultSubnetResponse
 Amazon::AWS::EC2::Response::CreateFpgaImageResponse
 Amazon::AWS::EC2::Response::CreateImageResponse
@@ -504,6 +505,7 @@ Amazon::AWS::EC2::Types::VpnConnectionOptionsSpecification
 Amazon::AWS::Response::ErrorResponse
 Amazon::AWS::Utils
 Amazon::AWS::EC2::Action::AllocateAddress
+Amazon::AWS::EC2::Action::CopySnapshot
 Amazon::AWS::EC2::Action::CreateDefaultSubnet
 Amazon::AWS::EC2::Action::CreateKeyPair
 Amazon::AWS::EC2::Action::CreateSnapshot
