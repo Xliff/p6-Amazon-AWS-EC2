@@ -69,11 +69,11 @@
   + CreateSnapshot
   + DeleteSnapshot
   e CreateNetworkAcl
+  e CreateNetworkAclEntry
   
   - CreateTags (Needs resource id)
   - CreateCapacityReservation
   - CreateNatGateway
-  - CreateNetworkAclEntry
   
   # Should create corresponding Delete actions for all Create actions!
   
