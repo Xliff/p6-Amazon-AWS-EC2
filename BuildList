@@ -326,6 +326,7 @@ Amazon::AWS::EC2::Response::CreateDefaultSubnetResponse
 Amazon::AWS::EC2::Response::CreateFpgaImageResponse
 Amazon::AWS::EC2::Response::CreateImageResponse
 Amazon::AWS::EC2::Response::CreateKeyPairResponse
+Amazon::AWS::EC2::Response::CreateNetworkAclEntryResponse
 Amazon::AWS::EC2::Response::CreatePlacementGroupResponse
 Amazon::AWS::EC2::Response::CreateSecurityGroupResponse
 Amazon::AWS::EC2::Response::CreateSnapshotResponse
@@ -508,6 +509,7 @@ Amazon::AWS::EC2::Action::AllocateAddress
 Amazon::AWS::EC2::Action::CopySnapshot
 Amazon::AWS::EC2::Action::CreateDefaultSubnet
 Amazon::AWS::EC2::Action::CreateKeyPair
+Amazon::AWS::EC2::Action::CreateNetworkAclEntry
 Amazon::AWS::EC2::Action::CreateSnapshot
 Amazon::AWS::EC2::Action::DeleteKeyPair
 Amazon::AWS::EC2::Action::DeleteNetworkInterface

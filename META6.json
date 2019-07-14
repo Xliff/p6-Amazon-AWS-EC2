@@ -339,6 +339,7 @@
       "Amazon::AWS::EC2::Response::CreateFpgaImageResponse"                                 :  "lib/Amazon/AWS/EC2/Response/CreateFpgaImageResponse.pm6"                                 ,
       "Amazon::AWS::EC2::Response::CreateImageResponse"                                     :  "lib/Amazon/AWS/EC2/Response/CreateImageResponse.pm6"                                     ,
       "Amazon::AWS::EC2::Response::CreateKeyPairResponse"                                   :  "lib/Amazon/AWS/EC2/Response/CreateKeyPairResponse.pm6"                                   ,
+      "Amazon::AWS::EC2::Response::CreateNetworkAclEntryResponse"                           :  "lib/Amazon/AWS/EC2/Response/CreateNetworkAclEntryResponse.pm6"                           ,
       "Amazon::AWS::EC2::Response::CreatePlacementGroupResponse"                            :  "lib/Amazon/AWS/EC2/Response/CreatePlacementGroupResponse.pm6"                            ,
       "Amazon::AWS::EC2::Response::CreateSecurityGroupResponse"                             :  "lib/Amazon/AWS/EC2/Response/CreateSecurityGroupResponse.pm6"                             ,
       "Amazon::AWS::EC2::Response::CreateSnapshotResponse"                                  :  "lib/Amazon/AWS/EC2/Response/CreateSnapshotResponse.pm6"                                  ,
@@ -521,6 +522,7 @@
       "Amazon::AWS::EC2::Action::CopySnapshot"                                              :  "lib/Amazon/AWS/EC2/Action/CopySnapshot.pm6"                                              ,
       "Amazon::AWS::EC2::Action::CreateDefaultSubnet"                                       :  "lib/Amazon/AWS/EC2/Action/CreateDefaultSubnet.pm6"                                       ,
       "Amazon::AWS::EC2::Action::CreateKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/CreateKeyPair.pm6"                                             ,
+      "Amazon::AWS::EC2::Action::CreateNetworkAclEntry"                                     :  "lib/Amazon/AWS/EC2/Action/CreateNetworkAclEntry.pm6"                                     ,
       "Amazon::AWS::EC2::Action::CreateSnapshot"                                            :  "lib/Amazon/AWS/EC2/Action/CreateSnapshot.pm6"                                            ,
       "Amazon::AWS::EC2::Action::DeleteKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/DeleteKeyPair.pm6"                                             ,
       "Amazon::AWS::EC2::Action::DeleteNetworkInterface"                                    :  "lib/Amazon/AWS/EC2/Action/DeleteNetworkInterface.pm6"                                    ,
@@ -703,6 +705,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
