@@ -39,24 +39,22 @@ sub getSignatureKey($k, $d, $r, $s) {
 sub getLocalAccess {
   die 'Cannot find personalized information'
     unless default_key_location.IO.e;
-  my ($ak, $sk);
-  try {
+  do try {
     CATCH { default { .message.say; die 'Invalid format'; } }
     my $access_file = default_key_location.IO.slurp;
     my %idx = (
       do gather for $access_file.lines[0].split(',').kv -> $k, $v {
-        take Pair.new($v, $k) 
+        take Pair.new($v.trim, $k.trim) 
           if $v eq ('Access key ID', 'Secret access key').any;
       }
     );    
     
     # Embedded spaces in key so curly brace hash access is mandatory.
-    ($ak, $sk) = $access_file.lines[1].split(',')[
-      %idx{'Access key ID'},
-      %idx{'Secret access key'},
+    $access_file.lines[1].split(',')[
+      %idx{'Access key ID'}.trim,
+      %idx{'Secret access key'}.trim,
     ];
   }
-  ($ak, $sk);
 }
 
 sub makeRequest (
@@ -78,7 +76,6 @@ sub makeRequest (
   my ($canonUri, $canonQS) = $uri.split('?');
   $canonUri = '/' unless $canonUri.chars;
   %headers.append: (x-amz-date => $amzdate, host => host);
-
   
   my $canonHeaders = %headers
     .pairs

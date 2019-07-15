@@ -57,10 +57,6 @@
   + DescribeDhcpOptions
   + DescribeIamInstanceProfileAssociations (No results, but can get a response object)
   + DescribeNatGateway
-  e CreateDefaultSubnet (Completed, but no valid response retrieved)
-  e DescribeIdentityIdFormat (Completed, but no valid response retrieved)
-  x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
-  
   + AllocateAddress
   + ReleaseAddress
   + CreateNetworkInterface
@@ -68,12 +64,18 @@
   + CopySnapshot
   + CreateSnapshot
   + DeleteSnapshot
+  
+  # Might need vpc: action permissions as well!
+  e CreateDefaultSubnet (Completed, but no valid response retrieved)
+  e DescribeIdentityIdFormat (Completed, but no valid response retrieved)
   e CreateNetworkAcl
   e CreateNetworkAclEntry
+  x DescribeCapacityReservations (Documentation is WOEFULLY lacking, may need to look at a reference impl)
   
   - CreateTags (Needs resource id)
   - CreateCapacityReservation
   - CreateNatGateway
+  - DescribeVpcEndpoint
   
   # Should create corresponding Delete actions for all Create actions!
   
@@ -114,6 +116,7 @@
     vol      - Volume
     sub      - Subnet
     vpc      - VPC
+    vpce     - VPC Endpoint
     snap     - Snapshot
     eipalloc - Elastic IP Allocation
     policy   - Snapshot Lifecycle Policy
