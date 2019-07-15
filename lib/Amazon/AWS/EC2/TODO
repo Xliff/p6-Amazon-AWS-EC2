@@ -3,9 +3,16 @@
 
   This should ONLY be considered after the type verification test has been written. See the obj-testing branch for the status on that initiative.
   update (cw): ... Oops... I forgot this prerequisite.
+  
++ Write script to test new actions. Would work like the basic test-new, except
+  would only key on new Action classes. From there it would test corresponding
+  Action, Response and Filter objects. Depends on completion of previous action
+  item.
 
 + Modify Utils::populateTestObject to honor Attribute WHY comments.
-+ Add a switch to object tests in t/ to limit testing to a specific object
+
+√ Add a switch to object tests in t/ to limit testing to a specific object
+
 - Regarding using Type objects in Actions and Filters, it may be best to smartmatch
   objects against Amazon::AWS::EC2::Types::Base, and then using dynamic lookup
   to special case. The default case would be whatever is appropriate for that filter,
@@ -13,11 +20,8 @@
 
   This may mean more complex logic in validation, although the above strategy
   could be used to keep it as clean as possible.
-- Write script to test new actions. Would work like the basic test-new, except
-  would only key on new Action classes. From there it would test corresponding
-  Action, Response and Filter objects. Depends on completion of previous action
-  item.
-- t/03-filter.t -- First test returns a false positive. Investigate why and solve.
+  
++ t/03-filter.t -- First test returns a false positive. Investigate why and solve.
 
 + Currently, Region is hardcoded to us-east-1 at the Request level. Add a mechanism that changes
   this to a default and allows it to be overridden at the ACTION, level.
@@ -64,6 +68,7 @@
   + CopySnapshot
   + CreateSnapshot
   + DeleteSnapshot
+  + DescribeVpcEndpoint
   
   # Might need vpc: action permissions as well!
   e CreateDefaultSubnet (Completed, but no valid response retrieved)
@@ -75,15 +80,15 @@
   - CreateTags (Needs resource id)
   - CreateCapacityReservation
   - CreateNatGateway
-  - DescribeVpcEndpoint
   
   # Should create corresponding Delete actions for all Create actions!
   
-- Add timing harness to TestUtils and TestTemplate so that timings per e-level
+√ Add timing harness to TestUtils and TestTemplate so that timings per e-level
   can be obtained and documented. E-level = 10, 100, 1000, ... *
   + Completed initial version, but see about writing TestTimings.pm6 to abstract
     away as much of the timing code as possible.
   + Add total execution time.
+  + E-level base now set to 5.
 
 - Fix tests for DescribeIdentityIdFormat, as the private test always returns a:
      URI: ?Action=DescribeIdentityIdFormat&Version=2016-11-15&PrincipalArn=arn:aws:iam::839618952316:root
@@ -91,15 +96,18 @@
       # Failed test 'Can run action'
       # at /usr/local/home/cbwood/Projects/p6-Amazon-AWS-EC2/../p6-Amazon-AWS-EC2-Private/lib/Amazon/AWS/EC2/Tests/Private/DescribeIdentityIdFormat.pm6 (Amazon::AWS::EC2::Tests::Private::DescribeIdentityIdFormat) line 23
       # Server responded with 401 Unauthorized
-  This could be a console-related issue, but the proper policy has been estanlished twice. So it could be something else!
+  This could be a console-related issue, but the proper policy has been established twice. So it could be something else!
 
 - For all Describe*Attribute actions, a list of attribute parameter to response object member should be developed and a definedness check performed, to insure that deserialization is being done properly.
-- Following the development of the list of actions, above. Develope the Create analogs of all developed Describe actions
-- Add a better key management system to the API. This would allow keeping either multiple key files in .ec2, using EC2AccessKeys (no .csv) as managed file containing multiple keys. May want to check for accessKeys.csv as the default and fall back to EC2AccessKeys.csv. If no EC2AccessKeys file is found, the key name is the name of the file without the ".csv" suffix. If no .csv files are found then use EC2AccessKeys. If neither of the previous options are available, then error out.
+- Following the development of the list of actions, above. Develop the Create analogs of all developed Describe actions
 - Additional unit testing via EC2/Tests may accidentally contain private information. This should not be allowed.  Should add pre-commit hooks that will abort any commit that contains private IDs and identifiers. 
   Tests.example directory, and can then be merged into master.
-- Create an IDENTITY mechanism. Basic functionality should be for selecting .csv files.
-- Add git submodule for PrivateTests. This directory will be for organizational object tests and will contain private data. This repo will NOT be for public consumption. Like Tests directory, name of ACTION class is expected.
+= Create an IDENTITY mechanism. Basic functionality should be for selecting .csv files.
+  + Currently done at the filesystem level with symlinks. Could be better.
+  
+= Add a better key management system to the API. This would allow keeping either multiple key files in .ec2, using EC2AccessKeys (no .csv) as managed file containing multiple keys. May want to check for accessKeys.csv as the default and fall back to EC2AccessKeys.csv. If no EC2AccessKeys file is found, the key name is the name of the file without the ".csv" suffix. If no .csv files are found then use EC2AccessKeys. If neither of the previous options are available, then error out.
+= Add git submodule for PrivateTests. This directory will be for organizational object tests and will contain private data. This repo will NOT be for public consumption. Like Tests directory, name of ACTION class is expected.
+
 - Further abstract the ::EC2::Action.run behavior by placing much of the repetitive operations of .run in a Role. This role can have a single attribute of $.usesNextToken which will use the xml-skip attribute, and can be set in BUILD. Can also do Amazon::AWS::Roles::Eqv.
   All specifics of the run operation are handled at action level by a .prepRun method that is callable by the role's .run method.
 - Attribute descriptions will now accept the following declarative, trailing comments:
@@ -110,22 +118,23 @@
                                                                   comp  = Name of CompUnit (will provide check and pick routines. Equivalent to:
                                                                     "pick=<compunit>::<pickSub>" and "check=<compunit>::<checkSub")
 
-+  Known Id prefixes:
-    eni      - Elastic Network Interface
-    i        - Instance
-    vol      - Volume
-    sub      - Subnet
-    vpc      - VPC
-    vpce     - VPC Endpoint
-    snap     - Snapshot
-    eipalloc - Elastic IP Allocation
-    policy   - Snapshot Lifecycle Policy
-    arn      - Amazon Resource Name
-    hro      - Host Reservation Offering
-    aclassoc - ACL Association
-    acl      - Network ACL
-    pl       - Prefix List
-    rtb      - Route Table
-    rtbassoc - Route Table Association
-    nat      - NAT Gateway
+- Write an ID validation routine.
+  +  Known Id prefixes:
+      eni      - Elastic Network Interface
+      i        - Instance
+      vol      - Volume
+      sub      - Subnet
+      vpc      - VPC
+      vpce     - VPC Endpoint
+      snap     - Snapshot
+      eipalloc - Elastic IP Allocation
+      policy   - Snapshot Lifecycle Policy
+      arn      - Amazon Resource Name
+      hro      - Host Reservation Offering
+      aclassoc - ACL Association
+      acl      - Network ACL
+      pl       - Prefix List
+      rtb      - Route Table
+      rtbassoc - Route Table Association
+      nat      - NAT Gateway
     
