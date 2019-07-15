@@ -116,9 +116,9 @@
                                                                 || check = Fully Qualified Subroutine Name (routine to check attribute values)
                                                                   pick  = Fully Qualified Subroutine Name (routine to generate random attribute values for testing)
                                                                   comp  = Name of CompUnit (will provide check and pick routines. Equivalent to:
-                                                                    "pick=<compunit>::<pickSub>" and "check=<compunit>::<checkSub")
 
-- Write an ID validation routine.
+                                                                    "pick=<compunit>::<pickSub>" and "check=<compunit>::<checkSub")
++ Write an ID validation routine.
   +  Known Id prefixes:
       eni      - Elastic Network Interface
       i        - Instance
@@ -137,4 +137,5 @@
       rtb      - Route Table
       rtbassoc - Route Table Association
       nat      - NAT Gateway
+      dopt     - DHCP Options Set
     
