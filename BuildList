@@ -366,6 +366,7 @@ Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse
 Amazon::AWS::EC2::Response::DescribeTagsResponse
 Amazon::AWS::EC2::Response::DescribeVolumeModificationsResponse
 Amazon::AWS::EC2::Response::DescribeVolumeStatusResponse
+Amazon::AWS::EC2::Response::DescribeVpcEndpointsResponse
 Amazon::AWS::EC2::Response::DisassociateAddressResponse
 Amazon::AWS::EC2::Response::DisassociateIamInstanceProfileResponse
 Amazon::AWS::EC2::Response::GetConsoleOutputResponse
@@ -523,6 +524,7 @@ Amazon::AWS::EC2::Action::DescribePrincipalIdFormat
 Amazon::AWS::EC2::Action::DescribeRegions
 Amazon::AWS::EC2::Action::DescribeSnapshotAttribute
 Amazon::AWS::EC2::Action::DescribeTags
+Amazon::AWS::EC2::Action::DescribeVpcEndpoints
 Amazon::AWS::EC2::Action::GetConsoleOutput
 Amazon::AWS::EC2::Action::GetConsoleScreenshot
 Amazon::AWS::EC2::Action::ReleaseAddress
