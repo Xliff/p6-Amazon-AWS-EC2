@@ -22,6 +22,7 @@
     "source-url": "https://github.com/Xliff/p6-Amazon-AWS-EC2",
     "provides": {
       "Amazon::AWS::EC2::Roles::InstanceState"                                              :  "lib/Amazon/AWS/EC2/Roles/InstanceState.pm6"                                              ,
+      "Amazon::AWS::EC2::validResourceIds"                                                  :  "lib/Amazon/AWS/EC2/validResourceIds.pm6"                                                 ,
       "Amazon::AWS::Roles::Eqv"                                                             :  "lib/Amazon/AWS/Roles/Eqv.pm6"                                                            ,
       "Amazon::AWS::Roles::Base"                                                            :  "lib/Amazon/AWS/Roles/Base.pm6"                                                           ,
       "Amazon::AWS::EC2::Filters::DescribeAddressesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeAddressesFilter.pm6"                                  ,
@@ -540,6 +541,7 @@
       "Amazon::AWS::EC2::Action::DescribeVpcEndpoints"                                      :  "lib/Amazon/AWS/EC2/Action/DescribeVpcEndpoints.pm6"                                      ,
       "Amazon::AWS::EC2::Action::GetConsoleOutput"                                          :  "lib/Amazon/AWS/EC2/Action/GetConsoleOutput.pm6"                                          ,
       "Amazon::AWS::EC2::Action::GetConsoleScreenshot"                                      :  "lib/Amazon/AWS/EC2/Action/GetConsoleScreenshot.pm6"                                      ,
+      "Amazon::AWS::EC2::Action::GetPasswordData"                                           :  "lib/Amazon/AWS/EC2/Action/GetPasswordData.pm6"                                           ,
       "Amazon::AWS::EC2::Action::ReleaseAddress"                                            :  "lib/Amazon/AWS/EC2/Action/ReleaseAddress.pm6"                                            ,
       "Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter"                   :  "lib/Amazon/AWS/EC2/Filters/DescribeHostReservationOfferingsFilter.pm6"                   ,
       "Amazon::AWS::EC2::Filters::DescribeIamInstanceProfileAssociationsFilter"             :  "lib/Amazon/AWS/EC2/Filters/DescribeIamInstanceProfileAssociationsFilter.pm6"             ,
@@ -708,6 +710,7 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
 
 
 
