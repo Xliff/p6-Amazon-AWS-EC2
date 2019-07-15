@@ -9,28 +9,6 @@ unit package Amazon::AWS::EC2::Tests::DescribeInstanceAttribute;
 my @instanceIds;
 
 our sub runTests {
-  my $c = $?FILE.split('::')[*-1].substr(0, * - 1);
-  # YYY- Determine why quietly is needed, here!
-  my ($action, $response);
-  quietly {
-    $action := do {
-      if not %classes{$c}:exists {
-        %classes{$c} := try require ::("Amazon::AWS::EC2::Action::{ $c }");
-      }
-      %classes{$c}
-    };
-    $response := do {
-      if not %classes{"{$c}Response"}:exists {
-        %classes{"{$c}Response"} := 
-          try require ::("Amazon::AWS::EC2::Response::{ $c }Response");
-      }
-      %classes{"{$c}Response"};
-    };
-    
-    # Load extra classes LAST!
-    %classes<DescribeInstances> = 
-      try require ::('Amazon::AWS::EC2::Action::DescribeInstances');
-  }
   
   subtest 'Testing with all attributes' => sub {
     my @attributes = $action.getAttributes;
@@ -51,16 +29,21 @@ our sub runTests {
     diag "Using instanceID: { $instanceId }"; 
     plan @attributes.elems * actionResponseTests;
     for @attributes {
-      my $fixup = -> $o { 
-        $o.InstanceId = $instanceId;
-        $o.Attribute = $_;
-      };
       runActionResponseTests(
         $action, 
         $response, 
-        $fixup,
+        loader => -> {
+          # Load extra classes LAST!
+          %classes<DescribeInstances> = 
+            try require ::('Amazon::AWS::EC2::Action::DescribeInstances');
+        },
+        fixup => -> $o { 
+          $o.InstanceId = $instanceId;
+          $o.Attribute = $_;
+        },
         :!plan
       );
     }
   }
+  
 }

@@ -12,25 +12,6 @@ unit package Amazon::AWS::EC2::Tests::DescribePrincipalIdFormat;
 # Test is currently off.
 
 our sub runTests {
-  my $c = $?FILE.split('::')[*-1].substr(0, * - 1);
-  # YYY- Determine why quietly is needed, here!
-  my ($action, $response);
-  quietly {
-    $action := do {
-      if not %classes{$c}:exists {
-        %classes{$c} := try require ::("Amazon::AWS::EC2::Action::{ $c }");
-      }
-      %classes{$c}
-    };
-    $response := do {
-      if not %classes{"{$c}Response"}:exists {
-        %classes{"{$c}Response"} := 
-          try require ::("Amazon::AWS::EC2::Response::{ $c }Response");
-      }
-      %classes{"{$c}Response"};
-    };
-   
-  }
   
   subtest 'Testing with various resources' => sub {
     my @resources = $action.getResources;
@@ -40,14 +21,12 @@ our sub runTests {
     
     for @base {
       my $num = @base.pick;
-      my $fixup = -> $o { 
-        #$o.Resources = @resources.pick xx $num;
-        $o.Resources = <arn vpc image>;
-      }
-      my $ro = runActionResponseTests(
-        $action, 
-        $response, 
-        $fixup,
+      my $ro = runTestCore(
+        $?PACKAGE,
+        fixup => -> $o { 
+          #$o.Resources = @resources.pick xx $num;
+          $o.Resources = <arn vpc image>;
+        },
         :!plan
       );
       

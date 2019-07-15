@@ -8,7 +8,8 @@ use Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse;
 unit package Amazon::AWS::EC2::Tests::DescribeSecurityGroups;
 
 our sub runTests {
-  my $c = $?FILE.split('::')[*-1].substr(0, * - 1);
+  my $c = $?PACKAGE.^name.split('::')[* - 1];
+  
   # YYY- Determine why quietly is needed, here!
   my ($action, $response);
   quietly {
