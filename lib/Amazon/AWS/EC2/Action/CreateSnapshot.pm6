@@ -10,8 +10,6 @@ use Amazon::AWS::EC2::Types::TagSpecification;
 
 use Amazon::AWS::EC2::Response::CreateSnapshotResponse;
 
-my %attributes;
-
 class Amazon::AWS::EC2::Action::CreateSnapshot is export
   does XML::Class[xml-element => 'CreateSnapshot']
 {
@@ -21,7 +19,7 @@ class Amazon::AWS::EC2::Action::CreateSnapshot is export
   
   has Str               $.Description                                                  is xml-element                      is xml-skip-null is rw;
   has Bool              $.DryRun                                                       is xml-element                      is xml-skip-null is rw;
-  has TagSpecification  @.TagSpecifications  is xml-container('tagSpecificationSet')   is xml-element('item', :over-ride)                         is xml-skip-null is rw;
+  has TagSpecification  @.TagSpecifications  is xml-container('tagSpecificationSet')   is xml-element('item', :over-ride)  is xml-skip-null is rw;
   has Str               $.VolumeId                                                     is xml-element                      is xml-skip-null is rw;
   
   submethod BUILD (
@@ -68,6 +66,10 @@ class Amazon::AWS::EC2::Action::CreateSnapshot is export
       unless $.VolumeId.chars;
       
     my @TagSpecArgs;
+    my $cnt = 1;
+    for @!TagSpecifications {
+      @TagSpecArgs.push: Pair.new("TagSpecification.{$cnt++}", $_);
+    }
       
     # @Args must be sorted by key name.
     my @args;
@@ -89,15 +91,5 @@ class Amazon::AWS::EC2::Action::CreateSnapshot is export
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-  
-  method getValidInterfaceTypes {
-    %attributes<InterfaceTypes|ValidValues>.Array;
-  }
    
-}
-
-BEGIN {
-  %attributes = getAttributeData(
-    Amazon::AWS::EC2::Action::CreateSnapshot
-  );
 }
