@@ -41,6 +41,7 @@
       "Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeSecurityGroupsFilter.pm6"                             ,
       "Amazon::AWS::EC2::Filters::DescribeTagsFilter"                                       :  "lib/Amazon/AWS/EC2/Filters/DescribeTagsFilter.pm6"                                       ,
       "Amazon::AWS::EC2::Filters::DescribeVolumesFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeVolumesFilter.pm6"                                    ,
+      "Amazon::AWS::EC2::Filters::DescribeVpcEndpointsFilter"                               :  "lib/Amazon/AWS/EC2/Filters/DescribeVpcEndpointsFilter.pm6"                               ,
       "Amazon::AWS::EC2::Tests::TestTemplate"                                               :  "lib/Amazon/AWS/EC2/Tests/TestTemplate.pm6"                                               ,
       "Amazon::AWS::EC2::Tests::DescribeAccountAttributes"                                  :  "lib/Amazon/AWS/EC2/Tests/DescribeAccountAttributes.pm6"                                  ,
       "Amazon::AWS::EC2::Tests::DescribeAddresses"                                          :  "lib/Amazon/AWS/EC2/Tests/DescribeAddresses.pm6"                                          ,
@@ -705,6 +706,8 @@
     "support": { "source": null },
     "authors": [ "clifton.wood@gmail.com" ]
 }
+
+
 
 
 

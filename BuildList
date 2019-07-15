@@ -28,6 +28,7 @@ Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter
 Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
 Amazon::AWS::EC2::Filters::DescribeTagsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumesFilter
+Amazon::AWS::EC2::Filters::DescribeVpcEndpointsFilter
 Amazon::AWS::EC2::Tests::TestTemplate
 Amazon::AWS::EC2::Tests::DescribeAccountAttributes
 Amazon::AWS::EC2::Tests::DescribeAddresses
