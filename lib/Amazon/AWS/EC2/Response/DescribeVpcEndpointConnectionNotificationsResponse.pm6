@@ -12,7 +12,7 @@ class Amazon::AWS::EC2::Response::DescribeVpcEndpointConnectionNotificationsResp
   also does Amazon::AWS::Roles::Response;
 
   has ConnectionNotification @.connectionNotifications
-    is xml-container('DescribeVpcEndpointConnectionNotificationsSet')  
+    is xml-container('connectionNotificationSet')  
     is xml-skip-null 
     is rw;
      
