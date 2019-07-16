@@ -28,7 +28,6 @@ Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter
 Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter
 Amazon::AWS::EC2::Filters::DescribeTagsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumesFilter
-Amazon::AWS::EC2::Filters::DescribeVpcEndpointConnectionNotificationsFilter
 Amazon::AWS::EC2::Filters::DescribeVpcEndpointsFilter
 Amazon::AWS::EC2::Tests::TestTemplate
 Amazon::AWS::EC2::Tests::DescribeAccountAttributes
@@ -367,6 +366,7 @@ Amazon::AWS::EC2::Response::DescribeSpotPriceHistoryResponse
 Amazon::AWS::EC2::Response::DescribeTagsResponse
 Amazon::AWS::EC2::Response::DescribeVolumeModificationsResponse
 Amazon::AWS::EC2::Response::DescribeVolumeStatusResponse
+Amazon::AWS::EC2::Response::DescribeVpcEndpointConnectionNotificationsResponse
 Amazon::AWS::EC2::Response::DescribeVpcEndpointConnectionsResponse
 Amazon::AWS::EC2::Response::DescribeVpcEndpointsResponse
 Amazon::AWS::EC2::Response::DisassociateAddressResponse
@@ -543,6 +543,7 @@ Amazon::AWS::EC2::Filters::DescribeSnapshotsFilter
 Amazon::AWS::EC2::Filters::DescribeSubnetsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumeModificationsFilter
 Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter
+Amazon::AWS::EC2::Filters::DescribeVpcEndpointConnectionNotificationsFilter
 Amazon::AWS::EC2::Filters::DescribeVpcEndpointConnectionsFilter
 Amazon::AWS::EC2::Filters::DescribeVpcsFilter
 Amazon::AWS::EC2::Response::BundleInstanceResponse
@@ -656,6 +657,7 @@ Amazon::AWS::EC2::Action::DescribeVolumeModifications
 Amazon::AWS::EC2::Action::DescribeVolumeStatus
 Amazon::AWS::EC2::Action::DescribeVolumes
 Amazon::AWS::EC2::Action::DescribeVpcAttribute
+Amazon::AWS::EC2::Action::DescribeVpcEndpointConnectionNotifications
 Amazon::AWS::EC2::Action::DescribeVpcEndpointConnections
 Amazon::AWS::EC2::Action::RebootInstances
 Amazon::AWS::EC2::Action::StartInstances
