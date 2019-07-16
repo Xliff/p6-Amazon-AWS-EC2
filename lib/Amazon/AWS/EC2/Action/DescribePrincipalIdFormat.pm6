@@ -43,7 +43,7 @@ class Amazon::AWS::EC2::Action::DescribePrincipalIdFormat is export
       { %attributes<Resources|Table> }
       DIE
   
-    $!DryRun       = $dryRun     if $dryRun.defined;
+    $!DryRun       = $dryRun     if $dryRun;
     $!MaxResults   = $maxResults if $maxResults.defined;
     @!Resources    = @resources  if @resources;
   
@@ -67,7 +67,7 @@ class Amazon::AWS::EC2::Action::DescribePrincipalIdFormat is export
   
     # Should already be sorted.
     my @args = (
-      DryRun           => $.DryRun,
+      DryRun           => $!DryRun,
       |@ResourceArgs,
       MaxResults       => $!MaxResults,
       Version          => '2016-11-15'

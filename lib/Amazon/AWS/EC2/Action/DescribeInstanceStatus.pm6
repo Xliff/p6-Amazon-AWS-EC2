@@ -45,7 +45,7 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
     :$!MaxResults          = 1000,
     #:$!NextToken          = '',
   ) {
-    $!DryRun     = $dryRun     if $dryRun.defined;
+    $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
     
     $!IncludeAllInstances = $includeAllInstances 
@@ -105,7 +105,8 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     # Should already be sorted.
@@ -115,7 +116,7 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
       @args = ( nextToken => $nextToken );
     } else {
       @args = (
-        DryRun              => $.DryRun,
+        DryRun              => $!DryRun,
         IncludeAllInstances => $!IncludeAllInstances,
         |@InstanceArgs,
         |@FilterArgs,

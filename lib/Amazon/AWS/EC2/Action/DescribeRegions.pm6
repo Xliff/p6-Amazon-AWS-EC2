@@ -30,7 +30,7 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
     :@!Filters,
     :@!Regions
   ) {
-    $!DryRun = $dryRun if $dryRun.defined;
+    $!DryRun = $dryRun if $dryRun;
     
     if @filters {
       @!Filters = do given @filters {

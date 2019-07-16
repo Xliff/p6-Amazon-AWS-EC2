@@ -74,7 +74,7 @@ class Amazon::AWS::EC2::Action::DescribePublicIpv4Pools is export
       @args = ( nextToken => $nextToken );
     } else {
       @args = (
-        MaxResults     => $.MaxResults,
+        MaxResults     => $!MaxResults,
       );
       @args.append: @PoolArgs if @PoolArgs;
       @args.append: (

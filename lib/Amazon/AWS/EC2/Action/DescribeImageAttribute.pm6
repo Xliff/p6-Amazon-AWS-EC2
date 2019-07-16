@@ -43,8 +43,8 @@ class Amazon::AWS::EC2::Action::DescribeImageAttribute is export
                        $!Attribute.chars.not   ||
                        $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
     
-    $!DryRun     = $dryRun  if $dryRun.defined;
-    $!ImageId    = $imageId if $imageId.defined;
+    $!DryRun     = $dryRun  if $dryRun;
+    $!ImageId    = $imageId if $imageId.defined && $imageId.trim.chars;
   }
 
   method run (:$raw)
@@ -53,17 +53,14 @@ class Amazon::AWS::EC2::Action::DescribeImageAttribute is export
       execute
     >
   {
-    die 'ImageId is required!' 
-      unless $.ImageId.defined && $.ImageId.trim.chars;
-      
-    die 'Attribute is required'
-      unless $.Attribute.defined && $.Attribute.trim.chars;
+    die 'ImageId is required!'  unless $!ImageId.chars;      
+    die 'Attribute is required' unless $!Attribute.chars;
 
     # Should already be sorted.
     my @args = (
-      Attribute => $.Attribute,
-      DryRun    => $.DryRun,
-      ImageId   => $.ImageId,
+      Attribute => $!Attribute,
+      DryRun    => $!DryRun,
+      ImageId   => $!ImageId,
       Version   => '2016-11-15'
     );
     

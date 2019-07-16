@@ -89,12 +89,13 @@ class Amazon::AWS::EC2::Action::DescribeRouteTables is export
     my $cnt = 1;
     my @RouteTableArgs;
     @RouteTableArgs.push: Pair.new("RouteTableId.{$cnt++}", $_) 
-      for @.RouteTableIds;
+      for @!RouteTableIds;
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     # Should already be sorted.
@@ -104,9 +105,9 @@ class Amazon::AWS::EC2::Action::DescribeRouteTables is export
       @args = ( nextToken => $nextToken );
     } else {
       @args = (
-        DryRun         => $.DryRun,
+        DryRun         => $!DryRun,
         |@FilterArgs,
-        MaxResults     => $.MaxResults,
+        MaxResults     => $!MaxResults,
         |@RouteTableArgs,
         Version        => '2016-11-15',
       );

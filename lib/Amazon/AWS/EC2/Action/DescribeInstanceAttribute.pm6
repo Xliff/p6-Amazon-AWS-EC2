@@ -28,9 +28,9 @@ class Amazon::AWS::EC2::Action::DescribeInstanceAttribute is export
     :$dryRun,
     :$instanceId,
     # For deserialization purposes, only!
-    :$!Attribute      = '',
-    :$!DryRun         = False,
-    :$!InstanceId     = '',
+    :$!Attribute  = '',
+    :$!DryRun     = False,
+    :$!InstanceId = '',
   ) { 
     # Abstract away into a sub done by Actions role?
     my $dieMsg = qq:to/DIE/.chomp;
@@ -38,13 +38,13 @@ class Amazon::AWS::EC2::Action::DescribeInstanceAttribute is export
       { %attributes<Attribute|Table> }
       DIE
      
-    $!Attribute     = $attribute  if $attribute.defined;
+    $!Attribute     = $attribute  if $attribute.defined && $attribute.trim.chars;
     die $dieMsg unless $!Attribute.defined.not ||
                        $!Attribute.chars.not   ||
                        $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
     
-    $!DryRun        = $dryRun     if $dryRun.defined;
-    $!InstanceId    = $instanceId if $instanceId.defined;
+    $!DryRun        = $dryRun     if $dryRun;
+    $!InstanceId    = $instanceId if $instanceId.defined && $instanceId.trim.chars;
   }
 
   method run (:$raw)
@@ -54,19 +54,18 @@ class Amazon::AWS::EC2::Action::DescribeInstanceAttribute is export
     >
   {
     die 'InstanceId is required!' 
-      unless $.InstanceId.defined && $.InstanceId.trim.chars;
+      unless $!InstanceId.defined && $!InstanceId.chars;
       
     die 'Attribute is required'
-      unless $.Attribute.defined && $.Attribute.trim.chars;
+      unless $!Attribute.defined && $!Attribute.chars;
 
     # Should already be sorted.
     my @args = (
-      DryRun     => $.DryRun,
-      InstanceId => $.InstanceId,
+      Attribute  => $!Attribute,
+      DryRun     => $!DryRun,
+      InstanceId => $!InstanceId,
       Version    => '2016-11-15'
     );
-    @args.unshift: Pair.new('Attribute', $.Attribute) 
-      if $.Attribute.trim.chars;
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(

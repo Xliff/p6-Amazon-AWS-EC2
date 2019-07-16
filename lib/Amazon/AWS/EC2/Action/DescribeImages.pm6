@@ -48,6 +48,8 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     :$!MaxResults           = 1000,
     
   ) {
+    $!DryRun     = $dryRun     if $dryRun;
+    
     if @imageIds {
       @!ImageIds = @imageIds.map({
         when Str                               { $_ }
@@ -125,7 +127,8 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     my @FilterArgs;
     $cnt = 1;
     for @.Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     $cnt = 1;
@@ -143,7 +146,7 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
       @args = ( nextToken => $nextToken );
     } else {
       @args = (
-        DryRun         => $.DryRun,
+        DryRun         => $!DryRun,
         |@ExecutableByArgs,
         |@FilterArgs,
         |@ImageIdArgs,

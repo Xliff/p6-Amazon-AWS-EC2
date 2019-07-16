@@ -40,15 +40,18 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions is export
     :@!NetworkInterfacePermissionIds,
     :$!MaxResults                    = 50
   ) {
+    $!DryRun     = $dryRun     if $dryRun;
+    $!MaxResults = $maxResults if $maxResults.defined;
+    
     die '$maxResutlts must be an integer between 5 and 255'
       unless $!MaxResults ~~ 5..255;
       
     if @networkInterfacePermissionIds {
       @!NetworkInterfacePermissionIds = @networkInterfacePermissionIds.map({
         do {
-          when Str      { $_          }
+          when Str  { $_ }
 
-          default {
+          default   {
             die qq:to/DIE/.chomp;
              Invalid value passed to \@networkInterfacePermissionIds. Should only contain Str objects, but contains:
             { @networkInterfacePermissionIds.grep( * !~~ Str ).map( *.^name ).unique.join(', ') }
@@ -90,12 +93,13 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions is export
     my $cnt = 1;
     my @NetworkPermissionIdArgs;
     @NetworkPermissionIdArgs.push: Pair.new("VpcId.{$cnt++}", $_) 
-      for @.NetworkInterfacePermissionIds;
+      for @!NetworkInterfacePermissionIds;
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+        for .pairs;
     }
 
     # Should already be sorted.
@@ -105,9 +109,9 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions is export
       @args = ( nextToken => $nextToken );
     } else {
       @args = (
-        DryRun         => $.DryRun,
+        DryRun         => $!DryRun,
         |@FilterArgs,
-        MaxResults     => $.MaxResults,
+        MaxResults     => $!MaxResults,
         |@NetworkPermissionIdArgs,
         Version        => '2016-11-15'
       );

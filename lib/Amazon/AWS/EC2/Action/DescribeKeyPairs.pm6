@@ -22,6 +22,7 @@ class Amazon::AWS::EC2::Action::DescribeKeyPairs is export
   has Str                    @.KeyNames    is xml-container('keyNameSet')    is xml-element('keyName')     is rw;
 
   submethod BUILD (
+    :$dryRun,
     :@filters,
     :@keyNames,
     # Testing purposes only!
@@ -29,9 +30,12 @@ class Amazon::AWS::EC2::Action::DescribeKeyPairs is export
     :@!Filters,
     :@!KeyNames
   ) {
+    $!DryRun = $dryRun if $dryRun;
+    
     if @filters {
       @!Filters = do given @filters {
-        when .all ~~ DescribeKeyPairsFilter    { @filters }
+        when .all ~~ DescribeKeyPairsFilter
+          { @filters }
 
         default {
           die qq:to/DIE/.chomp;
@@ -64,17 +68,19 @@ class Amazon::AWS::EC2::Action::DescribeKeyPairs is export
     # Needs more thought!
     my $cnt = 1;
     my @FilterArgs;
-    for @.Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+    for @!Filters {
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     $cnt = 1;
     my @KeyNameArgs;
-    @KeyNameArgs.push: Pair.new("KeyName.{$cnt++}", $_) for @.KeyNames;
+    @KeyNameArgs.push: Pair.new("KeyName.{$cnt++}", urlEncode($_)) 
+      for @!KeyNames;
 
     # Should already be sorted.
     my @args = (
-      DryRun         => $.DryRun,
+      DryRun         => $!DryRun,
       |@FilterArgs,
       |@KeyNameArgs,
       Version        => '2016-11-15'

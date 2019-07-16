@@ -38,7 +38,7 @@ class Amazon::AWS::EC2::Action::DescribeNatGateways is export
     :@!NatGatewayIds,
     :$!MaxResults  = 1000
   ) {
-    $!DryRun     = $dryRun     if $dryRun.defined;
+    $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
     
     if @natGatewayIds {
@@ -72,21 +72,21 @@ class Amazon::AWS::EC2::Action::DescribeNatGateways is export
     my @NatGatewayIdArgs;
     my $cnt = 1;
     for @!NatGatewayIds {
-      @NatGatewayIdArgs.push: Pair.new("NatGatewayId.{$cnt++}.{.key}", .value)
-        for .pairs;
+      @NatGatewayIdArgs.push: Pair.new("NatGatewayId.{$cnt++}", $_)
     }
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+        for .pairs;
     }
     
     # Should already be sorted.
     my @args = (
-      DryRun         => $.DryRun,
+      DryRun         => $!DryRun,
       |@FilterArgs,
-      MaxResults     => $.MaxResults,
+      MaxResults     => $!MaxResults,
       |@NatGatewayIdArgs,
       Version        => '2016-11-15'
     );

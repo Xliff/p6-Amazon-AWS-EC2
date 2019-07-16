@@ -26,16 +26,18 @@ class Amazon::AWS::EC2::Action::DescribeIdentityIdFormat is export
     Str :$principalArn,
     Str :$resource,
     # Testing purposes ONLY!
-    Str :$!PrincipalArn,
-    Str :$!Resource
+    Str :$!PrincipalArn = '',
+    Str :$!Resource     = ''
   ) {
     my $dieMsg = qq:to/DIE/.chomp;
       Invalid Resource value. Resource value should be any of:
       { %attributes<Resource|Table> }
       DIE
 
-    $!PrincipalArn = $principalArn if $principalArn.defined;
-    $!Resource     = $resource     if $resource.defined;
+    $!PrincipalArn = $principalArn 
+      if $principalArn.defined && $principalArn.trim.chars;
+    $!Resource     = $resource
+      if $resource.defined     && $resource.trim.chars;
     
     die $dieMsg unless $!Resource.defined.not ||
                        $!Resource ~~ %attributes<Resource|ValidValues>.any;
@@ -47,12 +49,14 @@ class Amazon::AWS::EC2::Action::DescribeIdentityIdFormat is export
       execute
     >
   {
+    die 'PrincipalArn is required' unless $!PrincipalArn.chars;
+    
     # Should already be sorted.
-    my @args = (
-      PrincipalArn => $.PrincipalArn,  
+    @args.unshift: (Resource => $!Resource) if $!Resource.chars;
+    @args.append: (
+      PrincipalArn => urlEncode($!PrincipalArn)),
+      Version      => '2016-11-15'
     );
-    @args.unshift: Pair.new('Resource', $.Resource) if $.Resource.defined;
-    @args.unshift: Pair.new('Version', '2016-11-15');
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
@@ -65,7 +69,7 @@ class Amazon::AWS::EC2::Action::DescribeIdentityIdFormat is export
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
   
-  method getResources {
+  method getValidResources {
     %attributes<Resource|ValidValues>.Array;
   }
 

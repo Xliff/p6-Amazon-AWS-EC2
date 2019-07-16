@@ -40,15 +40,18 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfaces is export
     :@!NetworkInterfaceIds,
     :$!MaxResults           = 1000
   ) {
+    $!DryRun     = $dryRun     if $dryRun;
+    $!MaxResults = $maxResults if $maxResults.defined;
+    
     die '$maxResutlts must be an integer between 5 and 1000'
       unless $!MaxResults ~~ 5..1000;
       
     if @networkInterfaceIds {
       @!NetworkInterfaceIds = @networkInterfaceIds.map({
         do {
-          when Str      { $_          }
+          when Str  { $_ }
 
-          default {
+          default   {
             die qq:to/DIE/.chomp;
              Invalid value passed to \@networkInterfaceIds. Should only contain Str objects, but contains:
             { @networkInterfaceIds.map( *.^name ).unique.join(', ') }
@@ -89,12 +92,15 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfaces is export
 
     my $cnt = 1;
     my @NetworkInterfaceIdArgs;
-    @NetworkInterfaceIdArgs.push: Pair.new("NetworkInterfaceId.{$cnt++}", $_) for @.NetworkInterfaceIds;
+    @NetworkInterfaceIdArgs.push: 
+      Pair.new("NetworkInterfaceId.{$cnt++}", $_) 
+        for @!NetworkInterfaceIds;
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     # Should already be sorted.
@@ -104,10 +110,10 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfaces is export
       @args = ( nextToken => $nextToken );
     } else {
       @args = (
-        DryRun         => $.DryRun,
+        DryRun         => $!DryRun,
         |@FilterArgs,
         |@NetworkInterfaceIdArgs,
-        MaxResults     => $.MaxResults,
+        MaxResults     => $!MaxResults,
         Version        => '2016-11-15'
       );
     }

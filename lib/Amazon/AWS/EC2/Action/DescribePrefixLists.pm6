@@ -74,7 +74,8 @@ class Amazon::AWS::EC2::Action::DescribePrefixLists is export
     my $cnt = 1;
     my @FilterArgs;
     for @.Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     $cnt = 1;
@@ -87,7 +88,7 @@ class Amazon::AWS::EC2::Action::DescribePrefixLists is export
     } else {
       # Should already be sorted.
       @args = (
-        DryRun         => $.DryRun,
+        DryRun         => $!DryRun,
         |@FilterArgs,
         |@PrefixListArgs,
         Version        => '2016-11-15'
