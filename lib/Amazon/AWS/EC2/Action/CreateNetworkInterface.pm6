@@ -83,38 +83,41 @@ class Amazon::AWS::EC2::Action::CreateNetworkInterface is export
     >
   {
     die "SubnetId is required. Please set this attribute before executing .run!"
-      unless $.SubnetId.chars;
+      unless $!SubnetId.chars;
       
     my (@PrivateIpAddressArgs, @Ipv6AddressArgs, @SecurityGroupArgs, $cnt);
    
     $cnt = 1;
-    @PrivateIpAddressArgs.push: Pair.new("PrivateIpAddresses.{$cnt++}", $_)
-      for @!PrivateIpAddresses;
+    @PrivateIpAddressArgs.push: 
+      Pair.new("PrivateIpAddresses.{$cnt++}", urlEncode($_))
+        for @!PrivateIpAddresses;
       
     $cnt = 1;
-    @Ipv6AddressArgs.push: Pair.new("Ipv6Addresses.{$cnt++}", $_)
+    @Ipv6AddressArgs.push: Pair.new("Ipv6Addresses.{$cnt++}", urlEncode($_))
       for @!Ipv6Addresses;
     
     $cnt = 1;
-    @SecurityGroupArgs.push: Pair.new("SecurityGroupId.{$cnt++}", $_)
-      for @!Ipv6Addresses;
+    @SecurityGroupArgs.push: 
+      Pair.new("SecurityGroupId.{$cnt++}", urlEncode($_))
+        for @!SecurityGroupIds;
       
     # @Args must be sorted by key name.
     my @args; 
-    @args.push:   (Description      => $.Description)      if $.Description.chars;
-    @args.push:   (DryRun           => $.DryRun);
-    @args.push:   (InterfaceType    => $.InterfaceType)    if $.InterfaceType.chars;
-    @args.push:   (Ipv6AddressCount => $.Ipv6AddressCount) if $.Ipv6AddressCount;
+    @args.push:   (Description      => urlEncode($!Description))
+      if $!Description.chars;
+    @args.push:   (DryRun           => $!DryRun);
+    @args.push:   (InterfaceType    => $!InterfaceType)    if $!InterfaceType.chars;
+    @args.push:   (Ipv6AddressCount => $!Ipv6AddressCount) if $!Ipv6AddressCount;
     @args.append: @Ipv6AddressArgs                         if @Ipv6AddressArgs;
     @args.append: @PrivateIpAddressArgs                    if @PrivateIpAddressArgs;
     
-    @args.push: (SecondaryPrivateAddressCount => $.SecondaryPrivateAddressCount)
-      if $.SecondaryPrivateAddressCount;
+    @args.push: (SecondaryPrivateAddressCount => $!sSecondaryPrivateAddressCount)
+      if $!SecondaryPrivateAddressCount;
       
     @args.append: @SecurityGroupArgs if @SecurityGroupArgs;
     
-    @args.push: (SubnetId           => $.SubnetId);
-    @args.push: (Version          => '2016-11-15');
+    @args.push: (SubnetId           => $!SubnetId);
+    @args.push: (Version            => '2016-11-15');
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(

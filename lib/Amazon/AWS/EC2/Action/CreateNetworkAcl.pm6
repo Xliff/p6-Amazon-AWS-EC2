@@ -40,11 +40,11 @@ class Amazon::AWS::EC2::Action::CreateNetworkAcl is export
     >
   {
     die 'VpcId is required!' 
-      unless $!VpcId.defined && $!VpcId.trim.chars;
+      unless $!VpcId.defined && $!VpcId.chars;
 
     # Should already be sorted.
     my @args = (
-      DryRun  => $.DryRun,
+      DryRun  => $!DryRun,
       vpcId   => $!VpcId,
       Version => '2016-11-15'
     );

@@ -59,7 +59,7 @@ class Amazon::AWS::EC2::Action::CreateVpc is export
     >
   {
     die 'CidrBlock is required!' 
-      unless $.CidrBlock.defined && $.CidrBlock.trim.chars;
+      unless $!CidrBlock.defined && $!CidrBlock.chars;
       
     my $dieMsg = qq:to/DIE/;
     CidrBlock is invalid. Please specify a valid tenacy cidr specification.
@@ -67,23 +67,23 @@ class Amazon::AWS::EC2::Action::CreateVpc is export
     a /28.
     DIE
     
-    die $dieMsg unless $.CidrBlock ~~ / '/' (\d ** 2) $/;
+    die $dieMsg unless $!CidrBlock ~~ / '/' (\d ** 2) $/;
     die $dieMsg unless $/[0].Int ~~ 16..28;
     
     # Added due to comment on documentation page, located here: 
     # https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpc.html
     die '"host" value currently not allowed for InstanceTenacy'
-      if $.InstanceTenacy eq 'host'
+      if $!InstanceTenacy eq 'host'
     
     # Should already be sorted.
     my @args = (
-      AmazonProvidedIpv6CidrBlock => $.AmazonProvidedIpv6CidrBlock,
-      CidrBlock                   => $.CidrBlock,
+      AmazonProvidedIpv6CidrBlock => urlEncode($!AmazonProvidedIpv6CidrBlock),
+      CidrBlock                   => urlEncode($!CidrBlock),
       DryRun                      => $.DryRun
     );
-    @args.push: Pair.new('InstanceTenacy', $.InstanceTenacy) 
-      if $.InstanceTenacy.chars;
-    @args.push: Pair.new('Version', '2016-11-15');
+    @args.push:  (InstanceTenacy  => $!InstanceTenacy)
+      if $!InstanceTenacy.chars;
+    @args.push:  (Version         => '2016-11-15');
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(

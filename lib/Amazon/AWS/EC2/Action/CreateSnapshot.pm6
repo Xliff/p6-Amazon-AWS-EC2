@@ -63,22 +63,25 @@ class Amazon::AWS::EC2::Action::CreateSnapshot is export
     >
   {
     die "VolumeId is required. Please set this attribute before executing .run!"
-      unless $.VolumeId.chars;
+      unless $!VolumeId.chars;
       
     my @TagSpecArgs;
     my $cnt = 1;
     for @!TagSpecifications {
-      @TagSpecArgs.push: Pair.new("TagSpecification.{$cnt++}", $_);
+      @TagSpecArgs.push: 
+        Pair.new("TagSpecification.{$cnt++}.{.key}", urlEncode(.value))
+          for .pairs;
     }
       
     # @Args must be sorted by key name.
     my @args;
-    @args.push:   (Description => $.Description)  if $.Description.chars;
+    @args.push:   (Description => urlEncode($!Description))
+      if $!Description.chars;
     @args.append: (
-      DryRun           => $.DryRun,
+      DryRun           => $!DryRun,
       |@TagSpecArgs,
       Version          => '2016-11-15',
-      VolumeId         => $.VolumeId
+      VolumeId         => $!VolumeId
     );
 
     # XXX - Add error handling to makeRequest!

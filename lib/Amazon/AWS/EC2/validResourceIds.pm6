@@ -20,7 +20,10 @@ our %validIdTypes = (
   rtb      => 'Route Table',
   rtbassoc => 'Route Table Association',
   nat      => 'NAT Gateway',
-  dopt     => 'DHCP Options Set'
+  dopt     => 'DHCP Options Set',
+  tmt      => 'Traffic Mirror Target',
+  tmf      => 'Traffic Mirror Filter',
+  vpce-nfn => 'VPC Endpoint Notification
 );
 
 sub getIdType($id) {  

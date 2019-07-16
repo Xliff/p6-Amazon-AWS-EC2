@@ -81,10 +81,19 @@
   - CreateTags (Needs resource id)
   - CreateCapacityReservation
   - CreateNatGateway
-  - CreateVolume
+  = CreateVolume (Not run tested)
+  = DescribeVpcEndpointConnections (Run tested, but no data to check against)
+  - DescribeVpcEndpointConnectionNotifications
+  - DescribeLaunchTemplates
+  - DescribeLaunchTemplateVersions
+  - GetLaunchTemplateData
+  ...
+  - RunInstances (Ultimate goal!)
   
   # Should create corresponding Delete actions for all Create actions!
-  
+
+- PRIORITY! Ensure all URL values are properly encoded.
+
 √ Add timing harness to TestUtils and TestTemplate so that timings per e-level
   can be obtained and documented. E-level = 10, 100, 1000, ... *
   + Completed initial version, but see about writing TestTimings.pm6 to abstract
@@ -140,4 +149,6 @@
       rtbassoc - Route Table Association
       nat      - NAT Gateway
       dopt     - DHCP Options Set
+      tmt      - Test Mirror Target
+      vpce-nfn - VPC Endpoint Notification
     

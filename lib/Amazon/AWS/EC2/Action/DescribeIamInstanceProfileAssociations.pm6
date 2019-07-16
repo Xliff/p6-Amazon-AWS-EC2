@@ -73,17 +73,14 @@ class Amazon::AWS::EC2::Action::DescribeIamInstanceProfileAssociations is export
     
     my @AssociationIdArgs;
     my $cnt = 1;
-    for @!AssociationIds {
-      @AssociationIdArgs.push: 
-        Pair.new("AssociationId.{$cnt++}.{.key}", .value) 
-          for .pairs;
-    }
+    @AssociationIdArgs.push: Pair.new("AssociationId.{$cnt++}", $_)
+      for @!AssociationIds;
     
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
       @FilterArgs.push: 
-        Pair.new("Filter.{$cnt++}.{.key}", .value) 
+        Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
           for .pairs;
     }
     
@@ -91,7 +88,7 @@ class Amazon::AWS::EC2::Action::DescribeIamInstanceProfileAssociations is export
     my @args = (
       |@AssociationIdArgs,
       |@FilterArgs,
-      MaxResults => $.MaxResults,
+      MaxResults => $!MaxResults,
       Version    => '2016-11-15'
     );
 

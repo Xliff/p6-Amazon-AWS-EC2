@@ -34,7 +34,7 @@ class Amazon::AWS::EC2::Action::DescribeAggregateIdFormat is export
     >
   {
     my @args.append: (
-      DryRun        => $.DryRun,
+      DryRun        => $!DryRun,
       Version       => '2016-11-15'
     );
  

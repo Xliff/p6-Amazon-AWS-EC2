@@ -41,7 +41,8 @@ class Amazon::AWS::EC2::Action::AllocateAddress is export
       
     $!Domain = $domain         
       if $domain.defined && $domain.chars;
-      
+    
+    # Is an ID.
     $!PublicIpv4Pool = $publicIpv4Pool 
       if $publicIpv4Pool.defined && $publicIpv4Pool.chars;
   }
@@ -54,10 +55,10 @@ class Amazon::AWS::EC2::Action::AllocateAddress is export
   {
     # @Args must be sorted by key name.
     my @args; 
-    @args.push: (Domain         => $.Domain)         if $.Domain.chars;
-    @args.push: (Address        => $.Address)        if $.Address.chars;
-    @args.push: (DryRun         => $.DryRun);
-    @args.push: (PublicIpv4Pool => $.PublicIpv4Pool) if $.PublicIpv4Pool.chars;
+    @args.push: (Domain         => $!Domain)             if $!Domain.chars;
+    @args.push: (Address        => urlEncode($!Address)) if $!Address.chars;
+    @args.push: (DryRun         => $!DryRun);
+    @args.push: (PublicIpv4Pool => $!PublicIpv4Pool)     if $!PublicIpv4Pool.chars;
     @args.push: (Version        => '2016-11-15');
 
     # XXX - Add error handling to makeRequest!

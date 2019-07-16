@@ -75,27 +75,26 @@ class Amazon::AWS::EC2::Action::DescribeAddresses is export
     my @AllocationIdArgs;
     my $cnt = 1;
     for @!AllocationIds {
-      @AllocationIdArgs.push: Pair.new("AllocationId.{$cnt++}.{.key}", .value)
-        for .pairs;
+      @AllocationIdArgs.push: Pair.new("AllocationId.{$cnt++}", $_)
     }
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     my @PublicIpArgs;
     $cnt = 1;
     for @!PublicIps {
-      @PublicIpArgs.push: Pair.new("PublicIps.{$cnt++}.{.key}", .value)
-        for .pairs;
+      @PublicIpArgs.push: Pair.new("PublicIps.{$cnt++}", urlEncode($_))
     }
 
     # Should already be sorted.
     my @args = (
       |@AllocationIdArgs,
-      DryRun         => $.DryRun,
+      DryRun         => $!DryRun,
       |@FilterArgs,
       |@PublicIpArgs,
       Version        => '2016-11-15'

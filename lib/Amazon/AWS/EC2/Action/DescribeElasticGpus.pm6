@@ -65,17 +65,19 @@ class Amazon::AWS::EC2::Action::DescribeElasticGpus is export
     # Needs more thought!
     my $cnt = 1;
     my @FilterArgs;
-    for @.Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+    for @!Filters {
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     $cnt = 1;
     my @ElasticGpuIdArgs;
-    @ElasticGpuIdArgs.push: Pair.new("ElasticGpuId.{$cnt++}", $_) for @.ElasticGpuIds;
+    @ElasticGpuIdArgs.push: Pair.new("ElasticGpuId.{$cnt++}", $_) 
+      for @!ElasticGpuIds;
 
     # Should already be sorted.
     my @args = (
-      DryRun         => $.DryRun,
+      DryRun         => $!DryRun,
       |@ElasticGpuIdArgs,
       |@FilterArgs,
       Version        => '2016-11-15'

@@ -50,18 +50,14 @@ DIE
     >
   {
     # Keep things sorted.
-    my @args;
-    if @.ConversionTaskIds {
-      my @ConversionTaskIdArgs;
-      my $cnt = 1;
-      for @.ConversionTaskIds {
-        @ConversionTaskIdArgs.push: Pair.new("ConversionTaskId.{$cnt++}", .value) 
-          for .pairs;
-      }
-      @args.append: @ConversionTaskIdArgs;
+    my (@args, @ConversionTaskIdArgs);
+    my $cnt = 1;
+    for @!ConversionTaskIds {
+      @ConversionTaskIdArgs.push: Pair.new("ConversionTaskId.{$cnt++}", $_) 
     }
     @args.append: (
-      DryRun        => $.DryRun,
+      |@ConversionTaskIdArgs,
+      DryRun        => $!DryRun,
       Version       => '2016-11-15'
     );
     

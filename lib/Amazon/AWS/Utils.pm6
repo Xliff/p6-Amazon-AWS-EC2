@@ -57,15 +57,20 @@ sub getLocalAccess {
   }
 }
 
+sub urlEncode($val) is export {
+  # From: https://www.rosettacode.org/wiki/URL_encoding#Perl_6
+  $val.subst(/<-alnum>/, *.ord.fmt("%%%02X"), :g);
+}
+
 sub makeRequest (
-  $uri,
-  :$method = 'GET',
+  $uri       is copy,
+  :$method   = 'GET',
   :$service,              #= For future use
   :$body,
   *%headers
 ) is export {
   say "URI: { $uri }";
-
+  
   die 'URI exceeds maximum recommended size of 1024 characters. Please shorten.'
     unless $uri.chars < 1025;
 

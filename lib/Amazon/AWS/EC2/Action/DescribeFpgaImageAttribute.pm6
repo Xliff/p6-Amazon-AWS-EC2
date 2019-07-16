@@ -62,9 +62,9 @@ class Amazon::AWS::EC2::Action::DescribeFpgaImageAttribute is export
     my @args;
     
     @args.append: (
-      FpgaImageId   => $.FpgaImageId,
-      Attribute     => $.Attribute,
-      #DryRun        => $.DryRun,
+      FpgaImageId   => $!FpgaImageId,
+      Attribute     => $!Attribute,
+      DryRun        => $!DryRun,
       Version       => '2016-11-15'
     );
     

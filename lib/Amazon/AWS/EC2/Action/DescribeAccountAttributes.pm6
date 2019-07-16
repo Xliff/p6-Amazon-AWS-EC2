@@ -63,17 +63,17 @@ class Amazon::AWS::EC2::Action::DescribeAccountAttributes is export
   {
     # Keep things sorted.
     my @args;
-    if @.AttributeNames {
+    if @!AttributeNames {
       my @AttributeArgs;
       my $cnt = 1;
-      for @.AttributeNames {
+      for @!AttributeNames {
         @AttributeArgs.push: Pair.new("AttributeName.{$cnt++}", .value) 
           for .pairs;
       }
       @args.append: @AttributeArgs;
     }
     @args.append: (
-      DryRun        => $.DryRun,
+      DryRun        => $!DryRun,
       Version       => '2016-11-15'
     );
     

@@ -90,29 +90,32 @@ class Amazon::AWS::EC2::Action::CreateNetworkAclEntry is export
     # - The request must contain the parameter cidrBlock or ipv6CidrBlock (MissingParameter)
     # This contradicts (and overrides) the decription found here:
     # https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkAclEntry.html
-    die 'CidrBlock must be declared!' unless $.CidrBlock.chars;
+    die 'CidrBlock must be declared!' unless $!CidrBlock.chars;
     
     # @Args must be sorted by key name.
     my @args = (
-                 DryRun           => $.DryRun,
-                 CidrBlock        => $.CidrBlock,
-                 Egress           => $.Egress
+                 DryRun           => $!DryRun,
+                 CidrBlock        => urlEncode($!CidrBlock),
+                 Egress           => $!Egress
     );
     
-    if $.Icmp.defined {
-      @args.push: Pair.new("Icmp.{.key}", .value) for $.Icmp.pairs;
+    if $!Icmp.defined {
+      # All Int, so does not need encoding.
+      @args.push: Pair.new("Icmp.{.key}", .value) for $!Icmp.pairs;
     }
     
-    @args.push: (Ipv6CidrBlock    => $.Ipv6CidrBlock)    if  $.Ipv6CidrBlock.chars;
-    @args.push: (NetworkAclId     => $.NetworkAclId)     if  $.NetworkAclId.chars;
+    @args.push: (Ipv6CidrBlock    => urlEncode($!Ipv6CidrBlock)
+      if $!Ipv6CidrBlock.chars;
+    @args.push: (NetworkAclId     => $!NetworkAclId if $!NetworkAclId.chars;
     
-    if $.PortRange.defined {
-      @args.push: Pair.new("PortRange.{.key}", .value) for $.PortRange.pairs;
+    if $!PortRange.defined {
+      @args.push: Pair.new("PortRange.{.key}", urlEncode(.value)) 
+        for $!PortRange.pairs;
     }
     
-    @args.push: (Protocol         => $.Protocol)         if  $.Protocol.chars;
-    @args.push: (RuleAction       => $.RuleAction)       if  $.RuleAction.chars;
-    @args.push: (RuleNumber       => $.RuleNumber)       if  $.RuleNumber;      
+    @args.push: (Protocol         => $.Protocol)    if $!Protocol.chars;
+    @args.push: (RuleAction       => $.RuleAction)  if $!RuleAction.chars;
+    @args.push: (RuleNumber       => $.RuleNumber)  if $!RuleNumber;      
     @args.push: (Version          => '2016-11-15');
 
     # XXX - Add error handling to makeRequest!

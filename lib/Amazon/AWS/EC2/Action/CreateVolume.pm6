@@ -115,8 +115,9 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
     my @TagSpecArgs;
     my $cnt = 1;
     for @!TagSpecifications {
-      @TagSpecArgs.push: Pair.new("TagSpecification.{$cnt++}.{.key}", .value)
-        for .pairs;
+      @TagSpecArgs.push: 
+        Pair.new("TagSpecification.{$cnt++}.{.key}", urlEncode(.value))
+          for .pairs;
     }
     
     # YYY - Other conditions for validity: 
@@ -125,14 +126,14 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
       
     # @Args must be sorted by key name.
     my @args;
-    @args.push:   (AvailabilityZone => $!AvailabilityZone)  if $!AvailabilityZone.chars; 
-    @args.push:   (DryRun           => $!DryRun)            if $!DryRun;
-    @args.push:   (Encrypted        => $!Encrypted)         if $!Encrypted;
-    @args.push:   (Iops             => $!Iops)              if $!Iops;
-    @args.push:   (KmsKeyId         => $!KmsKeyId)          if $!KmsKeyId.chars;
-    @args.push:   (Size             => $!Size)              if $!Size;
-    @args.push:   (SnapshotId       => $!SnapshotId)        if $!SnapshotId.chars;
-    @args.append: @TagSpecArgs                              if @TagSpecArgs;
+    @args.push:   (AvailabilityZone => $!AvailabilityZone)      if $!AvailabilityZone.chars; 
+    @args.push:   (DryRun           => $!DryRun)                if $!DryRun;
+    @args.push:   (Encrypted        => $!Encrypted)             if $!Encrypted;
+    @args.push:   (Iops             => $!Iops)                  if $!Iops;
+    @args.push:   (KmsKeyId         => $!KmsKeyId)              if $!KmsKeyId.chars;
+    @args.push:   (Size             => $!Size)                  if $!Size;
+    @args.push:   (SnapshotId       => $!SnapshotId)            if $!SnapshotId.chars;
+    @args.append: @TagSpecArgs                                  if @TagSpecArgs;
     @args.push:   (Version          => '2016-11-15');
     @args.push:   (VolumeType       => $!VolumeType);
 

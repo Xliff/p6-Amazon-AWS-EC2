@@ -40,12 +40,12 @@ class Amazon::AWS::EC2::Action::DeleteNetworkInterface is export
     >
   {
     die 'NetworkInterfaceId is required!' 
-      unless $.NetworkInterfaceId.defined && $.NetworkInterfaceId.trim.chars;
+      unless $!NetworkInterfaceId.defined && $!NetworkInterfaceId.chars;
   
     # Should already be sorted.
     my @args = (
-      DryRun             => $.DryRun,
-      NetworkInterfaceId => $.NetworkInterfaceId,
+      DryRun             => $!DryRun,
+      NetworkInterfaceId => $!NetworkInterfaceId,
       Version            => '2016-11-15'
     );
   

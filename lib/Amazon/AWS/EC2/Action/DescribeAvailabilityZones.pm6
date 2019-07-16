@@ -80,26 +80,25 @@ class Amazon::AWS::EC2::Action::DescribeAvailabilityZones is export
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     my @ZoneIdArgs;
     $cnt = 1;
     for @!ZoneIds {
-      @ZoneIdArgs.push: Pair.new("ZoneIds.{$cnt++}.{.key}", .value)
-        for .pairs;
+      @ZoneIdArgs.push: Pair.new("ZoneIds.{$cnt++}", $_);
     }
     
     my @ZoneNameArgs;
     $cnt = 1;
     for @!ZoneNames {
-      @ZoneNameArgs.push: Pair.new("ZoneNames.{$cnt++}.{.key}", .value)
-        for .pairs;
+      @ZoneNameArgs.push: Pair.new("ZoneNames.{$cnt++}", $_);
     }
 
     # Should already be sorted.
     my @args = (
-      DryRun         => $.DryRun
+      DryRun         => $!DryRun
     );
     for @FilterArgs, @ZoneIdArgs, @ZoneNameArgs {
       @args.append: $_ if .elems

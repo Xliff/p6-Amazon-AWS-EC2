@@ -76,12 +76,17 @@ class Amazon::AWS::EC2::Action::CopySnapshot is export
       
     # @Args must be sorted by key name.
     my @args;
-    @args.push:   (Description       => $!Description)       if $!Description.chars;
-    @args.push:   (DestinationRegion => $!DestinationRegion) if $!DestinationRegion.chars;
+    @args.push:   (Description       => urlEncode($!Description))       
+      if $!Description.chars;
+    @args.push:   (DestinationRegion => $!DestinationRegion)
+      if $!DestinationRegion.chars;
     @args.push:   (DryRun            => $!DryRun);
-    @args.push:   (Encrypted         => $!Encrypted)         if $!Encrypted;
-    @args.push:   (KmsKeyId          => $!KmsKeyId)          if $!KmsKeyId.chars;
-    @args.push:   (PresignedUrl      => $!PresignedUrl)      if $!PresignedUrl.chars;
+    @args.push:   (Encrypted         => $!Encrypted)
+      if $!Encrypted;
+    @args.push:   (KmsKeyId          => $!KmsKeyId)
+      if $!KmsKeyId.chars;
+    @args.push:   (PresignedUrl      => urlEncode($!PresignedUrl))      
+      if $!PresignedUrl.chars;
     @args.append: (
       SourceRegion      => $!SourceRegion,
       SourceSnapshotId  => $!SourceSnapshotId,

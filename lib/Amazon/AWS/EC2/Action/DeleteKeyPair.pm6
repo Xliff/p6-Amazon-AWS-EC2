@@ -40,12 +40,12 @@ class Amazon::AWS::EC2::Action::DeleteKeyPair is export
     >
   {
     die 'KeyName is required!' 
-      unless $.KeyName.defined && $.KeyName.trim.chars;
+      unless $!KeyName.defined && $!KeyName.chars;
 
     # Should already be sorted.
     my @args = (
-      DryRun  => $.DryRun,
-      KeyName => $.KeyName,
+      DryRun  => $!DryRun,
+      KeyName => urlEncode($!KeyName),
       Version => '2016-11-15'
     );
 
