@@ -93,6 +93,14 @@
   # Should create corresponding Delete actions for all Create actions!
 
 - PRIORITY! Ensure all URL values are properly encoded.
+  - Insure that all attribute access uses $! rather than $.
+  - If necessary, reorder @args processing so that it is not so special cased.
+  
+    # MAY NEED ANOTHER PASS, AS THE PROBLEM IS CLEAR, BUT THE 
+      NECESSARY LOGIC IS NOT!
+  - Insure that a Nil check is performed on $nextToken, if it is used. If it is 
+    detected, if $nextToken is not '' and is not defined, warn, and do NOT 
+    finish the operation.
 
 √ Add timing harness to TestUtils and TestTemplate so that timings per e-level
   can be obtained and documented. E-level = 10, 100, 1000, ... *

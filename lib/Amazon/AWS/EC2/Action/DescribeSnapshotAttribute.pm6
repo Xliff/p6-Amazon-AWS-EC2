@@ -40,7 +40,7 @@ constant myclass := (
         DIE
        
       $!Attribute     = $attribute  if $attribute.defined;
-      $!DryRun        = $dryRun     if $dryRun.defined;
+      $!DryRun        = $dryRun     if $dryRun;
       $!SnapshotId    = $snapshotId if $snapshotId.defined;
       
       die $dieMsg unless $!Attribute.defined.not ||
@@ -56,16 +56,16 @@ constant myclass := (
       >
     {
       die 'SnapshotId is required!' 
-        unless $.SnapshotId.defined && $.SnapshotId.trim.chars;
+        unless $!SnapshotId.defined && $!SnapshotId.chars;
         
       die 'Attribute is required'
-        unless $.Attribute.defined && $.Attribute.trim.chars;
+        unless $!Attribute.defined && $!Attribute.chars;
 
-      # Should already be sorted.
+      # Should already be sorted. No encoding necessary.
       my @args = (
-        Attribute  => $.Attribute,
-        DryRun     => $.DryRun,
-        SnapshotId => $.SnapshotId,
+        Attribute  => $!Attribute,
+        DryRun     => $!DryRun,
+        SnapshotId => $!SnapshotId,
         Version    => '2016-11-15'
       );
       

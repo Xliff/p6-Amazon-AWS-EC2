@@ -80,7 +80,7 @@ class Amazon::AWS::EC2::Action::DescribeSnapshots is export
     
   }
 
-  method run (:$raw)
+  method run (:$nextToken = '', :$raw)
     is also<
       do
       execute
@@ -89,31 +89,41 @@ class Amazon::AWS::EC2::Action::DescribeSnapshots is export
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     my @OwnerArgs;
     $cnt = 1;
-    @OwnerArgs.push: Pair.new("Owner.{$cnt++}", $_) for @.Owners;
+    @OwnerArgs.push: Pair.new("Owner.{$cnt++}", $_) for @!Owners;
     
+    # Expecting to be numeric, but if ARNs are acceptable, then these MUST
+    # be url-encoded!
     my @RestorableByArgs;
     $cnt = 1;
-    @RestorableByArgs.push: Pair.new("RestorableBy.{$cnt++}", $_) for @.RestorableBy;
+    @RestorableByArgs.push: Pair.new("RestorableBy.{$cnt++}", $_) 
+      for @!RestorableBy;
 
     my @SnapshotIdArgs;
     $cnt = 1;
-    @SnapshotIdArgs.push: Pair.new("SnapshotId.{$cnt++}", $_) for @.SnapshotIds;
+    @SnapshotIdArgs.push: Pair.new("SnapshotId.{$cnt++}", $_) 
+      for @!SnapshotIds;
 
     # Should already be sorted.
-    my @args = (
-      DryRun              => $.DryRun,
-      |@FilterArgs,
-      MaxResults          => $.MaxResults,
-      |@OwnerArgs,
-      |@RestorableByArgs,
-      |@SnapshotIdArgs,
-      Version             => '2016-11-15'
-    );
+    my @args;
+    if (my $nt = $nextToken.trim).chars {
+      @args = ( nextToken => $nt );
+    } else {
+      @args = (
+        DryRun              => $!DryRun,
+        |@FilterArgs,
+        MaxResults          => $!MaxResults,
+        |@OwnerArgs,
+        |@RestorableByArgs,
+        |@SnapshotIdArgs,
+        Version             => '2016-11-15'
+      );
+    }
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(

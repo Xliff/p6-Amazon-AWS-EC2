@@ -53,7 +53,7 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences is export
 
     # Should already be sorted.
     my @args = (
-      DryRun         => $.DryRun,
+      DryRun         => $!DryRun,
       |@GroupIdArgs,
       Version        => '2016-11-15'
     );
