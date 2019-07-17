@@ -67,15 +67,16 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnections is export
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
-        for .pairs;
+      @FilterArgs.push: 
+        Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+          for .pairs;
     }
     
     # Should already be sorted.
     my @args = (
-      DryRun         => $.DryRun,
+      DryRun         => $!DryRun,
       |@FilterArgs,
-      MaxResults     => $.MaxResults,
+      MaxResults     => $!MaxResults,
       Version        => '2016-11-15'
     );
 

@@ -30,9 +30,9 @@ class Amazon::AWS::EC2::Action::GetConsoleOutput is export
     :$!InstanceId     = '',
     :$!Latest         = False
   ) { 
-    $!DryRun     = $dryRun     if $dryRun.defined;
-    $!InstanceId = $instanceId if $instanceId.defined;
-    $!Latest     = $latest     if $latest.defined;
+    $!DryRun     = $dryRun          if $dryRun;
+    $!InstanceId = $instanceId.trim if $instanceId.defined && $instanceId.trim.chars;
+    $!Latest     = $latest          if $latest;
   }
 
   method run (:$raw)

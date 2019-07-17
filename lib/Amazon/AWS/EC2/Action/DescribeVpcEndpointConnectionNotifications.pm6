@@ -65,12 +65,14 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnectionNotifications is ex
 
   }
 
-  method run (:$nextToken = '', :$raw)
+  method run (Str :$nextToken is copy, :$raw)
     is also<
       do
       execute
     >
   {
+    $nextToken //= '';
+    
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
@@ -81,8 +83,8 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnectionNotifications is ex
     # Should already be sorted.
     my @args;
 
-    if $nextToken.chars {
-      @args = ( nextToken => $nextToken );
+    if (my $nt = $nextToken.trim).chars {
+      @args = ( nextToken => $nt );
     } else {
       @args.push:   (ConnectionNotificationId => $!ConnectionNotificationId)
         if $!ConnectionNotificationId.chars;

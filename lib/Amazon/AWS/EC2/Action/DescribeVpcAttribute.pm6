@@ -32,9 +32,9 @@ class Amazon::AWS::EC2::Action::DescribeVpcAttribute is export
     :$!DryRun = False,
     :$!VpcId = '',
   ) {        
-    $!DryRun    = $dryRun    if $dryRun.defined;
-    $!Attribute = $attribute if $attribute.defined;
-    $!VpcId     = $vpcId     if $vpcId.defined;
+    $!DryRun    = $dryRun         if $dryRun;
+    $!Attribute = $attribute.trim if $attribute.defined && $attribute.trim.chars;
+    $!VpcId     = $vpcId.trim     if $vpcId.defined && $vpcId.trim.chars;
   }
 
   method run (:$raw)
@@ -46,15 +46,15 @@ class Amazon::AWS::EC2::Action::DescribeVpcAttribute is export
     die '$VpcId is required!'     unless $!VpcId.chars;
     die '$Attribute is required!' unless $!Attribute.chars; 
     
-    die "Invalid value given for \$Attribute ('$!Attribute'). Must be one of:\n{ 
+    die "Invalid value given for Attribute ('$!Attribute'). Must be one of:\n{ 
       %attributes<Attribute|Table> 
     }" unless $!Attribute eq self.getValidAttributes.any;
     
     my @args.append: (
-      Attribute     => $.Attribute,
-      DryRun        => $.DryRun,
+      Attribute     => $!Attribute,
+      DryRun        => $!DryRun,
       Version       => '2016-11-15',
-      VpcId         => $.VpcId
+      VpcId         => $!VpcId
     );
  
    # XXX - Add error handling to makeRequest!

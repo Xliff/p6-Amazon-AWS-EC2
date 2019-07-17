@@ -36,7 +36,7 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
     :$!MaxResults = 1000,
     #:$!nextToken  = '',
   ) {
-    $!DryRun = $dryRun if $dryRun.defined;
+    $!DryRun = $dryRun if $dryRun;
     if $maxResults.defined {
       die ':$maxResults must be a number from 5 to 1000'
         unless $maxResults ~~ 5..1000;
@@ -57,14 +57,16 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
       };
     }
 
-  }
-
-  method run (:$nextToken = '', :$raw)
+  
+  method run (Str :$nextToken is copy, :$raw)
     is also<
       do
       execute
     >
   {
+    # Prevent reassignment to an undefined valie.
+    $nextToken //= '';
+    
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
