@@ -250,5 +250,3 @@ sub getAttributeData($type) is export  {
 
   %attributes;
 }
-
-sub urlEncode($v) is export { $v }
