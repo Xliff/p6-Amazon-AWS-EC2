@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Response::GetLaunchTemplateDataResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has ResponseLaunchTemplateData    $.launchTemplateData    is xml-element          is rw; 
+  has ResponseLaunchTemplateData    $.launchTemplateData is xml-element(:over-ride) is xml-skip-null is rw; 
 }

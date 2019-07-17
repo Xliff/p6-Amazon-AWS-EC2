@@ -12,17 +12,17 @@ class Amazon::AWS::EC2::Types::LaunchTemplateInstanceNetworkInterfaceSpecificati
 {
   also is Amazon::AWS::EC2::Types::Base;
 
-  has Bool                             $.associatePublicIpAddress          is xml-element    is xml-skip-null                                                   is rw; 
-  has Bool                             $.deleteOnTermination               is xml-element    is xml-skip-null                                                   is rw; 
-  has Str                              $.description                       is xml-element    is xml-skip-null                                                   is rw; 
-  has Int                              $.deviceIndex                       is xml-element    is xml-skip-null                                                   is rw; 
-  has Str                              @.groups                            is xml-element    is xml-skip-null    is xml-container('groupSet')                   is rw; 
-  has Str                              $.interfaceType                     is xml-element    is xml-skip-null                                                   is rw; 
-  has Int                              $.ipv6AddressCount                  is xml-element    is xml-skip-null                                                   is rw; 
-  has InstanceIpv6Address              @.ipv6Addressess                    is xml-element    is xml-skip-null    is xml-container('ipv6AddressesSet')           is rw; 
-  has Str                              $.networkInterfaceId                is xml-element    is xml-skip-null                                                   is rw; 
-  has Str                              $.privateIpAddress                  is xml-element    is xml-skip-null                                                   is rw; 
-  has PrivateIpAddressSpecification    @.privateIpAddressess               is xml-element    is xml-skip-null    is xml-container('privateIpAddressesSet')      is rw; 
-  has Int                              $.secondaryPrivateIpAddressCount    is xml-element    is xml-skip-null                                                   is rw; 
-  has Str                              $.subnetId                          is xml-element    is xml-skip-null                                                   is rw; 
+  has Bool                             $.associatePublicIpAddress          is xml-element                      is xml-skip-null                                                 is rw; 
+  has Bool                             $.deleteOnTermination               is xml-element                      is xml-skip-null                                                 is rw; 
+  has Str                              $.description                       is xml-element                      is xml-skip-null                                                 is rw; 
+  has Int                              $.deviceIndex                       is xml-element                      is xml-skip-null                                                 is rw; 
+  has Str                              @.groups                            is xml-element('groupId')           is xml-skip-null  is xml-container('groupSet')                   is rw; 
+  has Str                              $.interfaceType                     is xml-element                      is xml-skip-null                                                 is rw; 
+  has Int                              $.ipv6AddressCount                  is xml-element                      is xml-skip-null                                                 is rw; 
+  has InstanceIpv6Address              @.ipv6Addressess                                                        is xml-skip-null  is xml-container('ipv6AddressesSet')           is rw; 
+  has Str                              $.networkInterfaceId                is xml-element                      is xml-skip-null                                                 is rw; 
+  has Str                              $.privateIpAddress                  is xml-element                      is xml-skip-null                                                 is rw; 
+  has PrivateIpAddressSpecification    @.privateIpAddressess               is xml-element('item', :over-ride)  is xml-skip-null  is xml-container('privateIpAddressesSet')      is rw; 
+  has Int                              $.secondaryPrivateIpAddressCount    is xml-element                      is xml-skip-null                                                 is rw; 
+  has Str                              $.subnetId                          is xml-element                      is xml-skip-null                                                 is rw; 
 }
