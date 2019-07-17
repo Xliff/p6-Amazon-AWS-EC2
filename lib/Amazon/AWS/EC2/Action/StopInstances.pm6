@@ -35,16 +35,16 @@ class Amazon::AWS::EC2::Action::StopInstances is export
     :$!Hibernate   = False,
     :@!InstanceIds
   ) {
-    $!DryRun    = $dryRun    if $dryRun.defined;
-    $!Force     = $force     if $force.defined;
-    $!Hibernate = $hibernate if $hibernate.defined;
+    $!DryRun    = $dryRun    if $dryRun;
+    $!Force     = $force     if $force;
+    $!Hibernate = $hibernate if $hibernate;
     
     if @instances {
       my @valid-types = (Str, Instance);
       @!InstanceIds = @instances.map({
         do {
-          when  Instance { .instanceId }
-          when  Str      { $_          }
+          when  Instance { .instanceId.trim }
+          when  Str      { .trim            }
           
           default {
             die qq:to/DIE/.chomp;
@@ -67,14 +67,14 @@ class Amazon::AWS::EC2::Action::StopInstances is export
   {
     my $cnt = 1;
     my @InstanceArgs;
-    @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @.InstanceIds;
+    @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @!InstanceIds;
     @InstanceArgs.say;
 
     # Should already be sorted.
     my @args = (
-      DryRun         => $.DryRun,
-      Force          => $.Force,
-      Hibernate      => $.Hibernate,
+      DryRun         => $!DryRun,
+      Force          => $!Force,
+      Hibernate      => $!Hibernate,
       |@InstanceArgs,
       Version        => '2016-11-15'
     );

@@ -30,9 +30,11 @@ class Amazon::AWS::EC2::Action::GetConsoleScreenshot is export
     :$!InstanceId     = '',
     :$!WakeUp         = True
   ) { 
-    $!DryRun     = $dryRun     if $dryRun.defined;
-    $!InstanceId = $instanceId if $instanceId.defined;
-    $!WakeUp     = $wakeUp     if $wakeUp.defined;
+    my $i = ($instanceId // '').trim;
+    
+    $!DryRun     = $dryRun  if $dryRun;
+    $!InstanceId = $i       if $i.chars;
+    $!WakeUp     = $wakeUp  if $wakeUp;
   }
 
   method run (:$raw)
@@ -41,15 +43,14 @@ class Amazon::AWS::EC2::Action::GetConsoleScreenshot is export
       execute
     >
   {
-    die "InstanceId is required!" 
-      unless $.InstanceId.defined && $.InstanceId.trim.chars;
-
+    die "InstanceId is required!" unless $!InstancaId.chars;
+    
     # Should already be sorted.
     my @args = (
-      DryRun     => $.DryRun,
-      InstanceId => $.InstanceId,
+      DryRun     => $!DryRun,
+      InstanceId => $!InstanceId,
       Version    => '2016-11-15',
-      WakeUp     => $.WakeUp.Str.lc
+      WakeUp     => $!WakeUp
     );
 
     # XXX - Add error handling to makeRequest!

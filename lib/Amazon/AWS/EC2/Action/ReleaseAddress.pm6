@@ -28,13 +28,12 @@ class Amazon::AWS::EC2::Action::ReleaseAddress is export
     :$!DryRun        = False,
     :$!PublicIp      = ''
   ) { 
-    $!DryRun = $dryRun if $dryRun;
+    my $a = ($allocationId // '').trim;
+    my $p = ($publicIp // '').trim;
     
-    $!AllocationId = $allocationId
-      if $allocationId.defined && $allocationId.chars;
-      
-    $!PublicIp = $publicIp
-      if $publicIp.defined && $publicIp.chars;
+    $!DryRun       = $dryRun if $dryRun;
+    $!AllocationId = $a      if $a.chars;      
+    $!PublicIp     = $p      if $p.chars;
   }
   
   method run (:$raw)
@@ -43,14 +42,16 @@ class Amazon::AWS::EC2::Action::ReleaseAddress is export
       execute
     >
   {
-    die 'You may specify public IP or allocation id, but not both in the same call'
-      if $.AllocationId.chars && $.PublicIp.chars;
+    die 'You may specify public IP or allocation ID, but not both in the same call'
+      if $!AllocationId.chars && $!PublicIp.chars;
+    die 'You must specify one of public IP or allocation ID!'
+      unless $!AllocationId.chars || $PublicIp.chars;
       
     # @Args must be sorted by key name.
     my @args; 
-    @args.push: (AllocationId   => $.AllocationId)  if $.AllocationId.chars;
-    @args.push: (DryRun         => $.DryRun);    
-    @args.push: (PublicIp       => $.PublicIp)      if $.PublicIp.chars;
+    @args.push: (AllocationId   => $!AllocationId)  if $!AllocationId.chars;
+    @args.push: (DryRun         => $!DryRun);    
+    @args.push: (PublicIp       => $!PublicIp)      if $!PublicIp.chars;
     @args.push: (Version        => '2016-11-15');
 
     # XXX - Add error handling to makeRequest!

@@ -27,8 +27,10 @@ class Amazon::AWS::EC2::Action::GetLaunchTemplateData is export
     :$!DryRun         = False,
     :$!InstanceId     = ''
   ) { 
-    $!DryRun     = $dryRun     if $dryRun;
-    $!InstanceId = $instanceId if $instanceId.defined && $instanceId.trim.chars;
+    my $i = ($instanceId // '').trim;
+    
+    $!DryRun     = $dryRun if $dryRun;
+    $!InstanceId = $i      if $i.chars;
   }
 
   method run (:$raw)

@@ -29,8 +29,10 @@ class Amazon::AWS::EC2::Action::GetPasswordData is export
     :$!DryRun     = False,
     :$!InstanceId = '',
   ) { 
-    $!DryRun     = $dryRun     if $dryRun;
-    $!InstanceId = $instanceId if $instanceId.defined && $instanceId.trim.chars;
+    my $i = ($instanceId // '').trim;
+    
+    $!DryRun     = $dryRun if $dryRun;
+    $!InstanceId = $i      if $i.chars;
   }
 
   method run (:$raw)
@@ -40,12 +42,12 @@ class Amazon::AWS::EC2::Action::GetPasswordData is export
     >
   {
     die 'InstanceId is required!' 
-      unless $.InstanceId.defined && $.InstanceId.chars;
+      unless $!InstanceId.chars;
 
     # Should already be sorted.
     my @args = (
-      DryRun     => $.DryRun,
-      InstanceId => $.InstanceId,
+      DryRun     => $!DryRun,
+      InstanceId => $!InstanceId,
       Version    => '2016-11-15'
     );
 
