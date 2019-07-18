@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Response::DescribeLaunchTemplatesResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has LaunchTemplate    @.launchTemplates    is xml-element    is xml-container('launchTemplates')      is rw; 
-  has Str               $.nextToken          is xml-element                                             is rw; 
+  has LaunchTemplate    @.launchTemplates                    is xml-container('launchTemplates')  is rw; 
+  has Str               $.nextToken          is xml-element                                       is rw; 
 }

@@ -250,3 +250,12 @@ sub getAttributeData($type) is export  {
 
   %attributes;
 }
+
+sub errorBadContents(\a, \t) is export {
+  
+  die qq:to/DIE/.chomp;
+  Invalid value passed to { a.VAR.name }. Should only contain { t.^shortname } objects, but also contains:
+  { a.grep( * !~~ t ).map( *.^name ).unique.join('. ') }
+  DIE
+
+}
