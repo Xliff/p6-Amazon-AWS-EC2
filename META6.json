@@ -36,6 +36,7 @@
       "Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeInstanceStatusFilter.pm6"                             ,
       "Amazon::AWS::EC2::Filters::DescribeInstancesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeInstancesFilter.pm6"                                  ,
       "Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter"                                   :  "lib/Amazon/AWS/EC2/Filters/DescribeKeyPairsFilter.pm6"                                   ,
+      "Amazon::AWS::EC2::Filters::DescribeLaunchTemplatesFilter"                            :  "lib/Amazon/AWS/EC2/Filters/DescribeLaunchTemplatesFilter.pm6"                            ,
       "Amazon::AWS::EC2::Filters::DescribePrefixListsFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribePrefixListsFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeRegionsFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeRegionsFilter.pm6"                                    ,
       "Amazon::AWS::EC2::Filters::DescribeRouteTablesFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribeRouteTablesFilter.pm6"                                ,
