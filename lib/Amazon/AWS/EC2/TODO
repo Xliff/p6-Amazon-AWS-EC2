@@ -101,6 +101,7 @@
   - Insure that a Nil check is performed on $nextToken, if it is used. If it is 
     detected, if $nextToken is not '' and is not defined, warn, and do NOT 
     finish the operation. -- SEE DescribeTags.run for the proper logic.
+  - Insure MaxResults is properly checked
 
 √ Add timing harness to TestUtils and TestTemplate so that timings per e-level
   can be obtained and documented. E-level = 10, 100, 1000, ... *
@@ -159,4 +160,5 @@
       dopt     - DHCP Options Set
       tmt      - Test Mirror Target
       vpce-nfn - VPC Endpoint Notification
+      lt       - Launch Template
     
