@@ -182,11 +182,11 @@ sub doBasicTests(
       
       # Attempt to speed things up.
       %classes{$_} := $class if $tl && $te;
-      if $tl.not || $te.not || $na.not {
-        diag %classes.gist;
-        skip-rest 'One if the first three tests failed, so no further tests needed';
-        last NUMLOOP;
-      }     
+      # if $tl.not || $te.not || $na.not {
+      #   diag %classes.gist;
+      #   skip-rest 'One if the first three tests failed, so no further tests needed';
+      #   last NUMLOOP;
+      # }     
 
       lives-ok {
         CATCH { 
