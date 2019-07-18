@@ -12,7 +12,7 @@ use Amazon::AWS::Utils;
 
 class Amazon::AWS::EC2::Action::DescribeImages is export
   does XML::Class[
-    xml-element   => 'DescribeInstances',
+    xml-element   => 'DescribeImages',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
   ]
 {
@@ -37,7 +37,6 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     :@filters       is copy,
     :@executableBy  is copy,
     :@imageIds      is copy,
-    :$maxResults,
     :@owners        is copy,
     # For testing purposes only.
     :$!DryRun               = False,
@@ -46,7 +45,6 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     :@!ImageIds,
     :@!Owners               = ('self').Array, 
     :$!MaxResults           = 1000,
-    
   ) {
     $!DryRun     = $dryRun     if $dryRun;
     
@@ -56,6 +54,8 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
         when Amazon::AWS::EC2::Types::Instance { .imageId }
         when Amazon::AWS::EC2::Types::Image    { .imageId }
 
+        # Can't use errBadContents() here due to extra types.
+        # ... yet
         default {
           die qq:to/DIE/.chomp;
     Invalid value passed to \@instances. Should only contain InstanceIds or Instance objects, but contains:
@@ -70,14 +70,7 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
       @!ExecutableBy = @executableBy.map({
         do {
           when Str { $_ }
-
-          default {
-            die qq:to/DIE/.chomp unless @executableBy.all ~~ Str;
-      Invalid value passed to \@executableBy. Should only contain Strings but value provided contains:
-      { @executableBy.map( *.^name ).unique.join(', ') }
-      DIE
-
-          }
+          default  { errorBadContents(@executableBy, Str) }
         }
       });
     }
@@ -86,64 +79,54 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
       @!Owners = @owners.map({
         do {
           when Str { $_ }
-
-          default {
-            die qq:to/DIE/.chomp unless @owners.all ~~ Str;
-      Invalid value passed to \@owners. Should only contain Strings but value provided contains:
-      { @owners.map( *.^name ).unique.join(', ') }
-      DIE
-
-          }
+          default  { errorBadContents(@owners, Str) }
         }
       });
     }
 
     if @filters {
       @!Filters = do given @filters {
-        when .all ~~ Amazon::AWS::EC2::Filters::DescribeImagesFilter { $_ }
-
-        default {
-          die qq:to/DIE/.chomp;
-          Invalid value passed to \@filers. Should only contain Filters::DescribeImageFilter objects, but contains:
-          { @filters.map( *.^name ).unique.join('. ') }
-          DIE
-
-        }
+        when .all ~~ DescribeImagesFilter { $_ }
+        
+        default { errorBadContents(@filters, DescribeImagesFilter) }
       };
     }
 
   }
 
-  method run (:$nextToken = '', :$raw = False)
+  method run (Str :$nextToken is copy, :$raw = False)
     is also<
       do
       execute
     >
   {
+    $nextToken //= '';
+    
     my $cnt = 1;
     my @ExecutableByArgs;
-    @ExecutableByArgs.push: Pair.new("ExecutableBy.{$cnt++}", $_) for @.ExecutableBy;
+    @ExecutableByArgs.push: Pair.new("ExecutableBy.{$cnt++}", $_) 
+      for @!ExecutableBy;
 
     my @FilterArgs;
     $cnt = 1;
-    for @.Filters {
+    for @!Filters {
       @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
         for .pairs;
     }
 
     $cnt = 1;
     my @ImageIdArgs;
-    @ImageIdArgs.push: Pair.new("ImageId.{$cnt++}", $_) for @.ImageIds;
+    @ImageIdArgs.push: Pair.new("ImageId.{$cnt++}", $_) for @!ImageIds;
 
     $cnt = 1;
     my @OwnerArgs;
-    @OwnerArgs.push: Pair.new("Owner.{$cnt++}", $_) for @.Owners;
+    @OwnerArgs.push: Pair.new("Owner.{$cnt++}", $_) for @!Owners;
 
     # Should already be sorted.
     my @args;
 
-    if $nextToken.chars {
-      @args = ( nextToken => $nextToken );
+    if (my $nt = $nextToken.trim).chars {
+      @args = ( nextToken => $nt );
     } else {
       @args = (
         DryRun         => $!DryRun,

@@ -43,7 +43,7 @@ class Amazon::AWS::EC2::Action::DescribeVpcs is export
     $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
     
-    die '$maxResutlts must be an integer between 5 and 1000'
+    die 'MaxResutlts must be an integer between 5 and 1000'
       unless $!MaxResults ~~ 5..1000;
       
     if @vpcIds {
@@ -84,6 +84,8 @@ class Amazon::AWS::EC2::Action::DescribeVpcs is export
       execute
     >
   {
+    $nextToken //= '';
+    
     # cw: Not mentioned at https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html
     # but left in case it was an oversight.
     #
