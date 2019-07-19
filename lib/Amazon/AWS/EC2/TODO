@@ -102,6 +102,10 @@
     detected, if $nextToken is not '' and is not defined, warn, and do NOT 
     finish the operation. -- SEE DescribeTags.run for the proper logic.
   - Insure MaxResults is properly checked
+  
+- MEDIUM PRIORITY!
+  - All main filter objects will need an .addTag method, since the Tag object
+    will not be visible to outside code!
 
 √ Add timing harness to TestUtils and TestTemplate so that timings per e-level
   can be obtained and documented. E-level = 10, 100, 1000, ... *
