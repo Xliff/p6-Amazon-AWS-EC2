@@ -109,6 +109,18 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions is export
     >
   {
     $nextToken //= '';
+    
+    # Added according to the following error which was encountered during 
+    # .run testing.
+    #
+    # Additional Error Message(s):
+    # - Either a launch template ID or a launch template name must be specified 
+    #   in the request. (MissingParameter)
+    die 'A LaunchTemplateId or a LaunchTemplateName is required'
+      unless $!LaunchTemplateName.chars || $!LaunchTemplateId.chars;
+      
+    die 'LaunchTemplateId and LaunchTemplateName cannot be specified in the same call'
+      if $!LaunchTemplateName.chars && $!LaunchTemplateId.chars;
 
     my @FilterArgs;
     my $cnt = 1;

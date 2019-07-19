@@ -75,7 +75,11 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplates is export
     if @launchTemplateNames {
       @!LaunchTemplateNames = @launchTemplateNames.map({
         do {
-          when Str  { $_ }
+          # Pattern: Valid launchTemplateName
+          when Str  { die "Invalid characters found in '{$_}'"
+                        unless /^ /<[ a..z A..Z 0..9 ( ) . \- / _ ]>+ $/; 
+                      $_; }
+                      
           default   { errorBadContents(@launchTemplateNames, Str) }
         }
       });
@@ -101,8 +105,10 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplates is export
     
     my $cnt = 1;
     my @LaunchTemplateNamesArgs;
-    @LaunchTemplateNamesArgs.push: Pair.new("LaunchTemplateNames.{$cnt++}", $_) 
-      for @!LaunchTemplateNames;
+    # Needs encoding!
+    @LaunchTemplateNamesArgs.push: 
+      Pair.new("LaunchTemplateNames.{$cnt++}", urlEncode($_))
+        for @!LaunchTemplateNames;
 
     my @FilterArgs;
     $cnt = 1;
