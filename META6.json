@@ -36,6 +36,7 @@
       "Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter"                             :  "lib/Amazon/AWS/EC2/Filters/DescribeInstanceStatusFilter.pm6"                             ,
       "Amazon::AWS::EC2::Filters::DescribeInstancesFilter"                                  :  "lib/Amazon/AWS/EC2/Filters/DescribeInstancesFilter.pm6"                                  ,
       "Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter"                                   :  "lib/Amazon/AWS/EC2/Filters/DescribeKeyPairsFilter.pm6"                                   ,
+      "Amazon::AWS::EC2::Filters::DescribeLaunchTemplateVersionsFilter"                     :  "lib/Amazon/AWS/EC2/Filters/DescribeLaunchTemplateVersionsFilter.pm6"                     ,
       "Amazon::AWS::EC2::Filters::DescribeLaunchTemplatesFilter"                            :  "lib/Amazon/AWS/EC2/Filters/DescribeLaunchTemplatesFilter.pm6"                            ,
       "Amazon::AWS::EC2::Filters::DescribePrefixListsFilter"                                :  "lib/Amazon/AWS/EC2/Filters/DescribePrefixListsFilter.pm6"                                ,
       "Amazon::AWS::EC2::Filters::DescribeRegionsFilter"                                    :  "lib/Amazon/AWS/EC2/Filters/DescribeRegionsFilter.pm6"                                    ,
@@ -709,7 +710,8 @@
       "Amazon::AWS::EC2::Response::DescribeFleetsResponse"                                  :  "lib/Amazon/AWS/EC2/Response/DescribeFleetsResponse.pm6"                                  ,
       "Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse"                  :  "lib/Amazon/AWS/EC2/Response/DescribeLaunchTemplateVersionsResponse.pm6"                  ,
       "Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse"                       :  "lib/Amazon/AWS/EC2/Response/DescribeSpotFleetRequestsResponse.pm6"                       ,
-      "Amazon::AWS::EC2::Tests::CreateDefaultSubnet"                                        :  "lib/Amazon/AWS/EC2/Tests/CreateDefaultSubnet.pm6"                                        
+      "Amazon::AWS::EC2::Tests::CreateDefaultSubnet"                                        :  "lib/Amazon/AWS/EC2/Tests/CreateDefaultSubnet.pm6"                                        ,
+      "Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions"                            :  "lib/Amazon/AWS/EC2/Action/DescribeLaunchTemplateVersions.pm6"                            
     },
     "name": "Perl6-Amazon-AWS-EC2",
     "perl": "6.d",

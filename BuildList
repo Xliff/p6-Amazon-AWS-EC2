@@ -22,6 +22,7 @@ Amazon::AWS::EC2::Filters::DescribeImagesFilter
 Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter
 Amazon::AWS::EC2::Filters::DescribeInstancesFilter
 Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter
+Amazon::AWS::EC2::Filters::DescribeLaunchTemplateVersionsFilter
 Amazon::AWS::EC2::Filters::DescribeLaunchTemplatesFilter
 Amazon::AWS::EC2::Filters::DescribePrefixListsFilter
 Amazon::AWS::EC2::Filters::DescribeRegionsFilter
@@ -696,3 +697,4 @@ Amazon::AWS::EC2::Response::DescribeFleetsResponse
 Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse
 Amazon::AWS::EC2::Response::DescribeSpotFleetRequestsResponse
 Amazon::AWS::EC2::Tests::CreateDefaultSubnet
+Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions
