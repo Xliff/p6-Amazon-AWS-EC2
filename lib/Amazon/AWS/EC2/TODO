@@ -72,6 +72,8 @@
   + GetPasswordData
   + GetLaunchTemplateData
   + DescribeVpcEndpointConnectionNotifications
+  + DescribeLaunchTemplates
+  + DescribeLaunchTemplateVersions
   
   # Might need vpc: action permissions as well!
   e CreateDefaultSubnet (Completed, but no valid response retrieved)
@@ -85,8 +87,6 @@
   - CreateNatGateway
   = CreateVolume (Not run tested)
   = DescribeVpcEndpointConnections (Run tested, but no data to check against)
-  - DescribeLaunchTemplates
-  - DescribeLaunchTemplateVersions
   ...
   - RunInstances (Ultimate goal!)
   
