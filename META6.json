@@ -526,6 +526,7 @@
       "Amazon::AWS::EC2::Action::CreateDefaultSubnet"                                       :  "lib/Amazon/AWS/EC2/Action/CreateDefaultSubnet.pm6"                                       ,
       "Amazon::AWS::EC2::Action::CreateKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/CreateKeyPair.pm6"                                             ,
       "Amazon::AWS::EC2::Action::CreateNetworkAclEntry"                                     :  "lib/Amazon/AWS/EC2/Action/CreateNetworkAclEntry.pm6"                                     ,
+      "Amazon::AWS::EC2::Action::CreatePlacementGroup"                                      :  "lib/Amazon/AWS/EC2/Action/CreatePlacementGroup.pm6"                                      ,
       "Amazon::AWS::EC2::Action::CreateSnapshot"                                            :  "lib/Amazon/AWS/EC2/Action/CreateSnapshot.pm6"                                            ,
       "Amazon::AWS::EC2::Action::DeleteKeyPair"                                             :  "lib/Amazon/AWS/EC2/Action/DeleteKeyPair.pm6"                                             ,
       "Amazon::AWS::EC2::Action::DeleteNetworkInterface"                                    :  "lib/Amazon/AWS/EC2/Action/DeleteNetworkInterface.pm6"                                    ,

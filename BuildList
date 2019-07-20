@@ -512,6 +512,7 @@ Amazon::AWS::EC2::Action::CopySnapshot
 Amazon::AWS::EC2::Action::CreateDefaultSubnet
 Amazon::AWS::EC2::Action::CreateKeyPair
 Amazon::AWS::EC2::Action::CreateNetworkAclEntry
+Amazon::AWS::EC2::Action::CreatePlacementGroup
 Amazon::AWS::EC2::Action::CreateSnapshot
 Amazon::AWS::EC2::Action::DeleteKeyPair
 Amazon::AWS::EC2::Action::DeleteNetworkInterface

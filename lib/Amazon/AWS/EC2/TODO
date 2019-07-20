@@ -89,6 +89,7 @@
   = DescribeVpcEndpointConnections (Run tested, but no data to check against)
   ...
   - RunInstances (Ultimate goal!)
+  - CreatePlacementGroupo
   
   # Should create corresponding Delete actions for all Create actions!
 
