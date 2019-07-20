@@ -1,14 +1,14 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 use XML::Class;
 
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
 use Amazon::AWS::EC2::Filters::DescribeRegionsFilter;
 use Amazon::AWS::EC2::Response::DescribeRegionsResponse;
 
-use Amazon::AWS::Utils;
-
-use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeRegions is export
   does XML::Class

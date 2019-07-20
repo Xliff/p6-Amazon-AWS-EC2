@@ -1,14 +1,15 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
+
+use Amazon::AWS::Roles::Eqv;
+use Amazon::AWS::Utils;
 
 use Amazon::AWS::EC2::Types::Instance;
 
 use Amazon::AWS::EC2::Filters::DescribeLaunchTemplateVersionsFilter;
 use Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse;
-use Amazon::AWS::Roles::Eqv;
-use Amazon::AWS::Utils;
 
 class Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions is export
   does XML::Class[

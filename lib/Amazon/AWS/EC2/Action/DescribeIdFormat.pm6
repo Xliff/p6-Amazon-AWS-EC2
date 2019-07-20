@@ -3,8 +3,8 @@ use v6.d;
 use Method::Also;
 use XML::Class;
 
-use Amazon::AWS::Roles::Eqv;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 use Amazon::AWS::EC2::Response::DescribeIdFormatResponse;
 
@@ -42,7 +42,8 @@ class Amazon::AWS::EC2::Action::DescribeIdFormat is export
 
     $!Resource = $resource if $resource.defined && $resource.trim.chars;
     
-    die $dieMsg unless $!Resource.defined.not ||
+    die $dieMsg unless %*ENV<P6_AWS_TESTING>.defined ||
+                       $!Resource.defined.not ||
                        $!Resource ~~ %attributes<Resource|ValidValues>.any;
   }
 
@@ -53,6 +54,7 @@ class Amazon::AWS::EC2::Action::DescribeIdFormat is export
     >
   {
     # Should already be sorted.
+    my @args;
     @args.push: Pair.new('Resource', $!Resource) if $!Resource.chars;
     @args.push: (Version  => '2016-11-15');
 

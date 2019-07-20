@@ -5,6 +5,7 @@ use Method::Also;
 use XML::Class;
 
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 use Amazon::AWS::EC2::Response::CreateNetworkAclEntryResponse;
 
@@ -104,18 +105,18 @@ class Amazon::AWS::EC2::Action::CreateNetworkAclEntry is export
       @args.push: Pair.new("Icmp.{.key}", .value) for $!Icmp.pairs;
     }
     
-    @args.push: (Ipv6CidrBlock    => urlEncode($!Ipv6CidrBlock)
+    @args.push: (Ipv6CidrBlock    => urlEncode($!Ipv6CidrBlock))
       if $!Ipv6CidrBlock.chars;
-    @args.push: (NetworkAclId     => $!NetworkAclId if $!NetworkAclId.chars;
+    @args.push: (NetworkAclId     => $!NetworkAclId) if $!NetworkAclId.chars;
     
     if $!PortRange.defined {
       @args.push: Pair.new("PortRange.{.key}", urlEncode(.value)) 
         for $!PortRange.pairs;
     }
     
-    @args.push: (Protocol         => $.Protocol)    if $!Protocol.chars;
-    @args.push: (RuleAction       => $.RuleAction)  if $!RuleAction.chars;
-    @args.push: (RuleNumber       => $.RuleNumber)  if $!RuleNumber;      
+    @args.push: (Protocol         => $.Protocol)     if $!Protocol.chars;
+    @args.push: (RuleAction       => $.RuleAction)   if $!RuleAction.chars;
+    @args.push: (RuleNumber       => $.RuleNumber)   if $!RuleNumber;      
     @args.push: (Version          => '2016-11-15');
 
     # XXX - Add error handling to makeRequest!

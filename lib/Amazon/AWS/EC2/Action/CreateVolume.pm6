@@ -5,6 +5,7 @@ use Method::Also;
 use XML::Class;
 
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 use Amazon::AWS::EC2::Types::TagSpecification;
 
@@ -69,8 +70,8 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
       }
     }
  
-    die "Iops value ({ $iops }) is invalid!" 
-      unless %*ENV<P6_AWS_TESTING>.defined || $iops.defined && $!Iops ~~ 50..64000;
+    die "Iops value ({ $!Iops }) is invalid!" 
+      unless %*ENV<P6_AWS_TESTING>.defined || $!Iops ~~ 50..64000;
     
     $!KmsKeyId = $kmsKeyId 
       if $kmsKeyId.defined && $kmsKeyId.trim.chars;
@@ -83,7 +84,7 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
       
     my $vtDieMsg;
     $vtDieMsg = qq:to/DIE/ if $volumeType.defined && $volumeType.trim.chars;
-    VolumeType is set to an invalid value ({ $volumeType }). It must be one of the following: 
+    VolumeType is set to an invalid value '{ $!VolumeType }'. It must be one of the following: 
     { %attributes<VolumeType|Table> }
     DIE
     

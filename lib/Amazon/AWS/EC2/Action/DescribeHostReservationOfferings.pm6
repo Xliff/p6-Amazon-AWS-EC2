@@ -1,12 +1,13 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
-use Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter;
-use Amazon::AWS::EC2::Response::DescribeHostReservationOfferingsResponse;
 use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter;
+use Amazon::AWS::EC2::Response::DescribeHostReservationOfferingsResponse;
 
 class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
   does XML::Class[

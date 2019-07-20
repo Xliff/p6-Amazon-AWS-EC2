@@ -1,14 +1,15 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
-use Amazon::AWS::EC2::Types::Instance;
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 use Amazon::AWS::EC2::Filters::DescribeImagesFilter;
 use Amazon::AWS::EC2::Response::DescribeImagesResponse;
-use Amazon::AWS::Roles::Eqv;
-use Amazon::AWS::Utils;
+
+use Amazon::AWS::EC2::Types::Instance;
 
 class Amazon::AWS::EC2::Action::DescribeImages is export
   does XML::Class[

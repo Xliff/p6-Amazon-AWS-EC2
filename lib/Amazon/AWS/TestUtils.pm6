@@ -228,7 +228,7 @@ sub doBasicTests(
           }
         }
         changeRandomAttribute($b);
-        nok do { $a eqv $b                                     },   "Changed $_ fails eqv";
+        nok do { $a.eqv($b)                                    },   "Changed $_ fails eqv";
       }
     }
   }

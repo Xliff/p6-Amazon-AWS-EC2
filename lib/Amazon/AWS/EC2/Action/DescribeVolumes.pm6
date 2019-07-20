@@ -1,14 +1,15 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
 use Amazon::AWS::EC2::Filters::DescribeVolumesFilter;
 use Amazon::AWS::EC2::Response::DescribeVolumesResponse;
-use Amazon::AWS::EC2::Types::Volume;
-use Amazon::AWS::Utils;
 
-use Amazon::AWS::Roles::Eqv;
+use Amazon::AWS::EC2::Types::Volume;
 
 class Amazon::AWS::EC2::Action::DescribeVolumes is export
   does XML::Class[

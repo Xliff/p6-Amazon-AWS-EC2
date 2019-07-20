@@ -5,6 +5,7 @@ use Method::Also;
 use XML::Class;
 
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 use Amazon::AWS::EC2::Response::CreateNetworkInterfaceResponse;
 
@@ -111,7 +112,7 @@ class Amazon::AWS::EC2::Action::CreateNetworkInterface is export
     @args.append: @Ipv6AddressArgs                         if @Ipv6AddressArgs;
     @args.append: @PrivateIpAddressArgs                    if @PrivateIpAddressArgs;
     
-    @args.push: (SecondaryPrivateAddressCount => $!sSecondaryPrivateAddressCount)
+    @args.push: (SecondaryPrivateAddressCount => $!SecondaryPrivateAddressCount)
       if $!SecondaryPrivateAddressCount;
       
     @args.append: @SecurityGroupArgs if @SecurityGroupArgs;

@@ -1,11 +1,12 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::CreateKeyPairResponse;
 use Amazon::AWS::Utils;
+
+use Amazon::AWS::EC2::Response::CreateKeyPairResponse;
 
 class Amazon::AWS::EC2::Action::CreateKeyPair is export
   does XML::Class[

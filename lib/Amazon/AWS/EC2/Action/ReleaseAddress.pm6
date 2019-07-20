@@ -2,9 +2,10 @@ use v6.d;
 
 use Method::Also;
 
-use Amazon::AWS::Utils;
-
 use XML::Class;
+
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 use Amazon::AWS::EC2::Response::ReleaseAddressResponse;
 
@@ -45,7 +46,7 @@ class Amazon::AWS::EC2::Action::ReleaseAddress is export
     die 'You may specify public IP or allocation ID, but not both in the same call'
       if $!AllocationId.chars && $!PublicIp.chars;
     die 'You must specify one of public IP or allocation ID!'
-      unless $!AllocationId.chars || $PublicIp.chars;
+      unless $!AllocationId.chars || $!PublicIp.chars;
       
     # @Args must be sorted by key name.
     my @args; 
