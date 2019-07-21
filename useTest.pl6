@@ -149,6 +149,7 @@ my @modules = <
   DescribePublicIpv4Pools
   DescribeRouteTables
   DescribeSecurityGroupReferences
+  DescribeSecurityGroups
 >;
 
 my %class;
