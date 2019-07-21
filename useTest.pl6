@@ -64,11 +64,9 @@
 # use Amazon::AWS::EC2::Action::DescribeAccountAttributes;
 # use Amazon::AWS::EC2::Action::DescribeAvailabilityZones;
 # use Amazon::AWS::EC2::Action::DescribeConversionTasks;
-
 # use Amazon::AWS::EC2::Action::DescribeInstances;
 # use Amazon::AWS::EC2::Action::DescribeNetworkAcls;
 # use Amazon::AWS::EC2::Action::DescribeVpcs;
-
 # use Amazon::AWS::EC2::Action::GetLaunchTemplateData;
 
 # use Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions;
@@ -91,79 +89,83 @@
 # DescribePrincipalIdFormat.new.gist.say;
 # DescribeRegions.new.gist.say;
 
-# my @modules = <
-#   CopySnapshot
-#   CreateVolume
-# >;
-
 my @modules = <
   CopySnapshot
-  CreateDefaultSubnet
-  CreateKeyPair
-  CreateNetworkAclEntry
-  CreatePlacementGroup
-  CreateSnapshot
-  DeleteKeyPair
-  DeleteNetworkInterface
-  DeleteSnapshot
-  DescribeAggregateIdFormat
-  DescribeFlowLogs
-  DescribeIdFormat
-  DescribeIdentityIdFormat
-  DescribePrincipalIdFormat
-  DescribeRegions
-  DescribeSnapshotAttribute
-  DescribeTags
-  DescribeVpcEndpoints
-  GetConsoleOutput
-  GetConsoleScreenshot
-  GetPasswordData
-  ReleaseAddress
-  CreateNetworkInterface
-  CreateVolume
-  DescribeAddresses
-  DescribeDhcpOptions
-  DescribeElasticGpus
-  DescribeFpgaImageAttribute
-  DescribeFpgaImages
-  DescribeHostReservationOfferings
-  DescribeIamInstanceProfileAssociations
-  DescribeImageAttribute
-  DescribeImages
-  DescribeInstanceAttribute
-  DescribeInstanceStatus
-  DescribeInternetGateways
-  DescribeKeyPairs
-  DescribeLaunchTemplates
-  DescribeNatGateways
-  DescribeNetworkInterfaceAttribute
-  DescribeNetworkInterfacePermissions
-  DescribeNetworkInterfaces
-  DescribePlacementGroups
-  DescribePrefixLists
-  DescribePublicIpv4Pools
-  DescribeRouteTables
-  DescribeSecurityGroupReferences
-  DescribeSecurityGroups
-  DescribeSnapshots
-  DescribeSubnets
-  DescribeVolumeAttribute
-  DescribeVolumeModifications
-  DescribeVolumeStatus
-  DescribeVolumes
-  DescribeVpcAttribute
-  DescribeVpcEndpointConnectionNotifications
-  DescribeVpcEndpointConnections
-  RebootInstances
-  StartInstances
-  StopInstances
-  CreateNetworkAcl
-  CreateVpc
-  DescribeAccountAttributes
-  DescribeAvailabilityZones
-  DescribeConversionTasks
-  DescribeInstances
+  GetLaunchTemplateData
 >;
+
+# my @modules = <
+#   CopySnapshot
+#   CreateDefaultSubnet
+#   CreateKeyPair
+#   CreateNetworkAclEntry
+#   CreatePlacementGroup
+#   CreateSnapshot
+#   DeleteKeyPair
+#   DeleteNetworkInterface
+#   DeleteSnapshot
+#   DescribeAggregateIdFormat
+#   DescribeFlowLogs
+#   DescribeIdFormat
+#   DescribeIdentityIdFormat
+#   DescribePrincipalIdFormat
+#   DescribeRegions
+#   DescribeSnapshotAttribute
+#   DescribeTags
+#   DescribeVpcEndpoints
+#   GetConsoleOutput
+#   GetConsoleScreenshot
+#   GetPasswordData
+#   ReleaseAddress
+#   CreateNetworkInterface
+#   CreateVolume
+#   DescribeAddresses
+#   DescribeDhcpOptions
+#   DescribeElasticGpus
+#   DescribeFpgaImageAttribute
+#   DescribeFpgaImages
+#   DescribeHostReservationOfferings
+#   DescribeIamInstanceProfileAssociations
+#   DescribeImageAttribute
+#   DescribeImages
+#   DescribeInstanceAttribute
+#   DescribeInstanceStatus
+#   DescribeInternetGateways
+#   DescribeKeyPairs
+#   DescribeLaunchTemplates
+#   DescribeNatGateways
+#   DescribeNetworkInterfaceAttribute
+#   DescribeNetworkInterfacePermissions
+#   DescribeNetworkInterfaces
+#   DescribePlacementGroups
+#   DescribePrefixLists
+#   DescribePublicIpv4Pools
+#   DescribeRouteTables
+#   DescribeSecurityGroupReferences
+#   DescribeSecurityGroups
+#   DescribeSnapshots
+#   DescribeSubnets
+#   DescribeVolumeAttribute
+#   DescribeVolumeModifications
+#   DescribeVolumeStatus
+#   DescribeVolumes
+#   DescribeVpcAttribute
+#   DescribeVpcEndpointConnectionNotifications
+#   DescribeVpcEndpointConnections
+#   RebootInstances
+#   StartInstances
+#   StopInstances
+#   CreateNetworkAcl
+#   CreateVpc
+#   DescribeAccountAttributes
+#   DescribeAvailabilityZones
+#   DescribeConversionTasks
+#   DescribeInstances
+#   DescribeNetworkAcls
+#   DescribeVpcs
+#   GetLaunchTemplateData
+#   DescribeLaunchTemplateVersions
+# >;
 
 my %class;
 for @modules {
