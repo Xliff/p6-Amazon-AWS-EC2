@@ -4,10 +4,10 @@ use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::Utils;
-use Amazon::AWS::Roles::Eqv;
-
 use Amazon::AWS::EC2::Types::TagSpecification;
+
+use Amazon::AWS::Roles::Eqv;
+use Amazon::AWS::Utils;
 
 use Amazon::AWS::EC2::Response::CreateVolumeResponse;
 
@@ -59,17 +59,17 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
       @!TagSpecifications = do given @tagSpecifications {
         when .all ~~ TagSpecification
           { $_ }
-          
+    
         default {
           die qq:to/DIE/
           Invalid values passed to \@tagSpecifications. Elements must only consist of TagSpecifications, but also contains:
           { .grep( * !~~ TagSpecification ).map( *.^name ).join(', ') }
           DIE
-          
+    
         }
       }
     }
- 
+    
     die "Iops value ({ $!Iops }) is invalid!" 
       unless %*ENV<P6_AWS_TESTING>.defined || $!Iops ~~ 50..64000;
     
@@ -81,7 +81,7 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
       if $snapshotId.defined && $snapshotId.trim.chars;
     $!VolumeType = $volumeType
       if $volumeType.defined && $volumeType.trim.chars;
-      
+    
     my $vtDieMsg;
     $vtDieMsg = qq:to/DIE/ if $volumeType.defined && $volumeType.trim.chars;
     VolumeType is set to an invalid value '{ $!VolumeType }'. It must be one of the following: 
@@ -97,7 +97,7 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
       when 'st1' | 'sc1' { 500..16384 }
       when 'standard'    {   1.. 1024 }
     };
-      
+    
     my $sDieMsg = qq:to/DIE/;
     Given size ({ $!Size }) is invalid for volume type { $!VolumeType }. Valid range is: 
       { $range.min } - { $range.max }
@@ -124,7 +124,7 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
     # YYY - Other conditions for validity: 
     #   AvailabilityZone   - End User validation
     #   Size vs SnapshotId - End User validation
-      
+    
     # @Args must be sorted by key name.
     my @args;
     @args.push:   (AvailabilityZone => $!AvailabilityZone)      if $!AvailabilityZone.chars; 
@@ -137,12 +137,12 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
     @args.append: @TagSpecArgs                                  if @TagSpecArgs;
     @args.push:   (Version          => '2016-11-15');
     @args.push:   (VolumeType       => $!VolumeType);
-
+    
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
     );
-
+    
     $raw ??
       $xml
       !!

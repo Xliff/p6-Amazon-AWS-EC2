@@ -88,28 +88,37 @@
 # DescribePrincipalIdFormat.new.gist.say;
 # DescribeRegions.new.gist.say;
 
-my @modules = <
-  CopySnapshot
-  DescribeRegions
->;
-
 # my @modules = <
 #   CopySnapshot
-#   CreateDefaultSubnet
-#   CreateKeyPair
-#   CreateNetworkAclEntry
-#   CreatePlacementGroup
-#   CreateSnapshot
-#   DeleteKeyPair
-#   DeleteNetworkInterface
-#   DeleteSnapshot
-#   DescribeAggregateIdFormat
-#   DescribeFlowLogs
-#   DescribeIdFormat
-#   DescribeIdentityIdFormat
-#   DescribePrincipalIdFormat
-#   DescribeRegions
+#   CreateVolume
 # >;
+
+my @modules = <
+  CopySnapshot
+  CreateDefaultSubnet
+  CreateKeyPair
+  CreateNetworkAclEntry
+  CreatePlacementGroup
+  CreateSnapshot
+  DeleteKeyPair
+  DeleteNetworkInterface
+  DeleteSnapshot
+  DescribeAggregateIdFormat
+  DescribeFlowLogs
+  DescribeIdFormat
+  DescribeIdentityIdFormat
+  DescribePrincipalIdFormat
+  DescribeRegions
+  DescribeSnapshotAttribute
+  DescribeTags
+  DescribeVpcEndpoints
+  GetConsoleOutput
+  GetConsoleScreenshot
+  GetPasswordData
+  ReleaseAddress
+  CreateNetworkInterface
+  CreateVolume
+>;
 
 my %class;
 for @modules {
@@ -121,4 +130,7 @@ for @modules {
     %class{$_} := try require ::("Amazon::AWS::EC2::Action::$_");
   }
 }
-%class.gist.say;
+
+for %classes.kv -> $k, $v -> {
+  $k.say if $v =:= Nil;
+}
