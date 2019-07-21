@@ -62,7 +62,6 @@
 # use Amazon::AWS::EC2::Action::CreateNetworkAcl;
 # use Amazon::AWS::EC2::Action::CreateVpc;
 # use Amazon::AWS::EC2::Action::DescribeAccountAttributes;
-
 # use Amazon::AWS::EC2::Action::DescribeAvailabilityZones;
 # use Amazon::AWS::EC2::Action::DescribeConversionTasks;
 
@@ -162,6 +161,8 @@ my @modules = <
   CreateVpc
   DescribeAccountAttributes
   DescribeAvailabilityZones
+  DescribeConversionTasks
+  DescribeInstances
 >;
 
 my %class;
