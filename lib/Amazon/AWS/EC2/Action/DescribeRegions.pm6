@@ -1,14 +1,15 @@
 use v6.d;
 
 use Method::Also;
+
 use XML::Class;
 
-use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
 
-use Amazon::AWS::EC2::Filters::DescribeRegionsFilter;
 use Amazon::AWS::EC2::Response::DescribeRegionsResponse;
+use Amazon::AWS::EC2::Filters::DescribeRegionsFilter;
 
+use Amazon::AWS::Utils;
 
 class Amazon::AWS::EC2::Action::DescribeRegions is export
   does XML::Class
@@ -35,13 +36,13 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
     if @filters {
       @!Filters = do given @filters {
         when .all ~~ DescribeRegionsFilter    { @filters }
-
+  
         default {
           die qq:to/DIE/.chomp;
   Invalid value passed to \@filters. Should only contain DescribeRegionFilter objects, but contains:
   { @filters.grep( * !~~ DescribeRegionsFilter).map( *.^name ).unique.join(', ') }
   DIE
-
+  
         }
       }
     }
@@ -52,9 +53,9 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
   Invalid value passed to \@regions. Should only contain region name strings, but contains:
   { @regions.grep( * !~~ Str ).map( *.^name ).unique.join(', ') }
   DIE
-
+  
       @!Regions = @regions;
-    }
+  }
   }
 
   method run (:$raw = False)
@@ -77,7 +78,7 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
     # Should already be sorted.
     my @args = (
       DryRun         => $.DryRun,
-      |@FilterArgs,
+      # |@FilterArgs,
       |@RegionArgs,
       Version        => '2016-11-15'
     );
