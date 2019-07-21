@@ -58,7 +58,6 @@
 # use Amazon::AWS::EC2::Action::DescribeVpcEndpointConnections;
 # use Amazon::AWS::EC2::Action::RebootInstances;
 # use Amazon::AWS::EC2::Action::StartInstances;
-
 # use Amazon::AWS::EC2::Action::StopInstances;
 # use Amazon::AWS::EC2::Action::CreateNetworkAcl;
 # use Amazon::AWS::EC2::Action::CreateVpc;
@@ -158,6 +157,11 @@ my @modules = <
   DescribeVpcEndpointConnections
   RebootInstances
   StartInstances
+  StopInstances
+  CreateNetworkAcl
+  CreateVpc
+  DescribeAccountAttributes
+  DescribeAvailabilityZones
 >;
 
 my %class;

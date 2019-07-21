@@ -1,10 +1,5 @@
-Amazon::AWS::EC2::Action::CreateVolume => Nil
-Amazon::AWS::EC2::Action::DescribeAvailabilityZones => Nil
 Amazon::AWS::EC2::Action::DescribeInstances => Nil
 Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions => Nil
-Amazon::AWS::EC2::Action::DescribeRegions => Nil
-Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences => Nil
-Amazon::AWS::EC2::Action::DescribeSecurityGroups => Nil
 Amazon::AWS::EC2::Action::GetLaunchTemplateData => Nil
 Amazon::AWS::EC2::Action::StartInstances => Nil
 Amazon::AWS::EC2::Action::StopInstances => Nil
