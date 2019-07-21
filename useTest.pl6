@@ -45,9 +45,7 @@
 # use Amazon::AWS::EC2::Action::DescribePrefixLists;
 # use Amazon::AWS::EC2::Action::DescribePublicIpv4Pools;
 # use Amazon::AWS::EC2::Action::DescribeRouteTables;
-
 # use Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences;
-
 # use Amazon::AWS::EC2::Action::DescribeSecurityGroups;
 # use Amazon::AWS::EC2::Action::DescribeSnapshots;
 # use Amazon::AWS::EC2::Action::DescribeSubnets;
@@ -59,7 +57,6 @@
 # use Amazon::AWS::EC2::Action::DescribeVpcEndpointConnectionNotifications;
 # use Amazon::AWS::EC2::Action::DescribeVpcEndpointConnections;
 # use Amazon::AWS::EC2::Action::RebootInstances;
-
 # use Amazon::AWS::EC2::Action::StartInstances;
 
 # use Amazon::AWS::EC2::Action::StopInstances;
@@ -150,6 +147,17 @@ my @modules = <
   DescribeRouteTables
   DescribeSecurityGroupReferences
   DescribeSecurityGroups
+  DescribeSnapshots
+  DescribeSubnets
+  DescribeVolumeAttribute
+  DescribeVolumeModifications
+  DescribeVolumeStatus
+  DescribeVolumes
+  DescribeVpcAttribute
+  DescribeVpcEndpointConnectionNotifications
+  DescribeVpcEndpointConnections
+  RebootInstances
+  StartInstances
 >;
 
 my %class;
