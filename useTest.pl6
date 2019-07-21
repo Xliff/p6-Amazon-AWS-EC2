@@ -45,7 +45,9 @@
 # use Amazon::AWS::EC2::Action::DescribePrefixLists;
 # use Amazon::AWS::EC2::Action::DescribePublicIpv4Pools;
 # use Amazon::AWS::EC2::Action::DescribeRouteTables;
+
 # use Amazon::AWS::EC2::Action::DescribeSecurityGroupReferences;
+
 # use Amazon::AWS::EC2::Action::DescribeSecurityGroups;
 # use Amazon::AWS::EC2::Action::DescribeSnapshots;
 # use Amazon::AWS::EC2::Action::DescribeSubnets;
@@ -57,17 +59,23 @@
 # use Amazon::AWS::EC2::Action::DescribeVpcEndpointConnectionNotifications;
 # use Amazon::AWS::EC2::Action::DescribeVpcEndpointConnections;
 # use Amazon::AWS::EC2::Action::RebootInstances;
+
 # use Amazon::AWS::EC2::Action::StartInstances;
+
 # use Amazon::AWS::EC2::Action::StopInstances;
 # use Amazon::AWS::EC2::Action::CreateNetworkAcl;
 # use Amazon::AWS::EC2::Action::CreateVpc;
 # use Amazon::AWS::EC2::Action::DescribeAccountAttributes;
+
 # use Amazon::AWS::EC2::Action::DescribeAvailabilityZones;
 # use Amazon::AWS::EC2::Action::DescribeConversionTasks;
+
 # use Amazon::AWS::EC2::Action::DescribeInstances;
 # use Amazon::AWS::EC2::Action::DescribeNetworkAcls;
 # use Amazon::AWS::EC2::Action::DescribeVpcs;
+
 # use Amazon::AWS::EC2::Action::GetLaunchTemplateData;
+
 # use Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions;
 
 # %*ENV<P6_AWS_TESTING>=1;
@@ -118,6 +126,29 @@ my @modules = <
   ReleaseAddress
   CreateNetworkInterface
   CreateVolume
+  DescribeAddresses
+  DescribeDhcpOptions
+  DescribeElasticGpus
+  DescribeFpgaImageAttribute
+  DescribeFpgaImages
+  DescribeHostReservationOfferings
+  DescribeIamInstanceProfileAssociations
+  DescribeImageAttribute
+  DescribeImages
+  DescribeInstanceAttribute
+  DescribeInstanceStatus
+  DescribeInternetGateways
+  DescribeKeyPairs
+  DescribeLaunchTemplates
+  DescribeNatGateways
+  DescribeNetworkInterfaceAttribute
+  DescribeNetworkInterfacePermissions
+  DescribeNetworkInterfaces
+  DescribePlacementGroups
+  DescribePrefixLists
+  DescribePublicIpv4Pools
+  DescribeRouteTables
+  DescribeSecurityGroupReferences
 >;
 
 my %class;
@@ -131,6 +162,8 @@ for @modules {
   }
 }
 
-for %classes.kv -> $k, $v -> {
-  $k.say if $v =:= Nil;
+%class.gist.say;
+say "Nil classes:";
+for %class.kv -> $k, $v {
+  $k.say if $v === Nil;
 }
