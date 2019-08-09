@@ -3,18 +3,26 @@
 #   GetLaunchTemplateData
 # >;
 
+# cw: This won't work!
+# my @modules = <
+#   CopySnapshot
+#   GetLaunchTemplateData
+# >;
+
+# cw: This works!
 my @modules = <
   GetLaunchTemplateData
+  CopySnapshot
 >;
 
 my %class;
 for @modules {
   .say;
   quietly {
-    CATCH {
-      default { .message.say }
-    }
-    %class{$_} := try require ::("Amazon::AWS::EC2::Action::$_");
+    CATCH { default { .message.say } }
+    
+    require ::("Amazon::AWS::EC2::Action::$_");
+    %class{$_} := ::("Amazon::AWS::EC2::Action::$_");
   }
 }
 
