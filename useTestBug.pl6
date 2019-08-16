@@ -4,26 +4,26 @@
 # >;
 
 # cw: This won't work!
-# my @modules = <
-#   CopySnapshot
-#   GetLaunchTemplateData
-# >;
+my @modules = <
+  CopySnapshot
+  GetLaunchTemplateData
+>;
 
 # cw: This works!
-my @modules = <
-  GetLaunchTemplateData
-  CopySnapshot
->;
+# my @modules = <
+#   GetLaunchTemplateData
+#   CopySnapshot
+# >;
 
 my %class;
 for @modules {
   .say;
-  quietly {
-    CATCH { default { .message.say } }
-    
-    require ::("Amazon::AWS::EC2::Action::$_");
-    %class{$_} := ::("Amazon::AWS::EC2::Action::$_");
+  CATCH {
+    default { say "EXCEPTION ", .^name, ": ", .message }
   }
+  my $mod = "Amazon::AWS::EC2::Action::$_";
+  require ::($mod);
+  %class{$_} := ::($mod);
 }
 
 %class.gist.say;
