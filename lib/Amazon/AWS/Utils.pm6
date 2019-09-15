@@ -64,18 +64,7 @@ sub urlEncode($val) is export {
   $val.subst(/<-alnum>/, *.ord.fmt("%%%02X"), :g);
 }
 
-sub makeRequest (
-  $uri       is copy,
-  :$method   = 'GET',
-  :$service,              #= For future use
-  :$body,
-  *%headers
-) is export {
-  say "URI: { $uri }";
-  
-  die 'URI exceeds maximum recommended size of 1024 characters. Please shorten.'
-    unless $uri.chars < 1025;
-
+sub makeHeaders ($uri) {
   my $t = DateTime.now(timezone => 0);            # MUST be in GMT
   my $amzdate = strftime('%Y%m%dT%H%M%SZ', $t);
   #my $amzdate = '20190604T233232Z';
@@ -121,6 +110,21 @@ sub makeRequest (
     "{algorithm} Credential={$ak}/{$credScope}, SignedHeaders={$signedHeaders
   }, Signature={$signature}";
 
+  %headers;
+}
+
+sub makeRequest (
+  $uri       is copy,
+  :$method   = 'GET',
+  :$service,              #= For future use
+  :$body,
+  *%headers
+) is export {
+  say "URI: { $uri }";
+
+  die 'URI exceeds maximum recommended size of 1024 characters. Please shorten.'
+    unless $uri.chars < 1025;
+
   # # FINALLY make the request
   my $r = do given $method {
     CATCH {
@@ -140,6 +144,7 @@ sub makeRequest (
       }
     }
 
+    %headers.append( makeHeaders($uri) );
     my $url = "https://{host}$uri";
     %headers<host>:delete;
     when 'GET' {
@@ -255,7 +260,7 @@ sub getAttributeData($type) is export  {
 }
 
 sub errorBadContents(\a, \t) is export {
-  
+
   die qq:to/DIE/.chomp;
   Invalid value passed to { a.VAR.name }. Should only contain { t.^shortname } objects, but also contains:
   { a.grep( * !~~ t ).map( *.^name ).unique.join('. ') }

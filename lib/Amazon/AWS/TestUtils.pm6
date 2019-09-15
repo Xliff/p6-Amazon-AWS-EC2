@@ -80,10 +80,10 @@ sub getTestFiles($cat, :$unit) is export {
 sub changeRandomAttribute($o is rw) is export {
   my $victim;
   my @options = $o.^attributes
-                  .grep({ 
-                    .WHY.defined.not && 
-                    .name.defined    && 
-                    .name.chars      
+                  .grep({
+                    .WHY.defined.not &&
+                    .name.defined    &&
+                    .name.chars
                   });
   # Must put the next line inside an elements check, or an undefined
   # value will be created.
@@ -124,12 +124,12 @@ my ($benchmark-start, $benchmark-lev);
 constant exponent = 5;
 
 # Potential change:
-# Can remove exponent constant and that functionality can be set by the 
+# Can remove exponent constant and that functionality can be set by the
 # end-user with a parameter on startTiming...
 sub startTiming is export {
-  ($benchmark-start, 
-   $benchmark-real-start, 
-   $benchmark-iterations, 
+  ($benchmark-start,
+   $benchmark-real-start,
+   $benchmark-iterations,
    $benchmark-lev) = (DateTime.now, DateTime.now, 0, 0);
 }
 
@@ -146,7 +146,7 @@ sub checkNextTiming is export {
 sub finishTiming is export {
   my $end = DateTime.now;
   %timings{$benchmark-iterations} = $end - $benchmark-start;
-  #my $log-last = $benchmark-iterations.log(exponent) 
+  #my $log-last = $benchmark-iterations.log(exponent)
   #%timings{$benchmark-iterations} /= exponent if $log-last =~= $log-last.floor;
   %timings{$benchmark-iterations} /= exponent if %timings.elems > 1;
   diag %timings.pairs.sort( *.key.Int ).map( *.gist ).join(' / ');
@@ -154,42 +154,42 @@ sub finishTiming is export {
 }
 
 sub doBasicTests(
-  @files, 
-  :$elems = 1, 
+  @files,
+  :$elems = 1,
   :$number = 1,
   :$do-timings = True
 ) is export {
   my ($elev, $timeStart) = (0, DateTime.now);
-  
+
   plan @files.elems * 8 * $number;
-  
+
   startTiming if $do-timings;
-  NUMLOOP: for ^$number {  
+  NUMLOOP: for ^$number {
     checkNextTiming if $do-timings;
-    
+
     for @files {
       CATCH { default { diag .message } }
-      
+
       my ($class, $a, $bx, $b, $tl, $te, $na);
-      
+
       %classes{$_} := (try require ::($ = "$_")) if not %classes{$_}:exists;
-      
+
       $class := %classes{$_};
-         
+
       ok         ($tl = $class !~~ Failure),             "$_ loads. Is not a Failure object";
       ok         ($te = $class !=:= Nil),                "$_ exists";
       ok         ($na = $class.^name ne 'Any'),          "$_ is not (Any)";
-      
+
       # Attempt to speed things up.
       %classes{$_} := $class if $tl && $te;
       if $tl.not || $te.not || $na.not {
         diag %classes.gist;
         skip-rest 'One if the first three tests failed, so no further tests needed';
         last NUMLOOP;
-      }     
+      }
 
       lives-ok {
-        CATCH { 
+        CATCH {
           default {
             diag $class.^name;
             diag $class.HOW;
@@ -202,27 +202,27 @@ sub doBasicTests(
         #diag "CI: { $ci.gist }";
         $a = populateTestObject( $ci, :$elems, :!blanks )
       },                                                            "$_ can be populated";
-      lives-ok { 
-        CATCH { 
-          default { diag .message } 
+      lives-ok {
+        CATCH {
+          default { diag .message }
         }
         $bx = $a.to-xml                                        },   "$_ serializes ok";
       # diag $bx;
-      lives-ok { 
-        CATCH { 
-          default { diag .message } 
+      lives-ok {
+        CATCH {
+          default { diag .message }
         }
         $b = $class.from-xml($bx)                              },   "$_ deseralizes ok";
-      
+
       ok       ( my $eqv = $a.eqv($b) ),                            "$_ compares ok";
-      
+
       unless $eqv {
         diag $bx;
         diff( ddt($a, :get), ddt($b, :get) )
       }
-      
+
       {
-        CATCH { 
+        CATCH {
           when X::NoAttributesRemaining {
             pass 'No atributes left to change, so skipping...';
           }
