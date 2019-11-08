@@ -64,7 +64,8 @@ sub urlEncode($val) is export {
   $val.subst(/<-alnum>/, *.ord.fmt("%%%02X"), :g);
 }
 
-sub makeHeaders ($uri) {
+sub makeHeaders ($uri, $method) {
+  my %headers;
   my $t = DateTime.now(timezone => 0);            # MUST be in GMT
   my $amzdate = strftime('%Y%m%dT%H%M%SZ', $t);
   #my $amzdate = '20190604T233232Z';
@@ -144,7 +145,7 @@ sub makeRequest (
       }
     }
 
-    %headers.append( makeHeaders($uri) );
+    %headers.append( makeHeaders($uri, $method) );
     my $url = "https://{host}$uri";
     %headers<host>:delete;
     when 'GET' {
