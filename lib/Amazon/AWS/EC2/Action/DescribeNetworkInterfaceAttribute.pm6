@@ -6,6 +6,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 my %attributes;
 
@@ -32,20 +33,20 @@ constant myclass := (
       :$!Attribute          = '',
       :$!DryRun             = False,
       :$!NetworkInterfaceId = '',
-    ) { 
+    ) {
       # Abstract away into a sub done by Actions role?
       my $dieMsg = qq:to/DIE/.chomp;
         Invalid Attribute value. Valid value should be any of:
         { %attributes<Attribute|Table> }
         DIE
-       
+
       $!DryRun        = $dryRun     if $dryRun.defined;
       $!Attribute     = $attribute  if $attribute.defined;
       die $dieMsg unless $!Attribute.defined.not ||
                          $!Attribute.chars.not   ||
                          $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
-      
-      $!NetworkInterfaceId = $networkInterfaceId 
+
+      $!NetworkInterfaceId = $networkInterfaceId
         if $networkInterfaceId.defined;
     }
 
@@ -55,9 +56,9 @@ constant myclass := (
         execute
       >
     {
-      die 'NetworkInterfaceId is required!' 
+      die 'NetworkInterfaceId is required!'
         unless $.NetworkInterfaceId.defined && $.NetworkInterfaceId.trim.chars;
-        
+
       die 'Attribute is required'
         unless $.Attribute.defined && $.Attribute.trim.chars;
 
@@ -67,7 +68,7 @@ constant myclass := (
         InstanceId => $.InstanceId,
         Version    => '2016-11-15'
       );
-      @args.unshift: Pair.new('Attribute', $.Attribute) 
+      @args.unshift: Pair.new('Attribute', $.Attribute)
         if $.Attribute.trim.chars;
 
       # XXX - Add error handling to makeRequest!
@@ -80,11 +81,11 @@ constant myclass := (
         !!
         ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
     }
-    
+
     method getAttributes {
       %attributes<Attribute|ValidValues>.Array;
     }
-    
+
   }
 );
 

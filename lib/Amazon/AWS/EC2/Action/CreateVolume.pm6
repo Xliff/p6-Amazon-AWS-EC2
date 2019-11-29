@@ -5,6 +5,7 @@ use Method::Also;
 use XML::Class;
 
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 use Amazon::AWS::EC2::Types::TagSpecification;
 
@@ -18,7 +19,7 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
   also does Amazon::AWS::Roles::Eqv;
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
-  
+
   has Str               $.AvailabilityZone                                             is xml-element                      is xml-skip-null is rw;
   has Bool              $.DryRun                                                       is xml-element                      is xml-skip-null is rw;
   has Bool              $.Encrypted                                                    is xml-element                      is xml-skip-null is rw;
@@ -28,7 +29,7 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
   has Str               $.SnapshotId                                                   is xml-element                      is xml-skip-null is rw;
   has TagSpecification  @.TagSpecifications  is xml-container('tagSpecificationSet')   is xml-element('item', :over-ride)  is xml-skip-null is rw;
   has Str               $.VolumeType                                                   is xml-element                      is xml-skip-null is rw;  #= standard | io1 | gp2 | sc1 | st1
-  
+
   submethod BUILD (
     :$availabilityZone,
     :$dryRun,
@@ -49,30 +50,30 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
     :$!SnapshotId        = '',
     :@!TagSpecifications,
     :$!VolumeType        = 'standard'
-  ) { 
+  ) {
     $!DryRun            = $dryRun if $dryRun;
     $!Iops              = $iops   if $iops;
     $!Size              = $size   if $size;
-    
+
     if @tagSpecifications {
       @!TagSpecifications = do given @tagSpecifications {
         when .all ~~ TagSpecification
           { $_ }
-          
+
         default {
           die qq:to/DIE/
           Invalid values passed to \@tagSpecifications. Elements must only consist of TagSpecifications, but also contains:
           { .grep( * !~~ TagSpecification ).map( *.^name ).join(', ') }
           DIE
-          
+
         }
       }
     }
- 
-    die "Iops value ({ $iops }) is invalid!" 
+
+    die "Iops value ({ $iops }) is invalid!"
       unless %*ENV<P6_AWS_TESTING>.defined || $iops.defined && $!Iops ~~ 50..64000;
-    
-    $!KmsKeyId = $kmsKeyId 
+
+    $!KmsKeyId = $kmsKeyId
       if $kmsKeyId.defined && $kmsKeyId.trim.chars;
     $!AvailabilityZone = $availabilityZone
       if $availabilityZone.defined && $availabilityZone.trim.chars;
@@ -80,52 +81,52 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
       if $snapshotId.defined && $snapshotId.trim.chars;
     $!VolumeType = $volumeType
       if $volumeType.defined && $volumeType.trim.chars;
-      
+
     my $vtDieMsg;
     $vtDieMsg = qq:to/DIE/ if $volumeType.defined && $volumeType.trim.chars;
-    VolumeType is set to an invalid value ({ $volumeType }). It must be one of the following: 
+    VolumeType is set to an invalid value ({ $volumeType }). It must be one of the following:
     { %attributes<VolumeType|Table> }
     DIE
-    
-    die $vtDieMsg unless $!VolumeType.chars.not || 
-                         $!VolumeType ~~ self.getValidVolumeTypes.any; 
-    
+
+    die $vtDieMsg unless $!VolumeType.chars.not ||
+                         $!VolumeType ~~ self.getValidVolumeTypes.any;
+
     my $range = do given $!VolumeType {
       when 'gp2'         {   1..16384 }
       when 'io1'         {   4..16384 }
       when 'st1' | 'sc1' { 500..16384 }
       when 'standard'    {   1.. 1024 }
     };
-      
+
     my $sDieMsg = qq:to/DIE/;
-    Given size ({ $!Size }) is invalid for volume type { $!VolumeType }. Valid range is: 
+    Given size ({ $!Size }) is invalid for volume type { $!VolumeType }. Valid range is:
       { $range.min } - { $range.max }
     DIE
-    
+
     die $sDieMsg unless %*ENV<P6_AWS_TESTING>.defined || $!Size.not || $!Size ~~ $range;
-    
+
   }
-  
+
   method run (:$raw)
     is also<
       do
       execute
     >
-  {   
+  {
     my @TagSpecArgs;
     my $cnt = 1;
     for @!TagSpecifications {
       @TagSpecArgs.push: Pair.new("TagSpecification.{$cnt++}.{.key}", .value)
         for .pairs;
     }
-    
-    # YYY - Other conditions for validity: 
+
+    # YYY - Other conditions for validity:
     #   AvailabilityZone   - End User validation
     #   Size vs SnapshotId - End User validation
-      
+
     # @Args must be sorted by key name.
     my @args;
-    @args.push:   (AvailabilityZone => $!AvailabilityZone)  if $!AvailabilityZone.chars; 
+    @args.push:   (AvailabilityZone => $!AvailabilityZone)  if $!AvailabilityZone.chars;
     @args.push:   (DryRun           => $!DryRun)            if $!DryRun;
     @args.push:   (Encrypted        => $!Encrypted)         if $!Encrypted;
     @args.push:   (Iops             => $!Iops)              if $!Iops;
@@ -146,11 +147,11 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-  
+
   method getValidVolumeTypes {
     %attributes<VolumeType|ValidValues>.Array;
   }
-   
+
 }
 
 BEGIN {

@@ -6,6 +6,7 @@ use Method::Also;
 use Amazon::AWS::EC2::Filters::DescribeVpcEndpointConnectionsFilter;
 use Amazon::AWS::EC2::Response::DescribeVpcEndpointConnectionsResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnections is export
   does XML::Class[
@@ -20,7 +21,7 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnections is export
   has DescribeVpcEndpointConnectionsFilter @.Filters     is xml-container('filterSet')                                               is xml-skip-null is rw;
   has Bool                                 $.DryRun                                              is xml-element                      is xml-skip-null is rw;
   has Int                                  $.MaxResults                                          is xml-element                      is xml-skip-null is rw;
-  
+
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
   #                 - All in one (no user control)
@@ -37,13 +38,13 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnections is export
   ) {
     $!DryRun     = $dryRun     if $dryRun.defined;
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     die 'MaxResults must be an integer from 1 to 1000'
       unless $!MaxResults ~~ 5..1000;
 
     if @filters {
       @!Filters //= do given @filters {
-        when .all ~~ DescribeVpcEndpointConnectionsFilter      
+        when .all ~~ DescribeVpcEndpointConnectionsFilter
           { @filters }
 
         default {
@@ -55,7 +56,7 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnections is export
         }
       };
     }
-    
+
   }
 
   method run (:$raw)
@@ -69,7 +70,7 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnections is export
     for @!Filters {
       @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
     }
-    
+
     # Should already be sorted.
     my @args = (
       DryRun         => $.DryRun,

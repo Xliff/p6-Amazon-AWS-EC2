@@ -6,6 +6,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Response::GetLaunchTemplateDataResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::GetLaunchTemplateData is export
   does XML::Class[
@@ -26,7 +27,7 @@ class Amazon::AWS::EC2::Action::GetLaunchTemplateData is export
     # For deserialization purposes, only!
     :$!DryRun         = False,
     :$!InstanceId     = ''
-  ) { 
+  ) {
     $!DryRun     = $dryRun     if $dryRun;
     $!InstanceId = $instanceId if $instanceId.defined && $instanceId.trim.chars;
   }

@@ -6,6 +6,7 @@ use Method::Also;
 use Amazon::AWS::EC2::Filters::DescribeTagsFilter;
 use Amazon::AWS::EC2::Response::DescribeTagsResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeTags is export
   does XML::Class[
@@ -42,7 +43,7 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
         unless $maxResults ~~ 5..1000;
       $!MaxResults = $maxResults;
     }
-    
+
     if @filters {
       @!Filters = do given @filters {
         when .all ~~ DescribeTagsFilter    { @filters }

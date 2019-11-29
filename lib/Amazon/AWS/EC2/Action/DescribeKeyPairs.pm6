@@ -7,14 +7,13 @@ use Amazon::AWS::EC2::Filters::DescribeKeyPairsFilter;
 use Amazon::AWS::EC2::Response::DescribeKeyPairsResponse;
 use Amazon::AWS::EC2::Types::Instance;
 use Amazon::AWS::Utils;
-
 use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeKeyPairs is export
   does XML::Class[xml-element => 'DescribeKeyPairs']
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                   $.DryRun                                        is xml-element                is rw;
@@ -52,7 +51,7 @@ class Amazon::AWS::EC2::Action::DescribeKeyPairs is export
 
       @!KeyNames = @keyNames;
     }
-    
+
   }
 
   method run (:$raw = False)

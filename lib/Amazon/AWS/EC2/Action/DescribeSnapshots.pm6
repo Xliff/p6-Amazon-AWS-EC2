@@ -6,6 +6,7 @@ use Method::Also;
 use Amazon::AWS::EC2::Filters::DescribeSnapshotsFilter;
 use Amazon::AWS::EC2::Response::DescribeSnapshotsResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeSnapshots is export
   does XML::Class[
@@ -46,10 +47,10 @@ class Amazon::AWS::EC2::Action::DescribeSnapshots is export
   ) {
     $!DryRun     = $dryRun     if $dryRun.defined;
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     die '$maxResults must be an integer between 1..1000'
       unless $!MaxResults ~~ 1..1000;
-    
+
     if @owners {
       die '@owners must only contain Str' unless @owners.all ~~ Str;
       @!Owners = @owners;
@@ -65,7 +66,7 @@ class Amazon::AWS::EC2::Action::DescribeSnapshots is export
 
     if @filters {
       @!Filters //= do given @filters {
-        when .all ~~ DescribeSnapshotsFilter    
+        when .all ~~ DescribeSnapshotsFilter
           { @filters }
 
         default {
@@ -77,7 +78,7 @@ class Amazon::AWS::EC2::Action::DescribeSnapshots is export
         }
       };
     }
-    
+
   }
 
   method run (:$raw)
@@ -95,7 +96,7 @@ class Amazon::AWS::EC2::Action::DescribeSnapshots is export
     my @OwnerArgs;
     $cnt = 1;
     @OwnerArgs.push: Pair.new("Owner.{$cnt++}", $_) for @.Owners;
-    
+
     my @RestorableByArgs;
     $cnt = 1;
     @RestorableByArgs.push: Pair.new("RestorableBy.{$cnt++}", $_) for @.RestorableBy;

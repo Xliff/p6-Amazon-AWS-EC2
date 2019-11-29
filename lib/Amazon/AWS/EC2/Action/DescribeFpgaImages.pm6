@@ -5,15 +5,15 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Filters::DescribeFpgaImagesFilter;
 use Amazon::AWS::EC2::Response::DescribeFpgaImagesResponse;;
-use Amazon::AWS::Utils;
 
+use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeFpgaImages is export
   does XML::Class[xml-element => 'DescribeFpgaImages']
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                      $.DryRun                                          is xml-element                        is xml-skip-null is rw;
@@ -36,7 +36,7 @@ class Amazon::AWS::EC2::Action::DescribeFpgaImages is export
     :@!OwnerIds,
   ) {
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     if @filters {
       @!Filters = do given @filters {
         when .all ~~ DescribeFpgaImagesFilter    { @filters }
@@ -60,7 +60,7 @@ class Amazon::AWS::EC2::Action::DescribeFpgaImages is export
 
       @!FpgaImageIds = @fpgaImageIds;
     }
-    
+
     # This can be expanded top anything that returns a regionId
     if @ownerIds {
       die qq:to/DIE/.chomp unless @ownerIds.all ~~ Str;
@@ -70,7 +70,7 @@ class Amazon::AWS::EC2::Action::DescribeFpgaImages is export
 
       @!OwnerIds = @ownerIds;
     }
-    
+
   }
 
   method run (:$raw = False)
@@ -88,12 +88,12 @@ class Amazon::AWS::EC2::Action::DescribeFpgaImages is export
 
     $cnt = 1;
     my @FpgaImageIdArgs;
-    @FpgaImageIdArgs.push: Pair.new("FpgaImageId.{$cnt++}", $_) 
+    @FpgaImageIdArgs.push: Pair.new("FpgaImageId.{$cnt++}", $_)
       for @.FpgaImageIds;
-      
+
     $cnt = 1;
     my @OwnerIdArgs;
-    @OwnerIdArgs.push: Pair.new("OwnerId.{$cnt++}", $_) 
+    @OwnerIdArgs.push: Pair.new("OwnerId.{$cnt++}", $_)
       for @.OwnerIds;
 
     # Should already be sorted.

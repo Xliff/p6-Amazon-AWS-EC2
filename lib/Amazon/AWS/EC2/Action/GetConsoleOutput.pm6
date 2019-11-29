@@ -6,6 +6,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Response::GetConsoleOutputResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::GetConsoleOutput is export
   does XML::Class[
@@ -29,7 +30,7 @@ class Amazon::AWS::EC2::Action::GetConsoleOutput is export
     :$!DryRun         = False,
     :$!InstanceId     = '',
     :$!Latest         = False
-  ) { 
+  ) {
     $!DryRun     = $dryRun     if $dryRun.defined;
     $!InstanceId = $instanceId if $instanceId.defined;
     $!Latest     = $latest     if $latest.defined;
@@ -41,7 +42,7 @@ class Amazon::AWS::EC2::Action::GetConsoleOutput is export
       execute
     >
   {
-    die 'InstanceId is required!' 
+    die 'InstanceId is required!'
       unless $.InstanceId.defined && $.InstanceId.trim.chars;
 
     # Should already be sorted.

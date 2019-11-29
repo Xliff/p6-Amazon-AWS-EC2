@@ -5,6 +5,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Filters::DescribeIamInstanceProfileAssociationsFilter;
 use Amazon::AWS::EC2::Response::DescribeIamInstanceProfileAssociationsResponse;
+
 use Amazon::AWS::Roles::Eqv;
 use Amazon::AWS::Utils;
 
@@ -21,7 +22,7 @@ class Amazon::AWS::EC2::Action::DescribeIamInstanceProfileAssociations is export
   has Str                                          @.AssociationIds is xml-element('item', :over-ride) is xml-container('associationIdSet') is xml-skip-null is rw;
   has DescribeIamInstanceProfileAssociationsFilter @.Filters                                           is xml-container('filterSet')        is xml-skip-null is rw;
   has Int                                          $.MaxResults     is xml-element                                                          is xml-skip-null is rw;
- 
+
   submethod BUILD (
     :@associationIds,
     :@filters,
@@ -33,28 +34,28 @@ class Amazon::AWS::EC2::Action::DescribeIamInstanceProfileAssociations is export
     :$!MaxResults = 500
   ) {
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     if @associationIds {
       @!AssociationIds //= do given @associationIds {
         when .all ~~ Str { $_ }
         default {
           die qq:to/DIE/.chomp;
-          Invalid value passed to \@associationIds. Should only contain 
+          Invalid value passed to \@associationIds. Should only contain
           Str objects, but contains:
             { @associationIds.map( *.^name ).unique.join('. ') }
           DIE
         }
       }
     }
-    
+
     if @filters {
       @!Filters //= do given @filters {
         when .all ~~ DescribeIamInstanceProfileAssociationsFilter    { $_ }
 
         default {
           die qq:to/DIE/.chomp;
-          Invalid value passed to \@filers. Should only contain 
-          DescribeIamInstanceProfileAssociationsFilter objects, 
+          Invalid value passed to \@filers. Should only contain
+          DescribeIamInstanceProfileAssociationsFilter objects,
           but contains:
             { @filters.map( *.^name ).unique.join('. ') }
           DIE
@@ -70,23 +71,23 @@ class Amazon::AWS::EC2::Action::DescribeIamInstanceProfileAssociations is export
       execute
     >
   {
-    
+
     my @AssociationIdArgs;
     my $cnt = 1;
     for @!AssociationIds {
-      @AssociationIdArgs.push: 
-        Pair.new("AssociationId.{$cnt++}.{.key}", .value) 
+      @AssociationIdArgs.push:
+        Pair.new("AssociationId.{$cnt++}.{.key}", .value)
           for .pairs;
     }
-    
+
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: 
-        Pair.new("Filter.{$cnt++}.{.key}", .value) 
+      @FilterArgs.push:
+        Pair.new("Filter.{$cnt++}.{.key}", .value)
           for .pairs;
     }
-    
+
     # Should already be sorted.
     my @args = (
       |@AssociationIdArgs,

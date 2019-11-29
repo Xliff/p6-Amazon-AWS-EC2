@@ -4,8 +4,10 @@ use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::DescribeConversionTasksResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Response::DescribeConversionTasksResponse;
 
 class Amazon::AWS::EC2::Action::DescribeConversionTasks is export
   does XML::Class[
@@ -17,7 +19,7 @@ class Amazon::AWS::EC2::Action::DescribeConversionTasks is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Str  @.ConversionTaskIds  is xml-element('item') is xml-container('conversionTaskSet') is xml-skip-null is rw;  
+  has Str  @.ConversionTaskIds  is xml-element('item') is xml-container('conversionTaskSet') is xml-skip-null is rw;
   has Bool $.DryRun             is xml-element                                               is xml-skip-null is rw;
 
   submethod BUILD (
@@ -26,20 +28,20 @@ class Amazon::AWS::EC2::Action::DescribeConversionTasks is export
     # For deserialization purposes, only!
     :@!ConversionTaskIds,
     :$!DryRun            = False,
-    
+
   ) {
     @!ConversionTaskIds = @conversionTasks.map({
       when Str    { $_     }
-       
-      default     { 
+
+      default     {
         die qq:to/DIE/.chomp;
-Invalid type '{ .^name }' found in \@conversionTasks. This parameter will {'' 
+Invalid type '{ .^name }' found in \@conversionTasks. This parameter will {''
 } only accept Str objects
-DIE 
+DIE
 
       }
     }) if @conversionTasks;
-            
+
     $!DryRun = $dryRun if $dryRun.defined;
   }
 
@@ -55,7 +57,7 @@ DIE
       my @ConversionTaskIdArgs;
       my $cnt = 1;
       for @.ConversionTaskIds {
-        @ConversionTaskIdArgs.push: Pair.new("ConversionTaskId.{$cnt++}", .value) 
+        @ConversionTaskIdArgs.push: Pair.new("ConversionTaskId.{$cnt++}", .value)
           for .pairs;
       }
       @args.append: @ConversionTaskIdArgs;
@@ -64,7 +66,7 @@ DIE
       DryRun        => $.DryRun,
       Version       => '2016-11-15'
     );
-    
+
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
@@ -75,5 +77,5 @@ DIE
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-  
+
 };

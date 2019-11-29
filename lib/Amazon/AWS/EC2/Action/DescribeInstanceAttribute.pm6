@@ -6,6 +6,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Response::DescribeInstanceAttributeResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 my %attributes;
 
@@ -31,18 +32,18 @@ class Amazon::AWS::EC2::Action::DescribeInstanceAttribute is export
     :$!Attribute      = '',
     :$!DryRun         = False,
     :$!InstanceId     = '',
-  ) { 
+  ) {
     # Abstract away into a sub done by Actions role?
     my $dieMsg = qq:to/DIE/.chomp;
       Invalid Attribute value. Valid value should be any of:
       { %attributes<Attribute|Table> }
       DIE
-     
+
     $!Attribute     = $attribute  if $attribute.defined;
     die $dieMsg unless $!Attribute.defined.not ||
                        $!Attribute.chars.not   ||
                        $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
-    
+
     $!DryRun        = $dryRun     if $dryRun.defined;
     $!InstanceId    = $instanceId if $instanceId.defined;
   }
@@ -53,9 +54,9 @@ class Amazon::AWS::EC2::Action::DescribeInstanceAttribute is export
       execute
     >
   {
-    die 'InstanceId is required!' 
+    die 'InstanceId is required!'
       unless $.InstanceId.defined && $.InstanceId.trim.chars;
-      
+
     die 'Attribute is required'
       unless $.Attribute.defined && $.Attribute.trim.chars;
 
@@ -65,7 +66,7 @@ class Amazon::AWS::EC2::Action::DescribeInstanceAttribute is export
       InstanceId => $.InstanceId,
       Version    => '2016-11-15'
     );
-    @args.unshift: Pair.new('Attribute', $.Attribute) 
+    @args.unshift: Pair.new('Attribute', $.Attribute)
       if $.Attribute.trim.chars;
 
     # XXX - Add error handling to makeRequest!
@@ -78,11 +79,11 @@ class Amazon::AWS::EC2::Action::DescribeInstanceAttribute is export
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-  
+
   method getAttributes {
     return %attributes<Attribute|ValidValues>.Array;
   }
-  
+
 }
 
 BEGIN {

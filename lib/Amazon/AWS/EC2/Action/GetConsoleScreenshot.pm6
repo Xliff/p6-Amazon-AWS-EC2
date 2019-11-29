@@ -6,6 +6,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Response::GetConsoleScreenshotResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::GetConsoleScreenshot is export
   does XML::Class[
@@ -29,7 +30,7 @@ class Amazon::AWS::EC2::Action::GetConsoleScreenshot is export
     :$!DryRun         = False,
     :$!InstanceId     = '',
     :$!WakeUp         = True
-  ) { 
+  ) {
     $!DryRun     = $dryRun     if $dryRun.defined;
     $!InstanceId = $instanceId if $instanceId.defined;
     $!WakeUp     = $wakeUp     if $wakeUp.defined;
@@ -41,7 +42,7 @@ class Amazon::AWS::EC2::Action::GetConsoleScreenshot is export
       execute
     >
   {
-    die "InstanceId is required!" 
+    die "InstanceId is required!"
       unless $.InstanceId.defined && $.InstanceId.trim.chars;
 
     # Should already be sorted.

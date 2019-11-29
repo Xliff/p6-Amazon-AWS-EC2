@@ -6,6 +6,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Response::DescribeSnapshotAttributeResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 my %attributes;
 
@@ -32,21 +33,21 @@ constant myclass := (
       :$!Attribute  = '',
       :$!DryRun     = False,
       :$!SnapshotId = '',
-    ) { 
+    ) {
       # Abstract away into a sub done by Actions role?
       my $dieMsg = qq:to/DIE/.chomp;
         Invalid Attribute value. Valid value should be any of:
         { %attributes<Attribute|Table> }
         DIE
-       
+
       $!Attribute     = $attribute  if $attribute.defined;
       $!DryRun        = $dryRun     if $dryRun.defined;
       $!SnapshotId    = $snapshotId if $snapshotId.defined;
-      
+
       die $dieMsg unless $!Attribute.defined.not ||
                          $!Attribute.chars.not   ||
                          $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
-      
+
     }
 
     method run (:$raw)
@@ -55,9 +56,9 @@ constant myclass := (
         execute
       >
     {
-      die 'SnapshotId is required!' 
+      die 'SnapshotId is required!'
         unless $.SnapshotId.defined && $.SnapshotId.trim.chars;
-        
+
       die 'Attribute is required'
         unless $.Attribute.defined && $.Attribute.trim.chars;
 
@@ -68,7 +69,7 @@ constant myclass := (
         SnapshotId => $.SnapshotId,
         Version    => '2016-11-15'
       );
-      
+
       # XXX - Add error handling to makeRequest!
       my $xml = makeRequest(
         "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
@@ -79,14 +80,14 @@ constant myclass := (
         !!
         ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
     }
-    
+
     method getAttributes {
       %attributes<Attribute|ValidValues>.Array;
     }
-    
+
   }
-  
-  
+
+
 );
 
 BEGIN {

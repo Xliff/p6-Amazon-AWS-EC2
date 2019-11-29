@@ -7,6 +7,8 @@ use XML::Class;
 use Amazon::AWS::EC2::Response::DescribeFpgaImageAttributeResponse;
 use Amazon::AWS::Utils;
 
+use Amazson::AWS::Roles::Eqv;
+
 my %attributes;
 
 class Amazon::AWS::EC2::Action::DescribeFpgaImageAttribute is export

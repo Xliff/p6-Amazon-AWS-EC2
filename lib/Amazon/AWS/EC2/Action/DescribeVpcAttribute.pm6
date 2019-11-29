@@ -6,6 +6,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Response::DescribeVpcAttributeResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 my %attributes;
 
@@ -31,7 +32,7 @@ class Amazon::AWS::EC2::Action::DescribeVpcAttribute is export
     :$!Attribute = '',
     :$!DryRun = False,
     :$!VpcId = '',
-  ) {        
+  ) {
     $!DryRun    = $dryRun    if $dryRun.defined;
     $!Attribute = $attribute if $attribute.defined;
     $!VpcId     = $vpcId     if $vpcId.defined;
@@ -44,34 +45,34 @@ class Amazon::AWS::EC2::Action::DescribeVpcAttribute is export
     >
   {
     die '$VpcId is required!'     unless $!VpcId.chars;
-    die '$Attribute is required!' unless $!Attribute.chars; 
-    
-    die "Invalid value given for \$Attribute ('$!Attribute'). Must be one of:\n{ 
-      %attributes<Attribute|Table> 
+    die '$Attribute is required!' unless $!Attribute.chars;
+
+    die "Invalid value given for \$Attribute ('$!Attribute'). Must be one of:\n{
+      %attributes<Attribute|Table>
     }" unless $!Attribute eq self.getValidAttributes.any;
-    
+
     my @args.append: (
       Attribute     => $.Attribute,
       DryRun        => $.DryRun,
       Version       => '2016-11-15',
       VpcId         => $.VpcId
     );
- 
+
    # XXX - Add error handling to makeRequest!
    my $xml = makeRequest(
      "?Action={$c}&{ @args.map({ "{.key}={.value}" }).join('&') }"
    );
- 
+
    $raw ??
      $xml
      !!
      ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-  
+
   method getValidAttributes {
     %attributes<Attribute|ValidValues>.Array;
   }
-  
+
 };
 
 BEGIN {

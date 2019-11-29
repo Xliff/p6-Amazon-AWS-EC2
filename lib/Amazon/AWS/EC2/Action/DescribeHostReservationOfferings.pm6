@@ -3,10 +3,11 @@ use v6.c;
 use XML::Class;
 use Method::Also;
 
-use Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter;
-use Amazon::AWS::EC2::Response::DescribeHostReservationOfferingsResponse;
 use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter;
+use Amazon::AWS::EC2::Response::DescribeHostReservationOfferingsResponse;
 
 class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
   does XML::Class[
@@ -23,7 +24,7 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
   has Int                                     $.MaxDuration                                   is xml-element  is rw; # One year(31536000) or Three years(94608000)
   has Int                                     $.MaxResults                                    is xml-element  is rw;
   has Int                                     $.MinDuration                                   is xml-element  is rw; # One year(31536000) or Three years(94608000)
-  has Str                                     $.OfferingId                                    is xml-element  is rw; 
+  has Str                                     $.OfferingId                                    is xml-element  is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -31,12 +32,12 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
   #                 - One page (and then pass the next token).
 
   submethod BUILD (
-    :$dryRun,      
+    :$dryRun,
     :@filters,
-    :$maxDuration,  
-    :$maxResults,   
-    :$minDuration,  
-    :$offeringId,   
+    :$maxDuration,
+    :$maxResults,
+    :$minDuration,
+    :$offeringId,
     # For testing purposes only
     :$!DryRun       = False,
     :@!Filters,
@@ -47,7 +48,7 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
   ) {
     $!OfferingId = $offeringId if $offeringId.defined;
     die '$!OfferingId MUST be a String!' unless $!OfferingId ~~ Str;
-    
+
     if $minDuration {
       die '$minDuration must be an integer and have a value of 31536000, or 94608000'
       unless $minDuration == (31536000, 94608000).any;
@@ -63,11 +64,11 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
         unless $maxResults ~~ 5..500;
       $!MaxResults = $maxResults;
     }
-    
-     
+
+
     if @filters {
       @!Filters = do given @filters {
-        when .all ~~ Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter 
+        when .all ~~ Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter
           { @filters }
 
         default {
@@ -110,7 +111,7 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
         |@FilterArgs,
       );
     }
-    @args.append: Pair.new('MaxDuration', $.MaxDuration) 
+    @args.append: Pair.new('MaxDuration', $.MaxDuration)
       if $.MaxDuration.chars;
     @args.append: Pair.new('MaxResults', $.MaxResults);
     @args.append: Pair.new('MinDuration', $.MinDuration)

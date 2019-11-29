@@ -1,3 +1,4 @@
+Amazson::AWS::Roles::Eqv
 Base64::Native
 Cro::HTTP::Client
 Data::Dump::Tree

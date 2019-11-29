@@ -6,6 +6,7 @@ use XML::Class;
 
 use Amazon::AWS::EC2::Response::DescribeVolumeAttributeResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 my %attributes;
 
@@ -33,29 +34,29 @@ class Amazon::AWS::EC2::Action::DescribeVolumeAttribute is export
     :$!Attribute  = '',
     :$!DryRun     = False,
     :$!VolumeId   = ''
-    
-  ) { 
+
+  ) {
     # Abstract away into a sub done by Actions role?
     $badAttrValMsg //= qq:to/DIE/.chomp;
       Invalid Attribute value. Valid value should be any of:
       { %attributes<Attribute|Table> }
       DIE
-     
+
     $!DryRun    = $dryRun    if $dryRun.defined;
     $!Attribute = $attribute if $attribute.defined;
     $!VolumeId  = $volumeId  if $volumeId.defined;
-    
+
     die $badAttrValMsg unless
       $!Attribute.chars.not ||
       $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
   }
-  
+
   method Attribute is rw {
     Proxy.new:
       FETCH => -> $           { $!Attribute },
-      
-      STORE => -> $, Str $val { 
-       die $badAttrValMsg unless $val ~~ %attributes<Attribute|ValidValues>.any; 
+
+      STORE => -> $, Str $val {
+       die $badAttrValMsg unless $val ~~ %attributes<Attribute|ValidValues>.any;
        $!Attribute = $val;
       }
   }
@@ -68,17 +69,17 @@ class Amazon::AWS::EC2::Action::DescribeVolumeAttribute is export
   {
     die '$!Attribute is required!' unless $.Attribute.defined;
     die '$!VolumeId is required!'  unless $.VolumeId.defined;
-    
+
     # Keep things sorted.
     my @args;
-    
+
     @args.append: (
       Attribute  => $.Attribute,
       DryRun     => $.DryRun,
       VolumeId   => $.VolumeId,
       Version    => '2016-11-15'
     );
-    
+
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
@@ -89,11 +90,11 @@ class Amazon::AWS::EC2::Action::DescribeVolumeAttribute is export
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-  
+
   method getAttributes {
     %attributes<Attribute|ValidValues>.Array
   }
-  
+
 };
 
 BEGIN {
