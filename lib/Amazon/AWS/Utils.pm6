@@ -44,11 +44,11 @@ sub getLocalAccess {
     my $access_file = default_key_location.IO.slurp;
     my %idx = (
       do gather for $access_file.lines[0].split(',').kv -> $k, $v {
-        take Pair.new($v.trim, $k.trim) 
+        take Pair.new($v.trim, $k.trim)
           if $v eq ('Access key ID', 'Secret access key').any;
       }
-    );    
-    
+    );
+
     # Embedded spaces in key so curly brace hash access is mandatory.
     $access_file.lines[1].split(',')[
       %idx{'Access key ID'}.trim,
@@ -76,21 +76,21 @@ sub makeRequest (
   my ($canonUri, $canonQS) = $uri.split('?');
   $canonUri = '/' unless $canonUri.chars;
   %headers.append: (x-amz-date => $amzdate, host => host);
-  
+
   my $canonHeaders = %headers
     .pairs
     .sort( *.key )
     .map({ "{.key.lc}:{.value}" })
     .join("\n") ~ "\n";
-  
-  # Note, Content-Type is not included. Future versions of this API will need 
+
+  # Note, Content-Type is not included. Future versions of this API will need
   # to adjust for this omission.
-  
+
   # Original:
   my $signedHeaders = %headers.pairs.sort( *.key ).map( *.key.lc ).join(';');
   # Stubbed:
-  # my $signedHeaders = 'host;x-amz-date'; 
-  
+  # my $signedHeaders = 'host;x-amz-date';
+
   my $canonReq = (
     $method,
     $canonUri,
@@ -117,7 +117,7 @@ sub makeRequest (
   # # FINALLY make the request
   my $r = do given $method {
     CATCH {
-      # Dynamic lookup performed 
+      # Dynamic lookup performed
       when X::Cro::HTTP::Error {
         my $body = await .response.body;
         $body .= decode if $body ~~ Buf;
@@ -132,7 +132,7 @@ sub makeRequest (
         .rethrow
       }
     }
-    
+
     my $url = "https://{host}$uri";
     %headers<host>:delete;
     when 'GET' {
@@ -178,7 +178,7 @@ sub populateTestObject(
             my $v = (do gather for $vals.split(' ').Array { take .Str }).flat.pick;
             # Int as Str (conditional)
             $v = @range.pick.Str if $v.starts-with('\\d');
-            $v; 
+            $v;
           } else {
             (gather for ^@range.pick { take @charValue.pick }).join()
           }
@@ -220,7 +220,7 @@ sub getAttributeData($type) is export  {
   my %attributes;
 
   die 'getAttributeData only runs on classes!'
-    unless $type.HOW.^name.ends-with('ClassHOW');
+    unless $type.HOW ~~ Metamodel::ClassHOW;
 
   for $type.^attributes {
     my $attrName = .name.substr(2);
@@ -232,7 +232,7 @@ sub getAttributeData($type) is export  {
           %attributes{"{ $attrName }|ValidRegex"} = / $regex /;
         }
         when /('?')? \s* (<[\w\-]>+)+ %% [ \s* '|' \s* ]/ {
-          %attributes{"{ $attrName }|ValidValues"} = (do 
+          %attributes{"{ $attrName }|ValidValues"} = (do
             gather for $/[1].Array {
               take .Str
             }

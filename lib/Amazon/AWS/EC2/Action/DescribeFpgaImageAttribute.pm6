@@ -31,21 +31,21 @@ class Amazon::AWS::EC2::Action::DescribeFpgaImageAttribute is export
     :$!Attribute    = '',
     :$!DryRun       = False,
     :$!FpgaImageId  = ''
-    
-  ) { 
+
+  ) {
     # Abstract away into a sub done by Actions role?
     my $dieMsg = qq:to/DIE/.chomp;
       Invalid Attribute value. Valid value should be any of:
       { %attributes<Attribute|Table> }
       DIE
-     
+
     $!DryRun      = $dryRun      if $dryRun.defined;
     $!Attribute   = $attribute   if $attribute.defined;
     $!FpgaImageId = $fpgaImageId if $fpgaImageId.defined;
-    
-    die $dieMsg 
-      unless 
-        $!Attribute.chars.not || 
+
+    die $dieMsg
+      unless
+        $!Attribute.chars.not ||
         $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
   }
 
@@ -57,17 +57,17 @@ class Amazon::AWS::EC2::Action::DescribeFpgaImageAttribute is export
   {
     die '$!Attribute is required!'   unless $.Attribute.defined;
     die '$!FpgaImageId is required!' unless $.FpgaImageId.defined;
-    
+
     # Keep things sorted.
     my @args;
-    
+
     @args.append: (
       FpgaImageId   => $.FpgaImageId,
       Attribute     => $.Attribute,
       #DryRun        => $.DryRun,
       Version       => '2016-11-15'
     );
-    
+
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
@@ -78,11 +78,11 @@ class Amazon::AWS::EC2::Action::DescribeFpgaImageAttribute is export
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-  
+
   method getImageAttributes {
     %attributes<Attribute|ValidValues>.Array
   }
-  
+
 }
 
 BEGIN {
