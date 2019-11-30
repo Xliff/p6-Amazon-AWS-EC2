@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::GetConsoleOutputResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Response::GetConsoleOutputResponse;
 
 class Amazon::AWS::EC2::Action::GetConsoleOutput is export
   does XML::Class[
@@ -29,10 +31,12 @@ class Amazon::AWS::EC2::Action::GetConsoleOutput is export
     :$!DryRun         = False,
     :$!InstanceId     = '',
     :$!Latest         = False
-  ) { 
-    $!DryRun     = $dryRun     if $dryRun.defined;
-    $!InstanceId = $instanceId if $instanceId.defined;
-    $!Latest     = $latest     if $latest.defined;
+  ) {
+    my $i = ($instanceId // '').trim;
+    
+    $!DryRun     = $dryRun if $dryRun;
+    $!InstanceId = $i      if $i.chars;
+    $!Latest     = $latest if $latest;
   }
 
   method run (:$raw)

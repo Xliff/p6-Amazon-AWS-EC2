@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
 use Amazon::AWS::EC2::Filters::DescribeVpcEndpointsFilter;
 use Amazon::AWS::EC2::Response::DescribeVpcEndpointsResponse;
-use Amazon::AWS::Utils;
 
 class Amazon::AWS::EC2::Action::DescribeVpcEndpoints is export
   does XML::Class[
@@ -38,7 +40,7 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpoints is export
     :@!VpcEndpointIds,
     :$!MaxResults  = 1000
   ) {
-    $!DryRun     = $dryRun     if $dryRun.defined;
+    $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
     
     die 'MaxResults must be an integer from 1 to 1000'
@@ -82,14 +84,16 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpoints is export
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: 
+        Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+          for .pairs;
     }
     
     # Should already be sorted.
     my @args = (
-      DryRun         => $.DryRun,
+      DryRun         => $!DryRun,
       |@FilterArgs,
-      MaxResults     => $.MaxResults,
+      MaxResults     => $!MaxResults,
       Version        => '2016-11-15',
       |@VpcEndpointIdArgs
     );

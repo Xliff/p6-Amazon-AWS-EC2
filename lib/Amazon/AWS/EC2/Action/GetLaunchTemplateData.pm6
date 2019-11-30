@@ -1,13 +1,15 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::GetLaunchTemplateDataResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
-class Amazon::AWS::EC2::Action::GetLaunchTemplateData is export
+use Amazon::AWS::EC2::Response::GetLaunchTemplateDataResponse;
+
+class Amazon::AWS::EC2::Action::GetLaunchTemplateData is export 
   does XML::Class[
     xml-element   => 'GetLaunchTemplateData',
     xml-namespace => 'http://ec2.amazonaws.com/doc/2016-11-15/'
@@ -27,8 +29,10 @@ class Amazon::AWS::EC2::Action::GetLaunchTemplateData is export
     :$!DryRun         = False,
     :$!InstanceId     = ''
   ) { 
-    $!DryRun     = $dryRun     if $dryRun;
-    $!InstanceId = $instanceId if $instanceId.defined && $instanceId.trim.chars;
+    my $i = ($instanceId // '').trim;
+    
+    $!DryRun     = $dryRun if $dryRun;
+    $!InstanceId = $i      if $i.chars;
   }
 
   method run (:$raw)
@@ -56,5 +60,4 @@ class Amazon::AWS::EC2::Action::GetLaunchTemplateData is export
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-
 }

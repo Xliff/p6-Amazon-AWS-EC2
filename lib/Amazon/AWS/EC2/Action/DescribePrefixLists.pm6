@@ -1,14 +1,15 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 use XML::Class;
 
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
 use Amazon::AWS::EC2::Filters::DescribePrefixListsFilter;
 use Amazon::AWS::EC2::Response::DescribePrefixListsResponse;
-use Amazon::AWS::EC2::Types::Instance;
-use Amazon::AWS::Utils;
 
-use Amazon::AWS::Roles::Eqv;
+use Amazon::AWS::EC2::Types::Instance;
 
 class Amazon::AWS::EC2::Action::DescribePrefixLists is export
   does XML::Class[xml-element => 'DescribePrefixLists']
@@ -74,7 +75,8 @@ class Amazon::AWS::EC2::Action::DescribePrefixLists is export
     my $cnt = 1;
     my @FilterArgs;
     for @.Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     $cnt = 1;
@@ -87,7 +89,7 @@ class Amazon::AWS::EC2::Action::DescribePrefixLists is export
     } else {
       # Should already be sorted.
       @args = (
-        DryRun         => $.DryRun,
+        DryRun         => $!DryRun,
         |@FilterArgs,
         |@PrefixListArgs,
         Version        => '2016-11-15'

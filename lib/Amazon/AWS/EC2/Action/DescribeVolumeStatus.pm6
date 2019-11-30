@@ -1,15 +1,17 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
 use Amazon::AWS::EC2::Filters::DescribeVolumeStatusFilter;
 use Amazon::AWS::EC2::Response::DescribeVolumeStatusResponse;
+
 use Amazon::AWS::EC2::Types::Instance;
 use Amazon::AWS::EC2::Types::Snapshot;
 use Amazon::AWS::EC2::Types::Volume;
-use Amazon::AWS::Utils;
-use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeVolumeStatus is export
   does XML::Class[
@@ -36,17 +38,20 @@ class Amazon::AWS::EC2::Action::DescribeVolumeStatus is export
     :$dryRun,
     :@filters,
     :$maxResults,
-    :@volumes,
+    :@volumeIds,
     # For testing purposes only
     :$!DryRun     = False,
     :@!Filters,
-    :$!MaxResults = 1000,
+    :$!MaxResults = 0,
     :@!VolumeIds,
     # :$!NextToken  = '',
   ) {
-    if @volumes {
+    $!DryRun     = $dryRun     if $dryRun;
+    $!MaxResults = $maxResults if $maxResults.defined;
+    
+    if @volumeIds {
       my @valid-types = (Str, Instance, Snapshot, Volume);
-      @!VolumeIds = @volumes.map({
+      @!VolumeIds = @volumeIds.map({
         do {
           when Str      { $_                 }
           when Instance { .volumeId          }
@@ -57,7 +62,7 @@ class Amazon::AWS::EC2::Action::DescribeVolumeStatus is export
             die qq:to/DIE/.chomp;
             Invalid value passed to \@volumes. Should only contain VolumeId-compatible objects. 
             Invalid objects found: { 
-              @volumes.map( * !~~ @valid-types.any ).unique.join(', ') 
+              @volumeIds.map( * !~~ @valid-types.any ).unique.join(', ') 
             }
             DIE
 
@@ -88,34 +93,35 @@ class Amazon::AWS::EC2::Action::DescribeVolumeStatus is export
       execute
     >
   {
-    die 'Cannot use @.volumes and $.maxResults in the same call to DescribeVolumeStatus'
-      if $.MaxResults.defined && @.VolumeIds;
+    die 'Cannot use volumes and maxResults in the same call to DescribeVolumeStatus'
+      if $!MaxResults && @!VolumeIds;
 
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+        for .pairs;
     }
     
     $cnt = 1;
     my @VolumeArgs;
-    @VolumeArgs.push: Pair.new("VolumeId.{$cnt++}", $_) for @.VolumeIds;
+    @VolumeArgs.push: Pair.new("VolumeId.{$cnt++}", $_) for @!VolumeIds;
 
     # Should already be sorted.
     my @args;
 
-    if $nextToken.chars {
-      @args = ( nextToken => $nextToken );
+    if (my $nt = $nextToken.trim).chars {
+      @args = ( nextToken => $nt );
     } else {
       @args = (
-        DryRun         => $.DryRun
+         DryRun => $!DryRun,
+         |@FilterArgs
       );
-      @args.append: @FilterArgs if @FilterArgs;
+      @args.push: (MaxResults => $!MaxResults) if $!MaxResults;
       @args.append: (
-        MaxResults     => $.MaxResults,
-        Version        => '2016-11-15'
+        Version => '2016-11-15',
+        |@VolumeArgs
       );
-      @args.append: @VolumeArgs if @VolumeArgs;
     }
 
     # XXX - Add error handling to makeRequest!

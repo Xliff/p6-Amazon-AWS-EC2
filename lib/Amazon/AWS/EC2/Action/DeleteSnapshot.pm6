@@ -1,4 +1,4 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
@@ -40,12 +40,12 @@ class Amazon::AWS::EC2::Action::DeleteSnapshot is export
     >
   {
     die 'SnapshotId is required!' 
-      unless $!SnapshotId.defined && $!SnapshotId.trim.chars;
+      unless $!SnapshotId.defined && $!SnapshotId.chars;
 
     # Should already be sorted.
     my @args = (
-      DryRun     => $.DryRun,
-      SnapshotId => $.SnapshotId,
+      DryRun     => $!DryRun,
+      SnapshotId => $!SnapshotId,
       Version    => '2016-11-15'
     );
 

@@ -3,8 +3,8 @@ use v6.d;
 use Method::Also;
 use XML::Class;
 
-use Amazon::AWS::Roles::Eqv;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
 
 use Amazon::AWS::EC2::Response::DescribeIdFormatResponse;
 
@@ -33,16 +33,17 @@ class Amazon::AWS::EC2::Action::DescribeIdFormat is export
   submethod BUILD (
     Str :$resource,
     # Testing purposes ONLY!
-    Str :$!Resource
+    Str :$!Resource = ''
   ) {
     my $dieMsg = qq:to/DIE/.chomp;
       Invalid Resource value. Resource value should be any of:
       { %attributes<Resource|Table> }
       DIE
 
-    $!Resource = $resource if $resource;
+    $!Resource = $resource if $resource.defined && $resource.trim.chars;
     
-    die $dieMsg unless $!Resource.defined.not ||
+    die $dieMsg unless %*ENV<P6_AWS_TESTING>.defined ||
+                       $!Resource.defined.not ||
                        $!Resource ~~ %attributes<Resource|ValidValues>.any;
   }
 
@@ -53,10 +54,9 @@ class Amazon::AWS::EC2::Action::DescribeIdFormat is export
     >
   {
     # Should already be sorted.
-    my @args = (
-      Version  => '2016-11-15'
-    );
-    @args.unshift: Pair.new('Resource', $.Resource) if $.Resource.defined;
+    my @args;
+    @args.push: Pair.new('Resource', $!Resource) if $!Resource.chars;
+    @args.push: (Version  => '2016-11-15');
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(

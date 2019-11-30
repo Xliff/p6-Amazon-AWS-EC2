@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
 use Amazon::AWS::EC2::Filters::DescribeTagsFilter;
 use Amazon::AWS::EC2::Response::DescribeTagsResponse;
-use Amazon::AWS::Utils;
 
 class Amazon::AWS::EC2::Action::DescribeTags is export
   does XML::Class[
@@ -36,7 +38,7 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
     :$!MaxResults = 1000,
     #:$!nextToken  = '',
   ) {
-    $!DryRun = $dryRun if $dryRun.defined;
+    $!DryRun = $dryRun if $dryRun;
     if $maxResults.defined {
       die ':$maxResults must be a number from 5 to 1000'
         unless $maxResults ~~ 5..1000;
@@ -56,31 +58,36 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
         }
       };
     }
-
   }
 
-  method run (:$nextToken = '', :$raw)
+  
+  method run (Str :$nextToken is copy, :$raw)
     is also<
       do
       execute
     >
   {
+    # Prevent reassignment to an undefined valie.
+    $nextToken //= '';
+    
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: 
+        Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+          for .pairs;
     }
 
     # Should already be sorted.
     my @args;
 
-    if $nextToken.chars {
-      @args = ( nextToken => $nextToken );
+    if (my $nt = $nextToken.trim).chars {
+      @args = ( nextToken => $nt );
     } else {
       @args = (
-        DryRun         => $.DryRun,
+        DryRun         => $!DryRun,
         |@FilterArgs,
-        MaxResults     => $.MaxResults,
+        MaxResults     => $!MaxResults,
         Version        => '2016-11-15'
       );
     }

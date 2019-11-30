@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::DescribeVolumeAttributeResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Response::DescribeVolumeAttributeResponse;
 
 my %attributes;
 
@@ -41,9 +43,9 @@ class Amazon::AWS::EC2::Action::DescribeVolumeAttribute is export
       { %attributes<Attribute|Table> }
       DIE
      
-    $!DryRun    = $dryRun    if $dryRun.defined;
-    $!Attribute = $attribute if $attribute.defined;
-    $!VolumeId  = $volumeId  if $volumeId.defined;
+    $!DryRun    = $dryRun    if $dryRun;
+    $!Attribute = $attribute if $attribute.defined && $attribute.trim.chars;
+    $!VolumeId  = $volumeId  if $volumeId.defined && $volumeId.trim.chars;
     
     die $badAttrValMsg unless
       $!Attribute.chars.not ||
@@ -66,16 +68,16 @@ class Amazon::AWS::EC2::Action::DescribeVolumeAttribute is export
       execute
     >
   {
-    die '$!Attribute is required!' unless $.Attribute.defined;
-    die '$!VolumeId is required!'  unless $.VolumeId.defined;
+    die '$!Attribute is required!' unless $!Attribute.chars;
+    die '$!VolumeId is required!'  unless $!VolumeId.chars;
     
-    # Keep things sorted.
+    # Keep things sorted. No encoding necessary.
     my @args;
     
     @args.append: (
-      Attribute  => $.Attribute,
-      DryRun     => $.DryRun,
-      VolumeId   => $.VolumeId,
+      Attribute  => $!Attribute,
+      DryRun     => $!DryRun,
+      VolumeId   => $!VolumeId,
       Version    => '2016-11-15'
     );
     

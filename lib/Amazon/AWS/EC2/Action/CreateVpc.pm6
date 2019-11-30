@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::CreateVpcResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Response::CreateVpcResponse;
 
 my %attributes;
 
@@ -22,7 +24,7 @@ class Amazon::AWS::EC2::Action::CreateVpc is export
   has Bool $.AmazonProvidedIpv6CidrBlock is xml-element is xml-skip-null is rw;
   has Str  $.CidrBlock                   is xml-element is xml-skip-null is rw;
   has Bool $.DryRun                      is xml-element is xml-skip-null is rw;
-  has Str  $.InstanceTenacy              is xml-element is xml-skip-null is rw;   # = default | dedicated | host
+  has Str  $.InstanceTenacy              is xml-element is xml-skip-null is rw;   #=  default | dedicated | host 
 
   submethod BUILD (
     :$amazonProvidedIpv6CidrBlock,
@@ -43,13 +45,12 @@ class Amazon::AWS::EC2::Action::CreateVpc is export
 
     my $dieMsg = qq:to/DIE/;
     InstanceTenacy value is invalid, you must use one of the following values:
-    { %attributes<InstanceTenacy|ValidValues> }
+    { %attributes<InstanceTenacy|Table> }
     DIE
-
-    die $dieMsg
-      unless $!InstanceTenacy.chars ||
-             $!InstanceTenacy ~~ %attributes<InstanceTenacy|ValidValues>.any
-
+    
+    die $dieMsg unless %*ENV<P6_AWS_TESTING>.defined ||
+                       $!InstanceTenacy.chars || 
+                       $!InstanceTenacy ~~ self.getValidTenacyValues.any
   }
 
   method run (:$raw)
@@ -58,32 +59,31 @@ class Amazon::AWS::EC2::Action::CreateVpc is export
       execute
     >
   {
-    die 'CidrBlock is required!'
-      unless $.CidrBlock.defined && $.CidrBlock.trim.chars;
-
+    die 'CidrBlock is required!' 
+      unless $!CidrBlock.defined && $!CidrBlock.chars;
+      
     my $dieMsg = qq:to/DIE/;
     CidrBlock is invalid. Please specify a valid tenacy cidr specification.
     Note that the largest block you can request is a /16, and the smallest,
     a /28.
     DIE
-
-    die $dieMsg unless $.CidrBlock ~~ / '/' (\d ** 2) $/;
+    
+    die $dieMsg unless $!CidrBlock ~~ / '/' (\d ** 2) $/;
     die $dieMsg unless $/[0].Int ~~ 16..28;
 
     # Added due to comment on documentation page, located here:
     # https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVpc.html
     die '"host" value currently not allowed for InstanceTenacy'
-      if $.InstanceTenacy eq 'host';
-
+      if $!InstanceTenacy eq 'host';
     # Should already be sorted.
     my @args = (
-      AmazonProvidedIpv6CidrBlock => $.AmazonProvidedIpv6CidrBlock,
-      CidrBlock                   => $.CidrBlock,
+      AmazonProvidedIpv6CidrBlock => urlEncode($!AmazonProvidedIpv6CidrBlock),
+      CidrBlock                   => urlEncode($!CidrBlock),
       DryRun                      => $.DryRun
     );
-    @args.push: Pair.new('InstanceTenacy', $.InstanceTenacy)
-      if $.InstanceTenacy.chars;
-    @args.push: Pair.new('Version', '2016-11-15');
+    @args.push:  (InstanceTenacy  => $!InstanceTenacy)
+      if $!InstanceTenacy.chars;
+    @args.push:  (Version         => '2016-11-15');
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(

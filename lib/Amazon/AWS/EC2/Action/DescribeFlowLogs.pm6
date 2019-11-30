@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
 use Amazon::AWS::EC2::Filters::DescribeFlowLogsFilter;
 use Amazon::AWS::EC2::Response::DescribeFlowLogsResponse;
-use Amazon::AWS::Utils;
 
 class Amazon::AWS::EC2::Action::DescribeFlowLogs is export
   does XML::Class[
@@ -38,7 +40,7 @@ class Amazon::AWS::EC2::Action::DescribeFlowLogs is export
     :@!FlowLogIds,
     :$!MaxResults  = 1000
   ) {
-    $!DryRun = $dryRun         if $dryRun.defined;
+    $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
     
     if @flowLogs {
@@ -72,22 +74,22 @@ class Amazon::AWS::EC2::Action::DescribeFlowLogs is export
     my @FlowLogIdArgs;
     my $cnt = 1;
     for @!FlowLogIds {
-      @FlowLogIdArgs.push: Pair.new("FlowLogId.{$cnt++}.{.key}", .value)
-        for .pairs;
+      @FlowLogIdArgs.push: Pair.new("FlowLogId.{$cnt++}", $_);
     }
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
     
     # Should already be sorted.
     my @args = (
-      DryRun         => $.DryRun,
+      DryRun         => $!DryRun,
       |@FilterArgs,
       |@FlowLogIdArgs,
-      MaxResults     => $.MaxResults,
+      MaxResults     => $!MaxResults,
       Version        => '2016-11-15'
     );
 

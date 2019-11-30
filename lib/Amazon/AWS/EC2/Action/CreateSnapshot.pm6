@@ -4,6 +4,7 @@ use Method::Also;
 
 use XML::Class;
 
+use Amazon::AWS::Roles::Eqv;
 use Amazon::AWS::Utils;
 
 use Amazon::AWS::EC2::Types::TagSpecification;
@@ -16,12 +17,12 @@ class Amazon::AWS::EC2::Action::CreateSnapshot is export
   also does Amazon::AWS::Roles::Eqv;
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
-  
+
   has Str               $.Description                                                  is xml-element                      is xml-skip-null is rw;
   has Bool              $.DryRun                                                       is xml-element                      is xml-skip-null is rw;
   has TagSpecification  @.TagSpecifications  is xml-container('tagSpecificationSet')   is xml-element('item', :over-ride)  is xml-skip-null is rw;
   has Str               $.VolumeId                                                     is xml-element                      is xml-skip-null is rw;
-  
+
   submethod BUILD (
     :$description,
     :$dryRun,
@@ -32,30 +33,30 @@ class Amazon::AWS::EC2::Action::CreateSnapshot is export
     :$!DryRun           = False,
     :@!TagSpecifications,
     :$!VolumeId         = '',
-  ) { 
+  ) {
     $!DryRun            = $dryRun if $dryRun;
-    
+
     if @tagSpecifications {
       @!TagSpecifications = do given @tagSpecifications {
         when .all ~~ TagSpecification
           { $_ }
-          
+
         default {
           die qq:to/DIE/
           Invalid values passed to \@tagSpecifications. Elements must only consist of TagSpecifications, but also contains:
           { .grep( * !~~ TagSpecification ).map( *.^name ).join(', ') }
           DIE
-          
+
         }
       }
     }
-        
-    $!Description= $description 
+
+    $!Description= $description
       if $description.defined && $description.trim.chars;
     $!VolumeId = $volumeId
       if $volumeId.defined && $volumeId.trim.chars;
   }
-  
+
   method run (:$raw)
     is also<
       do
@@ -63,22 +64,25 @@ class Amazon::AWS::EC2::Action::CreateSnapshot is export
     >
   {
     die "VolumeId is required. Please set this attribute before executing .run!"
-      unless $.VolumeId.chars;
-      
+      unless $!VolumeId.chars;
+
     my @TagSpecArgs;
     my $cnt = 1;
     for @!TagSpecifications {
-      @TagSpecArgs.push: Pair.new("TagSpecification.{$cnt++}", $_);
+      @TagSpecArgs.push:
+        Pair.new("TagSpecification.{$cnt++}.{.key}", urlEncode(.value))
+          for .pairs;
     }
-      
+
     # @Args must be sorted by key name.
     my @args;
-    @args.push:   (Description => $.Description)  if $.Description.chars;
+    @args.push:   (Description => urlEncode($!Description))
+      if $!Description.chars;
     @args.append: (
-      DryRun           => $.DryRun,
+      DryRun           => $!DryRun,
       |@TagSpecArgs,
       Version          => '2016-11-15',
-      VolumeId         => $.VolumeId
+      VolumeId         => $!VolumeId
     );
 
     # XXX - Add error handling to makeRequest!
@@ -91,5 +95,5 @@ class Amazon::AWS::EC2::Action::CreateSnapshot is export
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-   
+
 }

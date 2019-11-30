@@ -11,6 +11,13 @@ class Amazon::AWS::EC2::Response::DescribeLaunchTemplateVersionsResponse is expo
 {
   also does Amazon::AWS::Roles::Response;
 
-  has LaunchTemplateVersion    @.launchTemplateVersions    is xml-element    is xml-container('launchTemplateVersionSet')      is rw; 
-  has Str                      $.nextToken                 is xml-element                                                      is rw; 
+  has LaunchTemplateVersion @.launchTemplateVersions
+    is xml-container('launchTemplateVersionSet')
+    is xml-skip-null
+    is rw; 
+    
+  has Str $.nextToken               
+    is xml-element
+    is xml-skip-null
+    is rw; 
 }

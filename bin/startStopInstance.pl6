@@ -1,6 +1,7 @@
 use v6.d;
 
 use Amazon::AWS::Action::DescribeInstances;
+use Amazon::AWS::ACtion::StartInstances;
 use Amazon::AWS::Action::StopInstances;
 
 sub MAIN (
@@ -8,13 +9,18 @@ sub MAIN (
   :$id,             #= Use an instance ID
   :$key   is copy,  #= Key of tag to use in search. Not to be used with --name
   :$value is copy   #= Value of tag to search for. Not to be used with --name
+  :$start = False,  #= Start an instance
+  :$stop  = False,  #= Stop an instance
 ) {
+  die 'Must use either --start or --stop' unless $start || $stop;
+  die 'Must use either --start or --stop' if     $start && $stop;
+
   die 'Cannot use --name with --key or --value'
     if $name.defined && ($key.defined || $value.defined);
 
   my $instanceID = do {
     when $name.defined {
-      ($key, $value) = ('Name', $name) if $name.defined;
+      ($key, $value) = ('Name', $name);
       DescribeInstances.new
                        .run
                        .reservations
@@ -38,7 +44,8 @@ sub MAIN (
       }
     }
 
-    my $r = StopInstances.new( :$instanceID ).run;
+    my $r = $start ?? StartInstances.new(:$instanceID ).run !!
+                      StopInstances.new( :$instanceID ).run;
     say "Instance state is now: { $r.instance-states[0].currentState.name }";
   }
 }

@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Response::DescribeNetworkInterfaceAttributeResponse;
 
 my %attributes;
 
@@ -39,14 +41,14 @@ constant myclass := (
         { %attributes<Attribute|Table> }
         DIE
        
-      $!DryRun        = $dryRun     if $dryRun.defined;
-      $!Attribute     = $attribute  if $attribute.defined;
-      die $dieMsg unless $!Attribute.defined.not ||
-                         $!Attribute.chars.not   ||
+      $!DryRun        = $dryRun     if $dryRun;
+      $!Attribute     = $attribute  if $attribute.defined && $attribute.trim.chars;
+      
+      die $dieMsg unless $!Attribute.chars.not   ||
                          $!Attribute ~~ %attributes<Attribute|ValidValues>.any;
       
       $!NetworkInterfaceId = $networkInterfaceId 
-        if $networkInterfaceId.defined;
+        if $networkInterfaceId.defined && $networkInterfaceId.trim.chars;
     }
 
     method run (:$raw)
@@ -56,19 +58,18 @@ constant myclass := (
       >
     {
       die 'NetworkInterfaceId is required!' 
-        unless $.NetworkInterfaceId.defined && $.NetworkInterfaceId.trim.chars;
+        unless $!NetworkInterfaceId.defined && $!NetworkInterfaceId.chars;
         
       die 'Attribute is required'
-        unless $.Attribute.defined && $.Attribute.trim.chars;
+        unless $!Attribute.defined && $!Attribute.chars;
 
       # Should already be sorted.
       my @args = (
-        DryRun     => $.DryRun,
-        InstanceId => $.InstanceId,
-        Version    => '2016-11-15'
+        Attribute          => $!Attribute,
+        DryRun             => $!DryRun,
+        NetworkInterfaceId => $!NetworkInterfaceId,
+        Version            => '2016-11-15'
       );
-      @args.unshift: Pair.new('Attribute', $.Attribute) 
-        if $.Attribute.trim.chars;
 
       # XXX - Add error handling to makeRequest!
       my $xml = makeRequest(

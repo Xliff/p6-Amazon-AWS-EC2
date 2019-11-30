@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::DescribeAccountAttributesResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Response::DescribeAccountAttributesResponse;
 
 my %attributes;
 
@@ -63,17 +65,17 @@ class Amazon::AWS::EC2::Action::DescribeAccountAttributes is export
   {
     # Keep things sorted.
     my @args;
-    if @.AttributeNames {
+    if @!AttributeNames {
       my @AttributeArgs;
       my $cnt = 1;
-      for @.AttributeNames {
+      for @!AttributeNames {
         @AttributeArgs.push: Pair.new("AttributeName.{$cnt++}", .value) 
           for .pairs;
       }
       @args.append: @AttributeArgs;
     }
     @args.append: (
-      DryRun        => $.DryRun,
+      DryRun        => $!DryRun,
       Version       => '2016-11-15'
     );
     

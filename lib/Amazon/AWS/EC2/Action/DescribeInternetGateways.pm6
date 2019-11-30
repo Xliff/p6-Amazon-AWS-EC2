@@ -1,13 +1,15 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
-use Amazon::AWS::EC2::Filters::DescribeInternetGatewaysFilter;
-use Amazon::AWS::EC2::Response::DescribeInternetGatewaysResponse;
-use Amazon::AWS::EC2::Types::Volume;
 use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Filters::DescribeInternetGatewaysFilter;
+use Amazon::AWS::EC2::Response::DescribeInternetGatewaysResponse;
+
+use Amazon::AWS::EC2::Types::Volume;
 
 class Amazon::AWS::EC2::Action::DescribeInternetGateways is export
   does XML::Class[
@@ -40,6 +42,8 @@ class Amazon::AWS::EC2::Action::DescribeInternetGateways is export
     :@!InternetGatewaysIds,
     :$!MaxResults           = 1000
   ) {
+    $!DryRun = $dryRun if $dryRun;
+    
     die '$maxResutlts must be an integer between 5 and 1000'
       unless $!MaxResults ~~ 5..1000;
       
@@ -89,12 +93,15 @@ class Amazon::AWS::EC2::Action::DescribeInternetGateways is export
 
     my $cnt = 1;
     my @InternetGatewaysIdArgs;
-    @InternetGatewaysIdArgs.push: Pair.new("InternetGatewaysId.{$cnt++}", $_) for @.InternetGatewaysIds;
+    @InternetGatewaysIdArgs.push: 
+      Pair.new("InternetGatewaysId.{$cnt++}", $_) 
+        for @!InternetGatewaysIds;
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     # Should already be sorted.
@@ -104,10 +111,10 @@ class Amazon::AWS::EC2::Action::DescribeInternetGateways is export
       @args = ( nextToken => $nextToken );
     } else {
       @args = (
-        DryRun         => $.DryRun,
+        DryRun         => $!DryRun,
         |@FilterArgs,
         |@InternetGatewaysIdArgs,
-        MaxResults     => $.MaxResults,
+        MaxResults     => $!MaxResults,
         Version        => '2016-11-15'
       );
     }

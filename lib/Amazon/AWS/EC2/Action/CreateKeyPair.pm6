@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::CreateKeyPairResponse;
+use Amazon::AWS::Roles::Eqv;
 use Amazon::AWS::Utils;
+
+use Amazon::AWS::EC2::Response::CreateKeyPairResponse;
 
 class Amazon::AWS::EC2::Action::CreateKeyPair is export
   does XML::Class[
@@ -26,7 +28,7 @@ class Amazon::AWS::EC2::Action::CreateKeyPair is export
     # For deserialization purposes, only!
     :$!DryRun  = False,
     :$!KeyName = '',
-  ) { 
+  ) {
     $!DryRun  = $dryRun  if $dryRun;
     $!KeyName = $keyName if $keyName.defined;
   }
@@ -37,13 +39,13 @@ class Amazon::AWS::EC2::Action::CreateKeyPair is export
       execute
     >
   {
-    die 'KeyName is required!' 
-      unless $.KeyName.defined && $.KeyName.trim.chars;
+    die 'KeyName is required!'
+      unless $!KeyName.defined && $!KeyName.chars;
 
     # Should already be sorted.
     my @args = (
-      DryRun  => $.DryRun,
-      KeyName => $.KeyName,
+      DryRun  => $!DryRun,
+      KeyName => urlEncode($!KeyName),
       Version => '2016-11-15'
     );
 

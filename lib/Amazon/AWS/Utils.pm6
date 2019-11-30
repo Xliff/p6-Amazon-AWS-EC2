@@ -19,6 +19,8 @@ constant terminator           = 'aws4_request';
 
 unit package Amazon::AWS::Utils;
 
+our $number-of-requests = 0;
+
 my (@range, @charValue);
 BEGIN {
   @range     = (5...30);
@@ -57,18 +59,13 @@ sub getLocalAccess {
   }
 }
 
-sub makeRequest (
-  $uri,
-  :$method = 'GET',
-  :$service,              #= For future use
-  :$body,
-  *%headers
-) is export {
-  say "URI: { $uri }";
+sub urlEncode($val) is export {
+  # From: https://www.rosettacode.org/wiki/URL_encoding#Perl_6
+  $val.subst(/<-alnum>/, *.ord.fmt("%%%02X"), :g);
+}
 
-  die 'URI exceeds maximum recommended size of 1024 characters. Please shorten.'
-    unless $uri.chars < 1025;
-
+sub makeHeaders ($uri, $method) {
+  my %headers;
   my $t = DateTime.now(timezone => 0);            # MUST be in GMT
   my $amzdate = strftime('%Y%m%dT%H%M%SZ', $t);
   #my $amzdate = '20190604T233232Z';
@@ -114,6 +111,21 @@ sub makeRequest (
     "{algorithm} Credential={$ak}/{$credScope}, SignedHeaders={$signedHeaders
   }, Signature={$signature}";
 
+  %headers;
+}
+
+sub makeRequest (
+  $uri       is copy,
+  :$method   = 'GET',
+  :$service,              #= For future use
+  :$body,
+  *%headers
+) is export {
+  say "URI: { $uri }";
+
+  die 'URI exceeds maximum recommended size of 1024 characters. Please shorten.'
+    unless $uri.chars < 1025;
+
   # # FINALLY make the request
   my $r = do given $method {
     CATCH {
@@ -133,6 +145,7 @@ sub makeRequest (
       }
     }
 
+    %headers.append( makeHeaders($uri, $method) );
     my $url = "https://{host}$uri";
     %headers<host>:delete;
     when 'GET' {
@@ -142,6 +155,7 @@ sub makeRequest (
       await Cro::HTTP::Client.post:
         $url, headers => %headers.pairs, body => $body;
     }
+    $number-of-requests++;
   }
   my $b = await $r.body;
   $b;
@@ -246,4 +260,11 @@ sub getAttributeData($type) is export  {
   %attributes;
 }
 
-sub urlEncode($v) is export { $v }
+sub errorBadContents(\a, \t) is export {
+
+  die qq:to/DIE/.chomp;
+  Invalid value passed to { a.VAR.name }. Should only contain { t.^shortname } objects, but also contains:
+  { a.grep( * !~~ t ).map( *.^name ).unique.join('. ') }
+  DIE
+
+}

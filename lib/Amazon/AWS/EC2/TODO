@@ -70,6 +70,10 @@
   + DeleteSnapshot
   + DescribeVpcEndpoint
   + GetPasswordData
+  + GetLaunchTemplateData
+  + DescribeVpcEndpointConnectionNotifications
+  + DescribeLaunchTemplates
+  + DescribeLaunchTemplateVersions
   
   # Might need vpc: action permissions as well!
   e CreateDefaultSubnet (Completed, but no valid response retrieved)
@@ -81,10 +85,29 @@
   - CreateTags (Needs resource id)
   - CreateCapacityReservation
   - CreateNatGateway
-  - CreateVolume
+  = CreateVolume (Not run tested)
+  = DescribeVpcEndpointConnections (Run tested, but no data to check against)
+  ...
+  - RunInstances (Ultimate goal!)
+  - CreatePlacementGroupo
   
   # Should create corresponding Delete actions for all Create actions!
+
+- PRIORITY! Ensure all URL values are properly encoded across all ACTIONS!
+  - When processing BUILD overrides, insure strings are checked against .defined AND .trim.chars
+  - Insure that all attribute access uses $! rather than $.
+  - If necessary, reorder @args processing so that it is not so special cased.
   
+    # MAY NEED ANOTHER PASS:
+  - Insure that a Nil check is performed on $nextToken, if it is used. If it is 
+    detected, if $nextToken is not '' and is not defined, warn, and do NOT 
+    finish the operation. -- SEE DescribeTags.run for the proper logic.
+  - Insure MaxResults is properly checked
+  
+- MEDIUM PRIORITY!
+  - All main filter objects will need an .addTag method, since the Tag object
+    will not be visible to outside code!
+
 √ Add timing harness to TestUtils and TestTemplate so that timings per e-level
   can be obtained and documented. E-level = 10, 100, 1000, ... *
   + Completed initial version, but see about writing TestTimings.pm6 to abstract
@@ -140,4 +163,7 @@
       rtbassoc - Route Table Association
       nat      - NAT Gateway
       dopt     - DHCP Options Set
+      tmt      - Test Mirror Target
+      vpce-nfn - VPC Endpoint Notification
+      lt       - Launch Template
     

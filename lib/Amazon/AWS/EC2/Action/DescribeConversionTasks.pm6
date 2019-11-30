@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::DescribeConversionTasksResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Response::DescribeConversionTasksResponse;
 
 class Amazon::AWS::EC2::Action::DescribeConversionTasks is export
   does XML::Class[
@@ -50,18 +52,14 @@ DIE
     >
   {
     # Keep things sorted.
-    my @args;
-    if @.ConversionTaskIds {
-      my @ConversionTaskIdArgs;
-      my $cnt = 1;
-      for @.ConversionTaskIds {
-        @ConversionTaskIdArgs.push: Pair.new("ConversionTaskId.{$cnt++}", .value) 
-          for .pairs;
-      }
-      @args.append: @ConversionTaskIdArgs;
+    my (@args, @ConversionTaskIdArgs);
+    my $cnt = 1;
+    for @!ConversionTaskIds {
+      @ConversionTaskIdArgs.push: Pair.new("ConversionTaskId.{$cnt++}", $_) 
     }
     @args.append: (
-      DryRun        => $.DryRun,
+      |@ConversionTaskIdArgs,
+      DryRun        => $!DryRun,
       Version       => '2016-11-15'
     );
     

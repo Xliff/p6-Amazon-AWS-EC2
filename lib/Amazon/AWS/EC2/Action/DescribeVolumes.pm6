@@ -1,14 +1,15 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
 use Amazon::AWS::EC2::Filters::DescribeVolumesFilter;
 use Amazon::AWS::EC2::Response::DescribeVolumesResponse;
-use Amazon::AWS::EC2::Types::Volume;
-use Amazon::AWS::Utils;
 
-use Amazon::AWS::Roles::Eqv;
+use Amazon::AWS::EC2::Types::Volume;
 
 class Amazon::AWS::EC2::Action::DescribeVolumes is export
   does XML::Class[
@@ -43,7 +44,7 @@ class Amazon::AWS::EC2::Action::DescribeVolumes is export
     :$!MaxResults = 1000,
     :@!VolumeIds,
   ) {
-    $!DryRun = $dryRun if $dryRun.defined;
+    $!DryRun = $dryRun if $dryRun;
     if $maxResults.defined {
       die ':$maxResults must be a number from 5 to 1000'
         unless $maxResults ~~ 5..1000;
@@ -75,34 +76,36 @@ class Amazon::AWS::EC2::Action::DescribeVolumes is export
 
   }
 
-  method run (:$nextToken = '', :$raw = False)
+  method run (Str :$nextToken is copy, :$raw = False)
     is also<
       do
       execute
     >
   {
+    $nextToken //= '';
+    
     my @FilterArgs;
     my $cnt = 1;
-    for @.Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+    for @!Filters {
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+        for .pairs;
     }
     
    $cnt = 1;
    my @VolumeIdArgs;
-   @VolumeIdArgs.push: Pair.new("VolumeId.{$cnt++}", $_) for @.VolumeIds;
-
+   @VolumeIdArgs.push: Pair.new("VolumeId.{$cnt++}", $_) for @!VolumeIds;
 
     # Should already be sorted.
     my @args;
 
-    if $nextToken.chars {
-      @args = ( nextToken => $nextToken );
+    if (my $nt = $nextToken.trim).chars {
+      @args = ( nextToken => $nt );
     } else {
       @args = (
-        DryRun         => $.DryRun,
+        DryRun         => $!DryRun,
         |@FilterArgs,
         |@VolumeIdArgs,
-        MaxResults     => $.MaxResults,
+        MaxResults     => $!MaxResults,
         Version        => '2016-11-15'
       );
     }

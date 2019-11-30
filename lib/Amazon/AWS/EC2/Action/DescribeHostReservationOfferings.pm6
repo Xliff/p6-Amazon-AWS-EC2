@@ -1,12 +1,13 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
-use Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter;
-use Amazon::AWS::EC2::Response::DescribeHostReservationOfferingsResponse;
 use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter;
+use Amazon::AWS::EC2::Response::DescribeHostReservationOfferingsResponse;
 
 class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
   does XML::Class[
@@ -106,18 +107,18 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
       @args = ( nextToken => $nextToken );
     } else {
       @args = (
-        DryRun         => $.DryRun,
+        DryRun      => $!DryRun,
         |@FilterArgs,
+        MaxDuration => $!MaxDuration,
+        MaxResults  => $!MaxResults,
+        MinDuration => $!MinDuration
       );
+      
+      @args.append: Pair.new('OfferingId', $!OfferingId)
+        if $.OfferingId.chars;
+        
+      @args.push: Pair.new('Version', '2016-11-15');
     }
-    @args.append: Pair.new('MaxDuration', $.MaxDuration) 
-      if $.MaxDuration.chars;
-    @args.append: Pair.new('MaxResults', $.MaxResults);
-    @args.append: Pair.new('MinDuration', $.MinDuration)
-      if $.MinDuration.chars;
-    @args.append: Pair.new('OfferingId', $.OfferingId)
-      if $.OfferingId.chars;
-    @args.append: Pair.new('Version', '2016-11-15');
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(

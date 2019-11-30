@@ -1,4 +1,4 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
@@ -40,13 +40,13 @@ class Amazon::AWS::EC2::Action::CreateDefaultSubnet is export
     >
   {
     die 'AvailabilityZone is required!' 
-      unless $.AvailabilityZone.defined && $.AvailabilityZone.trim.chars;
+      unless $!AvailabilityZone.defined && $!AvailabilityZone.chars;
 
     # Should already be sorted.
     my @args = (
-      DryRun  => $.DryRun,
-      AvailabilityZone => $.AvailabilityZone,
-      Version => '2016-11-15'
+      DryRun           => $!DryRun,
+      AvailabilityZone => $!AvailabilityZone,
+      Version          => '2016-11-15'
     );
 
     # XXX - Add error handling to makeRequest!

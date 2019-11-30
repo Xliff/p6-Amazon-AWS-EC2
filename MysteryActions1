@@ -1,0 +1,5 @@
+Amazon::AWS::EC2::Action::DescribeInstances => Nil
+Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions => Nil
+Amazon::AWS::EC2::Action::GetLaunchTemplateData => Nil
+Amazon::AWS::EC2::Action::StartInstances => Nil
+Amazon::AWS::EC2::Action::StopInstances => Nil

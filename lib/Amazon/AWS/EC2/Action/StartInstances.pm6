@@ -1,14 +1,14 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 use XML::Class;
 
 use Amazon::AWS::EC2::Types::Instance;
 
-use Amazon::AWS::EC2::Response::StartInstancesResponse;
 use Amazon::AWS::Utils;
-
 use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Response::StartInstancesResponse;
 
 class Amazon::AWS::EC2::Action::StartInstances is export
   does XML::Class[
@@ -33,14 +33,16 @@ class Amazon::AWS::EC2::Action::StartInstances is export
     :$!DryRun         = False,
     :@!InstanceIds
   ) {
-    $!AdditionalInfo = $additionalInfo if $additionalInfo.defined;
-    $!DryRun         = $dryRun         if $dryRun.defined;
+    my $ai = ($additionalInfo // '').trim;
+    
+    $!AdditionalInfo = $ai     if $ai.chars;
+    $!DryRun         = $dryRun if $dryRun;
     
     if @instances {
       @!InstanceIds = @instances.map({
         do {
-          when Str       { $_ }
-          when Instance  { .instanceId }
+          when Str       { .trim }
+          when Instance  { .instanceId.trim }
           
           default {
             die qq:to/DIE/.chomp;
@@ -62,18 +64,19 @@ class Amazon::AWS::EC2::Action::StartInstances is export
   {
     my $cnt = 1;
     my @InstanceArgs;
-    @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @.InstanceIds;
+    @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @!InstanceIds;
     @InstanceArgs.say;
 
     # Should already be sorted.
-    my @args = (
-      DryRun         => $.DryRun,
+    my @args;
+    @args.push: (AdditionalInfo => $!AdditionalInfo)
+      if $!AdditionalInfo.chars;
+    @args.append: (
+      DryRun  => $!DryRun,
       |@InstanceArgs,
-      Version        => '2016-11-15'
+      Version => '2016-11-15'
     );
-    @args.unshift: Pair.new('AdditionalInfo', $.AdditionalInfo)
-      if $.AdditionalInfo.chars;
-
+ 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"

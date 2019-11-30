@@ -1,16 +1,15 @@
-use v6.c;
+use v6.d;
 
 use XML::Class;
 use Method::Also;
 
 use Amazon::AWS::EC2::Types::GroupIdentifier;
 
+use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
 use Amazon::AWS::EC2::Filters::DescribeSecurityGroupsFilter;
 use Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse;
-
-use Amazon::AWS::Utils;
-
-use Amazon::AWS::Roles::Eqv;
 
 class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
   does XML::Class[
@@ -108,30 +107,33 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
   {
     my $cnt = 1;
     my @GroupIdArgs;
-    @GroupIdArgs.push: Pair.new("GroupId.{$cnt++}", $_) for @.GroupIds;
+    @GroupIdArgs.push: Pair.new("GroupId.{$cnt++}", $_) for @!GroupIds;
 
     $cnt = 1;
     my @GroupNameArgs;
-    @GroupNameArgs.push: Pair.new("GroupName.{$cnt++}", $_) for @.GroupNames;
+    @GroupNameArgs.push: 
+      Pair.new("GroupName.{$cnt++}", urlEncode($_)) 
+        for @!GroupNames;
 
     my @FilterArgs;
     $cnt = 1;
-    for @.Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+    for @!Filters {
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+        for .pairs;
     }
 
     # Should already be sorted.
     my @args;
 
-    if $nextToken.chars {
-      @args = ( nextToken => $nextToken );
+    if (my $nt = $nextToken.trim).chars {
+      @args = ( nextToken => $nt );
     } else {
       @args = (
-        DryRun         => $.DryRun,
+        DryRun         => $!DryRun,
         |@GroupIdArgs,
         |@GroupNameArgs,
         |@FilterArgs,
-        MaxResults     => $.MaxResults,
+        MaxResults     => $!MaxResults,
         Version        => '2016-11-15'
       );
     }

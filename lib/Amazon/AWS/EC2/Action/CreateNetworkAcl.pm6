@@ -1,11 +1,11 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
+use Amazon::AWS::Utils;
 
 use Amazon::AWS::EC2::Response::CreateNetworkAclResponse;
 
@@ -28,7 +28,7 @@ class Amazon::AWS::EC2::Action::CreateNetworkAcl is export
     # For deserialization purposes, only!
     :$!DryRun = False,
     :$!VpcId  = '',
-  ) { 
+  ) {
     $!VpcId  = $vpcId  if $vpcId.defined && $vpcId.trim.chars;
     $!DryRun = $dryRun if $dryRun;
   }
@@ -39,12 +39,12 @@ class Amazon::AWS::EC2::Action::CreateNetworkAcl is export
       execute
     >
   {
-    die 'VpcId is required!' 
-      unless $!VpcId.defined && $!VpcId.trim.chars;
+    die 'VpcId is required!'
+      unless $!VpcId.defined && $!VpcId.chars;
 
     # Should already be sorted.
     my @args = (
-      DryRun  => $.DryRun,
+      DryRun  => $!DryRun,
       vpcId   => $!VpcId,
       Version => '2016-11-15'
     );

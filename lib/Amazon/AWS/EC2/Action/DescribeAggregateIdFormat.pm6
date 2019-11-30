@@ -1,11 +1,13 @@
-use v6.c;
+use v6.d;
 
 use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::DescribeAggregateIdFormatResponse;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Response::DescribeAggregateIdFormatResponse;
 
 class Amazon::AWS::EC2::Action::DescribeAggregateIdFormat is export
   does XML::Class[
@@ -34,7 +36,7 @@ class Amazon::AWS::EC2::Action::DescribeAggregateIdFormat is export
     >
   {
     my @args.append: (
-      DryRun        => $.DryRun,
+      DryRun        => $!DryRun,
       Version       => '2016-11-15'
     );
  

@@ -3,24 +3,28 @@ use v6.d;
 unit package Amazon::AWS::EC2::validResourceIds;
 
 our %validIdTypes = (
-  eni      => 'Elastic Network Interface',
-  i        => 'Instance',
-  vol      => 'Volume',
-  'sub'    => 'Subnet',
-  vpc      => 'VPC',
-  vpce     => 'VPC Endpoint',
-  snap     => 'Snapshot',
-  eipalloc => 'Elastic IP Allocation',
-  policy   => 'Snapshot Lifecycle Policy',
-  arn      => 'Amazon Resource Name',
-  hro      => 'Host Reservation Offering',
-  aclassoc => 'ACL Association',
   acl      => 'Network ACL',
+  aclassoc => 'ACL Association',
+  arn      => 'Amazon Resource Name',
+  dopt     => 'DHCP Options Set',
+  eipalloc => 'Elastic IP Allocation',
+  eni      => 'Elastic Network Interface',
+  hro      => 'Host Reservation Offering',
+  i        => 'Instance',
+  lt       => 'Launch Template',
+  nat      => 'NAT Gateway',
   pl       => 'Prefix List',
+  policy   => 'Snapshot Lifecycle Policy',
   rtb      => 'Route Table',
   rtbassoc => 'Route Table Association',
-  nat      => 'NAT Gateway',
-  dopt     => 'DHCP Options Set'
+  snap     => 'Snapshot',
+  'sub'    => 'Subnet',
+  tmf      => 'Traffic Mirror Filter',
+  tmt      => 'Traffic Mirror Target',
+  vol      => 'Volume',
+  vpc      => 'VPC',
+  vpce     => 'VPC Endpoint',
+  vpce-nfn => 'VPC Endpoint Notification'
 );
 
 sub getIdType($id) {  

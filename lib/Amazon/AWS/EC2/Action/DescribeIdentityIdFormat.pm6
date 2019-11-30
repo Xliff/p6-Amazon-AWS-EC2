@@ -3,9 +3,10 @@ use v6.d;
 use Method::Also;
 use XML::Class;
 
-use Amazon::AWS::EC2::Response::DescribeIdentityIdFormatResponse;
-use Amazon::AWS::Roles::Eqv;
 use Amazon::AWS::Utils;
+use Amazon::AWS::Roles::Eqv;
+
+use Amazon::AWS::EC2::Response::DescribeIdentityIdFormatResponse;
 
 my %attributes;
 
@@ -26,18 +27,20 @@ class Amazon::AWS::EC2::Action::DescribeIdentityIdFormat is export
     Str :$principalArn,
     Str :$resource,
     # Testing purposes ONLY!
-    Str :$!PrincipalArn,
-    Str :$!Resource
-  ) {
+    Str :$!PrincipalArn is copy = '',
+    Str :$!Resource     is copy = ''
+  ) {    
+    $!PrincipalArn = $principalArn.trim
+      if $principalArn.defined && $principalArn.trimchars;
+    $!Resource = $resource.trim
+      if $resource.defined && $resource.trim.chars;
+      
     my $dieMsg = qq:to/DIE/.chomp;
-      Invalid Resource value. Resource value should be any of:
+      Invalid Resource value of '{ $!Resource }'. Resource value should be any of:
       { %attributes<Resource|Table> }
       DIE
-
-    $!PrincipalArn = $principalArn if $principalArn.defined;
-    $!Resource     = $resource     if $resource.defined;
     
-    die $dieMsg unless $!Resource.defined.not ||
+    die $dieMsg unless $!Resource.chars.not ||
                        $!Resource ~~ %attributes<Resource|ValidValues>.any;
   }
 
@@ -47,12 +50,15 @@ class Amazon::AWS::EC2::Action::DescribeIdentityIdFormat is export
       execute
     >
   {
+    die 'PrincipalArn is required' unless $!PrincipalArn.chars;
+    
     # Should already be sorted.
-    my @args = (
-      PrincipalArn => $.PrincipalArn,  
+    my @args;
+    @args.unshift: (Resource => $!Resource) if $!Resource.chars;
+    @args.append: (
+      PrincipalArn => urlEncode($!PrincipalArn),
+      Version      => '2016-11-15'
     );
-    @args.unshift: Pair.new('Resource', $.Resource) if $.Resource.defined;
-    @args.unshift: Pair.new('Version', '2016-11-15');
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
@@ -65,7 +71,7 @@ class Amazon::AWS::EC2::Action::DescribeIdentityIdFormat is export
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
   
-  method getResources {
+  method getValidResources {
     %attributes<Resource|ValidValues>.Array;
   }
 
