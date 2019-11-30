@@ -4,8 +4,8 @@ use Method::Also;
 
 use XML::Class;
 
-use Amazon::AWS::Utils;
 use Amazon::AWS::Roles::Eqv;
+use Amazon::AWS::Utils;
 
 use Amazon::AWS::EC2::Response::CopySnapshotResponse;
 
@@ -15,7 +15,7 @@ class Amazon::AWS::EC2::Action::CopySnapshot is export
   also does Amazon::AWS::Roles::Eqv;
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
-  
+
   has Str               $.Description        is xml-element  is xml-skip-null is rw;
   has Str               $.DestinationRegion  is xml-element  is xml-skip-null is rw;
   has Bool              $.DryRun             is xml-element  is xml-skip-null is rw;
@@ -24,13 +24,13 @@ class Amazon::AWS::EC2::Action::CopySnapshot is export
   has Str               $.PresignedUrl       is xml-element  is xml-skip-null is rw;
   has Str               $.SourceRegion       is xml-element  is xml-skip-null is rw;
   has Str               $.SourceSnapshotId   is xml-element  is xml-skip-null is rw;
-  
+
   submethod BUILD (
     :$description,
     :$destinationRegion,
     :$dryRun,
     :$encrypted,
-    :$kmsKeyId,       
+    :$kmsKeyId,
     :$presignedUrl,
     :$sourceRegion,
     :$sourceSnapshotId,
@@ -43,26 +43,26 @@ class Amazon::AWS::EC2::Action::CopySnapshot is export
     :$!PresignedUrl      = '',
     :$!SourceRegion      = '',
     :$!SourceSnapshotId  = ''
-  ) { 
-    $!Description       = $description 
+  ) {
+    $!Description       = $description
       if $description.defined && $description.trim.chars;
     $!DestinationRegion = $destinationRegion
       if $destinationRegion.defined && $destinationRegion.trim.chars;
-      
+
     $!DryRun            = False if $dryRun;
     $!Encrypted         = False if $encrypted;
-    
-    $!KmsKeyId          = $kmsKeyId 
+
+    $!KmsKeyId          = $kmsKeyId
       if $kmsKeyId.defined && $kmsKeyId.trim.chars;
     $!PresignedUrl      = $presignedUrl
       if $presignedUrl.defined && $presignedUrl.trim.chars;
-    $!SourceRegion      = $sourceRegion 
+    $!SourceRegion      = $sourceRegion
       if $sourceRegion.defined && $sourceRegion.trim.chars;
-    $!SourceSnapshotId  = $sourceSnapshotId 
+    $!SourceSnapshotId  = $sourceSnapshotId
       if $sourceSnapshotId.defined && $sourceSnapshotId.trim.chars;
-    
+
   }
-  
+
   method run (:$raw)
     is also<
       do
@@ -73,10 +73,10 @@ class Amazon::AWS::EC2::Action::CopySnapshot is export
       unless $!SourceRegion.chars;
     die "SourceSnapshotId is required. Please set this attribute before executing .run!"
       unless $!SourceSnapshotId.chars;
-      
+
     # @Args must be sorted by key name.
     my @args;
-    @args.push:   (Description       => urlEncode($!Description))       
+    @args.push:   (Description       => urlEncode($!Description))
       if $!Description.chars;
     @args.push:   (DestinationRegion => $!DestinationRegion)
       if $!DestinationRegion.chars;
@@ -85,7 +85,7 @@ class Amazon::AWS::EC2::Action::CopySnapshot is export
       if $!Encrypted;
     @args.push:   (KmsKeyId          => $!KmsKeyId)
       if $!KmsKeyId.chars;
-    @args.push:   (PresignedUrl      => urlEncode($!PresignedUrl))      
+    @args.push:   (PresignedUrl      => urlEncode($!PresignedUrl))
       if $!PresignedUrl.chars;
     @args.append: (
       SourceRegion      => $!SourceRegion,
@@ -103,5 +103,5 @@ class Amazon::AWS::EC2::Action::CopySnapshot is export
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-   
+
 }

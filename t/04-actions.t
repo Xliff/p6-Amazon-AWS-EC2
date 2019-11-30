@@ -8,6 +8,8 @@ sub MAIN (:$unit, :$number = 1, :$elems = 1, :$private, :$tests is copy) {
   # Figure out a more robust way to invoke this.
   qqx{scripts/dependencies.pl6};
 
+  %*ENV<P6_AWS_TESTING> = 1;
+
   my @files = getTestFiles('Action::', :$unit);
 
   my %prefixes = (
@@ -68,4 +70,5 @@ sub MAIN (:$unit, :$number = 1, :$elems = 1, :$private, :$tests is copy) {
     }
   }
   finishTiming;
+  %*ENV<P6_AWS_TESTING> = 0;
 }

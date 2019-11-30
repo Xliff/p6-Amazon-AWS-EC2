@@ -234,7 +234,7 @@ sub getAttributeData($type) is export  {
   my %attributes;
 
   die 'getAttributeData only runs on classes!'
-    unless $type.HOW.^name.ends-with('ClassHOW');
+    unless $type.HOW ~~ Metamodel::ClassHOW;
 
   for $type.^attributes {
     my $attrName = .name.substr(2);

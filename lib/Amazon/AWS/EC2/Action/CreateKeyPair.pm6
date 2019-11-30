@@ -4,6 +4,7 @@ use Method::Also;
 
 use XML::Class;
 
+use Amazon::AWS::Roles::Eqv;
 use Amazon::AWS::Utils;
 
 use Amazon::AWS::EC2::Response::CreateKeyPairResponse;
@@ -27,7 +28,7 @@ class Amazon::AWS::EC2::Action::CreateKeyPair is export
     # For deserialization purposes, only!
     :$!DryRun  = False,
     :$!KeyName = '',
-  ) { 
+  ) {
     $!DryRun  = $dryRun  if $dryRun;
     $!KeyName = $keyName if $keyName.defined;
   }
@@ -38,7 +39,7 @@ class Amazon::AWS::EC2::Action::CreateKeyPair is export
       execute
     >
   {
-    die 'KeyName is required!' 
+    die 'KeyName is required!'
       unless $!KeyName.defined && $!KeyName.chars;
 
     # Should already be sorted.
