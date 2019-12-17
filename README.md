@@ -1,7 +1,7 @@
 # p6-Amazon-AWS-EC2
 Client to communicate with the Amazon AWS EC2 service using Perl6.
 
-An example script that can start and stop AWS EC2 Instances:
+Perl6 source to a small program that can start and stop AWS EC2 Instances:
 
 ```perl6
 use v6.d;
@@ -26,13 +26,12 @@ sub MAIN (
 
   my $instanceID = do {
     when $name.defined {
-      ($key, $value) = ('Name', $name);
       DescribeInstances.new
                        .run
                        .reservations
                        .map( *.instances[0] )
                        .grep(
-                         *.tags.grep({ .key eq $key && .value eq $value } )
+                         *.tags.grep({ .key eq 'Name' && .value eq $name } )
                        )
                        .map( *.instanceId )[0];
     }
@@ -50,7 +49,7 @@ sub MAIN (
       }
     }
 
-    my $r = $start ?? StartInstances.new(:$instanceID ).run !!
+    my $r = $start ?? StartInstances.new( :$instanceID ).run !!
                       StopInstances.new( :$instanceID ).run;
     say "Instance state is now: { $r.instance-states[0].currentState.name }";
   }
