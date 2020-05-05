@@ -27,27 +27,28 @@ class Amazon::AWS::EC2::Action::StartInstances is export
   submethod BUILD (
     :$additionalInfo,
     :$dryRun,
-    :@instances,
+    :@instance-ids,
     # For deserialization purposes only
     :$!AdditionalInfo = '',
     :$!DryRun         = False,
     :@!InstanceIds
   ) {
     my $ai = ($additionalInfo // '').trim;
-    
+
     $!AdditionalInfo = $ai     if $ai.chars;
     $!DryRun         = $dryRun if $dryRun;
-    
-    if @instances {
-      @!InstanceIds = @instances.map({
+
+    if @instance-ids {
+      @!InstanceIds = @instance-ids.map({
         do {
           when Str       { .trim }
           when Instance  { .instanceId.trim }
-          
+
           default {
             die qq:to/DIE/.chomp;
-      Invalid value passed to \@instances. Should only contain Instance objects, but contains:
-      { @instances.map( *.^name ).unique.join(', ') }
+      Invalid value passed to \@instances. Should only contain {''
+      }Instance-compatible values, but contains:
+      { @instance-ids.map( *.^name ).unique.join(', ') }
       DIE
 
           }
@@ -65,7 +66,6 @@ class Amazon::AWS::EC2::Action::StartInstances is export
     my $cnt = 1;
     my @InstanceArgs;
     @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @!InstanceIds;
-    @InstanceArgs.say;
 
     # Should already be sorted.
     my @args;
@@ -76,7 +76,7 @@ class Amazon::AWS::EC2::Action::StartInstances is export
       |@InstanceArgs,
       Version => '2016-11-15'
     );
- 
+
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"

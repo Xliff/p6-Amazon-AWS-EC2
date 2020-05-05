@@ -1,14 +1,14 @@
 use v6.d;
 
-use Amazon::AWS::Action::DescribeInstances;
-use Amazon::AWS::ACtion::StartInstances;
-use Amazon::AWS::Action::StopInstances;
+use Amazon::AWS::EC2::Action::DescribeInstances;
+use Amazon::AWS::EC2::Action::StartInstances;
+use Amazon::AWS::EC2::Action::StopInstances;
 
 sub MAIN (
   :$name,           #= Use an instance name
   :$id,             #= Use an instance ID
   :$key   is copy,  #= Key of tag to use in search. Not to be used with --name
-  :$value is copy   #= Value of tag to search for. Not to be used with --name
+  :$value is copy,  #= Value of tag to search for. Not to be used with --name
   :$start = False,  #= Start an instance
   :$stop  = False,  #= Stop an instance
 ) {
@@ -21,14 +21,16 @@ sub MAIN (
   my $instanceID = do {
     when $name.defined {
       ($key, $value) = ('Name', $name);
-      DescribeInstances.new
-                       .run
-                       .reservations
-                       .map( *.instances[0] )
-                       .grep(
-                         *.tags.grep({ .key eq $key && .value eq $value } )
-                       )
-                       .map( *.instanceId )[0];
+      (
+        DescribeInstances.new
+                        .run
+                        .reservations
+                        .map( *.instances[0] )
+                        .grep(
+                          *.tags.grep({ .key eq $key && .value eq $value } )
+                        )
+                        .map( *.instanceId )
+      )[0];
     }
 
     when $id.defined  { $id }
@@ -44,8 +46,10 @@ sub MAIN (
       }
     }
 
-    my $r = $start ?? StartInstances.new(:$instanceID ).run !!
-                      StopInstances.new( :$instanceID ).run;
+    my %i = (instance-ids => $instanceID.Array).Hash;
+
+    my $r = $start ?? StartInstances.new( |%i ).run
+                   !! StopInstances.new(  |%i ).run;
     say "Instance state is now: { $r.instance-states[0].currentState.name }";
   }
 }
