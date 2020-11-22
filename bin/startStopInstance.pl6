@@ -1,14 +1,14 @@
 use v6.d;
 
-use Amazon::AWS::Action::DescribeInstances;
-use Amazon::AWS::ACtion::StartInstances;
-use Amazon::AWS::Action::StopInstances;
+use Amazon::AWS::EC2::Action::DescribeInstances;
+use Amazon::AWS::EC2::Action::StartInstances;
+use Amazon::AWS::EC2::Action::StopInstances;
 
 sub MAIN (
   :$name,           #= Use an instance name
   :$id,             #= Use an instance ID
   :$key   is copy,  #= Key of tag to use in search. Not to be used with --name
-  :$value is copy   #= Value of tag to search for. Not to be used with --name
+  :$value is copy,  #= Value of tag to search for. Not to be used with --name
   :$start = False,  #= Start an instance
   :$stop  = False,  #= Stop an instance
 ) {
@@ -18,34 +18,42 @@ sub MAIN (
   die 'Cannot use --name with --key or --value'
     if $name.defined && ($key.defined || $value.defined);
 
-  my $instanceID = do {
+  my $instanceIDs = do gather {
     when $name.defined {
       ($key, $value) = ('Name', $name);
-      DescribeInstances.new
-                       .run
-                       .reservations
-                       .map( *.instances[0] )
-                       .grep(
-                         *.tags.grep({ .key eq $key && .value eq $value } )
-                       )
-                       .map( *.instanceId )[0];
+      (
+        DescribeInstances.new
+                        .run
+                        .reservations
+                        .map( *.instances[0] )
+                        .grep(
+                          *.tags.grep({ .key eq $key && .value eq $value } )
+                        )
+                        .map({ take .instanceId })
+      );
     }
 
-    when $id.defined  { $id }
+    when $id.defined  { take $id }
   };
 
-  die 'Could not find instance ID!' unless $instanceID.defined;
+  die 'Could not find instance ID!' unless $instanceIDs.elems;
 
   try {
     CATCH {
       default {
-        say "Could not stop instance '{ $instanceID }':\n{ .message }";
+        say "Could not { $start ?? 'start' !! 'stop' } instance '{
+             $instanceID }':\n{ .message }";
         .rethrow;
       }
     }
 
-    my $r = $start ?? StartInstances.new(:$instanceID ).run !!
-                      StopInstances.new( :$instanceID ).run;
-    say "Instance state is now: { $r.instance-states[0].currentState.name }";
+    my %i = (instance-ids => $instanceIDs).Hash;
+
+    my $r = $start ?? StartInstances.new( |%i ).run
+                   !! StopInstances.new(  |%i ).run;
+
+    for $r.instance-states.Array {
+      say "{ .instanceID }: State is now: { .currentState.name }";
+    }
   }
 }
