@@ -27,6 +27,10 @@ sub MAIN (
   my $instanceIDs = do gather {
     when $name.defined {
       ($key, $value) = ('Name', $name);
+      proceed;
+    }
+
+    when $key.defined {
       (
         DescribeInstances.new
                         .run
