@@ -183,6 +183,13 @@ sub populateTestObject(
         when Str  {
           my @values;
           if (my $options = $a.WHY).defined {
+            # cw: -YYY- This block needs to be rewritten to handle ALL options:
+            #   Pipe separated:
+            #   * <val> | <val> | ... | <val>             (used here)
+            #   Space separated:
+            #   * sub:<fully qualified routine name>      (NOT used here!)
+            #   * validate:<fully qualified routine name> (equiv to 'sub:', NOT used here!)
+            #   * generate:<fully qualified routine name> (used here)
             $options ~~ /('?')? \s* (<[\\\w\-\:]>+)+ %% [ \s* '|' \s* ]/;
             # YYY - TODO: Do away with implicit conversion fom Array to Str
             my $vals = $/[1];
