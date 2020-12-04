@@ -18,7 +18,7 @@ sub MAIN (
   die 'Cannot use --name with --key or --value'
     if $name.defined && ($key.defined || $value.defined);
 
-  my $instanceID = do {
+  my $instanceIDs = do gather {
     when $name.defined {
       ($key, $value) = ('Name', $name);
       (
@@ -29,27 +29,31 @@ sub MAIN (
                         .grep(
                           *.tags.grep({ .key eq $key && .value eq $value } )
                         )
-                        .map( *.instanceId )
-      )[0];
+                        .map({ take .instanceId })
+      );
     }
 
-    when $id.defined  { $id }
+    when $id.defined  { take $id }
   };
 
-  die 'Could not find instance ID!' unless $instanceID.defined;
+  die 'Could not find instance ID!' unless $instanceIDs.elems;
 
   try {
     CATCH {
       default {
-        say "Could not stop instance '{ $instanceID }':\n{ .message }";
+        say "Could not { $start ?? 'start' !! 'stop' } instance '{
+             $instanceID }':\n{ .message }";
         .rethrow;
       }
     }
 
-    my %i = (instance-ids => $instanceID.Array).Hash;
+    my %i = (instance-ids => $instanceIDs).Hash;
 
     my $r = $start ?? StartInstances.new( |%i ).run
                    !! StopInstances.new(  |%i ).run;
-    say "Instance state is now: { $r.instance-states[0].currentState.name }";
+
+    for $r.instance-states.Array {
+      say "{ .instanceID }: State is now: { .currentState.name }";
+    }
   }
 }
