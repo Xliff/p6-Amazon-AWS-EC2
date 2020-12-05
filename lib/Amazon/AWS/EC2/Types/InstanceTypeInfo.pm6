@@ -34,7 +34,7 @@ class Amazon::AWS::EC2::Types::InstanceTypeInfo is export
   has InferenceAcceleratorInfo    $.inferenceAcceleratorInfo         is xml-element(:over-ride)              is xml-skip-null                                                          is rw;
   has InstanceStorageInfo         $.instanceStorageInfo              is xml-element                          is xml-skip-null                                                          is rw;
   has Bool                        $.instanceStorageSupported         is xml-element                          is xml-skip-null                                                          is rw;
-  has Str                         $.instanceType                     is xml-element                          is xml-skip-null                                                          is rw;   #= sub:Amazon::AWS::EC2::validInstanceTypes::checkInstanceType
+  has Str                         $.instanceType                     is xml-element                          is xml-skip-null                                                          is rw;   #= validation:Amazon::AWS::EC2::validInstanceTypes::checkInstanceType
   has MemoryInfo                  $.memoryInfo                       is xml-element(:over-ride)              is xml-skip-null                                                          is rw;
   has NetworkInfo                 $.networkInfo                      is xml-element(:over-ride)              is xml-skip-null                                                          is rw;
   has PlacementGroupInfo          $.placementGroupInfo               is xml-element(:over-ride)              is xml-skip-null                                                          is rw;
