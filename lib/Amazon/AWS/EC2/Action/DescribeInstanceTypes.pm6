@@ -54,14 +54,14 @@ class Amazon::AWS::EC2::Action::DescribeInstanceTypes is export
 
         }
       });
+    }
 
-      if @filters {
-        @!Filters = do given @filters {
-          when .all ~~ DescribeInstanceTypesFilter { $_ }
+    if @filters {
+      @!Filters = do given @filters {
+        when .all ~~ DescribeInstanceTypesFilter { $_ }
 
-          default { errorBadContents(@filters, DescribeInstanceTypesFilter) }
-        };
-      }
+        default { errorBadContents(@filters, DescribeInstanceTypesFilter) }
+      };
     }
   }
 
