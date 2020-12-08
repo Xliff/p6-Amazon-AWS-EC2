@@ -19,13 +19,13 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
 {
   also does Amazon::AWS::Roles::Eqv;
 
-  my $c = ::?CLASS.^name.split('::')[* - 1];
+  my $c = ::?CLASS.^shortname;
 
   has Bool                     $.DryRun                                        is xml-element         is rw;
   has DescribeInstancesFilter  @.Filters     is xml-container('filterSet')     is xml-element         is rw;
   has Str                      @.InstanceIds is xml-container('instanceIdSet') is xml-element('item') is rw;
   has Int                      $.MaxResults                                    is xml-element         is rw;
-  #has Str                      $.NextToken                                     is xml-element         is rw;
+  has Str                      $.NextToken                                     is xml-element         is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -43,10 +43,10 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     :@!Filters,
     :@!InstanceIds,
     :$!MaxResults = 1000,
-    # :$!NextToken  = '',
+    :$!NextToken  = ''
   ) {
     $!DryRun     = $dryRun     if $dryRun;
-    
+
     if @instances {
       @!InstanceIds = @instances.map({
         do {
@@ -88,9 +88,6 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
       execute
     >
   {
-    die 'Cannot use @.instances and $.maxResults in the same call to DescribeInstances'
-      if $!MaxResults.defined && @!InstanceIds;
-
     my $cnt = 1;
     my @InstanceArgs;
     @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @!InstanceIds;
@@ -98,7 +95,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
         for .pairs;
     }
 
@@ -109,12 +106,12 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
       @args = ( nextToken => $nextToken );
     } else {
       @args = (
-        DryRun         => $!DryRun,
+        DryRun          => $!DryRun,
         |@InstanceArgs,
-        |@FilterArgs,
-        MaxResults     => $!MaxResults,
-        Version        => '2016-11-15'
+        |@FilterArgs
       );
+      @args.push: Pair.new('MaxResults', $!MaxResults) unless @InstanceArgs;
+      @args.push: Pair.new('Version',    '2016-11-15')
     }
 
     # XXX - Add error handling to makeRequest!
