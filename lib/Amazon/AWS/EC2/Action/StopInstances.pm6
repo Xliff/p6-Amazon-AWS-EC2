@@ -29,7 +29,7 @@ class Amazon::AWS::EC2::Action::StopInstances is export
     :$dryRun,
     :$force,
     :$hibernate,
-    :@instance-ids,
+    :@instances,
     # For deserialization purposes, ONLY!
     :$!DryRun      = False,
     :$!Force       = False,
@@ -40,9 +40,9 @@ class Amazon::AWS::EC2::Action::StopInstances is export
     $!Force     = $force     if $force;
     $!Hibernate = $hibernate if $hibernate;
 
-    if @instance-ids {
+    if @instances {
       my @valid-types = (Str, Instance);
-      @!InstanceIds = @instance-ids.map({
+      @!InstanceIds = @instances.map({
         do {
           when  Instance { .instanceId.trim }
           when  Str      { .trim            }
@@ -51,9 +51,9 @@ class Amazon::AWS::EC2::Action::StopInstances is export
             die qq:to/DIE/.chomp;
               Invalid value passed to \@instances. Should only contain {''
               }Instance-compatible values, but contains:
-              { @instance-ids.grep( *.WHAT !~~ @valid-types.any )
-                             .map( *.^name ).unique
-                             .join(', ') }
+              { @instances.grep( *.WHAT !~~ @valid-types.any )
+                          .map( *.^name ).unique
+                          .join(', ') }
               DIE
 
           }
