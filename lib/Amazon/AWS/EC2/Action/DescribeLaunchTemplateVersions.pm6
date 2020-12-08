@@ -21,20 +21,21 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool  $.DryRun             is xml-element is xml-skip-null is rw;
-  has Int   $.MaxResults         is xml-element is xml-skip-null is rw;
-  has Str   $.LaunchTemplateId   is xml-element is xml-skip-null is rw;
-  has Str   $.LaunchTemplateName is xml-element is xml-skip-null is rw;
-  has Int   $.MaxVersion         is xml-element is xml-skip-null is rw;
-  has Int   $.MinVersion         is xml-element is xml-skip-null is rw;
-  
-  has DescribeLaunchTemplateVersionsFilter @.Filters       
-    is xml-container('filterSet')       
+  has Bool  $.DryRun                is xml-element is xml-skip-null is rw;
+  has Int   $.MaxResults            is xml-element is xml-skip-null is rw;
+  has Str   $.LaunchTemplateId      is xml-element is xml-skip-null is rw;
+  has Str   $.LaunchTemplateName    is xml-element is xml-skip-null is rw;
+  has Str   @.LaunchTemplateVersion is xml-element is xml-skip-null is rw;
+  has Int   $.MaxVersion            is xml-element is xml-skip-null is rw;
+  has Int   $.MinVersion            is xml-element is xml-skip-null is rw;
+
+  has DescribeLaunchTemplateVersionsFilter @.Filters
+    is xml-container('filterSet')
     is xml-element
     is xml-skip-null
     is rw;
-    
-  has Str @.LaunchTemplateVersions      
+
+  has Str @.LaunchTemplateVersions
     is xml-container('launchTemplateVersionSet')
     is xml-element('item')
     is xml-skip-null
@@ -68,24 +69,38 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions is export
     $!MaxResults = $maxResults if $maxResults.defined;
     $!MinVersion = $minVersion if $minVersion.defined;
     $!MaxVersion = $maxVersion if $maxVersion.defined;
-    
+
     $!LaunchTemplateId   = $launchTemplateId.trim
       if $launchTemplateId.defined   && $launchTemplateId.trim.chars;
     $!LaunchTemplateName = $launchTemplateName.trim
       if $launchTemplateName.defined && $launchTemplateName.trim.chars;
-    
+
     # Pattern: Valid launchTemplateName
     die "Invalid LaunchTemplateName: '{ $!LaunchTemplateName }'"
-      unless $!LaunchTemplateName.chars.not || 
+      unless $!LaunchTemplateName.chars.not ||
              $!LaunchTemplateName ~~ /^ <[ a..z A..Z 0..9 ( ) . \- / _ ]>+ $/;
-    
+
     die 'MaxResults must be an integer from 1..200'
       unless $!MaxResults ~~ 1..200;
-      
+
     if @launchTemplateVersions {
       @!LaunchTemplateVersions = @launchTemplateVersions.map({
+        my ($nums, $ld) = False xx 2;
         do {
-          when Int  { $_ }
+          when Int                    {
+            die "Can't use numbers with \$Latest or \$Default"
+              unless $ld.not;
+            $nums = True;
+            $_;
+          }
+
+          when '$Latest' | '$Default' {
+            die "Can't use numbers with \$Latest or \$Default"
+              unless $nums.not;
+            $ld = True;
+            $_;
+          }
+
           default   { errorBadContents(@launchTemplateVersions, Int) }
         }
       });
@@ -95,8 +110,8 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions is export
       @!Filters = do given @filters {
         when .all ~~ DescribeLaunchTemplateVersionsFilter { $_ }
 
-        default { 
-          errorBadContents(@filters, DescribeLaunchTemplateVersionsFilter) 
+        default {
+          errorBadContents(@filters, DescribeLaunchTemplateVersionsFilter)
         }
       };
     }
@@ -110,30 +125,30 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions is export
     >
   {
     $nextToken //= '';
-    
-    # Added according to the following error which was encountered during 
+
+    # Added according to the following error which was encountered during
     # .run testing.
     #
     # Additional Error Message(s):
-    # - Either a launch template ID or a launch template name must be specified 
+    # - Either a launch template ID or a launch template name must be specified
     #   in the request. (MissingParameter)
     die 'A LaunchTemplateId or a LaunchTemplateName is required'
       unless $!LaunchTemplateName.chars || $!LaunchTemplateId.chars;
-      
+
     die 'LaunchTemplateId and LaunchTemplateName cannot be specified in the same call'
       if $!LaunchTemplateName.chars && $!LaunchTemplateId.chars;
 
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
         for .pairs;
     }
 
     $cnt = 1;
     my @LaunchTemplateVersionArgs;
-    @LaunchTemplateVersionArgs.push: 
-      Pair.new("LaunchTemplateVersion.{$cnt++}", $_) 
+    @LaunchTemplateVersionArgs.push:
+      Pair.new( "LaunchTemplateVersion.{$cnt++}", urlEncode($_) )
         for @!LaunchTemplateVersions;
 
     # Should already be sorted.
@@ -146,14 +161,16 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplateVersions is export
         DryRun => $!DryRun,
         |@FilterArgs
       );
-      @args.push: (LaunchTemplateId   => $!LaunchTemplateId) 
+      @args.push: (LaunchTemplateId   => $!LaunchTemplateId)
         if $!LaunchTemplateId.chars;
       @args.push: (LaunchTemplateName => urlEncode($!LaunchTemplateName))
         if $!LaunchTemplateName.chars;
-      @args.append: @LaunchTemplateVersionArgs 
+      @args.append: @LaunchTemplateVersionArgs
         if @LaunchTemplateVersionArgs;
-      @args.push: (MaxResults => $!MaxResults) if $!MaxResults;
-      @args.push: (MinVersion => $!MinVersion) if $!MinVersion;
+      @args.push: (MaxResults => $!MaxResults)
+        if $!MaxResults && @LaunchTemplateVersionArgs.elems.not;
+      @args.push: (MinVersion => $!MinVersion)
+        if $!MinVersion && @LaunchTemplateVersionArgs.elems.not;
       @args.push: (Version    => '2016-11-15');
     }
 
