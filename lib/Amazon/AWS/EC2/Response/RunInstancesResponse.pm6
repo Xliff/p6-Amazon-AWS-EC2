@@ -12,9 +12,9 @@ class Amazon::AWS::EC2::Response::RunInstancesResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has GroupIdentifier    @.groups           is xml-element    is xml-container('groupSet')          is rw; 
-  has Instance           @.instancess       is xml-element    is xml-container('instancesSet')      is rw; 
-  has Str                $.ownerId          is xml-element                                          is rw; 
-  has Str                $.requesterId      is xml-element                                          is rw; 
-  has Str                $.reservationId    is xml-element                                          is rw; 
+  has GroupIdentifier    @.groups           is xml-element('item', :over-ride)   is xml-skip-null  is xml-container('groupSet')       is rw;
+  has Instance           @.instances        is xml-element('item', :over-ride)   is xml-skip-null  is xml-container('instancesSet')   is rw;
+  has Str                $.ownerId          is xml-element                       is xml-skip-null                                     is rw;
+  has Str                $.requesterId      is xml-element                       is xml-skip-null                                     is rw;
+  has Str                $.reservationId    is xml-element                       is xml-skip-null                                     is rw;
 }
