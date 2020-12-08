@@ -23,21 +23,21 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplates is export
 
   has Bool                            $.DryRun        is xml-element is xml-skip-null is rw;
   has Int                             $.MaxResults    is xml-element is xml-skip-null is rw;
-  
-  has DescribeLaunchTemplatesFilter   @.Filters       
-    is xml-container('filterSet')       
+
+  has DescribeLaunchTemplatesFilter   @.Filters
+    is xml-container('filterSet')
     is xml-element
     is xml-skip-null
     is rw;
-    
-  has Str                             @.LaunchTemplateIds      
+
+  has Str                             @.LaunchTemplateIds
     is xml-container('launchTemplateIdSet')
     is xml-element('item')
     is xml-skip-null
     is rw;
-    
+
   has Str                             @.LaunchTemplateNames
-    is xml-container('launchTemplateNameSet')      
+    is xml-container('launchTemplateNameSet')
     is xml-element('item')
     is xml-skip-null
     is rw;
@@ -62,10 +62,10 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplates is export
   ) {
     $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     die 'MaxResults must be an integer from 1..200'
       unless $!MaxResults ~~ 1..200;
-    
+
     if @launchTemplateIds {
       @!LaunchTemplateIds = @launchTemplateIds.map({
         when Str  { $_ }
@@ -78,9 +78,9 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplates is export
         do {
           # Pattern: Valid launchTemplateName
           when Str  { die "Invalid characters found in '{$_}'"
-                        unless /^ /<[ a..z A..Z 0..9 ( ) . \- / _ ]>+ $/; 
+                        unless /^ <[ a..z A..Z 0..9 ( ) . \- / _ ]>+ $/;
                       $_; }
-                      
+
           default   { errorBadContents(@launchTemplateNames, Str) }
         }
       });
@@ -103,24 +103,24 @@ class Amazon::AWS::EC2::Action::DescribeLaunchTemplates is export
     >
   {
     $nextToken //= '';
-    
+
     my $cnt = 1;
     my @LaunchTemplateNamesArgs;
     # Needs encoding!
-    @LaunchTemplateNamesArgs.push: 
-      Pair.new("LaunchTemplateNames.{$cnt++}", urlEncode($_))
+    @LaunchTemplateNamesArgs.push:
+      Pair.new("LaunchTemplateName.{$cnt++}", urlEncode($_))
         for @!LaunchTemplateNames;
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
         for .pairs;
     }
 
     $cnt = 1;
     my @LaunchTemplateIdsArgs;
-    @LaunchTemplateIdsArgs.push: Pair.new("LaunchTemplateId.{$cnt++}", $_) 
+    @LaunchTemplateIdsArgs.push: Pair.new("LaunchTemplateId.{$cnt++}", $_)
       for @!LaunchTemplateIds;
 
     # Should already be sorted.
