@@ -34,4 +34,35 @@ role Amazon::AWS::Roles::Base {
     @p;
   }
 
+  method handlePercentageAsString ($_ is raw) {
+    when Int { ~$_ ~ '%' }
+    when Str { $_        }
+
+    when Num {
+      my $p = $_ * 100;
+      die 'Percentage > 100 given for $!progress. Must be 1..100' if $p > 100;
+      $p.fmt('%d') ~ '%'
+    }
+
+    default {
+      die "Invalid type '{ .^name }' used for \$!{ .VAR.name }!";
+    }
+  }
+
+  method handleDateTimeAsString ($_ is raw) {
+    when Instant  { .DateTime; proceed  }
+    when Str      { $_                  }
+
+    when DateTime {
+      my $d = .utc;
+      $d ~~ s/'.'\d+//;
+      $d ~~ s/Z$/000Z/;
+      $d
+    }
+
+    default {
+      die "Invalid type '{ .name }' used for \$!{ .VAR.name }!";
+    }
+  }
+
 }
