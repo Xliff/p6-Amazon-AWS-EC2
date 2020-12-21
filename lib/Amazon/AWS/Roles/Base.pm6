@@ -13,19 +13,31 @@ role Amazon::AWS::Roles::Base {
         when Str | Num | Int | Bool {
           @p.push: Pair.new($n, self."$n"()) if self."$n"().defined;
         }
+
+        when Hash {
+          for .pairs {
+            next unless .value.defined;
+            @p.push: Pair.new("tag:{.key}", .value)
+          }
+        }
+
         default {
           next unless $v.defined;
-          {
-            # when .type ~~ Positional && .type.of ~~ Tag
-            when $v.^shortname eq 'Tag' {
-              for $v.Array {
-                next unless $_;
-                next unless .key.defined;
-                @p.push: Pair.new("tag:{.key}", .value)
-              }
+
+          # when .type ~~ Positional && .type.of ~~ Tag
+          when $v.^shortname eq <Tag TagFilter> {
+            for $v.Array {
+              next unless $_;
+              next unless .key.defined;
+              @p.push: Pair.new("tag:{.key}", .value)
             }
-            default {
-              @p.push: Pair.new("{$n}.{.key}", .value) for $v.pairs;
+          }
+
+          default {
+            if $v.?pairs -> $p {
+              @p.push: Pair.new("{$n}.{.key}, .value") for $p;
+            } else {
+              die "{ $v.^name } is not .pairs-compatible";
             }
           }
         }
