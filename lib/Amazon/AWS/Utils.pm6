@@ -9,11 +9,14 @@ use Digest::SHA256::Native;
 
 use Amazon::AWS::Response::ErrorResponse;
 
+# Global
+constant default_region is export = 'us-east-1';
+
+# Lexical
 constant algorithm            = 'AWS4-HMAC-SHA256';
 constant default_key_location = $*HOME.add('.ec2').add('default.csv');
 constant empty_payload_hash   = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
 constant host                 = 'ec2.amazonaws.com';
-constant region               = 'us-east-1';
 constant service              = 'ec2';            #= This can be optimized OUT if made generic across AWS.
 constant terminator           = 'aws4_request';
 
@@ -64,7 +67,7 @@ sub urlEncode($val) is export {
   $val.subst(/<-alnum>/, *.ord.fmt("%%%02X"), :g);
 }
 
-sub makeHeaders ($uri, $method) {
+sub makeHeaders ($uri, $method, $region) {
   my %headers;
   my $t = DateTime.now(timezone => 0);            # MUST be in GMT
   my $amzdate = strftime('%Y%m%dT%H%M%SZ', $t);
@@ -96,7 +99,7 @@ sub makeHeaders ($uri, $method) {
     $signedHeaders,
     empty_payload_hash
   ).join("\n");
-  my $credScope = ($datestamp, region, service, terminator).join('/');
+  my $credScope = ($datestamp, $region, service, terminator).join('/');
   my $signString = (
     algorithm,
     $amzdate,
@@ -104,7 +107,7 @@ sub makeHeaders ($uri, $method) {
     sha256-hex($canonReq)
   ).join("\n");
   my ($ak, $sk) = getLocalAccess;
-  my $signingKey = getSignatureKey($sk, $datestamp, region, service);
+  my $signingKey = getSignatureKey($sk, $datestamp, $region, service);
   my $signature = hmac-hex($signingKey, $signString, &sha256);
 
   %headers<Authorization> =
@@ -117,7 +120,8 @@ sub makeHeaders ($uri, $method) {
 sub makeRequest (
   $uri       is copy,
   :$method   = 'GET',
-  :$service,              #= For future use
+  :$region   =  default_region,
+  :$service,                    #= For future use
   :$body,
   *%headers
 ) is export {
@@ -145,7 +149,7 @@ sub makeRequest (
       }
     }
 
-    %headers.append( makeHeaders($uri, $method) );
+    %headers.append( makeHeaders($uri, $method, $region) );
     my $url = "https://{host}$uri";
     %headers<host>:delete;
     when 'GET' {
