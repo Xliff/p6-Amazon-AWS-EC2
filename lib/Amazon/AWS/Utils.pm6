@@ -10,7 +10,7 @@ use Digest::SHA256::Native;
 use Amazon::AWS::Response::ErrorResponse;
 
 constant algorithm            = 'AWS4-HMAC-SHA256';
-constant default_key_location = '/home/cbwood/.ec2/default.csv';
+constant default_key_location = $*HOME.add('.ec2').add('default.csv');
 constant empty_payload_hash   = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
 constant host                 = 'ec2.amazonaws.com';
 constant region               = 'us-east-1';
