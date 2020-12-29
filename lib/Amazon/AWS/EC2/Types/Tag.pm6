@@ -15,13 +15,15 @@ class Amazon::AWS::EC2::Types::Tag is export
   has Str    $.Value    is xml-element    is xml-skip-null          is rw;
   has Str    $.value    is xml-element    is xml-skip-null          is rw;
 
-  submethod BUILD (:$key, :$value, :$request) {
-    if   $request { ($!Key, $!Value) = ($key, $value) }
-    else          { ($!key, $!value) = ($key, $value) }
+  submethod BUILD (:$k, :$v, :$!key, :$!value, :$!Key, :$!Value, :$request) {
+    if $k && $v {
+      if   $request { ($!Key, $!Value) = ($k, $v) }
+      else          { ($!key, $!value) = ($k, $v) }
+    }
   }
 
-  method new ($key, $value, :$request = True) {
-    self.bless(:$key, :$value, :$request);
+  multi method new ($k, $v, :$request = True) {
+    self.bless(:$k, :$v, :$request);
   }
 
 }
