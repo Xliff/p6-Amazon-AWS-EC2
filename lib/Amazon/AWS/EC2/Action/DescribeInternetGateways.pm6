@@ -30,7 +30,7 @@ class Amazon::AWS::EC2::Action::DescribeInternetGateways is export
   # Ways to handle: - Max number of requests
   #                 - All in one (no user control)
   #                 - One page (and then pass the next token).
-  
+
   submethod BUILD (
     :@filters,
     :$dryRun,
@@ -43,10 +43,10 @@ class Amazon::AWS::EC2::Action::DescribeInternetGateways is export
     :$!MaxResults           = 1000
   ) {
     $!DryRun = $dryRun if $dryRun;
-    
+
     die '$maxResutlts must be an integer between 5 and 1000'
       unless $!MaxResults ~~ 5..1000;
-      
+
     if @internetGatewaysIds {
       @!InternetGatewaysIds = @internetGatewaysIds.map({
         do {
@@ -65,7 +65,7 @@ class Amazon::AWS::EC2::Action::DescribeInternetGateways is export
 
     if @filters {
       @!Filters = do given @filters {
-        when .all ~~ Amazon::AWS::EC2::Filters::DescribeInternetGatewaysFilter 
+        when .all ~~ Amazon::AWS::EC2::Filters::DescribeInternetGatewaysFilter
           { @filters }
 
         default {
@@ -89,19 +89,20 @@ class Amazon::AWS::EC2::Action::DescribeInternetGateways is export
     # but left in case it was an oversight.
     #
     # die 'Cannot use @.NetworkInterfaceIds and $.maxResults in the same call to DescribeInternetGatewayss'
-    #   if $.MaxResults.defined && @.NetworkInterfaceIds;   
+    #   if $.MaxResults.defined && @.NetworkInterfaceIds;
 
     my $cnt = 1;
     my @InternetGatewaysIdArgs;
-    @InternetGatewaysIdArgs.push: 
-      Pair.new("InternetGatewaysId.{$cnt++}", $_) 
+    @InternetGatewaysIdArgs.push:
+      Pair.new("InternetGatewaysId.{$cnt++}", $_)
         for @!InternetGatewaysIds;
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.

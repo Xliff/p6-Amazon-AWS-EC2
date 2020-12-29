@@ -28,7 +28,7 @@ class Amazon::AWS::EC2::Action::DescribeNetworkAcls is export
   # Ways to handle: - Max number of requests
   #                 - All in one (no user control)
   #                 - One page (and then pass the next token).
-  
+
   submethod BUILD (
     :@filters,
     :$dryRun,
@@ -41,10 +41,10 @@ class Amazon::AWS::EC2::Action::DescribeNetworkAcls is export
     :$!MaxResults           = 1000
   ) {
     $!DryRun     = $dryRun     if $dryRun;
-    
+
     die '$maxResutlts must be an integer between 5 and 1000'
       unless $!MaxResults ~~ 5..1000;
-      
+
     if @vpcIds {
       @!VpcIds = @vpcIds.map({
         do {
@@ -83,11 +83,11 @@ class Amazon::AWS::EC2::Action::DescribeNetworkAcls is export
       execute
     >
   {
-    # cw: Not mentioned at https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkAcls.html like others, 
+    # cw: Not mentioned at https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkAcls.html like others,
     # but left in case it was an oversight.
     #
     # die 'Cannot use @.NetworkAclIds and $.maxResults in the same call to DescribeNetworkAcls'
-    #   if $.MaxResults.defined && @.NetworkAclIds;   
+    #   if $.MaxResults.defined && @.NetworkAclIds;
 
     my $cnt = 1;
     my @VpcIdArgs;
@@ -96,8 +96,9 @@ class Amazon::AWS::EC2::Action::DescribeNetworkAcls is export
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.

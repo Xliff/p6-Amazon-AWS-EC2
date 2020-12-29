@@ -21,7 +21,7 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions is export
 
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
-  has Bool                                       $.DryRun                                                                   is xml-element         is rw;   
+  has Bool                                       $.DryRun                                                                   is xml-element         is rw;
   has DescribeNetworkInterfacePermissionsFilter  @.Filters                        is xml-container('filterSet')             is xml-element         is rw;
   has Str                                        @.NetworkInterfacePermissionIds  is xml-container('networkInterfaceIdSet') is xml-element('item') is rw;
   has Int                                        $.MaxResults                                                               is xml-element         is rw;
@@ -30,7 +30,7 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions is export
   # Ways to handle: - Max number of requests
   #                 - All in one (no user control)
   #                 - One page (and then pass the next token).
-  
+
   submethod BUILD (
     :$dryRun,
     :@filters,
@@ -44,10 +44,10 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions is export
   ) {
     $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     die '$maxResutlts must be an integer between 5 and 255'
       unless $!MaxResults ~~ 5..255;
-      
+
     if @networkInterfacePermissionIds {
       @!NetworkInterfacePermissionIds = @networkInterfacePermissionIds.map({
         do {
@@ -90,18 +90,19 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfacePermissions is export
     # but left in case it was an oversight.
     #
     # die 'Cannot use @.NetworkInterfaceIds and $.maxResults in the same call to DescribeNetworkInterfacePermissions'
-    #   if $.MaxResults.defined && @.NetworkInterfaceIds;   
+    #   if $.MaxResults.defined && @.NetworkInterfaceIds;
 
     my $cnt = 1;
     my @NetworkPermissionIdArgs;
-    @NetworkPermissionIdArgs.push: Pair.new("VpcId.{$cnt++}", $_) 
+    @NetworkPermissionIdArgs.push: Pair.new("VpcId.{$cnt++}", $_)
       for @!NetworkInterfacePermissionIds;
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.

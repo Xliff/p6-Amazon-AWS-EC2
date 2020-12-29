@@ -32,17 +32,17 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
     :@!Regions
   ) {
     $!DryRun = $dryRun if $dryRun;
-    
+
     if @filters {
       @!Filters = do given @filters {
         when .all ~~ DescribeRegionsFilter    { @filters }
-  
+
         default {
           die qq:to/DIE/.chomp;
   Invalid value passed to \@filters. Should only contain DescribeRegionFilter objects, but contains:
   { @filters.grep( * !~~ DescribeRegionsFilter).map( *.^name ).unique.join(', ') }
   DIE
-  
+
         }
       }
     }
@@ -53,7 +53,7 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
   Invalid value passed to \@regions. Should only contain region name strings, but contains:
   { @regions.grep( * !~~ Str ).map( *.^name ).unique.join(', ') }
   DIE
-  
+
       @!Regions = @regions;
   }
   }
@@ -68,7 +68,8 @@ class Amazon::AWS::EC2::Action::DescribeRegions is export
     my $cnt = 1;
     my @FilterArgs;
     for @.Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", .value) for .pairs;
+      $cnt++;
     }
 
     $cnt = 1;

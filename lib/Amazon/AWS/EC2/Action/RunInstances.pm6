@@ -234,10 +234,9 @@ class Amazon::AWS::EC2::Types::RunInstances is export
     for @arrays -> $_ is raw {
       my \v = .VAR.name.substr(2);
       my $cnt = 1;
-      ::("\@{ v }Args").push: Pair.new(
-        "{ v }.{$cnt++}.{ .key }",
-        .value
-      ) for .pairs;
+      ::("\@{ v }Args").push: Pair.new("{ v }.{$cnt}.{ .key }", .value)
+        for .pairs;
+      $cnt++;
     }
 
     for (@!SecurityGroup, @!SecurityGroupId) -> $_ is raw {

@@ -59,8 +59,9 @@ class Amazon::AWS::EC2::Action::DescribeInstanceTypeOfferings is export
 
     my ($cnt, @FilterArgs) = (1);
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.

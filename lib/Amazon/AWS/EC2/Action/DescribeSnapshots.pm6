@@ -48,10 +48,10 @@ class Amazon::AWS::EC2::Action::DescribeSnapshots is export
   ) {
     $!DryRun     = $dryRun     if $dryRun.defined;
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     die '$maxResults must be an integer between 1..1000'
       unless $!MaxResults ~~ 1..1000;
-    
+
     if @owners {
       die '@owners must only contain Str' unless @owners.all ~~ Str;
       @!Owners = @owners;
@@ -67,7 +67,7 @@ class Amazon::AWS::EC2::Action::DescribeSnapshots is export
 
     if @filters {
       @!Filters //= do given @filters {
-        when .all ~~ DescribeSnapshotsFilter    
+        when .all ~~ DescribeSnapshotsFilter
           { @filters }
 
         default {
@@ -79,7 +79,7 @@ class Amazon::AWS::EC2::Action::DescribeSnapshots is export
         }
       };
     }
-    
+
   }
 
   method run (:$nextToken = '', :$raw)
@@ -91,24 +91,25 @@ class Amazon::AWS::EC2::Action::DescribeSnapshots is export
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     my @OwnerArgs;
     $cnt = 1;
     @OwnerArgs.push: Pair.new("Owner.{$cnt++}", $_) for @!Owners;
-    
+
     # Expecting to be numeric, but if ARNs are acceptable, then these MUST
     # be url-encoded!
     my @RestorableByArgs;
     $cnt = 1;
-    @RestorableByArgs.push: Pair.new("RestorableBy.{$cnt++}", $_) 
+    @RestorableByArgs.push: Pair.new("RestorableBy.{$cnt++}", $_)
       for @!RestorableBy;
 
     my @SnapshotIdArgs;
     $cnt = 1;
-    @SnapshotIdArgs.push: Pair.new("SnapshotId.{$cnt++}", $_) 
+    @SnapshotIdArgs.push: Pair.new("SnapshotId.{$cnt++}", $_)
       for @!SnapshotIds;
 
     # Should already be sorted.

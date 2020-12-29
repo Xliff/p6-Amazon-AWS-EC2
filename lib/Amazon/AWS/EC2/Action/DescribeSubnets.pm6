@@ -22,7 +22,7 @@ class Amazon::AWS::EC2::Action::DescribeSubnets is export
   has Bool                   $.DryRun                                        is xml-element                      is xml-skip-null is rw;
   has DescribeSubnetsFilter  @.Filters      is xml-container('filterSet')                                        is xml-skip-null is rw;
   has Int                    $.MaxResults                                    is xml-element                      is xml-skip-null is rw;
-  has Str                    @.SubnetIds    is xml-container('subnetIdSet')  is xml-element('item', :over-ride)  is xml-skip-null is rw; 
+  has Str                    @.SubnetIds    is xml-container('subnetIdSet')  is xml-element('item', :over-ride)  is xml-skip-null is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -33,7 +33,7 @@ class Amazon::AWS::EC2::Action::DescribeSubnets is export
     :$dryRun,
     :@filters,
     :$maxResults,
-    :@subnetIds,  
+    :@subnetIds,
     # For testing purposes only
     :$!DryRun     = False,
     :@!Filters,
@@ -45,22 +45,22 @@ class Amazon::AWS::EC2::Action::DescribeSubnets is export
         unless $maxResults ~~ 5..1000;
       $!MaxResults = $maxResults;
     }
-    
+
     # if @filters {
     #   @!Filters = do given @filters {
-    #     when .all ~~ Amazon::AWS::EC2::Filters::DescribeSubnetsFilter 
+    #     when .all ~~ Amazon::AWS::EC2::Filters::DescribeSubnetsFilter
     #       { @filters }
-    # 
+    #
     #     default {
     #       die qq:to/DIE/.chomp;
     #       Invalid value passed to \@filers. Should only contain DescribeHostReservationFilter objects, but contains:
     #       { @filters.map( *.^name ).unique.join('. ') }
     #       DIE
-    # 
+    #
     #     }
     #   };
     # }
-    
+
     if @subnetIds {
       @!SubnetIds = do given @subnetIds {
         when .all ~~ Str    { @subnetIds }
@@ -91,10 +91,11 @@ class Amazon::AWS::EC2::Action::DescribeSubnets is export
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
-    
+
     my @SubnetIdArgs;
     $cnt = 1;
     @SubnetIdArgs.push: Pair.new("SubnetId.{$cnt++}", $_) for @!SubnetIds;

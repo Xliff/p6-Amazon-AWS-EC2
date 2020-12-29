@@ -22,14 +22,14 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnectionNotifications is ex
   has Bool                $.DryRun                                                                  is xml-element   is rw;
   has Str                 $.ConnectionNotificationId                                                is xml-element   is rw;
   has Int                 $.MaxResults                                                              is xml-element   is rw;
-  
+
   has DescribeVpcEndpointConnectionNotificationsFilter  @.Filters    is xml-container('filterSet')  is xml-element   is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
   #                 - All in one (no user control)
   #                 - One page (and then pass the next token).
-  
+
   submethod BUILD (
     :$dryRun,
     :@filters,
@@ -43,11 +43,11 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnectionNotifications is ex
   ) {
     $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     # Guessing, because range NOT specified here:
     # https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcEndpointConnectionNotifications.html
     die '$maxResutlts must be an integer between 5 and 100'
-      unless %*ENV<P6_AWS_TESTING>.defined || $!MaxResults ~~ 5..100;    
+      unless %*ENV<P6_AWS_TESTING>.defined || $!MaxResults ~~ 5..100;
 
     if @filters {
       @!Filters = do given @filters {
@@ -72,12 +72,13 @@ class Amazon::AWS::EC2::Action::DescribeVpcEndpointConnectionNotifications is ex
     >
   {
     $nextToken //= '';
-    
+
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.

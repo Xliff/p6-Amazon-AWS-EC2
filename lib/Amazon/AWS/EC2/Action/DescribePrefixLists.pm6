@@ -15,7 +15,7 @@ class Amazon::AWS::EC2::Action::DescribePrefixLists is export
   does XML::Class[xml-element => 'DescribePrefixLists']
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                      $.DryRun                                             is xml-element             is xml-skip-null is rw;
@@ -38,7 +38,7 @@ class Amazon::AWS::EC2::Action::DescribePrefixLists is export
     $!MaxResults = $maxResults if $maxResults.defined;
     die 'MaxResults must be an integer between 5 and 100'
       unless $!MaxResults ~~ 5..100;
-      
+
     if @filters {
       @!Filters = do given @filters {
         when .all ~~ DescribePrefixListsFilter    { @filters }
@@ -62,7 +62,7 @@ class Amazon::AWS::EC2::Action::DescribePrefixLists is export
 
       @!PrefixListIds = @prefixListIds;
     }
-    
+
   }
 
   method run (:$nextToken = '', :$raw = False)
@@ -75,8 +75,9 @@ class Amazon::AWS::EC2::Action::DescribePrefixLists is export
     my $cnt = 1;
     my @FilterArgs;
     for @.Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     $cnt = 1;

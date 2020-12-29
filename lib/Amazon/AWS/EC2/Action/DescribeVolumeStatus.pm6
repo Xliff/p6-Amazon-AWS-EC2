@@ -48,7 +48,7 @@ class Amazon::AWS::EC2::Action::DescribeVolumeStatus is export
   ) {
     $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     if @volumeIds {
       my @valid-types = (Str, Instance, Snapshot, Volume);
       @!VolumeIds = @volumeIds.map({
@@ -60,9 +60,9 @@ class Amazon::AWS::EC2::Action::DescribeVolumeStatus is export
 
           default {
             die qq:to/DIE/.chomp;
-            Invalid value passed to \@volumes. Should only contain VolumeId-compatible objects. 
-            Invalid objects found: { 
-              @volumeIds.map( * !~~ @valid-types.any ).unique.join(', ') 
+            Invalid value passed to \@volumes. Should only contain VolumeId-compatible objects.
+            Invalid objects found: {
+              @volumeIds.map( * !~~ @valid-types.any ).unique.join(', ')
             }
             DIE
 
@@ -99,10 +99,11 @@ class Amazon::AWS::EC2::Action::DescribeVolumeStatus is export
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
-    
+
     $cnt = 1;
     my @VolumeArgs;
     @VolumeArgs.push: Pair.new("VolumeId.{$cnt++}", $_) for @!VolumeIds;

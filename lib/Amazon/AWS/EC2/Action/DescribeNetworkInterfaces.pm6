@@ -30,7 +30,7 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfaces is export
   # Ways to handle: - Max number of requests
   #                 - All in one (no user control)
   #                 - One page (and then pass the next token).
-  
+
   submethod BUILD (
     :@filters,
     :$dryRun,
@@ -44,10 +44,10 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfaces is export
   ) {
     $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     die '$maxResutlts must be an integer between 5 and 1000'
       unless $!MaxResults ~~ 5..1000;
-      
+
     if @networkInterfaceIds {
       @!NetworkInterfaceIds = @networkInterfaceIds.map({
         do {
@@ -86,23 +86,24 @@ class Amazon::AWS::EC2::Action::DescribeNetworkInterfaces is export
       execute
     >
   {
-    # cw: Not mentioned at https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkInterfaces.html like others, 
+    # cw: Not mentioned at https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkInterfaces.html like others,
     # but left in case it was an oversight.
     #
     # die 'Cannot use @.NetworkInterfaceIds and $.maxResults in the same call to DescribeNetworkInterfaces'
-    #   if $.MaxResults.defined && @.NetworkInterfaceIds;   
+    #   if $.MaxResults.defined && @.NetworkInterfaceIds;
 
     my $cnt = 1;
     my @NetworkInterfaceIdArgs;
-    @NetworkInterfaceIdArgs.push: 
-      Pair.new("NetworkInterfaceId.{$cnt++}", $_) 
+    @NetworkInterfaceIdArgs.push:
+      Pair.new("NetworkInterfaceId.{$cnt++}", $_)
         for @!NetworkInterfaceIds;
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.
