@@ -11,5 +11,5 @@ class Amazon::AWS::EC2::Response::CancelSpotInstanceRequestsResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has CancelledSpotInstanceRequest    @.spotInstanceRequests    is xml-element    is xml-container('spotInstanceRequestSet')      is rw; 
+  has CancelledSpotInstanceRequest    @.spotInstanceRequests    is xml-element('item', :over-ride)    is xml-container('spotInstanceRequestSet')      is rw; 
 }
