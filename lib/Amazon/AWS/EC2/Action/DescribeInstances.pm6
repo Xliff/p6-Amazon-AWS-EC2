@@ -46,6 +46,7 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     :$!NextToken  = ''
   ) {
     $!DryRun     = $dryRun     if $dryRun;
+    $!MaxResults = $maxResults if $maxResults;
 
     if @instances {
       @!InstanceIds = @instances.map({
@@ -95,8 +96,13 @@ class Amazon::AWS::EC2::Action::DescribeInstances is export
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
-        for .pairs;
+      for .pairs {
+        @FilterArgs.push:
+          Pair.new( "Filter.{ $cnt }.Name", urlEncode(.key) );
+        @FilterArgs.push:
+          Pair.new( "Filter.{ $cnt }.Value", urlEncode(.value) );
+      }
+      $cnt++;
     }
 
     # Should already be sorted.
