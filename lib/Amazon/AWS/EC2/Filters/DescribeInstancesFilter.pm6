@@ -7,6 +7,8 @@ use XML::Class;
 use Amazon::AWS::Roles::Base;
 use Amazon::AWS::Roles::Eqv;
 
+use Amazon::AWS::EC2::Types::Tag;
+
 class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::BlockDeviceMapping     { ... }
 class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::HibernationOptions     { ... }
 class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::IamInstanceProfile     { ... }
@@ -18,7 +20,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAssociation    
 class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAttachment      { ... }
 class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkInterface       { ... }
 class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::ProductCode            { ... }
-class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Tag                    { ... }
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::TagFilter              { ... }
 
 constant BlockDeviceMapping     :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::BlockDeviceMapping;
 constant HibernationOptions     :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::HibernationOptions;
@@ -31,7 +33,7 @@ constant NetworkAssociation     :=  Amazon::AWS::EC2::Filters::DescribeInstances
 constant NetworkAttachment      :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkAttachment;
 constant NetworkInterface       :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::NetworkInterface;
 constant ProductCode            :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::ProductCode;
-constant Tag                    :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Tag;
+constant TagFilter              :=  Amazon::AWS::EC2::Filters::DescribeInstancesFilter::TagFilter;
 
 class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::BlockDeviceMapping
   does XML::Class[xml-element => 'block-device-mapping']
@@ -164,7 +166,7 @@ class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::ProductCode
   has Str                       $.type                      is xml-element is xml-skip-null is rw; #= devpay | marketplace
 }
 
-class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Tag
+class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::TagFilter
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Base;
@@ -172,6 +174,16 @@ class Amazon::AWS::EC2::Filters::DescribeInstancesFilter::Tag
 
   has Str                       $.key                       is xml-element is xml-skip-null is rw;
   has Str                       $.value                     is xml-element is xml-skip-null is rw;
+
+  method pairs {
+    key   => $.key,
+    value => $.value
+  }
+
+  method new (Amazon::AWS::EC2::Types::Tag $tag) {
+    # Remember to use the request version of the attributes!
+    self.bless( key => $tag.Key, value => $tag.Value );
+  }
 }
 
 # All objects used are local objects. Any EC2 objects used shall be fully qualified.
@@ -226,11 +238,18 @@ class Amazon::AWS::EC2::Filters::DescribeInstancesFilter is export
 
   # For serialization, the XML representation is wildly different than how it
   # will be emitted to the request. See the attributes attached description.
-  has Tag                       @.tags
-                                is xml-container('tags')                   is xml-skip-null is rw; #= The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
+  has                           %.tags
+                                is xml-element
+                                is xml-skip-null
+                                is rw; #= The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.
 
   has Str                       $.tag-key                   is xml-element is xml-skip-null is rw;
   has Str                       $.tenancy                   is xml-element is xml-skip-null is rw; #= dedicated | default | host
   has Str                       $.virtualization-type       is xml-element is xml-skip-null is rw; #= paravirtual | hvm
   has Str                       $.vpc-id                    is xml-element is xml-skip-null is rw;
+
+  multi method new (:%tags is required) {
+    self.bless( :%tags );
+  }
+
 }
