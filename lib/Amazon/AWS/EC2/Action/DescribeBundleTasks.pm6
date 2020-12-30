@@ -71,8 +71,9 @@ class Amazon::AWS::EC2::Action::DescribeBundleTasks is export
     $cnt = 1;
     my @FilterArgs;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.

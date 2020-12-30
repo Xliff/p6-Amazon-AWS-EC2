@@ -44,11 +44,11 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     :@!Filters,
     :@!ExecutableBy,
     :@!ImageIds,
-    :@!Owners               = ('self').Array, 
+    :@!Owners               = ('self').Array,
     :$!MaxResults           = 1000,
   ) {
     $!DryRun     = $dryRun     if $dryRun;
-    
+
     if @imageIds {
       @!ImageIds = @imageIds.map({
         when Str                               { $_ }
@@ -88,7 +88,7 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     if @filters {
       @!Filters = do given @filters {
         when .all ~~ DescribeImagesFilter { $_ }
-        
+
         default { errorBadContents(@filters, DescribeImagesFilter) }
       };
     }
@@ -102,17 +102,18 @@ class Amazon::AWS::EC2::Action::DescribeImages is export
     >
   {
     $nextToken //= '';
-    
+
     my $cnt = 1;
     my @ExecutableByArgs;
-    @ExecutableByArgs.push: Pair.new("ExecutableBy.{$cnt++}", $_) 
+    @ExecutableByArgs.push: Pair.new("ExecutableBy.{$cnt++}", $_)
       for @!ExecutableBy;
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     $cnt = 1;

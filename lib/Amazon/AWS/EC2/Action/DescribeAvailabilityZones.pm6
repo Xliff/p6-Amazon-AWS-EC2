@@ -41,7 +41,7 @@ class Amazon::AWS::EC2::Action::DescribeAvailabilityZones is export
     :@!ZoneNames
   ) {
     $!DryRun //= $dryRun // False;
-    
+
     if @zoneIds {
       die '@allocationIds must only contain strings'
        unless @zoneIds.all ~~ Str;
@@ -66,7 +66,7 @@ class Amazon::AWS::EC2::Action::DescribeAvailabilityZones is export
       die '@publicIps must only contain strings' unless @zoneIds.all ~~ Str;
       @!ZoneIds //= @zoneIds;
     }
-    
+
     if @zoneNames {
       die '@publicIps must only contain strings' unless @zoneNames.all ~~ Str;
       @!ZoneNames //= @zoneNames;
@@ -82,8 +82,9 @@ class Amazon::AWS::EC2::Action::DescribeAvailabilityZones is export
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     my @ZoneIdArgs;
@@ -91,7 +92,7 @@ class Amazon::AWS::EC2::Action::DescribeAvailabilityZones is export
     for @!ZoneIds {
       @ZoneIdArgs.push: Pair.new("ZoneIds.{$cnt++}", $_);
     }
-    
+
     my @ZoneNameArgs;
     $cnt = 1;
     for @!ZoneNames {

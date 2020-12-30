@@ -24,7 +24,7 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
   has Int                                     $.MaxDuration                                   is xml-element  is rw; # One year(31536000) or Three years(94608000)
   has Int                                     $.MaxResults                                    is xml-element  is rw;
   has Int                                     $.MinDuration                                   is xml-element  is rw; # One year(31536000) or Three years(94608000)
-  has Str                                     $.OfferingId                                    is xml-element  is rw; 
+  has Str                                     $.OfferingId                                    is xml-element  is rw;
 
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
@@ -32,12 +32,12 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
   #                 - One page (and then pass the next token).
 
   submethod BUILD (
-    :$dryRun,      
+    :$dryRun,
     :@filters,
-    :$maxDuration,  
-    :$maxResults,   
-    :$minDuration,  
-    :$offeringId,   
+    :$maxDuration,
+    :$maxResults,
+    :$minDuration,
+    :$offeringId,
     # For testing purposes only
     :$!DryRun       = False,
     :@!Filters,
@@ -48,7 +48,7 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
   ) {
     $!OfferingId = $offeringId if $offeringId.defined;
     die '$!OfferingId MUST be a String!' unless $!OfferingId ~~ Str;
-    
+
     if $minDuration {
       die '$minDuration must be an integer and have a value of 31536000, or 94608000'
       unless $minDuration == (31536000, 94608000).any;
@@ -64,11 +64,11 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
         unless $maxResults ~~ 5..500;
       $!MaxResults = $maxResults;
     }
-    
-     
+
+
     if @filters {
       @!Filters = do given @filters {
-        when .all ~~ Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter 
+        when .all ~~ Amazon::AWS::EC2::Filters::DescribeHostReservationOfferingsFilter
           { @filters }
 
         default {
@@ -97,7 +97,8 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", .value) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", .value) for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.
@@ -113,10 +114,10 @@ class Amazon::AWS::EC2::Action::DescribeHostReservationOfferings is export
         MaxResults  => $!MaxResults,
         MinDuration => $!MinDuration
       );
-      
+
       @args.append: Pair.new('OfferingId', $!OfferingId)
         if $.OfferingId.chars;
-        
+
       @args.push: Pair.new('Version', '2016-11-15');
     }
 

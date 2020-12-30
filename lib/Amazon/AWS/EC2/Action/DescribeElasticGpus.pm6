@@ -15,7 +15,7 @@ class Amazon::AWS::EC2::Action::DescribeElasticGpus is export
   does XML::Class[xml-element => 'DescribeElasticGpus']
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                      $.DryRun                                              is xml-element                         is rw;
@@ -54,7 +54,7 @@ class Amazon::AWS::EC2::Action::DescribeElasticGpus is export
 
       @!ElasticGpuIds = @elasticGpuIds;
     }
-    
+
   }
 
   method run (:$raw = False)
@@ -67,13 +67,14 @@ class Amazon::AWS::EC2::Action::DescribeElasticGpus is export
     my $cnt = 1;
     my @FilterArgs;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     $cnt = 1;
     my @ElasticGpuIdArgs;
-    @ElasticGpuIdArgs.push: Pair.new("ElasticGpuId.{$cnt++}", $_) 
+    @ElasticGpuIdArgs.push: Pair.new("ElasticGpuId.{$cnt++}", $_)
       for @!ElasticGpuIds;
 
     # Should already be sorted.
