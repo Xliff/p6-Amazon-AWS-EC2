@@ -52,7 +52,7 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
         unless $maxResults ~~ 5..1000;
       $!MaxResults = $maxResults;
     }
-      
+
    # Will MaxResults work with @!GroupIds?
 
     for @groups {
@@ -111,15 +111,16 @@ class Amazon::AWS::EC2::Action::DescribeSecurityGroups is export
 
     $cnt = 1;
     my @GroupNameArgs;
-    @GroupNameArgs.push: 
-      Pair.new("GroupName.{$cnt++}", urlEncode($_)) 
+    @GroupNameArgs.push:
+      Pair.new("GroupName.{$cnt++}", urlEncode($_))
         for @!GroupNames;
 
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.

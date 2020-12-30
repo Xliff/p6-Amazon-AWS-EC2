@@ -49,13 +49,13 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
   ) {
     $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
-    
-    $!IncludeAllInstances = $includeAllInstances 
+
+    $!IncludeAllInstances = $includeAllInstances
       if $includeAllInstances.defined;
-    
+
     die 'Cannot use @.instances and $.maxResults in the same call to DescribeInstanceStatus'
       if $maxResults.defined && @instances;
-    
+
     if @instances {
       @!InstanceIds = @instances.map({
         do {
@@ -76,8 +76,8 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
 
     if @filters {
       @!Filters = do given @filters {
-        when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter { 
-          @!Filters 
+        when .all ~~ Amazon::AWS::EC2::Filters::DescribeInstanceStatusFilter {
+          @!Filters
         }
 
         default {
@@ -99,7 +99,7 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
     >
   {
     $!MaxResults = -1 if @.InstanceIds;
-    
+
     my $cnt = 1;
     my @InstanceArgs;
     @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @.InstanceIds;
@@ -107,8 +107,9 @@ class Amazon::AWS::EC2::Action::DescribeInstanceStatus is export
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.

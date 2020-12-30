@@ -39,20 +39,22 @@ class Amazon::AWS::EC2::Action::StopInstances is export
     $!DryRun    = $dryRun    if $dryRun;
     $!Force     = $force     if $force;
     $!Hibernate = $hibernate if $hibernate;
-    
+
     if @instances {
       my @valid-types = (Str, Instance);
       @!InstanceIds = @instances.map({
         do {
           when  Instance { .instanceId.trim }
           when  Str      { .trim            }
-          
+
           default {
             die qq:to/DIE/.chomp;
-    Invalid value passed to \@instances. Should only contain Instance-ID compatible Strings, but contains:
-    { @instances.grep( *.WHAT !~~ @valid-types.any ).map( *.^name ).unique
-                .join(', ') }
-    DIE
+              Invalid value passed to \@instances. Should only contain {''
+              }Instance-compatible values, but contains:
+              { @instances.grep( *.WHAT !~~ @valid-types.any )
+                          .map( *.^name ).unique
+                          .join(', ') }
+              DIE
 
           }
         }
@@ -69,7 +71,6 @@ class Amazon::AWS::EC2::Action::StopInstances is export
     my $cnt = 1;
     my @InstanceArgs;
     @InstanceArgs.push: Pair.new("InstanceId.{$cnt++}", $_) for @!InstanceIds;
-    @InstanceArgs.say;
 
     # Should already be sorted.
     my @args = (

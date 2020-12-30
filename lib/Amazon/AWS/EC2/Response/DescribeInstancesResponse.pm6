@@ -13,6 +13,6 @@ class Amazon::AWS::EC2::Response::DescribeInstancesResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has Str         $.nextToken    is xml-element                     is rw;
-  has Reservation @.reservations is xml-container('reservationSet') is rw;
+  has Str         $.nextToken    is xml-skip-null is xml-element                                                        is rw;
+  has Reservation @.reservations is xml-skip-null is xml-element('item', :over-ride) is xml-container('reservationSet') is rw;
 }

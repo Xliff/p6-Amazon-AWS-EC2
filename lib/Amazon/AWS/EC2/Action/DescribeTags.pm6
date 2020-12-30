@@ -44,7 +44,7 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
         unless $maxResults ~~ 5..1000;
       $!MaxResults = $maxResults;
     }
-    
+
     if @filters {
       @!Filters = do given @filters {
         when .all ~~ DescribeTagsFilter    { @filters }
@@ -60,7 +60,7 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
     }
   }
 
-  
+
   method run (Str :$nextToken is copy, :$raw)
     is also<
       do
@@ -69,13 +69,13 @@ class Amazon::AWS::EC2::Action::DescribeTags is export
   {
     # Prevent reassignment to an undefined valie.
     $nextToken //= '';
-    
+
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: 
-        Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
-          for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
+        for .pairs;
+      $cnt++;
     }
 
     # Should already be sorted.

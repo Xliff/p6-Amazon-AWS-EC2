@@ -6,7 +6,7 @@ use LWP::Simple;
 use Mojo::DOM:from<Perl5>;
 use Mojo::URL:from<Perl5>;
 
-sub makeClass (Str $url, :$response = False) is export {
+sub makeClass (Str $url, :$response = False, :$action = False) is export {
   my $dom = Mojo::DOM.new( LWP::Simple.get($url) );
 
   my ($className, @attributes);
@@ -54,8 +54,8 @@ sub makeClass (Str $url, :$response = False) is export {
               if $te.text.starts-with('Type: Array of') {
                 $sigil = '@.';
                 if (my $link = $te.find('a').to_array[0]) {
-                  $link.text;
                   $override = True;
+                  $link.text;
                 } else {
                   $te.text ~~ /'Array of ' (\w+)/;
                   do given $/[0] {
@@ -102,16 +102,23 @@ sub makeClass (Str $url, :$response = False) is export {
               $validValues ~~ s:g/ \s+ / /;
             } else {
               # Note potential sub-call declaration.
-              $validValues = '#=  sub:Amazon::AWS::EC2::validInstanceTypes::checkInstanceType';
+              $validValues = '#=  validation:Amazon::AWS::EC2::validInstanceTypes::checkInstanceType';
             }
           }
         }
+
+        $attrType = $className ~ 'Filter' if $attrType eq 'Filter';
+
         # Emit xml-container('attrName') if sigil starts with @.
         if $sigil.starts-with('@') {
+          $attrName ~~ s/.N$/s/;
           my $oldAttrName = $attrName;
+          $oldAttrName.substr-rw(0, 1) = $oldAttrName.substr(0, 1).lc;
+          $oldAttrName ~= 'Set' unless $response;
+          $oldAttrName ~~ s/SetSet/Set/;
+          $container = "is xml-container('{$oldAttrName}')";
           $attrName ~~ s/'ValueSet'/s/;
           $attrName ~~ s/'Set'$/s/;
-          $container = "is xml-container('{$oldAttrName}')";
         }
       }
 
@@ -119,9 +126,12 @@ sub makeClass (Str $url, :$response = False) is export {
         $attrType,
         $attrName,
         $sigil,
-        $sigil.starts-with('@') ??
-          '' !!
-          'is xml-element' ~ $override ?? '(:over-ride)' !! '',
+        $sigil.starts-with('@') ?? "is xml-element('item', :over-ride)"
+                                !! 'is xml-element' ~ (
+                                  $override ?? '(:over-ride)'
+                                            !! ''
+                                ),
+
         $container,
         $validValues,
         'is xml-skip-null',
@@ -152,28 +162,80 @@ sub makeClass (Str $url, :$response = False) is export {
                        $a[5].defined ?? "  #= { $a[5] }" !! '' }";
   }
 
-  my $mode = $response ?? 'Response' !! 'Types';
-
   # Really should be separated out into a view.
-  my $dependent = $response ??
-    'Amazon::AWS::Roles::Response'
-    !!
-    'Amazon::AWS::EC2::Types::Base';
+  my ($dependent, $also, $xml-item, $mode, $shortname) = do {
+    if $response {
+      (
+        'use Amazon::AWS::Roles::Response;',
+        'also does Amazon::AWS::Roles::Response;',
+        "{ $className }Response",
+        'Response',
+        ''
+      );
+    } elsif $action {
+      my $d = q:to/DEP/,
+        use Method::Also;
 
-  my $also = $response ??
-    "also does {$dependent};"
-    !!
-    "also is {$dependent};";
-  my $xml-item = $response ??  "{ $className }Response" !! 'item';
+        use Amazon::AWS::Utils;
+        use Amazon::AWS::Roles::Eqv;
+        DEP
+      (
+        $d,
+        "also does Amazon::AWS::Roles::Eqv;",
+         'item',
+         'Action',
+         "\n" ~ '  my $c = ::?CLASS.^shortname;'
+      );
+    } else {
+      (
+        'use Amazon::AWS::EC2::Types::Base',
+        'also is Amazon::AWS::EC2::Types::Base',
+        'item',
+        'Types',
+        ''
+      );
+    }
+  }
 
-  qq:to/PRE1/.chomp;
+  my $run = '';
+  $run = q:to/RUN/ if $action;
+      method run (:$raw)
+        is also<
+          do
+          execute
+        >
+      {
+        # Should already be sorted.
+        my @args = (
+          DryRun     => $!DryRun,
+          Version    => '2016-11-15'
+        );
+
+        # XXX - Add error handling to makeRequest!
+        my $xml = makeRequest(
+          "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
+        );
+
+        $raw ??
+          $xml
+          !!
+          ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
+      }
+
+    RUN
+
+  my $pre = qq:to/PRE1/.chomp;
     use v6.d;
 
-    use { $dependent };
+    { $dependent }
 
     use XML::Class;
 
-    { @extraTypes.sort.map( 'use Amazon::AWS::EC2::Types::' ~ *  ~ ';' ).join("\n") }
+    { @extraTypes.sort.map({
+        my $mode = .ends-with('Filter') ?? 'Filters' !! 'Types';
+        "use Amazon::AWS::EC2::{ $mode }::{ $_ };"
+      }).join("\n") }
+    { $response ?? '' !! "use Amazon::AWS::EC2::Response::{ $className }Response;" }
 
     class Amazon::AWS::EC2::{ $mode }::{ $className }{
       $response ?? 'Response' !! ''
@@ -181,10 +243,14 @@ sub makeClass (Str $url, :$response = False) is export {
       does XML::Class[xml-element => '{ $xml-item }']
     \{
       { $also }
+    { $shortname }
 
     { @attrDefs.join("\n") }
-    \}
+
+    { $run }\}
     PRE1
+
+  $pre;
 }
 
 sub processClass ($url, :$response) {

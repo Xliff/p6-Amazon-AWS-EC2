@@ -18,7 +18,7 @@ class Amazon::AWS::EC2::Action::DescribeVolumeModifications is export
   ]
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                               $.DryRun                                       is xml-element                       is rw;
@@ -32,7 +32,7 @@ class Amazon::AWS::EC2::Action::DescribeVolumeModifications is export
   #                 - One page (and then pass the next token).
 
   submethod BUILD (
-    :$dryRun,     
+    :$dryRun,
     :@filters,
     :$maxResults,
     :@volumeIds,
@@ -62,7 +62,7 @@ class Amazon::AWS::EC2::Action::DescribeVolumeModifications is export
         }
       };
     }
-    
+
     if @volumeIds {
       @!VolumeIds = @volumeIds.map({
         do {
@@ -82,14 +82,15 @@ class Amazon::AWS::EC2::Action::DescribeVolumeModifications is export
     >
   {
     $nextToken //= '';
-    
+
     my @FilterArgs;
     my $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
-    
+
    $cnt = 1;
    my @VolumeIdArgs;
    @VolumeIdArgs.push: Pair.new("VolumeId.{$cnt++}", $_) for @!VolumeIds;

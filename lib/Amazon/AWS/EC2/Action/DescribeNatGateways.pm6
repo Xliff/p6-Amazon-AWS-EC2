@@ -23,7 +23,7 @@ class Amazon::AWS::EC2::Action::DescribeNatGateways is export
   has Str                       @.NatGatewayIds    is xml-container('natGatewaysIdSet')    is xml-element('item', :over-ride)  is xml-skip-null is rw;
   has Bool                      $.DryRun                                                   is xml-element                      is xml-skip-null is rw;
   has Int                       $.MaxResults                                               is xml-element                      is xml-skip-null is rw;
-  
+
   # How to handle use of nextToken? -- TBD
   # Ways to handle: - Max number of requests
   #                 - All in one (no user control)
@@ -42,7 +42,7 @@ class Amazon::AWS::EC2::Action::DescribeNatGateways is export
   ) {
     $!DryRun     = $dryRun     if $dryRun;
     $!MaxResults = $maxResults if $maxResults.defined;
-    
+
     if @natGatewayIds {
       die '@NatGatewaysIds must only contain strings'
        unless @natGatewayIds.all ~~ Str;
@@ -62,7 +62,7 @@ class Amazon::AWS::EC2::Action::DescribeNatGateways is export
         }
       };
     }
-    
+
   }
 
   method run (:$raw)
@@ -80,10 +80,11 @@ class Amazon::AWS::EC2::Action::DescribeNatGateways is export
     my @FilterArgs;
     $cnt = 1;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value))
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
-    
+
     # Should already be sorted.
     my @args = (
       DryRun         => $!DryRun,

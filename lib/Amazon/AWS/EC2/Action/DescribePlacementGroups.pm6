@@ -15,7 +15,7 @@ class Amazon::AWS::EC2::Action::DescribePlacementGroups is export
   does XML::Class[xml-element => 'DescribePlacementGroups']
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                          $.DryRun                                          is xml-element             is rw;
@@ -32,7 +32,7 @@ class Amazon::AWS::EC2::Action::DescribePlacementGroups is export
     :@!GroupNames
   ) {
     $!DryRun = $dryRun if $dryRun;
-    
+
     if @filters {
       @!Filters = do given @filters {
         when .all ~~ DescribePlacementGroupsFilter    { @filters }
@@ -56,7 +56,7 @@ class Amazon::AWS::EC2::Action::DescribePlacementGroups is export
 
       @!GroupNames = @groupNames;
     }
-    
+
   }
 
   method run (:$raw = False)
@@ -70,12 +70,13 @@ class Amazon::AWS::EC2::Action::DescribePlacementGroups is export
     for @!Filters {
       my $v = .value;
       $v = urlEncode($v) if .key eq 'GroupName';
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", $v) for .pairs;
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", $v) for .pairs;
+      $cnt++;
     }
 
     $cnt = 1;
     my @GroupNameArgs;
-    @GroupNameArgs.push: Pair.new("GroupName.{$cnt++}", urlEncode($_)) 
+    @GroupNameArgs.push: Pair.new("GroupName.{$cnt++}", urlEncode($_))
       for @!GroupNames;
 
     # Should already be sorted.

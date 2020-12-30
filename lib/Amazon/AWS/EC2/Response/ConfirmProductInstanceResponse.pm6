@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Response::ConfirmProductInstanceResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has Str     $.ownerId    is xml-element          is rw; 
-  has Bool    $.return     is xml-element          is rw; 
+  has Str     $.ownerId    is xml-element     is xml-skip-null     is rw; 
+  has Bool    $.return     is xml-element     is xml-skip-null     is rw; 
 }

@@ -30,30 +30,30 @@ class Amazon::AWS::EC2::Action::DescribeAccountAttributes is export
     # For deserialization purposes, only!
     :@!AttributeNames,
     :$!DryRun         = False,
-    
-  ) { 
+
+  ) {
     # Abstract away into a sub done by Actions role?
     my $dieMsg = qq:to/DIE/.chomp;
       Invalid AttributeName value. Valid value should be any of:
       { %attributes<AttributeNames|Table> }
       DIE
-     
+
     @!AttributeNames = @attributeNames.map({
       when Str {
-        when %attributes<AttributeNames|ValidValues>.any 
+        when %attributes<AttributeNames|ValidValues>.any
           { $_ }
-        
-        default { 
+
+        default {
           die qq:to/DIE/.chomp;
             Invalid value for AttributeName. Must be one of:
               { %attributes<AttributeNames|Table> }
             DIE
         }
       }
-      
+
       default    { die $dieMsg }
     }) if @attributeNames;
-            
+
     $!DryRun = $dryRun if $dryRun.defined;
   }
 
@@ -68,17 +68,15 @@ class Amazon::AWS::EC2::Action::DescribeAccountAttributes is export
     if @!AttributeNames {
       my @AttributeArgs;
       my $cnt = 1;
-      for @!AttributeNames {
-        @AttributeArgs.push: Pair.new("AttributeName.{$cnt++}", .value) 
-          for .pairs;
-      }
+      @AttributeArgs.push: Pair.new("AttributeName.{$cnt++}", $_)
+        for @!AttributeNames;        
       @args.append: @AttributeArgs;
     }
     @args.append: (
       DryRun        => $!DryRun,
       Version       => '2016-11-15'
     );
-    
+
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
@@ -89,11 +87,11 @@ class Amazon::AWS::EC2::Action::DescribeAccountAttributes is export
       !!
       ::("Amazon::AWS::EC2::Response::{ $c }Response").from-xml($xml);
   }
-  
+
   method getAccountAttributeNames {
     %attributes<AttributeNames|ValidValues>.Array
   }
-  
+
 };
 
 BEGIN {

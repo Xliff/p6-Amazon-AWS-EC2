@@ -15,7 +15,7 @@ class Amazon::AWS::EC2::Action::DescribeKeyPairs is export
   does XML::Class[xml-element => 'DescribeKeyPairs']
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^name.split('::')[* - 1];
 
   has Bool                   $.DryRun                                        is xml-element                is rw;
@@ -32,7 +32,7 @@ class Amazon::AWS::EC2::Action::DescribeKeyPairs is export
     :@!KeyNames
   ) {
     $!DryRun = $dryRun if $dryRun;
-    
+
     if @filters {
       @!Filters = do given @filters {
         when .all ~~ DescribeKeyPairsFilter
@@ -57,7 +57,7 @@ class Amazon::AWS::EC2::Action::DescribeKeyPairs is export
 
       @!KeyNames = @keyNames;
     }
-    
+
   }
 
   method run (:$raw = False)
@@ -70,13 +70,14 @@ class Amazon::AWS::EC2::Action::DescribeKeyPairs is export
     my $cnt = 1;
     my @FilterArgs;
     for @!Filters {
-      @FilterArgs.push: Pair.new("Filter.{$cnt++}.{.key}", urlEncode(.value)) 
+      @FilterArgs.push: Pair.new("Filter.{$cnt}.{.key}", urlEncode(.value))
         for .pairs;
+      $cnt++;
     }
 
     $cnt = 1;
     my @KeyNameArgs;
-    @KeyNameArgs.push: Pair.new("KeyName.{$cnt++}", urlEncode($_)) 
+    @KeyNameArgs.push: Pair.new("KeyName.{$cnt++}", urlEncode($_))
       for @!KeyNames;
 
     # Should already be sorted.

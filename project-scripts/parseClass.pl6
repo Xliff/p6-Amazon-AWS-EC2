@@ -6,12 +6,13 @@ use lib <. project-scripts>;
 use ClassGeneration;
 
 sub MAIN (
-  Str  :$spider,           #= Spider all links at argument and generate classes from
-                           #= all <a> tags. Generated classes are sent to their own file.
+  Str  :$spider,            #= Spider all links at argument and generate classes from
+                            #= all <a> tags. Generated classes are sent to their own file.
   #Str  :$pattern,          #= Pattern to use to filter links and extract class name.
   #Int  :$threads = 5,      #= Number of parallel threads. Used with --spider
-  Str  :$url,              #= Generate a class from the given URL and send it to STDOUT.
-  Bool :$response = False  #= Generate classes from Response descriptions
+  Str  :$url,               #= Generate a class from the given URL and send it to STDOUT.
+  Bool :$response = False,  #= Generate classes from Response descriptions
+  Bool :$action   = False   #= Generate classes from Action descriptions
 
 ) {
   when $spider.defined {
@@ -20,7 +21,7 @@ sub MAIN (
   }
 
   when $url.defined {
-    makeClass($url, :$response).say;
+    makeClass($url, :$response, :$action).say;
   }
 
   default {

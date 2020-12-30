@@ -11,6 +11,6 @@ class Amazon::AWS::EC2::Response::DescribeInstanceCreditSpecificationsResponse i
 {
   also does Amazon::AWS::Roles::Response;
 
-  has InstanceCreditSpecification    @.instanceCreditSpecifications    is xml-element    is xml-container('instanceCreditSpecificationSet')      is rw; 
-  has Str                            $.nextToken                       is xml-element                                                            is rw; 
+  has InstanceCreditSpecification    @.instanceCreditSpecifications    is xml-element('item', :over-ride)    is xml-skip-null    is xml-container('instanceCreditSpecificationSet')      is rw;
+  has Str                            $.nextToken                       is xml-element                        is xml-skip-null                                                            is rw;
 }
