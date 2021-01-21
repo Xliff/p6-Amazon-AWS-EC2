@@ -14,6 +14,6 @@ our class Amazon::AWS::EC2::Response::DescribeSecurityGroupsResponse is export
 {
   also does Amazon::AWS::Roles::Response;
 
-  has Str            $.nextToken is xml-element                        is rw;
-  has SecurityGroup  @.groups    is xml-container('securityGroupInfo') is rw;
+  has Str            $.nextToken is xml-element                     is xml-skip-null                                       is rw;
+  has SecurityGroup  @.groups    is xml-element('item', :over-ride) is xml-skip-null is xml-container('securityGroupInfo') is rw;
 }
