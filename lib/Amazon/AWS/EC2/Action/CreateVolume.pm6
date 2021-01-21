@@ -18,7 +18,7 @@ class Amazon::AWS::EC2::Action::CreateVolume is export
 {
   also does Amazon::AWS::Roles::Eqv;
 
-  my $c = ::?CLASS.^name.split('::')[* - 1];
+  my $c = ::?CLASS.^shortname;
 
   has Str               $.AvailabilityZone                                             is xml-element                      is xml-skip-null is rw;
   has Bool              $.DryRun                                                       is xml-element                      is xml-skip-null is rw;

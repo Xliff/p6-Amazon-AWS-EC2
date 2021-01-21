@@ -17,7 +17,7 @@ class Amazon::AWS::EC2::Action::DeleteSnapshot is export
 {
   also does Amazon::AWS::Roles::Eqv;
 
-  my $c = ::?CLASS.^name.split('::')[* - 1];
+  my $c = ::?CLASS.^shortname;
 
   has Bool $.DryRun        is xml-element is xml-skip-null is rw;
   has Str  $.SnapshotId    is xml-element is xml-skip-null is rw;
