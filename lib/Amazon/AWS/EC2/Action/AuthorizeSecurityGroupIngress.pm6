@@ -14,19 +14,19 @@ class Amazon::AWS::EC2::AuthorizeSecurityGroupIngress is export
   does XML::Class[xml-element => 'item']
 {
   also does Amazon::AWS::Roles::Eqv;
-  
+
   my $c = ::?CLASS.^shortname;
 
-  has Str             $.CidrIp                        is xml-element                        is xml-skip-null                                               is rw; 
-  has Bool            $.DryRun                        is xml-element                        is xml-skip-null                                               is rw; 
-  has Int             $.FromPort                      is xml-element                        is xml-skip-null                                               is rw; 
-  has Str             $.GroupId                       is xml-element                        is xml-skip-null                                               is rw; 
-  has Str             $.GroupName                     is xml-element                        is xml-skip-null                                               is rw; 
-  has IpPermission    @.IpPermissions                 is xml-element('item', :over-ride)    is xml-skip-null    is xml-container('ipPermissionssSet')      is rw; 
-  has Str             $.IpProtocol                    is xml-element                        is xml-skip-null                                               is rw; 
-  has Str             $.SourceSecurityGroupName       is xml-element                        is xml-skip-null                                               is rw; 
-  has Str             $.SourceSecurityGroupOwnerId    is xml-element                        is xml-skip-null                                               is rw; 
-  has Int             $.ToPort                        is xml-element                        is xml-skip-null                                               is rw; 
+  has Str             $.CidrIp                        is xml-element                        is xml-skip-null                                               is rw;
+  has Bool            $.DryRun                        is xml-element                        is xml-skip-null                                               is rw;
+  has Int             $.FromPort                      is xml-element                        is xml-skip-null                                               is rw;
+  has Str             $.GroupId                       is xml-element                        is xml-skip-null                                               is rw;
+  has Str             $.GroupName                     is xml-element                        is xml-skip-null                                               is rw;
+  has IpPermission    @.IpPermissions                 is xml-element('item', :over-ride)    is xml-skip-null    is xml-container('ipPermissionssSet')      is rw;
+  has Str             $.IpProtocol                    is xml-element                        is xml-skip-null                                               is rw;
+  has Str             $.SourceSecurityGroupName       is xml-element                        is xml-skip-null                                               is rw;
+  has Str             $.SourceSecurityGroupOwnerId    is xml-element                        is xml-skip-null                                               is rw;
+  has Int             $.ToPort                        is xml-element                        is xml-skip-null                                               is rw;
 
   submethod BUILD (
     :$cidrIp                      ,
@@ -39,34 +39,34 @@ class Amazon::AWS::EC2::AuthorizeSecurityGroupIngress is export
     :$sourceSecurityGroupName     ,
     :$sourceSecurityGroupOwnerId  ,
     :$toPort                      ,
-    :$!CidrIp                     ,   
-    :$!DryRun                     = False,   
-    :$!FromPort                   ,   
-    :$!GroupId                    ,   
-    :$!GroupName                  ,   
-    :@!IpPermissions              ,  
-    :$!IpProtocol                 ,   
-    :$!SourceSecurityGroupName    ,   
-    :$!SourceSecurityGroupOwnerId ,   
-    :$!ToPort
+    :$!CidrIp                     = '',
+    :$!DryRun                     = False,
+    :$!FromPort                   = Int,
+    :$!GroupId                    = '',
+    :$!GroupName                  = '',
+    :@!IpPermissions              ,
+    :$!IpProtocol                 = '',
+    :$!SourceSecurityGroupName    = '',
+    :$!SourceSecurityGroupOwnerId = '',
+    :$!ToPort                     = Int
   ) {
     $!CidrIp                       = $cidrIp                      if $cidrIp   ;
     $!DryRun                       = $dryRun                      if $dryRun   ;
     $!FromPort                     = $fromPort                    if $fromPort ;
     $!GroupId                      = $groupId                     if $groupId  ;
     $!GroupName                    = $groupName                   if $groupName;
-    $!IpProtocol                   = $ipProtocol                  
+    $!IpProtocol                   = $ipProtocol
       if $ipProtocol;
-    $!SourceSecurityGroupName      = $sourceSecurityGroupName     
+    $!SourceSecurityGroupName      = $sourceSecurityGroupName
       if $sourceSecurityGroupName;
-    $!SourceSecurityGroupOwnerId   = $sourceSecurityGroupOwnerId  
+    $!SourceSecurityGroupOwnerId   = $sourceSecurityGroupOwnerId
       if $sourceSecurityGroupOwnerId;
-    $!ToPort                       = $toPort                      if $toPort;    
-         
-    @!IpPermissions = @ipPermissions.map({
-      if $_ !~~ IpPermission {
+    $!ToPort                       = $toPort                      if $toPort;
+
+    @!IpPermissions = @ipPermissions.map(-> $p is rw {
+      if $p !~~ IpPermission {
         if .^lookup('IpPermission') -> $m {
-          $_ = $m($_);
+          $p = $m($p);
         } else {
           die qq:to/DIE/.chomp;
             Invalid value passed to \@ipPermissions. Should only contain {
@@ -74,8 +74,9 @@ class Amazon::AWS::EC2::AuthorizeSecurityGroupIngress is export
             DIE
         }
       }
+      $p;
     });
-    
+
   }
 
   method run (:$raw)
@@ -86,20 +87,23 @@ class Amazon::AWS::EC2::AuthorizeSecurityGroupIngress is export
   {
     my @args;
     for self.^attributes.sort( *.name ) {
-      if .name eq 'IpPermission' {
+      my $an = .name.substr(2);
+      if $an eq 'IpPermissions' {
         my @ipp;
         my $cnt = 1;
         for @!IpPermissions {
           @args.push:
-            Pair.new("IpPermission.{ $cnt }.{ .key }", urlEncode( .value ))
+            Pair.new( "{ $an }.{ $cnt }.{ .key }", .value )
               for .pairs;
         }
         $cnt++;
-      } else { 
-        @args.push: Pair.new( .name.substr(2), .get_value(self) ) 
+      } else {
+        my \av = .get_value(self);
+
+        @args.push: Pair.new( $an, av ) if av;
       }
     }
-     
+
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
       "?Action={ $c }&{ @args.map({ "{.key}={.value}" }).join('&') }"
