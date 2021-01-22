@@ -45,7 +45,7 @@ class Amazon::AWS::EC2::Action::CreateNetworkAcl is export
     # Should already be sorted.
     my @args = (
       DryRun  => $!DryRun,
-      vpcId   => $!VpcId,
+      VpcId   => $!VpcId,
       Version => '2016-11-15'
     );
 
