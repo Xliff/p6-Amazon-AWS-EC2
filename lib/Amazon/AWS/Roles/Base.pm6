@@ -1,5 +1,7 @@
 use v6.d;
 
+use Amazon::AWS::Utils;
+
 role Amazon::AWS::Roles::Base {
 
   method pairs {
@@ -11,13 +13,21 @@ role Amazon::AWS::Roles::Base {
 
       given $v {
         when Str | Num | Int | Bool {
-          @p.push: Pair.new($n, self."$n"()) if self."$n"().defined;
+          @p.push: Pair.new($n, $_);
+        }
+
+        when Array {
+          next unless .elems;
+          my $cnt = 1;
+          for .Array {
+            @p.push: Pair.new( "{$n}.{$cnt++}.{ .key }", .value ) for .pairs;
+          }
         }
 
         when Hash {
           for .pairs {
             next unless .value.defined;
-            @p.push: Pair.new("tag:{.key}", .value)
+            @p.push: Pair.new( "tag:{.key}", urlEncode(.value) )
           }
         }
 
@@ -29,21 +39,23 @@ role Amazon::AWS::Roles::Base {
             for $v.Array {
               next unless $_;
               next unless .key.defined;
-              @p.push: Pair.new("tag:{.key}", .value)
+              @p.push: Pair.new( "tag:{.key}", urlEncode(.value) )
             }
           }
 
           default {
-            if $v.?pairs -> $p {
-              @p.push: Pair.new("{$n}.{.key}, .value") for $p;
+            if $v.^lookup('pairs') -> $pm {
+              for $pm($v)[] {
+                @p.push: Pair.new( "{$n}.{.key}", urlEncode(.value) )
+              }
             } else {
-              die "{ $v.^name } is not .pairs-compatible";
+              die "{ $v.^name } is not .pairs compatible";
             }
           }
         }
       }
     }
-    @p;
+    @p.sort( *.key );
   }
 
   method handlePercentageAsString ($_ is raw) {
