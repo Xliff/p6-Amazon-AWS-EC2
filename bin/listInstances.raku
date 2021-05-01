@@ -6,7 +6,12 @@ use Amazon::AWS::EC2::Filters::DescribeInstancesFilter;
 use Amazon::AWS::EC2::Types::Tag;
 
 my @valid-options;
-sub MAIN (:$tags, *%filter is copy) {
+sub MAIN (:$tags, :$help, *%filter is copy) {
+  if $help {
+    print $*USAGE;
+    exit;
+  }
+
   die "Invalid option name '{ $_ }'!" unless $_ eq @valid-options.any
     for %filter.keys;
 
