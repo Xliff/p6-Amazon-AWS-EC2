@@ -103,6 +103,7 @@ class Amazon::AWS::EC2::AuthorizeSecurityGroupIngress is export
         @args.push: Pair.new( $an, av ) if av;
       }
     }
+    @args.push: Pair.new('Version', '2016-11-15');
 
     # XXX - Add error handling to makeRequest!
     my $xml = makeRequest(
