@@ -67,7 +67,7 @@ sub urlEncode($val) is export {
   $val.subst(/<-alnum>/, *.ord.fmt("%%%02X"), :g);
 }
 
-sub makeHeaders ($uri, $method, $region) {
+sub makeHeaders ($uri, $method, $region, :$token) {
   my %headers;
   my $t = DateTime.now(timezone => 0);            # MUST be in GMT
   my $amzdate = strftime('%Y%m%dT%H%M%SZ', $t);
@@ -75,7 +75,12 @@ sub makeHeaders ($uri, $method, $region) {
   my $datestamp = strftime('%Y%m%d', $t);
   my ($canonUri, $canonQS) = $uri.split('?');
   $canonUri = '/' unless $canonUri.chars;
-  %headers.append: (x-amz-date => $amzdate, host => host);
+  %headers.append: (
+    content-type => 'application/x-www-form-urlencoded; charset=utf-8',
+    host         => host,
+    x-amz-date   => $amzdate,
+  );
+  %headers<x-amz-security-token> = $token if $token;
 
   my $canonHeaders = %headers
     .pairs
@@ -149,7 +154,11 @@ sub makeRequest (
       }
     }
 
-    %headers.append( makeHeaders($uri, $method, $region) );
+    my $token;
+    $token = %headers<X-Amz-Security-Token>:v;
+    %headers.append(
+      makeHeaders($uri, $method, $region, :$token)
+    );
     my $url = "https://{host}$uri";
     %headers<host>:delete;
     when 'GET' {
